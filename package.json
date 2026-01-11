@@ -1,0 +1,16 @@
+{
+  "name": "gaing-brain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "echo \"No dev server configured\" && exit 1",
+    "build": "echo \"No build step configured\" && exit 1",
+    "lint": "echo \"No linting configured\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
