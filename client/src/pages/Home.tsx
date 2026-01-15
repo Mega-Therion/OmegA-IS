@@ -3,7 +3,9 @@ import { MessageBubble } from '@/components/MessageBubble';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useConversations } from '@/hooks/useConversations';
+import { useAuth } from '@/_core/hooks/useAuth';
 import { Menu, X, Search, Download } from 'lucide-react';
+import { NotificationCenter } from '@/components/NotificationCenter';
 import { useState, useRef, useEffect } from 'react';
 
 /**
@@ -18,13 +20,15 @@ export default function Home() {
   const {
     conversations,
     allConversations,
-    loading,
-    error,
+    loading: conversationsLoading,
+    error: conversationsError,
     searchQuery,
     setSearchQuery,
     selectedConversation,
     setSelectedConversationId,
   } = useConversations();
+
+  const { user, loading: authLoading, error: authError, isAuthenticated, logout } = useAuth();
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -85,14 +89,14 @@ export default function Home() {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          {loading ? (
+          {conversationsLoading ? (
             <div className="text-center py-8">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               <p className="text-sm text-muted-foreground mt-2">Loading conversations...</p>
             </div>
-          ) : error ? (
+          ) : conversationsError ? (
             <div className="text-center py-8">
-              <p className="text-sm text-destructive">{error}</p>
+              <p className="text-sm text-destructive">{conversationsError}</p>
             </div>
           ) : (
             <ConversationList
@@ -126,17 +130,21 @@ export default function Home() {
             </div>
           )}
 
-          {selectedConversation && (
-            <Button
-              onClick={handleDownloadTranscript}
-              variant="outline"
-              size="sm"
-              className="gap-2"
-            >
-              <Download size={16} />
-              Export
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            <NotificationCenter />
+
+            {selectedConversation && (
+              <Button
+                onClick={handleDownloadTranscript}
+                variant="outline"
+                size="sm"
+                className="gap-2"
+              >
+                <Download size={16} />
+                Export
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Messages Area */}
