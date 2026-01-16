@@ -1,0 +1,110 @@
+version: '3.9'
+
+services:
+  # =============================================================================
+  # OMEGA Brain (Backend Node.js Server)
+  # =============================================================================
+  omega-brain:
+    build:
+      context: ./packages/brain
+      dockerfile: Dockerfile
+    container_name: omega-brain
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GROK_API_KEY=${GROK_API_KEY}
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
+      - CODEX_SERVICE_KEY=${CODEX_SERVICE_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - SAFA_ALLOWED_USERS=${SAFA_ALLOWED_USERS}
+      - GAING_SHARED_TOKEN=${GAING_SHARED_TOKEN}
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./packages/brain/logs:/app/logs
+      - ./packages/brain/uploads:/app/uploads
+    networks:
+      - omega-network
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8080/health', (r) => r.statusCode==200 ? process.exit(0) : process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # =============================================================================
+  # OMEGA HUD (Frontend Next.js App)
+  # =============================================================================
+  omega-hud:
+    build:
+      context: ./packages/hud
+      dockerfile: Dockerfile
+    container_name: omega-hud
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    networks:
+      - omega-network
+    depends_on:
+      - omega-brain
+
+  # =============================================================================
+  # OMEGA Bridge (Python CollectiveBrain)
+  # =============================================================================
+  omega-bridge:
+    build:
+      context: ./packages/bridge
+      dockerfile: Dockerfile
+    container_name: omega-bridge
+    restart: unless-stopped
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOG_LEVEL=INFO
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - omega-network
+    depends_on:
+      redis:
+        condition: service_healthy
+    # Using the default command from Dockerfile
+
+  # =============================================================================
+  # Shared Infrastructure
+  # =============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: omega-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - omega-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  omega-network:
+    driver: bridge
