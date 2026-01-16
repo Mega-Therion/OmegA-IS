@@ -1,37 +1,36 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is an early-stage coordination hub for multi-agent work.
-- `log.md`: shared coordination log ("The Block"); keep entries short and actionable.
-- `.claude/agents/`: Claude agent configurations and personas.
-- `public/captures/`: public-facing captures or artifacts.
-- `uploads/`: intended upload staging area.
-- Root docs: `CLAUDE.md`, `GEMINI.md`, and this guide.
+This repository is a multi-project workspace.
+- `gAIng-brAin/`: primary Node/Express service (`src/` with `routes/`, `services/`, `workers/`) plus `scripts/`, `supabase/`, and `public/`.
+- `gAIng-brAin/frontend/`: Vite + React UI (`src/App.jsx`, `src/components/`).
+- `gAIng-brAin/mobile/` and `gAIng-brAin/desktop/`: client apps.
+- `Jarvis/` and `Jarvis-1/`: Next.js UIs (`src/app/`, `public/`).
+- `CollectiveBrain_V1/`: Python prototype (`main.py`, `tests/`).
+- Docs and references: `docs/`, `README.md`, `log.md`, `CLAUDE.md`, `GEMINI.md`.
 
 ## Build, Test, and Development Commands
-`package.json` exists with placeholder scripts until tooling is added.
-- `npm run dev`: placeholder; no dev server configured yet.
-- `npm run build`: placeholder; no build step configured yet.
-- `npm run lint`: placeholder; no linting configured yet.
-- `npm test`: placeholder; update once tests exist.
-- Keep any new scripts in a `scripts/` folder and prefer PowerShell-friendly commands.
+Run commands from the subproject directory you are working in.
+- `gAIng-brAin/`: `npm run start` (API), `npm run test` (smoke test), `npm run omega:win` (Windows bootstrap), `npm run frontend` (launch Vite UI).
+- `gAIng-brAin/frontend/`: `npm run dev`, `npm run build`, `npm run lint`.
+- `Jarvis/` or `Jarvis-1/`: `npm run dev`, `npm run build`, `npm run start`, `npm run lint`.
+- `CollectiveBrain_V1/`: `pip install -r requirements.txt`, `pytest -v`.
 
 ## Coding Style & Naming Conventions
-Follow repository docs and existing patterns until a formatter is added.
-- Indentation: 2 spaces for JSON/JS and 2 spaces for Markdown lists.
-- Filenames: lowercase with hyphens for new docs (e.g., `architecture-notes.md`).
-- Agent configs: keep under `.claude/agents/` and use clear, role-based names.
+- Indentation: 2 spaces for JS/TS/JSON; 4 spaces for Python.
+- Naming: `camelCase` variables, `PascalCase` React components, `snake_case` Python, `kebab-case` docs/scripts.
+- Linting: use `npm run lint` where available (Next.js or Vite frontend).
 
 ## Testing Guidelines
-No testing framework is configured yet.
-- If you introduce tests, place them under `tests/` or alongside source files with a `.test.*` suffix (e.g., `agents.test.js`).
-- Document the exact command to run tests once available.
+- `gAIng-brAin/` uses `scripts/smoke-test.js` via `npm run test`.
+- `CollectiveBrain_V1/` uses pytest; name tests `test_*.py` under `tests/`.
+- No global coverage gate is defined; add tests for new behavior.
 
 ## Commit & Pull Request Guidelines
-Git is initialized but there is no commit history yet.
-- Use concise, imperative commit messages (e.g., `Add log sync script`).
-- PRs should explain the change, link relevant issues, and include screenshots when UI changes are involved.
+- History is minimal; follow concise, imperative, sentence-case subjects (e.g., `Initialize repo guidelines and scripts`).
+- Follow `gAIng-brAin/CONTRIBUTING.md`: create an Issue first, branch from `main` (`feature/...` or `fix/...`), link PRs with `Closes #123`, and do not self-merge.
+- PRs should include a clear summary, tests run, and screenshots for UI changes.
 
-## Agent-Specific Instructions
-- When coordinating across agents, read `log.md` before acting and add a short bullet after significant actions.
-- Keep shared terminology consistent with `CLAUDE.md`.
+## Security & Configuration Tips
+- Keep secrets in `.env` files; update `.env.example` when adding variables.
+- Supabase and MCP configuration live under `gAIng-brAin/supabase/` and `gAIng-brAin/mcp/`.
