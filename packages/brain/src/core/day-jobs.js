@@ -11,6 +11,7 @@
 
 const { getNeuroCreditSystem } = require('./neuro-credits');
 const https = require('https');
+const opportunityScout = require('./tasks/revenue/opportunity-scout');
 
 class DayJobsSystem {
     constructor() {
@@ -37,6 +38,7 @@ class DayJobsSystem {
         setTimeout(() => this._startMemoryPruning(), 1000);
         setTimeout(() => this._startProbationReview(), 5000);
         setTimeout(() => this._startSelfEducation(), 10000);
+        setTimeout(() => this._startRevenueTask(), 15000);
     }
 
     /**
@@ -175,6 +177,37 @@ class DayJobsSystem {
                 console.error(`[DAY JOB] ${agent} self-education failed:`, error.message);
             }
         }, 60 * 60 * 1000); // 1 hour
+    }
+
+    /**
+     * DAY JOB 4: Revenue Generation (The War Chest)
+     * Autonomous scouting for crypto earnings
+     */
+    _startRevenueTask() {
+        // Run every 20 minutes (Frequency: High)
+        this.intervals.revenueTask = setInterval(async () => {
+            const agent = this._selectRandomAgent();
+            console.log(`[DAY JOB] ${agent} → 💰 Revenue Scout`);
+
+            try {
+                const result = await opportunityScout.execute(agent);
+
+                if (result.success) {
+                    await this.ncSystem.payForDayJob(agent, 'revenue_task');
+                    await this._logDayJob(agent, 'revenue_task',
+                        `Found ${result.source} worth $${result.earned}`, 0.5);
+                    console.log(`[DAY JOB] ${agent} 💰 Earned $${result.earned} for the War Chest`);
+                }
+            } catch (error) {
+                console.error(`[DAY JOB] ${agent} revenue task failed:`, error.message);
+            }
+        }, 20 * 60 * 1000); // 20 minutes
+
+        // Immediate run for demo
+        setTimeout(() => {
+            const agent = this._selectRandomAgent();
+            opportunityScout.execute(agent).catch(e => console.error(e));
+        }, 5000);
     }
 
     async _performSelfEducation(agent) {

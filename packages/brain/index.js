@@ -100,6 +100,13 @@ server.listen(PORT, async () => {
     }
     console.log('[OMEGA] ✅ Agent wallets initialized');
 
+    // Initialize Revenue Governor (The War Chest)
+    const { getRevenueGovernor } = require('./src/core/revenue-governor');
+    console.log('[OMEGA] 🏦 Initializing Federal Reserve (Revenue Governor)...');
+    const fed = getRevenueGovernor();
+    const status = fed.getTreasuryStatus();
+    console.log(`[OMEGA] 💰 Treasury Wallet: ${status.wallet.slice(0, 8)}... (Balance: $${status.balance})`);
+
     // Start Day Jobs (autonomous work routines)
     console.log('[OMEGA] 🏢 Activating Day Jobs system...');
     const dayJobs = getDayJobsSystem();

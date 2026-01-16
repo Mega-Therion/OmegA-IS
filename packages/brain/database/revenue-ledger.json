@@ -1,0 +1,14 @@
+{
+  "balanced_usd": 0.01,
+  "transactions": [
+    {
+      "id": "1768600655348",
+      "timestamp": "2026-01-16T21:57:35.348Z",
+      "agent": "claude",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    }
+  ]
+}
