@@ -1,16 +1,49 @@
 {
-  "name": "gaing-brain",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "echo \"No dev server configured\" && exit 1",
-    "build": "echo \"No build step configured\" && exit 1",
-    "lint": "echo \"No linting configured\" && exit 1",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "name": "omega-trinity",
+  "version": "2.0.0",
+  "description": "OMEGA Trinity - Unified AI Agent Ecosystem (HUD + Brain + Bridge)",
+  "author": "Mega-Therion",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "private": true,
+  "workspaces": [
+    "packages/hud",
+    "packages/brain",
+    "packages/brain/frontend",
+    "packages/brain/cli",
+    "packages/brain/mcp",
+    "packages/brain/alexa-skill",
+    "packages/brain/desktop",
+    "packages/brain/mobile"
+  ],
+  "scripts": {
+    "start": "npm run start --workspace=packages/brain",
+    "dev": "npm run start --workspace=packages/brain",
+    "omega": "npm run start --workspace=packages/brain",
+    "omega:hud": "npm run dev --workspace=packages/hud",
+    "omega:crew": "npm run crew --workspace=packages/brain",
+    "omega:safa": "npm run safa --workspace=packages/brain",
+    "omega:doctor": "node packages/brain/tools/omega-doctor.mjs",
+    "omega:status": "node -e \"require('./packages/brain/src/core').getOmegaStatus()\"",
+    "install:all": "npm install",
+    "build": "npm run build --workspace=packages/hud",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mega-Therion/gAIng-Brain.git"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "omega",
+    "trinity",
+    "collective-intelligence",
+    "monorepo"
+  ]
 }

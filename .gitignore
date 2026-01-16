@@ -1,0 +1,85 @@
+# Dependencies
+node_modules/
+**/node_modules/
+package-lock.json
+.pnpm-debug.log*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+packages/bridge/venv/
+packages/bridge/env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.claude/
+
+# Next.js (HUD)
+packages/hud/.next/
+packages/hud/out/
+packages/hud/build/
+packages/hud/.vercel/
+
+# Brain specific
+packages/brain/uploads/
+packages/brain/*.db
+packages/brain/*.sqlite
+packages/brain/*.sqlite3
+packages/brain/logs/
+packages/brain/.ngrok-*
+
+# Build outputs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Misc
+*.pem
+.cache/
+.temp/
+temp/
+tmp/
+
+# Executables
+*.exe
+*.dll
+!supabase.exe
+
+# Lock files (keep package-lock.json in packages)
+!/packages/*/package-lock.json
