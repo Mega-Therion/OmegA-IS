@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>gAIng Brain - Project Omega | AI Collective Command Center</title>
+    <meta
+      name="title"
+      content="gAIng Brain - Project Omega | AI Collective Command Center"
+    />
+    <meta
+      name="description"
+      content="Command center for the gAIng Collective - orchestrate AI agents, manage missions, and control your autonomous swarm with the Vision dashboard."
+    />
+    <meta
+      name="keywords"
+      content="AI, agents, collective intelligence, multi-agent, swarm, orchestration, dashboard"
+    />
+    <meta name="author" content="gAIng Collective" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gaing-brain.io/" />
+    <meta property="og:title" content="gAIng Brain - Project Omega" />
+    <meta
+      property="og:description"
+      content="Command center for orchestrating AI agent collectives with Vision dashboard."
+    />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://gaing-brain.io/" />
+    <meta property="twitter:title" content="gAIng Brain - Project Omega" />
+    <meta
+      property="twitter:description"
+      content="Command center for orchestrating AI agent collectives with Vision dashboard."
+    />
+    <meta property="twitter:image" content="/og-image.png" />
+
+    <!-- Theme & PWA -->
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="gAIng Brain" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/brain-icon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <!-- Preconnect to API -->
+    <link rel="preconnect" href="http://localhost:8080" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Critical Loading Styles -->
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background: #0a0a1a;
+        color: #fff;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      .app-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          #0a0a1a 0%,
+          #1a1a3a 50%,
+          #0a0a1a 100%
+        );
+        z-index: 9999;
+      }
+      .loader-brain {
+        width: 80px;
+        height: 80px;
+        animation: pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+      }
+      .loader-ring {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border: 3px solid transparent;
+        border-top-color: #00d4ff;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite;
+      }
+      .loader-ring:nth-child(2) {
+        width: 100px;
+        height: 100px;
+        border-top-color: #7c3aed;
+        animation-duration: 2s;
+        animation-direction: reverse;
+      }
+      .loader-text {
+        margin-top: 2rem;
+        font-size: 1.125rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #00d4ff, #7c3aed, #00d4ff);
+        background-size: 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 2s linear infinite;
+      }
+      .loader-sub {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes shimmer {
+        to {
+          background-position: -200%;
+        }
+      }
+      .error-boundary {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 1rem;
+        max-width: 400px;
+        margin: 2rem auto;
+      }
+      .error-boundary h2 {
+        color: #f87171;
+        margin-bottom: 1rem;
+      }
+      .error-boundary button {
+        background: #7c3aed;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .error-boundary button:hover {
+        background: #6d28d9;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Loading State -->
+      <div class="app-loader" id="app-loader">
+        <div
+          style="
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div class="loader-ring"></div>
+          <div class="loader-ring"></div>
+          <svg
+            class="loader-brain"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient
+                id="brainGrad"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" style="stop-color: #00d4ff" />
+                <stop offset="100%" style="stop-color: #7c3aed" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 15C35 15 25 25 25 40C20 45 18 55 22 65C26 75 35 82 50 85C65 82 74 75 78 65C82 55 80 45 75 40C75 25 65 15 50 15Z"
+              stroke="url(#brainGrad)"
+              stroke-width="3"
+              fill="none"
+            />
+            <path
+              d="M40 35C40 35 45 45 50 45C55 45 60 35 60 35"
+              stroke="url(#brainGrad)"
+              stroke-width="2"
+              fill="none"
+            />
+            <path
+              d="M35 50C35 50 42 55 50 55C58 55 65 50 65 50"
+              stroke="url(#brainGrad)"
+              stroke-width="2"
+              fill="none"
+            />
+            <circle cx="40" cy="60" r="3" fill="url(#brainGrad)" />
+            <circle cx="60" cy="60" r="3" fill="url(#brainGrad)" />
+          </svg>
+        </div>
+        <div class="loader-text">Initializing Vision</div>
+        <div class="loader-sub">Connecting to the Collective...</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Hide loader when React mounts
+      window.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("app-loader");
+        if (loader) {
+          setTimeout(() => {
+            loader.style.opacity = "0";
+            loader.style.transition = "opacity 0.5s ease";
+            setTimeout(() => loader.remove(), 500);
+          }, 800);
+        }
+      });
+    </script>
+
+    <!-- NoScript Fallback -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          text-align: center;
+          background: #1a1a3a;
+          color: #fff;
+        "
+      >
+        <h1>gAIng Brain requires JavaScript</h1>
+        <p>Please enable JavaScript to use the Vision dashboard.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
