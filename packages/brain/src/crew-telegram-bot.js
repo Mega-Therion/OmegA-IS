@@ -74,8 +74,15 @@ const CREW_CONFIG = {
         name: 'Perplexity',
         token: process.env.PERPLEXITY_BOT_TOKEN,
         apiKey: process.env.PERPLEXITY_API_KEY,
-        model: process.env.PERPLEXITY_MODEL || 'llama-3.1-sonar-small-128k-online',
+        model: process.env.PERPLEXITY_MODEL || 'sonar-pro',
         emoji: '🔍'
+    },
+    grav: {
+        name: 'Grav',
+        token: process.env.GRAV_BOT_TOKEN,
+        apiKey: process.env.GRAV_API_KEY || process.env.OPENAI_API_KEY, // Default to OpenAI if no specific key
+        model: process.env.GRAV_MODEL || 'gpt-4o',
+        emoji: '⚡'
     }
 };
 
@@ -398,6 +405,7 @@ async function callLLM(agent, messages, config) {
         case 'claude':
             return callClaude(messages, config);
         case 'codex':
+        case 'grav': // Grav uses OpenAI
             return callOpenAI(messages, config);
         case 'grok':
             return callGrok(messages, config);

@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 301372.04,
+  "balanced_usd": 301372.06,
   "transactions": [
     {
       "id": "1768600655348",
@@ -98,6 +98,15 @@
       "amount": 124,
       "source": "Digitap ($TAP) Presale Staking",
       "details": "Ongoing presale staking with up to 124% APR from fixed reward pool, next price increase to $0.0439 imminent, listing at $0.14; connects crypto/fiat banking with Visa cards[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768621320617",
+      "timestamp": "2026-01-17T03:42:00.617Z",
+      "agent": "perplexity",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
       "type": "INCOME"
     }
   ]
