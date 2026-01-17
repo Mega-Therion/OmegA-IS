@@ -17,17 +17,28 @@ if errorlevel 1 (
 )
 
 echo.
-echo 🏗️  Building and Starting Services (Brain, HUD, Bridge, Redis)...
-docker compose up --build -d
+echo 🏗️  Building and Starting Services...
+echo    (This may take a few minutes for the first run)
+echo.
+
+docker compose up -d --build
 
 if errorlevel 1 (
     echo.
-    echo ❌ Failed to start. Please check Docker status.
+    echo ❌ FAILED TO START.
+    echo.
+    echo Common Issue: "500 Internal Server Error" / "Pipe error"
+    echo SOLUTION: 
+    echo   1. Your Docker Desktop / WSL is frozen.
+    echo   2. Restart Docker Desktop (Right click Icon - Restart).
+    echo   3. If that fails, RESTART YOUR COMPUTER.
+    echo.
 ) else (
     echo.
     echo ✅ OMEGA is running!
-    echo    - Brain: http://localhost:8080
-    echo    - HUD:   http://localhost:3000
+    echo.
+    echo    🧠 Brain:  http://localhost:8080
+    echo    💻 HUD:    http://localhost:3000
     echo.
     echo 🔍 View logs with: docker compose logs -f
 )
