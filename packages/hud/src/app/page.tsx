@@ -14,12 +14,12 @@ const qualityConfig = {
   lite: { glow: 'shadow-md', density: 'bg-cyan-400/5' }
 }
 
-const generateAssistantReply = async (prompt: string, ragSnippets: string[], agent: string): Promise<string> => {
+const generateAssistantReply = async (prompt: string, ragSnippets: string[], agent: string, useOmega: boolean): Promise<string> => {
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, context: ragSnippets, agent })
+      body: JSON.stringify({ prompt, context: ragSnippets, agent, useOmega })
     })
     const data = await response.json()
     return data.reply || 'Neural link established. Awaiting calibration.'
@@ -75,6 +75,11 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const [selectedAgent, setSelectedAgent] = useState('gemini')
+  const [omegaMode, setOmegaMode] = useState(false)
+  const [omegaSpeak, setOmegaSpeak] = useState(false)
+  const [omegaVoiceId, setOmegaVoiceId] = useState('')
+  const [omegaVoiceProvider, setOmegaVoiceProvider] = useState('elevenlabs')
+  const [omegaVoiceName, setOmegaVoiceName] = useState('')
   const endRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<SpeechRecognition | null>(null)
 
@@ -89,6 +94,34 @@ export default function Home() {
     }, 2000)
     return () => clearInterval(interval)
   }, [setMetrics])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const stored = window.localStorage.getItem('omegaSettings')
+    if (!stored) return
+    try {
+      const parsed = JSON.parse(stored)
+      setOmegaMode(Boolean(parsed.omegaMode))
+      setOmegaSpeak(Boolean(parsed.omegaSpeak))
+      setOmegaVoiceId(typeof parsed.omegaVoiceId === 'string' ? parsed.omegaVoiceId : '')
+      setOmegaVoiceProvider(typeof parsed.omegaVoiceProvider === 'string' ? parsed.omegaVoiceProvider : 'elevenlabs')
+      setOmegaVoiceName(typeof parsed.omegaVoiceName === 'string' ? parsed.omegaVoiceName : '')
+    } catch (error) {
+      console.warn('Failed to load OmegA settings', error)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const payload = JSON.stringify({
+      omegaMode,
+      omegaSpeak,
+      omegaVoiceId,
+      omegaVoiceProvider,
+      omegaVoiceName
+    })
+    window.localStorage.setItem('omegaSettings', payload)
+  }, [omegaMode, omegaSpeak, omegaVoiceId, omegaVoiceProvider, omegaVoiceName])
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -140,6 +173,31 @@ export default function Home() {
     if (recognitionRef.current) {
       recognitionRef.current.stop()
       setIsListening(false)
+    }
+  }
+
+  const playOmegaAudio = async (text: string) => {
+    if (!omegaSpeak) return
+
+    try {
+      const response = await fetch('/api/omega/speak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text,
+          voiceId: omegaVoiceId || undefined,
+          provider: omegaVoiceProvider,
+          voice: omegaVoiceName || undefined
+        })
+      })
+
+      const data = await response.json()
+      if (!data?.audioBase64) return
+
+      const audio = new Audio(`data:${data.audioContentType || 'audio/mpeg'};base64,${data.audioBase64}`)
+      await audio.play()
+    } catch (error) {
+      console.error('OmegA speak failed:', error)
     }
   }
 
@@ -195,15 +253,19 @@ export default function Home() {
     const ragSnippets = matches.flatMap((match) => match.highlights)
     
     setIsLoading(true)
-    const assistantReply = await generateAssistantReply(input, ragSnippets, selectedAgent)
+    const assistantReply = await generateAssistantReply(input, ragSnippets, selectedAgent, omegaMode)
     setIsLoading(false)
 
     addMessage({
       id: `assist-${timestamp}`,
       role: 'assistant',
       content: assistantReply,
-      timestamp: new Date().toISOString()
+      timestamp
     })
+
+    if (omegaMode) {
+      await playOmegaAudio(assistantReply)
+    }
 
     if (input.length > 8) {
       addMemory({
@@ -442,3 +504,6 @@ export default function Home() {
     </ErrorBoundary>
   )
 }
+
+
+

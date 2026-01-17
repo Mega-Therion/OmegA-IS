@@ -12,12 +12,42 @@ contextBridge.exposeInMainWorld('omega', {
   getConfig: () => ipcRenderer.invoke('get-config'),
   
   // Send chat message
-  chat: async (message, agent = 'gemini') => {
+  chat: async (message, agent = 'gemini', options = {}) => {
     const config = await ipcRenderer.invoke('get-config');
-    const response = await fetch(`${config.apiUrl}/chat`, {
+    const useOmega = options.useOmega === true;
+    const payload = useOmega
+      ? {
+          messages: [{ role: 'user', content: message }],
+          max_tokens: 500,
+          temperature: 0.7
+        }
+      : {
+          messages: [{ role: 'user', content: message }],
+          model: agent,
+          max_tokens: 500,
+          temperature: 0.7
+        };
+
+    const response = await fetch(`${config.apiUrl}${useOmega ? '/omega/chat' : '/llm/chat'}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: message, agent, context: [] })
+      body: JSON.stringify(payload)
+    });
+    return response.json();
+  },
+
+  // Generate speech via OmegA
+  speak: async (text, options = {}) => {
+    const config = await ipcRenderer.invoke('get-config');
+    const response = await fetch(`${config.apiUrl}/omega/speak`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text,
+        voiceId: options.voiceId,
+        provider: options.provider,
+        voice: options.voice
+      })
     });
     return response.json();
   },

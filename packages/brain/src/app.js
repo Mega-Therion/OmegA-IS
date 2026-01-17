@@ -7,6 +7,7 @@ const membersRoutes = require('./routes/members');
 const memoriesRoutes = require('./routes/memories');
 const mem0Routes = require('./routes/mem0');
 const llmRoutes = require('./routes/llm');
+const omegaRoutes = require('./routes/omega');
 const messagesRoutes = require('./routes/messages');
 const tasksRoutes = require('./routes/tasks');
 const systemRoutes = require('./routes/system');
@@ -78,6 +79,7 @@ app.use('/memories', memoriesRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/llm', llmRoutes);
+app.use('/omega', omegaRoutes);
 app.use('/safa', safaRoutes);
 app.use('/agents', agentsRoutes);
 app.use('/realtime', realtimeRoutes);
@@ -110,6 +112,7 @@ if (vaultQueueRoutes) {
 }
 
 module.exports = app;
+
 
 
 

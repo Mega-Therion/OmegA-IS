@@ -16,18 +16,42 @@ if (!SUPABASE_SERVICE_ROLE_KEY) {
   console.warn('Using anon key; RLS may block requests.');
 }
 
-const supabase = createClient(SUPABASE_URL, supabaseKey);
+// Config with explicit schema (or try removing schema option if "public" is default invalid)
+// Some setups fail when schema is explicitly 'public' if the user doesn't havepermissions or it's misconfigured.
+// We'll try without options first, which defaults to 'public'.
+
+const supabase = createClient(SUPABASE_URL, supabaseKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false
+  },
+  db: {
+    schema: 'public'
+  }
+});
 
 (async () => {
-  const { data, error } = await supabase
-    .from('members')
-    .select('user_id')
-    .limit(1);
+  try {
+    console.log('Testing connection to Supabase...');
 
-  if (error) {
-    console.error('Supabase query failed:', error.message);
+    // Try a simple health check query (no table) via rpc if possible, or basic table check
+
+    // Just check if we can query the `members` table
+    const { data, error } = await supabase
+      .from('members')
+      .select('user_id')
+      .limit(1);
+
+    if (error) {
+      console.error('Supabase query failed:', error.message);
+      // Don't crash hard, just report
+      process.exit(1);
+    }
+
+    console.log(`Supabase OK. members rows: ${data.length}`);
+  } catch (e) {
+    console.error('Unexpected error:', e);
     process.exit(1);
   }
-
-  console.log(`Supabase OK. members rows: ${data.length}`);
 })();

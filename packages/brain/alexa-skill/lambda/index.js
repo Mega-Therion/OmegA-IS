@@ -132,17 +132,18 @@ const handlers = {
     }
     
     try {
-      const response = await apiRequest('POST', '/llm/chat', {
-        prompt: query,
-        agent: CONFIG.defaultAgent,
-        context: []
+      const response = await apiRequest('POST', '/omega/chat', {
+        messages: [{ role: 'user', content: query }],
+        max_tokens: 300,
+        temperature: 0.7
       });
 
-      const replyText = response?.reply
-        || response?.response?.content
+      const replyText = response?.response?.content
         || response?.choices?.[0]?.message?.content
-        || response?.raw?.reply
         || response?.raw?.response?.content
+        || response?.raw?.choices?.[0]?.message?.content
+        || response?.reply
+        || response?.raw?.reply
         || null;
 
       if (replyText) {

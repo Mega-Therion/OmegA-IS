@@ -1,4 +1,4 @@
-﻿# Claude Code Memory - gAIng Protocol (Project Local)
+# Claude Code Memory - gAIng Protocol (Project Local)
 
 ## Status
 **PEAK MODE:** ACTIVE

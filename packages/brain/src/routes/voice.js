@@ -4,10 +4,26 @@ const { speak } = require('../services/voice');
 
 router.post('/speak', async (req, res) => {
     try {
-        const { text } = req.body;
+        const {
+            text,
+            voiceId,
+            provider,
+            voice,
+            modelId,
+            stability,
+            similarityBoost
+        } = req.body || {};
+
         if (!text) return res.status(400).json({ error: 'No text provided' });
 
-        const audioBuffer = await speak(text);
+        const audioBuffer = await speak(text, {
+            voiceId,
+            provider,
+            voice,
+            modelId,
+            stability,
+            similarityBoost
+        });
         res.set({
             'Content-Type': 'audio/mpeg',
             'Content-Length': audioBuffer.byteLength

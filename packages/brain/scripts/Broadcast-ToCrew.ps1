@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Broadcast-ToCrew.ps1 - Send a message to all AI agents
 .DESCRIPTION
