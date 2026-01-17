@@ -83,3 +83,8 @@ tmp/
 
 # Lock files (keep package-lock.json in packages)
 !/packages/*/package-lock.json
+
+# Large files
+*.zip
+supabase.exe
+.uploads/
