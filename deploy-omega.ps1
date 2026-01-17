@@ -7,32 +7,63 @@ if (-not (Get-Command railway -ErrorAction SilentlyContinue)) {
     npm install -g @railway/cli
 }
 
-# Login
+# Login Check
 Write-Host "🔑 Checking Login..." -ForegroundColor Yellow
 $whoami = railway whoami 2>$null
 if ($getLastError -or $whoami -match "Not logged in") {
-    Write-Host "⚠️  Please login in the browser..." -ForegroundColor Cyan
+    Write-Host "⚠️  You are NOT logged in." -ForegroundColor Red
+    Write-Host "👉 A browser window should open. Please login." -ForegroundColor Yellow
     railway login
+    
+    # Re-check
+    $whoami = railway whoami 2>$null
+    if ($whoami -match "Not logged in") {
+        Write-Host "❌ Login failed or was skipped. Cannot proceed." -ForegroundColor Red
+        exit 1
+    }
 }
+Write-Host "✅ Logged in as: $whoami" -ForegroundColor Green
 
-# Init
+# Init / Link
 if (-not (Test-Path .railway)) {
-    Write-Host "🔗 Linking Project (Select 'OMEGA-Trinity' or Create New)..." -ForegroundColor Cyan
-    railway init
+    Write-Host "🔗 Linking Project..." -ForegroundColor Cyan
+    # Try to link to existing project first
+    railway link -p "OMEGA-Trinity" 2>$null
+    
+    if (-not (Test-Path .railway)) {
+        Write-Host "   Project not found, creating new 'OMEGA-Trinity'..."
+        railway init --name "OMEGA-Trinity"
+    }
+    else {
+        Write-Host "✅ Linked to existing 'OMEGA-Trinity'" -ForegroundColor Green
+    }
 }
 
-# Sync Env
+# Sync Env Variables
 Write-Host "⚙️  Syncing Environment Variables..." -ForegroundColor Yellow
-if (Test-Path "packages/brain/.env") {
-    Get-Content "packages/brain/.env" | ForEach-Object {
-        # Match lines that look like KEY=VALUE (ignore comments)
-        if ($_ -match "^[^#]+=") {
-            $parts = $_ -split "=", 2
-            $key = $parts[0].Trim()
-            $val = $parts[1].Trim()
-            # Set variable using shell arguments to avoid parsing issues
-            Write-Host "   Setting $key"
-            cmd /c "railway variables --set `"$key=$val`"" > $null
+$envFiles = @(
+    "packages/brain/.env",
+    "packages/bridge/.env", 
+    "packages/hud/.env.local",
+    ".env"
+)
+
+foreach ($file in $envFiles) {
+    if (Test-Path $file) {
+        Write-Host "   Reading $file..." -ForegroundColor Gray
+        Get-Content $file | ForEach-Object {
+            # Match lines that look like KEY=VALUE (ignore comments, empty lines)
+            if ($_ -match "^[^#\s]+=.+") {
+                $parts = $_ -split "=", 2
+                $key = $parts[0].Trim()
+                $val = $parts[1].Trim()
+                
+                # Skip if value is empty or placeholders
+                if ($val -ne "" -and $val -ne "your-key-here") {
+                    # Set variable silently
+                    cmd /c "railway variables --set `"$key=$val`"" > $null
+                }
+            }
         }
     }
 }
@@ -40,4 +71,6 @@ if (Test-Path "packages/brain/.env") {
 # Deploy
 Write-Host "🚀 Deploying..." -ForegroundColor Green
 railway up --detach
-Write-Host "✅ Done! Monitor at https://railway.app/dashboard" -ForegroundColor Cyan
+
+Write-Host "✅ Done! Opening Dashboard..." -ForegroundColor Cyan
+Start-Process "https://railway.app/dashboard"

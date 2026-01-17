@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     UNLEASH.ps1 - Full gAIng Brain Startup Sequence
 .DESCRIPTION

@@ -11,6 +11,7 @@ type ChatRequest = {
   prompt?: string
   context?: string[]
   agent?: string
+  useOmega?: boolean
 }
 
 const createTimeoutSignal = (timeoutMs: number) => {
@@ -29,7 +30,9 @@ const parseBody = (body: ChatRequest) => {
         .slice(0, MAX_CONTEXT_ITEMS)
     : []
 
-  return { prompt, context, agent }
+  const useOmega = Boolean(body.useOmega)
+
+  return { prompt, context, agent, useOmega }
 }
 
 const respondWithError = (message: string, status: number) => {
@@ -42,10 +45,24 @@ const respondWithError = (message: string, status: number) => {
   )
 }
 
+const buildOmegaMessages = (prompt: string, context: string[]) => {
+  const messages = [] as { role: string; content: string }[]
+
+  if (context.length) {
+    messages.push({
+      role: 'system',
+      content: `Grounded context:\n${context.join('\n')}`
+    })
+  }
+
+  messages.push({ role: 'user', content: prompt })
+  return messages
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as ChatRequest
-    const { prompt, context, agent } = parseBody(body)
+    const { prompt, context, agent, useOmega } = parseBody(body)
 
     if (!prompt) {
       return respondWithError('Prompt is required to continue.', 400)
@@ -55,29 +72,38 @@ export async function POST(request: NextRequest) {
       return respondWithError('Prompt exceeds the allowed length.', 413)
     }
 
-    const messages = [
-      {
-        role: 'system',
-        content: `You are JARVIS, an advanced AI assistant with neural-link capabilities. You have access to retrieval-augmented context when available. Be concise, helpful, and precise.${
-          context.length ? `\n\nGrounded context:\n${context.join('\n')}` : ''
-        }`
-      },
-      { role: 'user', content: prompt }
-    ]
-
     const { signal, timeoutId } = createTimeoutSignal(GAING_BRAIN_TIMEOUT_MS)
 
-    const response = await fetch(`${GAING_BRAIN_URL}/api/llm/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messages,
-        max_tokens: 500,
-        temperature: 0.7,
-        model: agent
-      }),
-      signal
-    })
+    const response = await fetch(
+      `${GAING_BRAIN_URL}${useOmega ? '/omega/chat' : '/api/llm/chat'}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+          useOmega
+            ? {
+                messages: buildOmegaMessages(prompt, context),
+                max_tokens: 500,
+                temperature: 0.7
+              }
+            : {
+                messages: [
+                  {
+                    role: 'system',
+                    content: `You are JARVIS, an advanced AI assistant with neural-link capabilities. You have access to retrieval-augmented context when available. Be concise, helpful, and precise.${
+                      context.length ? `\n\nGrounded context:\n${context.join('\n')}` : ''
+                    }`
+                  },
+                  { role: 'user', content: prompt }
+                ],
+                max_tokens: 500,
+                temperature: 0.7,
+                model: agent
+              }
+        ),
+        signal
+      }
+    )
 
     clearTimeout(timeoutId)
 
@@ -106,6 +132,7 @@ export async function POST(request: NextRequest) {
     const data = await response.json()
     const reply =
       data.response?.choices?.[0]?.message?.content ||
+      data.response?.content ||
       data.content ||
       data.reply ||
       'Neural link established. Awaiting further calibration.'

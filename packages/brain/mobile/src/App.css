@@ -269,3 +269,34 @@
 .send-btn:disabled {
   opacity: 0.5;
 }
+
+.omega-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.omega-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #d6e6ff;
+  font-size: 12px;
+}
+
+.omega-toggle.active {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.omega-controls select,
+.omega-controls input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #d6e6ff;
+  font-size: 12px;
+  padding: 6px 10px;
+}

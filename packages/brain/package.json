@@ -6,6 +6,7 @@
         "@react-three/drei": "^10.7.7",
         "@react-three/fiber": "^9.5.0",
         "@supabase/supabase-js": "^2.89.0",
+        "axios": "^1.13.2",
         "cors": "^2.8.5",
         "dotenv": "^17.2.3",
         "express": "^5.2.1",
@@ -17,6 +18,7 @@
         "screenshot-desktop": "^1.15.3",
         "sql.js": "^1.13.0",
         "three": "^0.182.0",
+        "tonweb": "^0.0.66",
         "uuid": "^13.0.0",
         "ws": "^8.14.2"
     },

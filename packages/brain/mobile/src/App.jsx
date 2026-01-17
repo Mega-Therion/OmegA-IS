@@ -19,6 +19,11 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [currentAgent, setCurrentAgent] = useState('gemini');
+  const [omegaMode, setOmegaMode] = useState(false);
+  const [omegaSpeak, setOmegaSpeak] = useState(false);
+  const [omegaVoiceProvider, setOmegaVoiceProvider] = useState('elevenlabs');
+  const [omegaVoiceId, setOmegaVoiceId] = useState('');
+  const [omegaVoiceName, setOmegaVoiceName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const messagesEndRef = useRef(null);
@@ -53,6 +58,28 @@ function App() {
     }
   };
 
+  const playOmegaAudio = async (text) => {
+    if (!omegaSpeak) return;
+    try {
+      const response = await fetch(`${API_URL}/omega/speak`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text,
+          provider: omegaVoiceProvider,
+          voiceId: omegaVoiceProvider === 'elevenlabs' ? omegaVoiceId : undefined,
+          voice: omegaVoiceProvider === 'openai' ? omegaVoiceName : undefined
+        })
+      });
+      const data = await response.json();
+      if (!data?.audioBase64) return;
+      const audio = new Audio(`data:${data.audioContentType || 'audio/mpeg'};base64,${data.audioBase64}`);
+      await audio.play();
+    } catch (error) {
+      console.error('Omega speak failed:', error);
+    }
+  };
+
   // Send message
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -65,29 +92,49 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/chat`, {
+            const history = messages.slice(-6).map(m => ({
+        role: m.type === 'user' ? 'user' : 'assistant',
+        content: m.content
+      }));
+
+      const payload = omegaMode
+        ? {
+            messages: [...history, { role: 'user', content: input }],
+            max_tokens: 500,
+            temperature: 0.7
+          }
+        : {
+            messages: [...history, { role: 'user', content: input }],
+            model: currentAgent,
+            max_tokens: 500,
+            temperature: 0.7
+          };
+
+      const response = await fetch(`${API_URL}${omegaMode ? '/omega/chat' : '/llm/chat'}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prompt: input,
-          agent: currentAgent,
-          context: messages.slice(-10).map(m => ({
-            role: m.type === 'user' ? 'user' : 'assistant',
-            content: m.content
-          }))
-        })
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json();
       
       await haptic(ImpactStyle.Light);
-      
+
+      const reply = data?.response?.content
+        || data?.choices?.[0]?.message?.content
+        || data?.reply
+        || 'No response';
+
       setMessages(prev => [...prev, {
         type: 'ai',
-        agent: currentAgent,
-        content: data.reply || 'No response',
+        agent: omegaMode ? 'omega' : currentAgent,
+        content: reply,
         timestamp: new Date()
       }]);
+
+      if (omegaMode && omegaSpeak && reply) {
+        await playOmegaAudio(reply);
+      }
     } catch (error) {
       await haptic(ImpactStyle.Heavy);
       
@@ -108,11 +155,49 @@ function App() {
   };
 
   const currentAgentData = AGENTS.find(a => a.id === currentAgent);
+  const omegaAgent = { id: 'omega', name: 'OmegA', emoji: '??', color: '#10b981' };
+  const activeAgent = omegaMode ? omegaAgent : currentAgentData;
 
   return (
     <div className="app">
       {/* Header */}
       <header className="header">
+        <div className="omega-controls">
+          <button
+            className={`omega-toggle ${omegaMode ? 'active' : ''}`}
+            onClick={() => setOmegaMode(!omegaMode)}
+          >
+            OmegA {omegaMode ? 'On' : 'Off'}
+          </button>
+          <button
+            className={`omega-toggle ${omegaSpeak ? 'active' : ''}`}
+            onClick={() => setOmegaSpeak(!omegaSpeak)}
+            disabled={!omegaMode}
+          >
+            Speak {omegaSpeak ? 'On' : 'Off'}
+          </button>
+          <select
+            value={omegaVoiceProvider}
+            onChange={(event) => setOmegaVoiceProvider(event.target.value)}
+            disabled={!omegaMode}
+          >
+            <option value="elevenlabs">ElevenLabs</option>
+            <option value="openai">OpenAI</option>
+          </select>
+          <input
+            value={omegaVoiceProvider === 'elevenlabs' ? omegaVoiceId : omegaVoiceName}
+            onChange={(event) => {
+              if (omegaVoiceProvider === 'elevenlabs') {
+                setOmegaVoiceId(event.target.value);
+              } else {
+                setOmegaVoiceName(event.target.value);
+              }
+            }}
+            placeholder={omegaVoiceProvider === 'elevenlabs' ? 'Voice ID' : 'OpenAI voice'}
+            disabled={!omegaMode}
+          />
+        </div>
+
         <div className="header-content">
           <div className="status-indicator" data-online={isOnline} />
           <h1>OMEGA Brain</h1>
@@ -136,9 +221,9 @@ function App() {
       <main className="messages">
         {messages.length === 0 && (
           <div className="welcome">
-            <div className="welcome-emoji">{currentAgentData.emoji}</div>
+            <div className="welcome-emoji">{activeAgent.emoji}</div>
             <h2>Hello!</h2>
-            <p>I'm {currentAgentData.name}. How can I help you today?</p>
+            <p>I'm {activeAgent.name}. How can I help you today?</p>
           </div>
         )}
         
@@ -171,7 +256,7 @@ function App() {
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyPress={e => e.key === 'Enter' && sendMessage()}
-          placeholder={`Ask ${currentAgentData.name}...`}
+          placeholder={`Ask ${activeAgent.name}...`}
           disabled={isLoading}
         />
         <button 
@@ -187,3 +272,6 @@ function App() {
 }
 
 export default App;
+
+
+

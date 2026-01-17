@@ -267,6 +267,43 @@
       border-radius: 4px;
       margin: 0 4px;
     }
+
+    .omega-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .omega-controls select,
+    .omega-controls input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px 10px;
+      color: var(--text-primary);
+      font-size: 11px;
+      outline: none;
+    }
+
+    .omega-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .agent-buttons {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
   </style>
 </head>
 <body>
@@ -292,11 +329,24 @@
     
     <div class="chat-container">
       <div class="agent-selector">
-        <button class="agent-btn active" data-agent="gemini">🌟 Gemini</button>
-        <button class="agent-btn" data-agent="claude">🧠 Claude</button>
-        <button class="agent-btn" data-agent="codex">💻 Codex</button>
-        <button class="agent-btn" data-agent="grok">🔍 Grok</button>
+
+      <div class="omega-controls">
+        <label class="omega-toggle"><input type="checkbox" id="omega-mode"> OmegA</label>
+        <label class="omega-toggle"><input type="checkbox" id="omega-speak"> Speak</label>
+        <select id="omega-provider">
+          <option value="elevenlabs">ElevenLabs</option>
+          <option value="openai">OpenAI</option>
+        </select>
+        <input id="omega-voice" type="text" placeholder="Voice ID/Name" />
       </div>
+
+      <div class="agent-buttons">
+        <button class="agent-btn active" data-agent="gemini">?? Gemini</button>
+        <button class="agent-btn" data-agent="claude">?? Claude</button>
+        <button class="agent-btn" data-agent="codex">?? Codex</button>
+        <button class="agent-btn" data-agent="grok">?? Grok</button>
+      </div>
+    </div>
       
       <div class="messages" id="messages">
         <div class="welcome">
@@ -325,14 +375,71 @@
     const serverStatus = document.getElementById('server-status');
     const serverText = document.getElementById('server-text');
     const agentStatus = document.getElementById('agent-status');
+    const omegaModeToggle = document.getElementById('omega-mode');
+    const omegaSpeakToggle = document.getElementById('omega-speak');
+    const omegaProviderSelect = document.getElementById('omega-provider');
+    const omegaVoiceInput = document.getElementById('omega-voice');
+
+    let omegaMode = false;
+    let omegaSpeak = false;
+    let omegaProvider = 'elevenlabs';
+    let omegaVoice = '';
     
+    // Omega controls
+    const storedSettings = window.localStorage.getItem('omegaDesktopSettings');
+    if (storedSettings) {
+      try {
+        const parsed = JSON.parse(storedSettings);
+        omegaMode = Boolean(parsed.omegaMode);
+        omegaSpeak = Boolean(parsed.omegaSpeak);
+        omegaProvider = typeof parsed.omegaProvider === 'string' ? parsed.omegaProvider : 'elevenlabs';
+        omegaVoice = typeof parsed.omegaVoice === 'string' ? parsed.omegaVoice : '';
+      } catch (e) {}
+    }
+
+    omegaModeToggle.checked = omegaMode;
+    omegaSpeakToggle.checked = omegaSpeak;
+    omegaProviderSelect.value = omegaProvider;
+    omegaVoiceInput.value = omegaVoice;
+    agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+
+    const persistOmegaSettings = () => {
+      window.localStorage.setItem('omegaDesktopSettings', JSON.stringify({
+        omegaMode,
+        omegaSpeak,
+        omegaProvider,
+        omegaVoice
+      }));
+    };
+
+    omegaModeToggle.addEventListener('change', () => {
+      omegaMode = omegaModeToggle.checked;
+      agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+      persistOmegaSettings();
+    });
+
+    omegaSpeakToggle.addEventListener('change', () => {
+      omegaSpeak = omegaSpeakToggle.checked;
+      persistOmegaSettings();
+    });
+
+    omegaProviderSelect.addEventListener('change', () => {
+      omegaProvider = omegaProviderSelect.value;
+      persistOmegaSettings();
+    });
+
+    omegaVoiceInput.addEventListener('input', () => {
+      omegaVoice = omegaVoiceInput.value;
+      persistOmegaSettings();
+    });
+
     // Agent buttons
     document.querySelectorAll('.agent-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentAgent = btn.dataset.agent;
-        agentStatus.textContent = `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+        agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
       });
     });
     
@@ -350,11 +457,19 @@
       input.value = '';
       
       try {
-        const response = await window.omega.chat(text, currentAgent);
-        if (response.reply) {
-          addMessage(response.reply, 'ai', currentAgent);
-        } else {
-          addMessage('No response received', 'ai', currentAgent);
+        const response = await window.omega.chat(text, currentAgent, { useOmega: omegaMode });
+        const reply = response?.response?.content || response?.choices?.[0]?.message?.content || response?.reply || 'No response received';
+        addMessage(reply, 'ai', omegaMode ? 'omega' : currentAgent);
+        if (omegaMode && omegaSpeak && reply) {
+          const speakResponse = await window.omega.speak(reply, {
+            provider: omegaProvider,
+            voiceId: omegaProvider === 'elevenlabs' ? omegaVoice : undefined,
+            voice: omegaProvider === 'openai' ? omegaVoice : undefined
+          });
+          if (speakResponse?.audioBase64) {
+            const audio = new Audio(`data:${speakResponse.audioContentType || 'audio/mpeg'};base64,${speakResponse.audioBase64}`);
+            audio.play();
+          }
         }
       } catch (error) {
         addMessage('Error: Could not connect to server', 'ai', 'system');
@@ -414,3 +529,6 @@
   </script>
 </body>
 </html>
+
+
+
