@@ -1,0 +1,76 @@
+{
+  "$schema": "https://a2aprotocol.ai/schemas/agent-card.json",
+  "name": "gAIng-Brain",
+  "description": "Collective memory and orchestration platform for AI agents",
+  "version": "1.0.0",
+  "provider": {
+    "name": "gAIng Collective",
+    "url": "https://github.com/megas-DIO/gAIng-brAin"
+  },
+  "capabilities": {
+    "memory": {
+      "operations": ["store", "search", "retrieve", "vote"],
+      "description": "Persistent memory storage with search and voting"
+    },
+    "tasks": {
+      "operations": ["create", "assign", "complete", "fail"],
+      "description": "Priority-based task queue with agent assignment"
+    },
+    "messaging": {
+      "operations": ["send", "receive", "broadcast"],
+      "description": "Three-tier agent communication (REST, WebSocket, Redis)"
+    },
+    "llm": {
+      "operations": ["chat"],
+      "providers": ["openai", "azure", "grok"],
+      "description": "LLM proxy with BYOK support"
+    }
+  },
+  "agents": [
+    {
+      "id": "claude",
+      "name": "Claude (Opus 4.5)",
+      "role": "Deep Reasoner",
+      "skills": ["complex-analysis", "architecture", "refactoring", "code-review", "multi-step-logic"],
+      "status": "available"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "role": "Architect",
+      "skills": ["planning", "coordination", "research", "multimodal", "orchestration"],
+      "status": "available"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "role": "Engineer",
+      "skills": ["quick-edits", "scripts", "shell-commands", "boilerplate"],
+      "status": "available"
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "role": "Scout",
+      "skills": ["real-time-search", "current-events", "social-context"],
+      "status": "available"
+    }
+  ],
+  "endpoints": {
+    "base": "/",
+    "health": "/health",
+    "tasks": "/tasks",
+    "messages": "/messages",
+    "memories": "/memories",
+    "agents": "/agents",
+    "websocket": "/ws"
+  },
+  "authentication": {
+    "type": "bearer",
+    "description": "Supabase Auth JWT tokens"
+  },
+  "protocols": {
+    "a2a": "0.3",
+    "mcp": "supported"
+  }
+}
