@@ -28,6 +28,15 @@ const AZURE_OPENAI_API_VERSION = process.env.AZURE_OPENAI_API_VERSION || '2024-0
 const DISABLE_AUTH = process.env.DISABLE_AUTH === '1';
 const PORT = process.env.PORT || 8080;
 
+// OMEGA Trinity Configuration
+const BRIDGE_URL = process.env.BRIDGE_URL || 'http://localhost:8000';
+const HUD_URL = process.env.HUD_URL || 'http://localhost:3000';
+const REDIS_URL = process.env.REDIS_URL;
+const MILVUS_URL = process.env.MILVUS_URL;
+const NEO4J_URL = process.env.NEO4J_URL;
+const NEO4J_USER = process.env.NEO4J_USER;
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD;
+
 const supabaseKey = SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
 
 module.exports = {
@@ -58,5 +67,13 @@ module.exports = {
   AZURE_OPENAI_API_VERSION,
   DISABLE_AUTH,
   PORT,
+  // OMEGA Trinity
+  BRIDGE_URL,
+  HUD_URL,
+  REDIS_URL,
+  MILVUS_URL,
+  NEO4J_URL,
+  NEO4J_USER,
+  NEO4J_PASSWORD,
   supabaseKey
 };

@@ -8,13 +8,14 @@ const express = require('express');
 const router = express.Router();
 
 // Import services (with graceful fallback)
-let observability, selfHealing, orchestrator, plugins, streaming;
+let observability, selfHealing, orchestrator, plugins, streaming, bridgeClient;
 
 try { observability = require('../services/observability'); } catch (e) { observability = null; }
 try { selfHealing = require('../services/self-healing'); } catch (e) { selfHealing = null; }
 try { orchestrator = require('../services/orchestrator'); } catch (e) { orchestrator = null; }
 try { plugins = require('../services/plugins'); } catch (e) { plugins = null; }
 try { streaming = require('../services/streaming'); } catch (e) { streaming = null; }
+try { bridgeClient = require('../services/bridge-client'); } catch (e) { bridgeClient = null; }
 
 /**
  * GET /system/health
@@ -42,6 +43,68 @@ router.get('/health', async (req, res) => {
   }
 
   res.json(health);
+});
+
+/**
+ * GET /system/omega
+ * OMEGA Trinity unified health check - checks all three services
+ */
+router.get('/omega', async (req, res) => {
+  const omegaStatus = {
+    ok: true,
+    service: 'omega-trinity',
+    timestamp: new Date().toISOString(),
+    components: {
+      brain: {
+        status: 'healthy',
+        port: process.env.PORT || 8080,
+        uptime: process.uptime(),
+      },
+      bridge: {
+        status: 'unknown',
+        port: 8000,
+        url: bridgeClient?.BRIDGE_URL || 'http://localhost:8000',
+      },
+      hud: {
+        status: 'unknown',
+        port: 3000,
+        url: process.env.HUD_URL || 'http://localhost:3000',
+      },
+    },
+  };
+
+  // Check Bridge health
+  if (bridgeClient) {
+    try {
+      const bridgeHealth = await bridgeClient.getHealth();
+      omegaStatus.components.bridge.status = 'healthy';
+      omegaStatus.components.bridge.details = bridgeHealth.components || {};
+    } catch (err) {
+      omegaStatus.components.bridge.status = 'unavailable';
+      omegaStatus.components.bridge.error = err.message;
+      omegaStatus.ok = false;
+    }
+  }
+
+  // Check HUD health (simple fetch)
+  try {
+    const hudUrl = process.env.HUD_URL || 'http://localhost:3000';
+    const hudResponse = await fetch(`${hudUrl}/api/health`, {
+      signal: AbortSignal.timeout(3000)
+    });
+    if (hudResponse.ok) {
+      omegaStatus.components.hud.status = 'healthy';
+    } else {
+      omegaStatus.components.hud.status = 'degraded';
+    }
+  } catch (err) {
+    omegaStatus.components.hud.status = 'unavailable';
+    // Don't fail the whole check for HUD - it's optional
+  }
+
+  // Set HTTP status based on overall health
+  const httpStatus = omegaStatus.ok ? 200 : 503;
+  res.status(httpStatus).json(omegaStatus);
 });
 
 /**
