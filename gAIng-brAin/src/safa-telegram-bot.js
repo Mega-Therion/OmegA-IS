@@ -19,6 +19,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') }
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const BRAIN_URL = process.env.BRAIN_URL || 'http://localhost:8080';
+const GATEWAY_URL = process.env.GATEWAY_URL || 'http://localhost:8000';
 const GAING_SHARED_TOKEN = process.env.GAING_SHARED_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
@@ -150,6 +151,59 @@ async function brainRequest(endpoint, method = 'GET', body = null) {
 
         req.on('error', reject);
         if (body) req.write(JSON.stringify(body));
+        req.end();
+    });
+}
+
+// Call OMEGA Gateway for chat (supports mode switching)
+async function gatewayChat(userMessage, mode = 'omega') {
+    return new Promise((resolve, reject) => {
+        const url = new URL('/api/v1/chat', GATEWAY_URL);
+        const isHttps = url.protocol === 'https:';
+        const lib = isHttps ? https : require('http');
+
+        const body = JSON.stringify({
+            user: userMessage,
+            mode: mode,
+            use_memory: true,
+            temperature: 0.7
+        });
+
+        const options = {
+            hostname: url.hostname,
+            port: url.port || (isHttps ? 443 : 80),
+            path: url.pathname,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(body),
+                'Authorization': `Bearer ${GAING_SHARED_TOKEN || 'dev-token'}`
+            }
+        };
+
+        const req = lib.request(options, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    const json = JSON.parse(data);
+                    if (json.reply) {
+                        resolve({ ok: true, message: json.reply, mode: json.mode });
+                    } else if (json.detail) {
+                        resolve({ ok: false, error: json.detail });
+                    } else {
+                        resolve({ ok: true, message: data, mode: mode });
+                    }
+                } catch (e) {
+                    resolve({ ok: false, error: `Invalid response: ${data}` });
+                }
+            });
+        });
+
+        req.on('error', (err) => {
+            resolve({ ok: false, error: err.message });
+        });
+        req.write(body);
         req.end();
     });
 }
@@ -353,16 +407,21 @@ async function handleMessage(message) {
             case '/start':
             case '/help':
                 await sendMessage(chatId,
-                    `*Hey, I'm Safa* - your AI assistant.\n\n` +
-                    `Just chat with me naturally! I'm here to help with the gAIng-Brain system and answer questions.\n\n` +
-                    `*Commands:*\n` +
-                    `/clear - Clear our conversation history\n` +
+                    `*Hey, I'm Safa* - your gateway to OmegA.\n\n` +
+                    `Just chat naturally and the Collective responds. Or DM any member directly:\n\n` +
+                    `*Direct Messages:*\n` +
+                    `/claude <msg> - DM Claude\n` +
+                    `/gemini <msg> - DM Gemini\n` +
+                    `/grok <msg> - DM Grok\n` +
+                    `/perplexity <msg> - Ask Perplexity\n` +
+                    `/deepseek <msg> - DM DeepSeek\n` +
+                    `/local <msg> - Talk to Ollama\n\n` +
+                    `*System:*\n` +
+                    `/clear - Clear conversation\n` +
                     `/status - Queue overview\n` +
                     `/agents - Who's online\n` +
-                    `/task <description> - Submit a task to the queue\n` +
-                    `/high <task> - Submit high priority\n` +
-                    `/critical <task> - Submit critical priority\n\n` +
-                    `Or just send me a message and I'll respond!`
+                    `/task <desc> - Submit task\n\n` +
+                    `Regular messages → OmegA (the Collective)`
                 );
                 return;
 
@@ -425,6 +484,89 @@ async function handleMessage(message) {
                 }
                 return;
 
+            // --- DIRECT AGENT MESSAGES ---
+            case '/claude':
+            case '/anthropic': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /claude <message>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'claude');
+                if (result.ok) {
+                    await sendMessage(chatId, `*Claude:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
+            case '/gemini':
+            case '/google': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /gemini <message>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'gemini');
+                if (result.ok) {
+                    await sendMessage(chatId, `*Gemini:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
+            case '/grok':
+            case '/xai': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /grok <message>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'grok');
+                if (result.ok) {
+                    await sendMessage(chatId, `*Grok:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
+            case '/perplexity': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /perplexity <question>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'perplexity');
+                if (result.ok) {
+                    await sendMessage(chatId, `*Perplexity:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
+            case '/deepseek': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /deepseek <message>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'deepseek');
+                if (result.ok) {
+                    await sendMessage(chatId, `*DeepSeek:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
+            case '/local':
+            case '/ollama': {
+                const msg = message.text.slice(command.length).trim();
+                if (!msg) { await sendMessage(chatId, 'Usage: /local <message>'); return; }
+                await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
+                const result = await gatewayChat(msg, 'local');
+                if (result.ok) {
+                    await sendMessage(chatId, `*Local AI:*\n${result.message}`);
+                } else {
+                    await sendMessage(chatId, `Error: ${result.error}`);
+                }
+                return;
+            }
+
             default:
                 await sendMessage(chatId, `Unknown command. Try /help`);
                 return;
@@ -459,7 +601,7 @@ async function handleMessage(message) {
         return;
     }
 
-    // Handle regular text messages - send to Safa AI
+    // Handle regular text messages - always route to OmegA (the Collective)
     if (message.text) {
         const text = message.text.trim();
 
@@ -471,13 +613,20 @@ async function handleMessage(message) {
         // Show typing indicator
         await telegramRequest('sendChatAction', { chat_id: chatId, action: 'typing' });
 
-        // Get Safa AI response
-        const result = await chatWithGPT(chatId, text);
+        // Route to OmegA (Collective)
+        const result = await gatewayChat(text, 'omega');
 
         if (result.ok) {
             await sendMessage(chatId, result.message);
         } else {
-            await sendMessage(chatId, `Sorry, I encountered an error: ${result.error}\n\nTip: Use /task to submit directly to the task queue instead.`);
+            // Fallback to direct GPT if Gateway fails
+            logToBlock(`Gateway error, falling back to direct GPT: ${result.error}`);
+            const fallback = await chatWithGPT(chatId, text);
+            if (fallback.ok) {
+                await sendMessage(chatId, `_(Gateway unavailable)_\n\n${fallback.message}`);
+            } else {
+                await sendMessage(chatId, `Error: ${result.error}\n\nTip: /task to submit to queue`);
+            }
         }
     }
 }
@@ -525,6 +674,7 @@ async function start() {
 
     console.log(`Bot: @${me.result.username}`);
     console.log(`Brain: ${BRAIN_URL}`);
+    console.log(`Gateway: ${GATEWAY_URL} (OmegA Collective)`);
     console.log(`Allowed users: ${ALLOWED_USERS.length || 'ALL (configure SAFA_ALLOWED_USERS)'}`);
     console.log('\nListening for messages...\n');
 

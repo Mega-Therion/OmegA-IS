@@ -47,7 +47,7 @@ kernel.on('reflection', (evt) => {
 const corsOptions = {
     origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Internal-Token']
 };
 app.use(cors(corsOptions));
 
@@ -69,6 +69,21 @@ if (observability) {
 
 app.use(express.json());
 app.use('/ui', express.static('public'));
+
+// Internal auth guard (skip health/metrics)
+const INTERNAL_TOKEN = process.env.INTERNAL_TOKEN || process.env.OMEGA_INTERNAL_TOKEN;
+const INTERNAL_SKIP = ['/system/health', '/health', '/system/metrics'];
+app.use((req, res, next) => {
+  if (!INTERNAL_TOKEN) return next();
+  if (INTERNAL_SKIP.includes(req.path)) return next();
+  const headerToken =
+    req.headers['x-internal-token'] ||
+    (req.headers.authorization && req.headers.authorization.split(' ')[1]);
+  if (headerToken !== INTERNAL_TOKEN) {
+    return res.status(401).json({ ok: false, error: 'Internal token required' });
+  }
+  return next();
+});
 
 app.use('/', systemRoutes);
 app.use('/', mem0Routes);

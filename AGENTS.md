@@ -14,8 +14,11 @@
 - `pnpm check` runs TypeScript no-emit; `pnpm format` applies Prettier.
 - `pnpm test` runs Vitest suites under `server/**/*.test.ts|spec.ts`.
 - `pnpm db:push` generates and runs Drizzle migrations (requires `DATABASE_URL`; run from a clean tree).
-- `pnpm omega` launches the Omega Trinity stack (portal + Jarvis + CollectiveBrain API + gAIng-brAin) from one command; see `OMEGA_STACK.md` for env requirements.
-- Env: use the single root `.env` (copy from `.env.example`); per-app env templates were removed.
+- `pnpm omega` launches the Omega Trinity stack (Jarvis + Bridge + gAIng-brAin + Gateway; portal optional with `RUN_PORTAL=1`) from one command; see `OMEGA_STACK.md` for env requirements.
+- Gateway is the public ingress; keep Brain/Bridge internal. Use `/api/v1/*` from the HUD and n8n.
+- Env: use the single root `.env` (copy from `.env.example`); per-app env templates were removed. `OMEGA_DB_URL` should point to Supabase Postgres for gateway events/idempotency.
+- Jarvis is the primary UI; portal/chat_history_viewer is deprecated (only start if you need legacy admin).
+- `pnpm omega:smoke` runs a gateway health/idempotency smoke test.
 
 ## Coding Style & Naming Conventions
 - TypeScript + ESM; use path aliases `@`, `@shared`, and `@assets` for imports.
