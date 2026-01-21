@@ -9,6 +9,7 @@ const app = require('./src/app');
 const brain = require('./src/core/brain');
 
 const PORT = process.env.PORT || 8080;
+const HOST = process.env.BIND_HOST || "127.0.0.1";
 const ENABLE_NGROK = process.env.ENABLE_NGROK === '1';
 const NGROK_AUTHTOKEN = process.env.NGROK_AUTHTOKEN;
 
@@ -78,9 +79,9 @@ function gracefulShutdown(signal) {
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
-server.listen(PORT, async () => {
-  console.log("Express server listening on port " + PORT);
-  console.log("WebSocket endpoint: ws://localhost:" + PORT + "/ws?agent=<agent_name>");
+server.listen(PORT, HOST, async () => {
+  console.log(`Express server listening on ${HOST}:${PORT}`);
+  console.log(`WebSocket endpoint: ws://${HOST}:${PORT}/ws?agent=<agent_name>`);
 
   // WAKE THE BRAIN
   brain.awaken();

@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 /**
  * Omega Trinity launcher
- * Boots the three legacy Omega services from one command.
- * - Portal (this repo) -> http://localhost:3100
- * - Jarvis Neuro-Link -> http://localhost:3001
- * - CollectiveBrain API -> http://localhost:8000
- * - gAIng-brAin -> http://localhost:8080 (requires Supabase env)
+ * Boots the unified Omega services from one command.
  */
 
 import { spawn } from "node:child_process";
@@ -20,42 +16,28 @@ const isWin = process.platform === "win32";
 
 const services = [
   {
-    name: "portal",
-    cwd: repoRoot,
-    cmd: "pnpm",
-    args: ["dev"],
-    env: {
-      ...process.env,
-      PORT: process.env.PORT || "3100",
-    },
-    readyCheck: () => true,
+    name: "gateway",
+    cwd: path.join(repoRoot, "gateway"),
+    cmd: pythonCmd,
+    args: ["-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", process.env.GATEWAY_PORT || "8787"],
+    env: process.env,
+    readyCheck: () => fs.existsSync(path.join(repoRoot, "gateway", "app", "main.py")),
   },
   {
-    name: "jarvis",
-    cwd: path.join(repoRoot, "Jarvis"),
-    cmd: "npm",
-    args: ["run", "dev"],
-    env: {
-      ...process.env,
-      PORT: process.env.JARVIS_PORT || "3001",
-    },
-    readyCheck: () => fs.existsSync(path.join(repoRoot, "Jarvis")),
-  },
-  {
-    name: "collectivebrain",
-    cwd: path.join(repoRoot, "CollectiveBrain_V1"),
+    name: "bridge",
+    cwd: path.join(repoRoot, "bridge"),
     cmd: pythonCmd,
     args: [
       "-m",
       "uvicorn",
       "api:app",
       "--host",
-      "0.0.0.0",
+      process.env.BIND_HOST || "127.0.0.1",
       "--port",
       process.env.COLLECTIVE_PORT || "8000",
     ],
     env: process.env,
-    readyCheck: () => fs.existsSync(path.join(repoRoot, "CollectiveBrain_V1", "api.py")),
+    readyCheck: () => fs.existsSync(path.join(repoRoot, "bridge", "api.py")),
   },
   {
     name: "gaing-brain",
@@ -75,6 +57,17 @@ const services = [
       }
       return fs.existsSync(path.join(repoRoot, "gAIng-brAin", "index.js"));
     },
+  },
+  {
+    name: "jarvis",
+    cwd: path.join(repoRoot, "Jarvis"),
+    cmd: "npm",
+    args: ["run", "dev"],
+    env: {
+      ...process.env,
+      PORT: process.env.JARVIS_PORT || "3001",
+    },
+    readyCheck: () => fs.existsSync(path.join(repoRoot, "Jarvis")),
   },
 ];
 
@@ -126,4 +119,8 @@ for (const service of services) {
   startService(service);
 }
 
-console.log("[omega] Services launching. Portal: http://localhost:3100 | Jarvis: http://localhost:3001 | CollectiveBrain API: http://localhost:8000 | gAIng-brAin: http://localhost:8080");
+console.log("[omega] Services launching.");
+console.log("- Gateway: http://localhost:8787");
+console.log("- Bridge:  http://localhost:8000");
+console.log("- Brain:   http://localhost:8080");
+console.log("- Jarvis:  http://localhost:3001");

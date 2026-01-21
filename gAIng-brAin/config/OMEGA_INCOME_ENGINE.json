@@ -1,0 +1,377 @@
+�^{
+  "name": "gAIng Income Engine - OMEGA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "income-engine",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook_trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 400],
+      "webhookId": "income-engine"
+    },
+    {
+      "parameters": {},
+      "id": "manual_trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 600]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "tableId": "members",
+        "filterType": "formula",
+        "formula": "status.eq.active"
+      },
+      "id": "get_agents",
+      "name": "Get Active Agents",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [320, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "tableId": "agent_jobs",
+        "filterType": "formula",
+        "formula": "status.eq.completed,created_at.gte.{{ $now.minus({days: 7}).toISO() }}"
+      },
+      "id": "get_recent_jobs",
+      "name": "Get Recent Completed Jobs",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [320, 700],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare context for the crew roundtable\nconst agents = $('Get Active Agents').all();\nconst recentJobs = $('Get Recent Completed Jobs').all();\n\nconst agentList = agents.map(a => ({\n  name: a.json.name,\n  role: a.json.role || 'Agent'\n}));\n\nconst completedJobsSummary = recentJobs.slice(0, 20).map(j => \n  `- ${j.json.agent_name}: ${j.json.job_title} (${j.json.status})`\n).join('\\n') || 'No recently completed jobs.';\n\nreturn [{\n  json: {\n    agents: agentList,\n    agentNames: agentList.map(a => a.name),\n    completedJobsSummary,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "prepare_context",
+      "name": "Prepare Roundtable Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [540, 500]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are facilitating a crew roundtable for the gAIng collective. Each agent will propose income-generating jobs for other agents, provide feedback, and converge on final assignments.\n\nThe output MUST be valid JSON with this structure:\n{\n  \"roundtable_discussion\": \"<brief narrative of the roundtable discussion>\",\n  \"assignments\": [\n    {\n      \"agent_name\": \"<agent name>\",\n      \"job_title\": \"<concise job title>\",\n      \"job_description\": \"<detailed description of the income-generating task>\",\n      \"assigned_by\": \"<name of proposing agent>\",\n      \"revenue_target_usd\": <numeric target>\n    }\n  ]\n}\n\nEnsure each active agent gets at least one job. Jobs should be realistic, leverage the agent's role, and contribute to the collective's income goals."
+            },
+            {
+              "role": "user",
+              "content": "Run a crew roundtable for these agents:\n\n{{ $json.agents | map(a => `- ${a.name} (${a.role})`) | join('\\n') }}\n\nRecent completed jobs for context:\n{{ $json.completedJobsSummary }}\n\nGenerate job assignments for today. Return ONLY valid JSON, no markdown formatting."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.4,
+          "maxTokens": 3000
+        }
+      },
+      "id": "crew_roundtable",
+      "name": "Crew Roundtable",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [760, 500],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "Omega OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the LLM response and extract job assignments\nconst response = $input.first().json.text;\n\nlet parsed;\ntry {\n  // Handle potential markdown code blocks\n  let cleanJson = response.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  parsed = JSON.parse(cleanJson);\n} catch (e) {\n  return [{\n    json: {\n      error: 'Failed to parse LLM response',\n      raw: response\n    }\n  }];\n}\n\nconst assignments = parsed.assignments || [];\nconst discussion = parsed.roundtable_discussion || 'Roundtable completed.';\n\n// Return each assignment as a separate item for batch insert\nreturn assignments.map(job => ({\n  json: {\n    agent_name: job.agent_name,\n    job_title: job.job_title,\n    job_description: job.job_description || '',\n    assigned_by: job.assigned_by || 'OMEGA',\n    revenue_target_usd: job.revenue_target_usd || 0,\n    status: 'pending',\n    discussion_summary: discussion\n  }\n}));"
+      },
+      "id": "parse_assignments",
+      "name": "Parse Job Assignments",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [980, 500]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "agent_jobs",
+        "fieldsToSend": {
+          "fieldValues": [
+            {
+              "fieldName": "agent_name",
+              "fieldValue": "={{ $json.agent_name }}"
+            },
+            {
+              "fieldName": "job_title",
+              "fieldValue": "={{ $json.job_title }}"
+            },
+            {
+              "fieldName": "job_description",
+              "fieldValue": "={{ $json.job_description }}"
+            },
+            {
+              "fieldName": "assigned_by",
+              "fieldValue": "={{ $json.assigned_by }}"
+            },
+            {
+              "fieldName": "revenue_target_usd",
+              "fieldValue": "={{ $json.revenue_target_usd }}"
+            },
+            {
+              "fieldName": "status",
+              "fieldValue": "pending"
+            }
+          ]
+        }
+      },
+      "id": "insert_jobs",
+      "name": "Insert Job Assignments",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1200, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "financial_ledger",
+        "fieldsToSend": {
+          "fieldValues": [
+            {
+              "fieldName": "description",
+              "fieldValue": "gAIng Income Engine - Daily Job Assignment"
+            },
+            {
+              "fieldName": "amount_usd",
+              "fieldValue": "={{ 0.003 }}"
+            },
+            {
+              "fieldName": "category",
+              "fieldValue": "api_cost"
+            },
+            {
+              "fieldName": "agent_name",
+              "fieldValue": "OMEGA"
+            }
+          ]
+        }
+      },
+      "id": "log_cost",
+      "name": "Log API Cost",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1200, 700],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate all inserted jobs for summary\nconst items = $input.all();\nconst jobList = items.map(i => \n  `• **${i.json.agent_name}**: ${i.json.job_title} ($${i.json.revenue_target_usd || 0} target)`\n).join('\\n');\n\nconst discussion = items[0]?.json.discussion_summary || 'Assignments generated.';\n\nreturn [{\n  json: {\n    summary: `# 💼 gAIng Income Engine\\n\\n${discussion}\\n\\n## Today's Assignments\\n\\n${jobList}\\n\\n---\\n_Generated at ${new Date().toISOString()}_`,\n    jobCount: items.length\n  }\n}];"
+      },
+      "id": "prepare_summary",
+      "name": "Prepare Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1420, 500]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.summary }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "send_telegram",
+      "name": "Send Job Summary",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1640, 500],
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Omega Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { success: true, jobs_assigned: $('Prepare Summary').item.json.jobCount } }}"
+      },
+      "id": "respond_webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1860, 500]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Active Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Active Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Agents": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Completed Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Completed Jobs": {
+      "main": [
+        [
+          {
+            "node": "Prepare Roundtable Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Roundtable Context": {
+      "main": [
+        [
+          {
+            "node": "Crew Roundtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crew Roundtable": {
+      "main": [
+        [
+          {
+            "node": "Parse Job Assignments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Job Assignments": {
+      "main": [
+        [
+          {
+            "node": "Insert Job Assignments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log API Cost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Job Assignments": {
+      "main": [
+        [
+          {
+            "node": "Prepare Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Summary": {
+      "main": [
+        [
+          {
+            "node": "Send Job Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Job Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "OMEGA",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Income",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-14T00:00:00.000Z",
+  "versionId": "1.0.0"
+}
+�^*cascade082yfile:///c:/Users/mega_/Downloads/OMEGA_REALITY_KIT_UPDATED/OMEGA_REALITY_KIT/workflows/gAIng_Income_Engine_OMEGA_n8n.json
