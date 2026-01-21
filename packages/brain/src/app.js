@@ -21,6 +21,7 @@ const voiceRoutes = require('./routes/voice');
 const eyesRoutes = require('./routes/eyes');
 const earsRoutes = require('./routes/ears');
 const analyticsRoutes = require('./routes/analytics');
+const bridgeRoutes = require('./routes/bridge');
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -90,6 +91,7 @@ app.use('/voice', voiceRoutes);
 app.use('/eyes', eyesRoutes);
 app.use('/ears', earsRoutes);
 app.use('/analytics', analyticsRoutes);
+app.use('/bridge', bridgeRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
 app.use('/captures', express.static('public/captures'));
 
