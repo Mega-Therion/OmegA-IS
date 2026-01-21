@@ -24,6 +24,115 @@
       "env": {
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
       }
+    },
+    {
+      "name": "perplexity",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/perplexity-server.js"],
+      "env": {
+        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
+      }
+    },
+    {
+      "name": "telegram",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/telegram/dist/index.js"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}"
+      }
+    },
+    {
+      "name": "manus",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/manus-server.js"],
+      "env": {
+        "MANUS_API_KEY": "${MANUS_API_KEY}"
+      }
+    },
+    {
+      "name": "replit",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/replit-server.js"],
+      "env": {
+        "REPLIT_API_KEY": "${REPLIT_API_KEY}"
+      }
+    },
+    {
+      "name": "webhook",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/webhook/dist/index.js"]
+    },
+    {
+      "name": "memory",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    {
+      "name": "sequential-thinking",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    {
+      "name": "fetch",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+    {
+      "name": "brave-search",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    {
+      "name": "puppeteer",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+    {
+      "name": "postgres",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${POSTGRES_URL}"]
+    },
+    {
+      "name": "slack",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      }
+    },
+    {
+      "name": "sentry",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}"
+      }
+    },
+    {
+      "name": "gitlab",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_PERSONAL_ACCESS_TOKEN}"
+      }
     }
   ]
 }
