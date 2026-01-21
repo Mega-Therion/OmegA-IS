@@ -1,0 +1,14 @@
+{
+  "id": "a0770c87-2212-4117-87a5-54c91a705084",
+  "objective": "Build a 'Voice' service in src/services/voice.js that uses the ElevenLabs API to generate speech from text. Then add a button to the UI that reads the latest mission thought out loud.",
+  "status": "PLANNING",
+  "steps": [],
+  "context": {
+    "constraints": [],
+    "resources": []
+  },
+  "decisionLog": [],
+  "createdAt": "2026-01-04T20:04:01.305Z",
+  "updatedAt": "2026-01-04T20:04:01.333Z",
+  "persistenceDir": "C:\\Users\\mega_\\data\\missions"
+}

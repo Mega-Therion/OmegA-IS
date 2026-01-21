@@ -1,0 +1,128 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "omega brain",
+      "intents": [
+        {
+          "name": "ChatIntent",
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "ask {query}",
+            "tell me {query}",
+            "what is {query}",
+            "explain {query}",
+            "help me with {query}",
+            "{query}",
+            "I want to know {query}",
+            "can you tell me {query}",
+            "what do you think about {query}",
+            "analyze {query}",
+            "research {query}"
+          ]
+        },
+        {
+          "name": "StatusIntent",
+          "slots": [],
+          "samples": [
+            "status",
+            "what is the status",
+            "system status",
+            "how are you",
+            "are you online",
+            "check status",
+            "health check",
+            "is everything working"
+          ]
+        },
+        {
+          "name": "MissionIntent",
+          "slots": [],
+          "samples": [
+            "missions",
+            "what are my missions",
+            "list missions",
+            "show missions",
+            "current missions",
+            "active missions",
+            "mission status",
+            "what am I working on"
+          ]
+        },
+        {
+          "name": "AgentIntent",
+          "slots": [
+            {
+              "name": "agent",
+              "type": "AgentType"
+            }
+          ],
+          "samples": [
+            "talk to {agent}",
+            "switch to {agent}",
+            "use {agent}",
+            "connect to {agent}",
+            "ask {agent}",
+            "speak to {agent}",
+            "let me talk to {agent}"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "AgentType",
+          "values": [
+            {
+              "id": "gemini",
+              "name": {
+                "value": "Gemini",
+                "synonyms": ["gem", "planning agent", "strategist"]
+              }
+            },
+            {
+              "id": "claude",
+              "name": {
+                "value": "Claude",
+                "synonyms": ["reasoning agent", "thinker", "architect"]
+              }
+            },
+            {
+              "id": "codex",
+              "name": {
+                "value": "Codex",
+                "synonyms": ["code agent", "developer", "builder", "coder"]
+              }
+            },
+            {
+              "id": "grok",
+              "name": {
+                "value": "Grok",
+                "synonyms": ["search agent", "scout", "researcher"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

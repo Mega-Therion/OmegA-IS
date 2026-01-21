@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok Voice - gAIng Brain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e4e4e4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+        .voice-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .voice-btn {
+            padding: 10px 20px;
+            border: 2px solid #333;
+            background: transparent;
+            color: #888;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .voice-btn:hover {
+            border-color: #00d9ff;
+            color: #00d9ff;
+        }
+        .voice-btn.active {
+            border-color: #00ff88;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .main-btn {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #333;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .main-btn:hover {
+            border-color: #00d9ff;
+            transform: scale(1.05);
+        }
+        .main-btn.listening {
+            border-color: #00ff88;
+            animation: pulse 1.5s infinite;
+        }
+        .main-btn.speaking {
+            border-color: #ff6b6b;
+            animation: glow 0.5s infinite alternate;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+            50% { box-shadow: 0 0 0 30px rgba(0, 255, 136, 0); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+            to { box-shadow: 0 0 40px rgba(255, 107, 107, 0.8); }
+        }
+        .mic-icon {
+            font-size: 60px;
+        }
+        .status {
+            text-align: center;
+            color: #888;
+            margin-bottom: 20px;
+            min-height: 24px;
+        }
+        .status.connected { color: #00ff88; }
+        .status.error { color: #ff6b6b; }
+        .transcript-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 85%;
+        }
+        .message.user {
+            background: rgba(0, 217, 255, 0.2);
+            margin-left: auto;
+            text-align: right;
+        }
+        .message.grok {
+            background: rgba(0, 255, 136, 0.2);
+        }
+        .message .label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .ctrl-btn {
+            padding: 10px 20px;
+            border: 1px solid #333;
+            background: transparent;
+            color: #888;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .ctrl-btn:hover {
+            border-color: #00d9ff;
+            color: #00d9ff;
+        }
+        .ctrl-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grok Voice</h1>
+    <p class="subtitle">gAIng Collective Voice Interface</p>
+
+    <div class="container">
+        <div class="voice-selector">
+            <button class="voice-btn" data-voice="Ara">Ara</button>
+            <button class="voice-btn active" data-voice="Rex">Rex</button>
+            <button class="voice-btn" data-voice="Sal">Sal</button>
+            <button class="voice-btn" data-voice="Eve">Eve</button>
+            <button class="voice-btn" data-voice="Leo">Leo</button>
+        </div>
+
+        <div class="status" id="status">Click to connect</div>
+
+        <button class="main-btn" id="mainBtn">
+            <span class="mic-icon">🎙️</span>
+        </button>
+
+        <div class="transcript-box" id="transcript"></div>
+
+        <div class="controls">
+            <button class="ctrl-btn" id="clearBtn">Clear</button>
+            <button class="ctrl-btn" id="interruptBtn" disabled>Interrupt</button>
+        </div>
+    </div>
+
+    <script>
+        const mainBtn = document.getElementById('mainBtn');
+        const status = document.getElementById('status');
+        const transcript = document.getElementById('transcript');
+        const clearBtn = document.getElementById('clearBtn');
+        const interruptBtn = document.getElementById('interruptBtn');
+
+        let ws = null;
+        let audioContext = null;
+        let mediaStream = null;
+        let processor = null;
+        let isListening = false;
+        let selectedVoice = 'Rex';
+        let audioQueue = [];
+        let isPlaying = false;
+
+        // Voice selector
+        document.querySelectorAll('.voice-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.voice-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedVoice = btn.dataset.voice;
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'config', voice: selectedVoice }));
+                }
+            });
+        });
+
+        mainBtn.addEventListener('click', async () => {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                await connect();
+            } else if (!isListening) {
+                await startListening();
+            } else {
+                stopListening();
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            transcript.innerHTML = '';
+        });
+
+        interruptBtn.addEventListener('click', () => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'interrupt' }));
+                audioQueue = [];
+                isPlaying = false;
+            }
+        });
+
+        async function connect() {
+            status.textContent = 'Connecting...';
+            status.className = 'status';
+
+            const wsUrl = `ws://${location.host}/grok-voice?voice=${selectedVoice}`;
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                status.textContent = 'Connected - Click to speak';
+                status.className = 'status connected';
+            };
+
+            ws.onmessage = async (event) => {
+                if (event.data instanceof Blob) {
+                    // Audio data
+                    const arrayBuffer = await event.data.arrayBuffer();
+                    playAudio(arrayBuffer);
+                } else {
+                    const msg = JSON.parse(event.data);
+                    handleMessage(msg);
+                }
+            };
+
+            ws.onerror = (err) => {
+                status.textContent = 'Connection error';
+                status.className = 'status error';
+                console.error('WebSocket error:', err);
+            };
+
+            ws.onclose = () => {
+                status.textContent = 'Disconnected - Click to reconnect';
+                status.className = 'status';
+                stopListening();
+            };
+        }
+
+        function handleMessage(msg) {
+            switch (msg.type) {
+                case 'ready':
+                    status.textContent = `Ready (${msg.voice}) - Click to speak`;
+                    break;
+                case 'listening':
+                    mainBtn.classList.add('listening');
+                    mainBtn.classList.remove('speaking');
+                    break;
+                case 'processing':
+                    status.textContent = 'Processing...';
+                    break;
+                case 'user_transcript':
+                    addMessage('You', msg.text, 'user');
+                    break;
+                case 'transcript':
+                    addMessage('Grok', msg.text, 'grok');
+                    mainBtn.classList.remove('listening');
+                    mainBtn.classList.add('speaking');
+                    interruptBtn.disabled = false;
+                    break;
+                case 'transcript_delta':
+                    // Update streaming transcript
+                    updateStreamingMessage(msg.delta);
+                    break;
+                case 'response_done':
+                    mainBtn.classList.remove('speaking');
+                    interruptBtn.disabled = true;
+                    status.textContent = 'Ready - Click to speak';
+                    break;
+                case 'error':
+                    status.textContent = `Error: ${msg.message}`;
+                    status.className = 'status error';
+                    break;
+            }
+        }
+
+        let streamingEl = null;
+        function updateStreamingMessage(delta) {
+            if (!streamingEl) {
+                streamingEl = document.createElement('div');
+                streamingEl.className = 'message grok';
+                streamingEl.innerHTML = '<div class="label">Grok</div><div class="text"></div>';
+                transcript.appendChild(streamingEl);
+            }
+            streamingEl.querySelector('.text').textContent += delta;
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        function addMessage(sender, text, type) {
+            streamingEl = null;
+            const el = document.createElement('div');
+            el.className = `message ${type}`;
+            el.innerHTML = `<div class="label">${sender}</div><div class="text">${text}</div>`;
+            transcript.appendChild(el);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        async function startListening() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
+                mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                const source = audioContext.createMediaStreamSource(mediaStream);
+                processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+                processor.onaudioprocess = (e) => {
+                    if (!isListening || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+                    const input = e.inputBuffer.getChannelData(0);
+                    const pcm16 = new Int16Array(input.length);
+                    for (let i = 0; i < input.length; i++) {
+                        pcm16[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
+                    }
+                    ws.send(pcm16.buffer);
+                };
+
+                source.connect(processor);
+                processor.connect(audioContext.destination);
+
+                isListening = true;
+                mainBtn.classList.add('listening');
+                status.textContent = 'Listening...';
+            } catch (err) {
+                status.textContent = `Mic error: ${err.message}`;
+                status.className = 'status error';
+            }
+        }
+
+        function stopListening() {
+            isListening = false;
+            mainBtn.classList.remove('listening');
+            if (processor) processor.disconnect();
+            if (mediaStream) mediaStream.getTracks().forEach(t => t.stop());
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'commit' }));
+            }
+        }
+
+        async function playAudio(arrayBuffer) {
+            audioQueue.push(arrayBuffer);
+            if (!isPlaying) {
+                playNextAudio();
+            }
+        }
+
+        async function playNextAudio() {
+            if (audioQueue.length === 0) {
+                isPlaying = false;
+                return;
+            }
+            isPlaying = true;
+            const buffer = audioQueue.shift();
+
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
+                }
+                // PCM16 to Float32
+                const pcm16 = new Int16Array(buffer);
+                const float32 = new Float32Array(pcm16.length);
+                for (let i = 0; i < pcm16.length; i++) {
+                    float32[i] = pcm16[i] / 32768;
+                }
+
+                const audioBuffer = audioContext.createBuffer(1, float32.length, 24000);
+                audioBuffer.getChannelData(0).set(float32);
+
+                const source = audioContext.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioContext.destination);
+                source.onended = playNextAudio;
+                source.start();
+            } catch (err) {
+                console.error('Audio playback error:', err);
+                playNextAudio();
+            }
+        }
+    </script>
+</body>
+</html>

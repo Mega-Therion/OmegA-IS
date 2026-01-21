@@ -1,0 +1,31 @@
+# OMEGA Bridge Requirements
+# =========================
+
+# Core Dependencies
+# -----------------
+fastapi>=0.109.0           # Web framework for REST API
+uvicorn[standard]>=0.27.0  # ASGI server
+pydantic>=2.0.0            # Data validation
+httpx>=0.25.0              # HTTP client for LLM API calls
+typing-extensions>=4.0.0   # Enhanced type hints
+python-dotenv>=1.0.0       # Environment variable loading
+
+# Production Memory Backends (optional)
+# -------------------------------------
+# Uncomment these for production deployment:
+
+# redis>=4.5.0             # SessionMemory - real-time task state
+# pymilvus>=2.3.0          # SemanticMemory - vector embeddings
+# neo4j>=5.0.0             # RelationalMemory - knowledge graphs
+
+# LLM Providers (optional - choose one)
+# -------------------------------------
+# openai>=1.0.0            # OpenAI API client
+
+# Development Dependencies
+# ------------------------
+# Install with: pip install -e ".[dev]"
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
+# ruff>=0.1.0
+# mypy>=1.0.0

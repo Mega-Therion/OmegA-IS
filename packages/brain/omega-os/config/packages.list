@@ -1,0 +1,66 @@
+# OMEGA-OS Base Packages
+# These packages are installed in the live system
+
+# Core System
+linux-image-amd64
+live-boot
+systemd-sysv
+sudo
+passwd
+
+# Networking
+network-manager
+wpasupplicant
+iproute2
+iputils-ping
+dnsutils
+curl
+wget
+openssh-client
+
+# Development
+git
+vim
+nano
+build-essential
+python3
+python3-pip
+python3-venv
+
+# Utilities
+htop
+tmux
+screen
+unzip
+zip
+tar
+
+# Hardware Support
+firmware-linux-free
+firmware-misc-nonfree
+pciutils
+usbutils
+
+# Security
+ca-certificates
+gnupg
+openssl
+
+# Desktop Environment (optional, for non-minimal builds)
+xorg
+xfce4
+xfce4-terminal
+xfce4-whiskermenu-plugin
+xfce4-taskmanager
+xfce4-screenshooter
+lightdm
+lightdm-gtk-greeter
+
+# Applications
+firefox-esr
+thunar
+
+# Fonts
+fonts-dejavu-core
+fonts-liberation
+fonts-noto-core

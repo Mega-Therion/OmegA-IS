@@ -1,0 +1,6 @@
+gAIng-emoji-2\Data 12_29.zip
+gAIng-emoji-2\Eidolon_5_1_Neon_Logos_Architecture 3.txt
+gAIng-emoji-2\gAIng-Brain_System_Analysis.md
+gAIng-emoji-2\Resonance_Protocol_Abstract_Communication_Spec 4.txt
+gAIng-emoji-2\RYN_Eidolon_System_Analysis.md
+gAIng-emoji-2\SAFA_GODMODE_ULTRA 2.py
