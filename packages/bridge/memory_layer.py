@@ -113,8 +113,13 @@ class SessionMemory:
         """Check if using production Redis backend."""
         return self.redis_client is not None
 
-    def set_session(self, session_id: str, data: Dict[str, Any], ttl: int = 3600) -> None:
-        """Set session data with optional TTL (default: 1 hour)."""
+    def set_session(self, session_id: str, data: Dict[str, Any], ttl: int = 3600) -> Dict[str, Any]:
+        """
+        Set session data with optional TTL (default: 1 hour).
+
+        Returns:
+            Dict with 'success' (bool), 'backend' (str), and optional 'error' (str) keys
+        """
         timestamp = datetime.now(timezone.utc).isoformat()
         session_data = {"data": data, "updated_at": timestamp}
 
@@ -125,12 +130,17 @@ class SessionMemory:
                     ttl,
                     json.dumps(session_data)
                 )
-                return
+                return {"success": True, "backend": "redis"}
             except Exception as e:
-                print(f"[SessionMemory] Redis SET failed: {e}")
+                error_msg = f"Redis SET failed: {e}"
+                print(f"[SessionMemory] {error_msg}")
+                # Fallback to in-memory
+                self.sessions[session_id] = session_data
+                return {"success": True, "backend": "memory", "warning": error_msg}
 
-        # Fallback to in-memory
+        # In-memory only mode
         self.sessions[session_id] = session_data
+        return {"success": True, "backend": "memory"}
 
     def get_session(self, session_id: str) -> Optional[Dict[str, Any]]:
         """Get session data."""
@@ -224,8 +234,13 @@ class SemanticMemory:
         # Convert to 128-dim float vector
         return [float(b) / 255.0 for b in hash_bytes[:128] + hash_bytes[:128][::-1]][:128]
 
-    def index_document(self, doc_id: str, content: str, metadata: Optional[Dict] = None) -> str:
-        """Index a document for semantic search."""
+    def index_document(self, doc_id: str, content: str, metadata: Optional[Dict] = None) -> Dict[str, Any]:
+        """
+        Index a document for semantic search.
+
+        Returns:
+            Dict with 'vector_id' (str), 'backend' (str), 'success' (bool), and optional 'warning' (str) keys
+        """
         vector_id = f"vec_{self.index_count}"
         self.index_count += 1
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -254,14 +269,32 @@ class SemanticMemory:
                 )
                 doc_data["embedding"] = embedding[:5]  # Store first 5 dims for reference
                 self.vectors[vector_id] = doc_data
-                return vector_id
+                return {
+                    "vector_id": vector_id,
+                    "backend": "milvus",
+                    "success": True
+                }
             except Exception as e:
-                print(f"[SemanticMemory] Milvus insert failed: {e}")
+                error_msg = f"Milvus insert failed: {e}"
+                print(f"[SemanticMemory] {error_msg}")
+                # Fallback to in-memory with no embedding
+                doc_data["embedding"] = None
+                self.vectors[vector_id] = doc_data
+                return {
+                    "vector_id": vector_id,
+                    "backend": "memory",
+                    "success": True,
+                    "warning": error_msg
+                }
 
-        # Fallback to in-memory
+        # In-memory only mode
         doc_data["embedding"] = None
         self.vectors[vector_id] = doc_data
-        return vector_id
+        return {
+            "vector_id": vector_id,
+            "backend": "memory",
+            "success": True
+        }
 
     def semantic_search(self, query: str, top_k: int = 5) -> List[Dict]:
         """Perform semantic search."""
@@ -362,14 +395,21 @@ class RelationalMemory:
         """Check if using production Neo4j backend."""
         return self.driver is not None
 
-    def create_node(self, node_id: str, node_type: str, properties: Dict) -> None:
-        """Create a node in the knowledge graph."""
+    def create_node(self, node_id: str, node_type: str, properties: Dict) -> Dict[str, Any]:
+        """
+        Create a node in the knowledge graph.
+
+        Returns:
+            Dict with 'success' (bool), 'backend' (str), 'node_id' (str), and optional 'warning' (str) keys
+        """
         timestamp = datetime.now(timezone.utc).isoformat()
         node_data = {
             "type": node_type,
             "properties": properties,
             "created_at": timestamp,
         }
+
+        result = {"node_id": node_id, "success": True}
 
         if self.driver:
             try:
@@ -386,11 +426,18 @@ class RelationalMemory:
                         properties=properties,
                         timestamp=timestamp,
                     )
+                result["backend"] = "neo4j"
             except Exception as e:
-                print(f"[RelationalMemory] Neo4j create node failed: {e}")
+                error_msg = f"Neo4j create node failed: {e}"
+                print(f"[RelationalMemory] {error_msg}")
+                result["backend"] = "memory"
+                result["warning"] = error_msg
+        else:
+            result["backend"] = "memory"
 
         # Always store locally for quick access
         self.nodes[node_id] = node_data
+        return result
 
     def create_relationship(
         self,

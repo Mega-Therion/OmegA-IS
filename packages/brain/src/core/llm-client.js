@@ -186,9 +186,11 @@ class LLMClient {
             data => data.candidates?.[0]?.content?.parts?.[0]?.text);
     }
 
-    _request(hostname, path, headers, payload, extractor) {
+    _request(hostname, path, headers, payload, extractor, timeoutMs = 30000) {
         return new Promise((resolve, reject) => {
             const data = JSON.stringify(payload);
+            let timeoutHandle;
+            let isResolved = false;
 
             const req = https.request({
                 hostname,
@@ -197,26 +199,67 @@ class LLMClient {
                 headers: {
                     ...headers,
                     'Content-Length': Buffer.byteLength(data)
-                }
+                },
+                timeout: timeoutMs
             }, (res) => {
                 let body = '';
                 res.on('data', chunk => body += chunk);
                 res.on('end', () => {
+                    if (isResolved) return; // Already timed out
+                    clearTimeout(timeoutHandle);
+
                     try {
                         const json = JSON.parse(body);
+
+                        // Check for HTTP error status
+                        if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+                            isResolved = true;
+                            reject(new Error(`HTTP ${res.statusCode}: ${json.error?.message || body.substring(0, 200)}`));
+                            return;
+                        }
+
                         const result = extractor(json);
                         if (result) {
+                            isResolved = true;
                             resolve(result);
                         } else {
-                            reject(new Error(json.error?.message || 'No response'));
+                            isResolved = true;
+                            reject(new Error(json.error?.message || 'No valid response from provider'));
                         }
                     } catch (e) {
-                        reject(e);
+                        if (!isResolved) {
+                            isResolved = true;
+                            reject(new Error(`Response parsing failed: ${e.message}`));
+                        }
                     }
                 });
             });
 
-            req.on('error', reject);
+            // Set timeout
+            timeoutHandle = setTimeout(() => {
+                if (!isResolved) {
+                    isResolved = true;
+                    req.destroy();
+                    reject(new Error(`Request timeout after ${timeoutMs}ms`));
+                }
+            }, timeoutMs);
+
+            req.on('timeout', () => {
+                if (!isResolved) {
+                    isResolved = true;
+                    req.destroy();
+                    reject(new Error(`Socket timeout after ${timeoutMs}ms`));
+                }
+            });
+
+            req.on('error', (err) => {
+                if (!isResolved) {
+                    clearTimeout(timeoutHandle);
+                    isResolved = true;
+                    reject(new Error(`Network error: ${err.message}`));
+                }
+            });
+
             req.write(data);
             req.end();
         });

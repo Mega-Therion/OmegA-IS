@@ -60,8 +60,18 @@ const buildOmegaMessages = (prompt: string, context: string[]) => {
 }
 
 export async function POST(request: NextRequest) {
+  let timeoutId: NodeJS.Timeout | undefined
+
   try {
-    const body = (await request.json()) as ChatRequest
+    // Parse and validate request body
+    let body: ChatRequest
+    try {
+      body = (await request.json()) as ChatRequest
+    } catch (parseError) {
+      console.error('[HUD Chat] Failed to parse request body:', parseError)
+      return respondWithError('Invalid JSON in request body.', 400)
+    }
+
     const { prompt, context, agent, useOmega } = parseBody(body)
 
     if (!prompt) {
@@ -72,77 +82,115 @@ export async function POST(request: NextRequest) {
       return respondWithError('Prompt exceeds the allowed length.', 413)
     }
 
-    const { signal, timeoutId } = createTimeoutSignal(GAING_BRAIN_TIMEOUT_MS)
+    const { signal, timeoutId: tid } = createTimeoutSignal(GAING_BRAIN_TIMEOUT_MS)
+    timeoutId = tid
 
-    const response = await fetch(
-      `${GAING_BRAIN_URL}${useOmega ? '/omega/chat' : '/api/llm/chat'}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(
-          useOmega
-            ? {
-                messages: buildOmegaMessages(prompt, context),
-                max_tokens: 500,
-                temperature: 0.7
-              }
-            : {
-                messages: [
-                  {
-                    role: 'system',
-                    content: `You are JARVIS, an advanced AI assistant with neural-link capabilities. You have access to retrieval-augmented context when available. Be concise, helpful, and precise.${
-                      context.length ? `\n\nGrounded context:\n${context.join('\n')}` : ''
-                    }`
-                  },
-                  { role: 'user', content: prompt }
-                ],
-                max_tokens: 500,
-                temperature: 0.7,
-                model: agent
-              }
-        ),
-        signal
+    try {
+      const response = await fetch(
+        `${GAING_BRAIN_URL}${useOmega ? '/omega/chat' : '/api/llm/chat'}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            useOmega
+              ? {
+                  messages: buildOmegaMessages(prompt, context),
+                  max_tokens: 500,
+                  temperature: 0.7
+                }
+              : {
+                  messages: [
+                    {
+                      role: 'system',
+                      content: `You are JARVIS, an advanced AI assistant with neural-link capabilities. You have access to retrieval-augmented context when available. Be concise, helpful, and precise.${
+                        context.length ? `\n\nGrounded context:\n${context.join('\n')}` : ''
+                      }`
+                    },
+                    { role: 'user', content: prompt }
+                  ],
+                  max_tokens: 500,
+                  temperature: 0.7,
+                  model: agent
+                }
+          ),
+          signal
+        }
+      )
+
+      clearTimeout(timeoutId)
+      timeoutId = undefined
+
+      if (!response.ok) {
+        console.warn(`[HUD Chat] Primary endpoint failed with ${response.status}, trying fallback...`)
+
+        // Try fallback endpoint
+        try {
+          const fallbackResponse = await fetch(`${GAING_BRAIN_URL}/api/messages`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sender: 'jarvis-frontend',
+              recipient: agent,
+              content: prompt,
+              message_type: 'text'
+            }),
+            signal: createTimeoutSignal(GAING_BRAIN_TIMEOUT_MS).signal
+          })
+
+          if (fallbackResponse.ok) {
+            const data = await fallbackResponse.json()
+            return NextResponse.json({
+              reply: data.message?.content || 'Message logged. Processing...'
+            })
+          }
+
+          console.error(`[HUD Chat] Fallback endpoint also failed with ${fallbackResponse.status}`)
+        } catch (fallbackError) {
+          console.error('[HUD Chat] Fallback endpoint error:', fallbackError)
+        }
+
+        return respondWithError('Upstream service unavailable. Try again shortly.', 502)
       }
-    )
 
-    clearTimeout(timeoutId)
-
-    if (!response.ok) {
-      const fallbackResponse = await fetch(`${GAING_BRAIN_URL}/api/messages`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sender: 'jarvis-frontend',
-          recipient: agent,
-          content: prompt,
-          message_type: 'text'
-        })
-      })
-
-      if (fallbackResponse.ok) {
-        const data = await fallbackResponse.json()
-        return NextResponse.json({
-          reply: data.message?.content || 'Message logged. Processing...'
-        })
+      // Parse response
+      let data: any
+      try {
+        data = await response.json()
+      } catch (jsonError) {
+        console.error('[HUD Chat] Failed to parse Brain response as JSON:', jsonError)
+        return respondWithError('Received invalid response from upstream service.', 502)
       }
 
-      return respondWithError('Upstream service unavailable. Try again shortly.', 502)
+      const reply =
+        data.response?.choices?.[0]?.message?.content ||
+        data.response?.content ||
+        data.content ||
+        data.reply ||
+        'Neural link established. Awaiting further calibration.'
+
+      return NextResponse.json({ reply })
+
+    } catch (fetchError) {
+      if (timeoutId) clearTimeout(timeoutId)
+
+      if (fetchError instanceof Error && fetchError.name === 'AbortError') {
+        console.error(`[HUD Chat] Request timeout after ${GAING_BRAIN_TIMEOUT_MS}ms`)
+        return respondWithError('Upstream request timed out. Please retry.', 504)
+      }
+
+      // Check for network errors
+      if (fetchError instanceof TypeError && fetchError.message.includes('fetch failed')) {
+        console.error('[HUD Chat] Network error connecting to Brain:', fetchError)
+        return respondWithError('Cannot connect to Brain service. Check if it is running.', 503)
+      }
+
+      throw fetchError
     }
 
-    const data = await response.json()
-    const reply =
-      data.response?.choices?.[0]?.message?.content ||
-      data.response?.content ||
-      data.content ||
-      data.reply ||
-      'Neural link established. Awaiting further calibration.'
-
-    return NextResponse.json({ reply })
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      return respondWithError('Upstream request timed out. Please retry.', 504)
-    }
-    console.error('JARVIS API Error:', error)
+    if (timeoutId) clearTimeout(timeoutId)
+
+    console.error('[HUD Chat] Unexpected error:', error)
     return respondWithError(
       'Neural link temporarily interrupted. Falling back to local heuristics.',
       500

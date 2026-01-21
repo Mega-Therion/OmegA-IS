@@ -76,85 +76,85 @@ class HealthResponse(BaseModel):
 
 class MemoryEntry(BaseModel):
     """Memory entry for working memory."""
-    type: str
-    content: str
+    type: str = Field(..., min_length=1, max_length=100, description="Type of memory entry")
+    content: str = Field(..., min_length=1, max_length=10000, description="Content of the memory entry")
     metadata: Optional[Dict[str, Any]] = None
 
 
 class SessionData(BaseModel):
     """Session data for session memory."""
-    session_id: str
-    data: Dict[str, Any]
+    session_id: str = Field(..., min_length=1, max_length=100, description="Unique session identifier")
+    data: Dict[str, Any] = Field(..., description="Session data dictionary")
 
 
 class DocumentIndex(BaseModel):
     """Document for semantic indexing."""
-    doc_id: str
-    content: str
+    doc_id: str = Field(..., min_length=1, max_length=200, description="Unique document identifier")
+    content: str = Field(..., min_length=1, max_length=50000, description="Document content to index")
     metadata: Optional[Dict[str, Any]] = None
 
 
 class SemanticSearchRequest(BaseModel):
     """Semantic search request."""
-    query: str
-    top_k: int = 5
+    query: str = Field(..., min_length=1, max_length=1000, description="Search query")
+    top_k: int = Field(default=5, ge=1, le=100, description="Number of results to return")
 
 
 class NodeCreate(BaseModel):
     """Node creation for relational memory."""
-    node_id: str
-    node_type: str
-    properties: Dict[str, Any]
+    node_id: str = Field(..., min_length=1, max_length=200, description="Unique node identifier")
+    node_type: str = Field(..., min_length=1, max_length=100, description="Node type/label")
+    properties: Dict[str, Any] = Field(..., description="Node properties")
 
 
 class RelationshipCreate(BaseModel):
     """Relationship creation for relational memory."""
-    from_node: str
-    to_node: str
-    rel_type: str
+    from_node: str = Field(..., min_length=1, max_length=200, description="Source node ID")
+    to_node: str = Field(..., min_length=1, max_length=200, description="Target node ID")
+    rel_type: str = Field(..., min_length=1, max_length=100, description="Relationship type")
     properties: Optional[Dict[str, Any]] = None
 
 
 class PathQuery(BaseModel):
     """Path query for relational memory."""
-    start_node: str
-    end_node: str
-    max_hops: int = 3
+    start_node: str = Field(..., min_length=1, max_length=200, description="Start node ID")
+    end_node: str = Field(..., min_length=1, max_length=200, description="End node ID")
+    max_hops: int = Field(default=3, ge=1, le=10, description="Maximum number of hops")
 
 
 class ObjectiveRequest(BaseModel):
     """Objective for orchestration."""
-    objective: str
-    max_goals: int = 5
+    objective: str = Field(..., min_length=10, max_length=5000, description="The objective to decompose")
+    max_goals: int = Field(default=5, ge=1, le=20, description="Maximum number of sub-goals")
 
 
 class WorkerAssignment(BaseModel):
     """Worker assignment request."""
-    task_id: str
-    sub_goal_index: int
-    worker_role: str
+    task_id: str = Field(..., min_length=1, max_length=200, description="Task identifier")
+    sub_goal_index: int = Field(..., ge=0, description="Sub-goal index")
+    worker_role: str = Field(..., min_length=1, max_length=100, description="Worker role")
 
 
 class TaskAssignment(BaseModel):
     """Task assignment to worker pool."""
-    role: str
-    task_id: str
-    instruction: str
+    role: str = Field(..., min_length=1, max_length=100, description="Worker role")
+    task_id: str = Field(..., min_length=1, max_length=200, description="Task identifier")
+    instruction: str = Field(..., min_length=1, max_length=5000, description="Task instruction")
 
 
 class VoteInitiate(BaseModel):
     """Initiate a consensus vote."""
-    decision_id: str
-    description: str
-    agents: List[str]
+    decision_id: str = Field(..., min_length=1, max_length=200, description="Decision identifier")
+    description: str = Field(..., min_length=1, max_length=2000, description="Decision description")
+    agents: List[str] = Field(..., min_items=1, max_items=50, description="List of agent IDs")
 
 
 class VoteCast(BaseModel):
     """Cast a vote in consensus."""
-    decision_id: str
-    agent_id: str
-    vote: str  # "approve", "reject", "abstain"
-    justification: Optional[str] = None
+    decision_id: str = Field(..., min_length=1, max_length=200, description="Decision identifier")
+    agent_id: str = Field(..., min_length=1, max_length=100, description="Agent identifier")
+    vote: str = Field(..., pattern="^(approve|reject|abstain)$", description="Vote type: approve, reject, or abstain")
+    justification: Optional[str] = Field(None, max_length=2000, description="Vote justification")
 
 
 class ChatRequest(BaseModel):
@@ -266,8 +266,13 @@ async def clear_working_memory():
 @app.post("/memory/session", tags=["Memory"])
 async def set_session(session: SessionData):
     """Set session data."""
-    memory.session.set_session(session.session_id, session.data)
-    return {"status": "stored", "session_id": session.session_id}
+    result = memory.session.set_session(session.session_id, session.data)
+    return {
+        "status": "stored",
+        "session_id": session.session_id,
+        "backend": result["backend"],
+        "warning": result.get("warning")
+    }
 
 
 @app.get("/memory/session/{session_id}", tags=["Memory"])
@@ -292,15 +297,17 @@ async def delete_session(session_id: str):
 @app.post("/memory/semantic/index", tags=["Memory"])
 async def index_document(doc: DocumentIndex):
     """Index a document for semantic search."""
-    vector_id = memory.semantic.index_document(
+    result = memory.semantic.index_document(
         doc.doc_id,
         doc.content,
         doc.metadata
     )
     return {
         "status": "indexed",
-        "vector_id": vector_id,
+        "vector_id": result["vector_id"],
         "doc_id": doc.doc_id,
+        "backend": result["backend"],
+        "warning": result.get("warning")
     }
 
 
@@ -329,15 +336,17 @@ async def get_document(vector_id: str):
 @app.post("/memory/relational/node", tags=["Memory"])
 async def create_node(node: NodeCreate):
     """Create a node in the knowledge graph."""
-    memory.relational.create_node(
+    result = memory.relational.create_node(
         node.node_id,
         node.node_type,
         node.properties
     )
     return {
         "status": "created",
-        "node_id": node.node_id,
+        "node_id": result["node_id"],
         "node_type": node.node_type,
+        "backend": result["backend"],
+        "warning": result.get("warning")
     }
 
 
@@ -637,7 +646,8 @@ async def omega_remember(text: str, metadata: Optional[Dict[str, Any]] = None):
     """Store a memory in the OMEGA system."""
     # Index in semantic memory
     doc_id = f"mem_{uuid.uuid4()}"
-    vector_id = memory.semantic.index_document(doc_id, text, metadata)
+    index_result = memory.semantic.index_document(doc_id, text, metadata)
+    vector_id = index_result["vector_id"]
 
     # Also add to working memory
     memory.working.add_entry({
@@ -646,6 +656,7 @@ async def omega_remember(text: str, metadata: Optional[Dict[str, Any]] = None):
         "vector_id": vector_id,
         "content": text,
         "metadata": metadata,
+        "backend": index_result["backend"],
     })
 
     return {
@@ -679,40 +690,92 @@ async def execute_pipeline(request: ObjectiveRequest):
     3. Execute and collect results
     4. Store in memory
     """
-    # 1. Decompose
-    task = orchestrator.decompose_objective(request.objective, request.max_goals)
-    task_id = task["task_id"]
-
-    # 2. Assign and execute each sub-goal
+    task_id = None
     results = []
-    for i, goal in enumerate(task["sub_goals"]):
-        role = worker_pool.worker_roles[i % len(worker_pool.worker_roles)]
-        result = worker_pool.assign_task(role, task_id, goal)
 
-        # 3. Store in memory
-        memory.working.add_entry({
-            "type": "task_result",
+    try:
+        # 1. Decompose objective
+        try:
+            task = orchestrator.decompose_objective(request.objective, request.max_goals)
+            task_id = task["task_id"]
+
+            if not task.get("sub_goals"):
+                raise ValueError("Decomposition produced no sub-goals")
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to decompose objective: {str(e)}"
+            )
+
+        # 2. Assign and execute each sub-goal
+        failed_goals = []
+        for i, goal in enumerate(task["sub_goals"]):
+            try:
+                role = worker_pool.worker_roles[i % len(worker_pool.worker_roles)]
+                result = worker_pool.assign_task(role, task_id, goal)
+
+                # 3. Store in memory
+                try:
+                    memory.working.add_entry({
+                        "type": "task_result",
+                        "task_id": task_id,
+                        "sub_goal": goal,
+                        "result": result,
+                    })
+                except Exception as mem_error:
+                    print(f"[Pipeline] Warning: Failed to store result in memory: {mem_error}")
+                    # Continue execution even if memory storage fails
+
+                results.append({
+                    "sub_goal": goal,
+                    "role": role,
+                    "result": result,
+                    "status": "success"
+                })
+
+            except Exception as goal_error:
+                error_msg = f"Failed to execute sub-goal '{goal}': {str(goal_error)}"
+                print(f"[Pipeline] {error_msg}")
+                failed_goals.append(goal)
+                results.append({
+                    "sub_goal": goal,
+                    "role": role if 'role' in locals() else "unknown",
+                    "error": str(goal_error),
+                    "status": "failed"
+                })
+
+        # 4. Mark complete (or partial if some goals failed)
+        try:
+            if failed_goals:
+                # Mark as partially completed
+                status = "partial"
+                print(f"[Pipeline] Task {task_id} completed with {len(failed_goals)} failed sub-goals")
+            else:
+                orchestrator.mark_complete(task_id)
+                status = "completed"
+        except Exception as e:
+            print(f"[Pipeline] Warning: Failed to mark task complete: {e}")
+            status = "completed_untracked"
+
+        return {
+            "status": status,
             "task_id": task_id,
-            "sub_goal": goal,
-            "result": result,
-        })
+            "objective": request.objective,
+            "results": results,
+            "failed_goals": failed_goals,
+            "success_rate": f"{len([r for r in results if r.get('status') == 'success'])}/{len(results)}",
+            "memory_status": memory.get_status(),
+        }
 
-        results.append({
-            "sub_goal": goal,
-            "role": role,
-            "result": result,
-        })
-
-    # 4. Mark complete
-    orchestrator.mark_complete(task_id)
-
-    return {
-        "status": "completed",
-        "task_id": task_id,
-        "objective": request.objective,
-        "results": results,
-        "memory_status": memory.get_status(),
-    }
+    except HTTPException:
+        raise
+    except Exception as e:
+        # Catch-all for unexpected errors
+        raise HTTPException(
+            status_code=500,
+            detail=f"Pipeline execution failed: {str(e)}"
+        )
 
 
 # =============================================================================

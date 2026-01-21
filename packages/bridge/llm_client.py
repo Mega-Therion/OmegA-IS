@@ -164,22 +164,72 @@ class LLMClient:
                 "max_tokens": kwargs.get("max_tokens", 1000)
             }
         
-        try:
-            with httpx.Client(timeout=30.0) as client:
-                response = client.post(self._base_url, headers=headers, json=payload)
-                response.raise_for_status()
-                data = response.json()
-                
-                # Provider-specific response parsing
-                if self.provider == "gemini":
-                    return data["candidates"][0]["content"]["parts"][0]["text"]
-                elif self.provider == "anthropic":
-                    return data["content"][0]["text"]
-                else:
-                    return data["choices"][0]["message"]["content"]
-        except Exception as e:
-            print(f"[LLM] API error: {e}")
-            return None
+        # Retry logic with exponential backoff
+        max_retries = 3
+        for attempt in range(1, max_retries + 1):
+            try:
+                with httpx.Client(timeout=30.0) as client:
+                    response = client.post(self._base_url, headers=headers, json=payload)
+                    response.raise_for_status()
+                    data = response.json()
+
+                    # Provider-specific response parsing with validation
+                    try:
+                        if self.provider == "gemini":
+                            return data["candidates"][0]["content"]["parts"][0]["text"]
+                        elif self.provider == "anthropic":
+                            return data["content"][0]["text"]
+                        else:
+                            return data["choices"][0]["message"]["content"]
+                    except (KeyError, IndexError, TypeError) as parse_error:
+                        error_msg = f"Failed to parse {self.provider} response: {parse_error}"
+                        print(f"[LLM] {error_msg}")
+                        print(f"[LLM] Response data: {data}")
+                        raise ValueError(error_msg)
+
+            except httpx.TimeoutException as e:
+                error_msg = f"Request timeout (attempt {attempt}/{max_retries}): {e}"
+                print(f"[LLM] {error_msg}")
+                if attempt == max_retries:
+                    return None
+                # Wait before retry (exponential backoff: 2s, 4s, 8s)
+                import time
+                time.sleep(2 ** attempt)
+
+            except httpx.HTTPStatusError as e:
+                error_msg = f"HTTP {e.response.status_code} error: {e.response.text[:200]}"
+                print(f"[LLM] {error_msg}")
+                # Don't retry on 4xx errors (client errors)
+                if 400 <= e.response.status_code < 500:
+                    return None
+                # Retry on 5xx errors (server errors)
+                if attempt == max_retries:
+                    return None
+                import time
+                time.sleep(2 ** attempt)
+
+            except httpx.NetworkError as e:
+                error_msg = f"Network error (attempt {attempt}/{max_retries}): {e}"
+                print(f"[LLM] {error_msg}")
+                if attempt == max_retries:
+                    return None
+                import time
+                time.sleep(2 ** attempt)
+
+            except ValueError as e:
+                # Response parsing error - don't retry
+                print(f"[LLM] Response parsing failed: {e}")
+                return None
+
+            except Exception as e:
+                error_msg = f"Unexpected error (attempt {attempt}/{max_retries}): {type(e).__name__}: {e}"
+                print(f"[LLM] {error_msg}")
+                if attempt == max_retries:
+                    return None
+                import time
+                time.sleep(2 ** attempt)
+
+        return None
 
 
 def decompose_with_llm(objective: str, max_goals: int = 5) -> List[str]:

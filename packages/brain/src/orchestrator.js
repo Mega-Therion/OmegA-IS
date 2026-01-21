@@ -150,33 +150,46 @@ function generateSubtasks(task) {
 }
 
 /**
- * Assign a task to an agent
+ * Assign a task to an agent with proper error handling and atomicity
  */
 async function assignTask(taskId, agentId) {
-    const { error } = await supabase
-        .from('tasks')
-        .update({
-            assigned_to: agentId,
-            assigned_at: new Date().toISOString(),
-            status: 'assigned'
-        })
-        .eq('id', taskId);
+    try {
+        // Step 1: Update task assignment
+        const { error: updateError } = await supabase
+            .from('tasks')
+            .update({
+                assigned_to: agentId,
+                assigned_at: new Date().toISOString(),
+                status: 'assigned'
+            })
+            .eq('id', taskId);
 
-    if (error) {
-        console.error('Failed to assign task:', error);
-        return false;
+        if (updateError) {
+            console.error(`[Orchestrator] Failed to assign task ${taskId}:`, updateError);
+            return { success: false, error: updateError.message };
+        }
+
+        // Step 2: Log to task_updates
+        const { error: logError } = await supabase.from('task_updates').insert({
+            task_id: taskId,
+            agent_id: 'orchestrator',
+            update_type: 'progress',
+            content: `Task assigned to ${agentId}`
+        });
+
+        if (logError) {
+            console.error(`[Orchestrator] Task ${taskId} assigned but failed to log update:`, logError);
+            // Task is assigned, but logging failed - still consider it a success with warning
+            return { success: true, warning: 'Assignment logged locally but failed to record in task_updates' };
+        }
+
+        console.log(`[Orchestrator] Successfully assigned task ${taskId} to ${agentId}`);
+        return { success: true };
+
+    } catch (error) {
+        console.error(`[Orchestrator] Unexpected error assigning task ${taskId}:`, error);
+        return { success: false, error: error.message };
     }
-
-    // Log to task_updates
-    await supabase.from('task_updates').insert({
-        task_id: taskId,
-        agent_id: 'orchestrator',
-        update_type: 'progress',
-        content: `Task assigned to ${agentId}`
-    });
-
-    console.log(`Assigned task ${taskId} to ${agentId}`);
-    return true;
 }
 
 /**
@@ -199,87 +212,192 @@ async function checkFileLocks(files, agentId) {
 }
 
 /**
- * Main orchestration loop
+ * Main orchestration loop with comprehensive error handling
  */
 async function orchestrate() {
     console.log('\n=== gAIng Orchestrator Running ===\n');
 
-    // 1. Get tasks that need planning (complex tasks from Safa)
-    const { data: needsPlanning } = await supabase
-        .from('tasks')
-        .select('*')
-        .eq('status', 'planning')
-        .is('parent_task_id', null);
+    let stats = {
+        planned: 0,
+        assigned: 0,
+        errors: 0,
+        locksCleared: 0
+    };
 
-    for (const task of needsPlanning || []) {
-        console.log(`Planning task: ${task.title}`);
-        const subtasks = generateSubtasks(task);
-
-        for (let i = 0; i < subtasks.length; i++) {
-            const sub = subtasks[i];
-            const deps = i > 0 ? [subtasks[i - 1].id] : null;
-
-            await supabase.from('tasks').insert({
-                title: sub.title,
-                parent_task_id: task.id,
-                complexity: sub.complexity,
-                dependencies: deps,
-                created_by: 'orchestrator',
-                status: 'pending'
-            });
-        }
-
-        // Mark parent as waiting
-        await supabase
+    try {
+        // 1. Get tasks that need planning (complex tasks from Safa)
+        const { data: needsPlanning, error: planningQueryError } = await supabase
             .from('tasks')
-            .update({ status: 'blocked' })
-            .eq('id', task.id);
-    }
+            .select('*')
+            .eq('status', 'planning')
+            .is('parent_task_id', null);
 
-    // 2. Get available tasks and assign them
-    const { data: availableTasks } = await supabase
-        .from('available_tasks')
-        .select('*')
-        .limit(10);
-
-    for (const task of availableTasks || []) {
-        const agentId = await findBestAgent(task);
-        if (agentId) {
-            await assignTask(task.id, agentId);
+        if (planningQueryError) {
+            console.error('[Orchestrator] Failed to fetch planning tasks:', planningQueryError);
+            stats.errors++;
         } else {
-            console.log(`No suitable agent for: ${task.title}`);
+            for (const task of needsPlanning || []) {
+                try {
+                    console.log(`[Orchestrator] Planning task: ${task.title}`);
+                    const subtasks = generateSubtasks(task);
+
+                    for (let i = 0; i < subtasks.length; i++) {
+                        const sub = subtasks[i];
+                        const deps = i > 0 ? [subtasks[i - 1].id] : null;
+
+                        const { error: insertError } = await supabase.from('tasks').insert({
+                            title: sub.title,
+                            parent_task_id: task.id,
+                            complexity: sub.complexity,
+                            dependencies: deps,
+                            created_by: 'orchestrator',
+                            status: 'pending'
+                        });
+
+                        if (insertError) {
+                            console.error(`[Orchestrator] Failed to insert subtask '${sub.title}':`, insertError);
+                            stats.errors++;
+                        }
+                    }
+
+                    // Mark parent as waiting
+                    const { error: updateError } = await supabase
+                        .from('tasks')
+                        .update({ status: 'blocked' })
+                        .eq('id', task.id);
+
+                    if (updateError) {
+                        console.error(`[Orchestrator] Failed to mark task ${task.id} as blocked:`, updateError);
+                        stats.errors++;
+                    } else {
+                        stats.planned++;
+                    }
+                } catch (error) {
+                    console.error(`[Orchestrator] Error planning task ${task.id}:`, error);
+                    stats.errors++;
+                    // Continue with next task
+                }
+            }
         }
+
+        // 2. Get available tasks and assign them
+        const { data: availableTasks, error: availableQueryError } = await supabase
+            .from('available_tasks')
+            .select('*')
+            .limit(10);
+
+        if (availableQueryError) {
+            console.error('[Orchestrator] Failed to fetch available tasks:', availableQueryError);
+            stats.errors++;
+        } else {
+            for (const task of availableTasks || []) {
+                try {
+                    const agentId = await findBestAgent(task);
+                    if (agentId) {
+                        const result = await assignTask(task.id, agentId);
+                        if (result.success) {
+                            stats.assigned++;
+                            if (result.warning) {
+                                console.warn(`[Orchestrator] Assignment warning:`, result.warning);
+                            }
+                        } else {
+                            console.error(`[Orchestrator] Failed to assign task ${task.id}:`, result.error);
+                            stats.errors++;
+                        }
+                    } else {
+                        console.log(`[Orchestrator] No suitable agent for: ${task.title}`);
+                    }
+                } catch (error) {
+                    console.error(`[Orchestrator] Error assigning task ${task.id}:`, error);
+                    stats.errors++;
+                    // Continue with next task
+                }
+            }
+        }
+
+        // 3. Check for completed subtasks -> complete parent
+        try {
+            const { data: blockedParents, error: blockedQueryError } = await supabase
+                .from('tasks')
+                .select('id')
+                .eq('status', 'blocked')
+                .not('parent_task_id', 'is', null);
+
+            if (blockedQueryError) {
+                console.error('[Orchestrator] Failed to fetch blocked parents:', blockedQueryError);
+                stats.errors++;
+            }
+            // This is simplified - real logic would check all children
+        } catch (error) {
+            console.error('[Orchestrator] Error checking blocked parents:', error);
+            stats.errors++;
+        }
+
+        // 4. Clean up expired file locks
+        try {
+            const { error: deleteError, count } = await supabase
+                .from('file_locks')
+                .delete()
+                .lt('expires_at', new Date().toISOString());
+
+            if (deleteError) {
+                console.error('[Orchestrator] Failed to clean up file locks:', deleteError);
+                stats.errors++;
+            } else {
+                stats.locksCleared = count || 0;
+            }
+        } catch (error) {
+            console.error('[Orchestrator] Error cleaning file locks:', error);
+            stats.errors++;
+        }
+
+    } catch (error) {
+        console.error('[Orchestrator] Critical error in orchestration cycle:', error);
+        stats.errors++;
     }
 
-    // 3. Check for completed subtasks -> complete parent
-    const { data: blockedParents } = await supabase
-        .from('tasks')
-        .select('id')
-        .eq('status', 'blocked')
-        .not('parent_task_id', 'is', null);
-
-    // This is simplified - real logic would check all children
-
-    // 4. Clean up expired file locks
-    await supabase
-        .from('file_locks')
-        .delete()
-        .lt('expires_at', new Date().toISOString());
-
-    console.log('\n=== Orchestration cycle complete ===\n');
+    console.log(`\n=== Orchestration cycle complete ===`);
+    console.log(`Stats: ${stats.planned} planned, ${stats.assigned} assigned, ${stats.locksCleared} locks cleared, ${stats.errors} errors\n`);
 }
 
 /**
- * Heartbeat - mark orchestrator as alive
+ * Heartbeat - mark orchestrator as alive with error handling and retry
  */
-async function heartbeat(agentId = 'gemini') {
-    await supabase
-        .from('agents')
-        .update({
-            status: 'online',
-            last_heartbeat: new Date().toISOString()
-        })
-        .eq('id', agentId);
+async function heartbeat(agentId = 'gemini', retries = 3) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const { error } = await supabase
+                .from('agents')
+                .update({
+                    status: 'online',
+                    last_heartbeat: new Date().toISOString()
+                })
+                .eq('id', agentId);
+
+            if (error) {
+                console.error(`[Orchestrator] Heartbeat failed (attempt ${attempt}/${retries}):`, error);
+                if (attempt === retries) {
+                    console.error('[Orchestrator] WARNING: Orchestrator status may become stale');
+                    return false;
+                }
+                // Wait before retry (exponential backoff: 1s, 2s, 4s)
+                await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt - 1) * 1000));
+            } else {
+                if (attempt > 1) {
+                    console.log(`[Orchestrator] Heartbeat succeeded on attempt ${attempt}`);
+                }
+                return true;
+            }
+        } catch (error) {
+            console.error(`[Orchestrator] Heartbeat error (attempt ${attempt}/${retries}):`, error);
+            if (attempt === retries) {
+                console.error('[Orchestrator] WARNING: Failed to send heartbeat after all retries');
+                return false;
+            }
+            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt - 1) * 1000));
+        }
+    }
+    return false;
 }
 
 // Run modes
