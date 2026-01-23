@@ -3,29 +3,45 @@
 
 # Core Dependencies
 # -----------------
-fastapi>=0.109.0           # Web framework for REST API
-uvicorn[standard]>=0.27.0  # ASGI server
-pydantic>=2.0.0            # Data validation
-httpx>=0.25.0              # HTTP client for LLM API calls
-typing-extensions>=4.0.0   # Enhanced type hints
-python-dotenv>=1.0.0       # Environment variable loading
+fastapi>=0.115.0              # Web framework for REST API (upgraded)
+uvicorn[standard]>=0.32.0     # ASGI server (upgraded)
+pydantic>=2.10.0              # Data validation (upgraded)
+httpx>=0.28.0                 # HTTP client for LLM API calls (upgraded)
+typing-extensions>=4.12.0     # Enhanced type hints (upgraded)
+python-dotenv>=1.0.1          # Environment variable loading (upgraded)
 
-# Production Memory Backends (optional)
-# -------------------------------------
-# Uncomment these for production deployment:
+# AI/ML Dependencies
+# ------------------
+tensorflow>=2.18.0            # Machine learning framework
+keras>=3.7.0                  # High-level neural networks API
+transformers>=4.46.0          # Hugging Face transformers for NLP
+torch>=2.5.0                  # PyTorch deep learning framework
+torchvision>=0.20.0           # Computer vision utilities
+numpy>=2.1.0                  # Numerical computing
+scikit-learn>=1.6.0           # Machine learning utilities
+pandas>=2.2.0                 # Data manipulation and analysis
 
-# redis>=4.5.0             # SessionMemory - real-time task state
-# pymilvus>=2.3.0          # SemanticMemory - vector embeddings
-# neo4j>=5.0.0             # RelationalMemory - knowledge graphs
+# Production Memory Backends
+# --------------------------
+redis>=5.2.0                  # SessionMemory - real-time task state
+pymilvus>=2.4.0               # SemanticMemory - vector embeddings
+neo4j>=5.26.0                 # RelationalMemory - knowledge graphs
 
-# LLM Providers (optional - choose one)
-# -------------------------------------
-# openai>=1.0.0            # OpenAI API client
+# LLM Providers
+# -------------
+openai>=1.54.0                # OpenAI API client
+anthropic>=0.39.0            # Anthropic Claude AP
+Igoogle-generativeai>=0.8.0    # Google Gemini API
+langchain>=0.3.0              # LLM orchestration framework
+langchain-core>=0.3.0         # LangChain core utilities
+langchain-community>=0.3.0    # LangChain community integrations
 
 # Development Dependencies
 # ------------------------
 # Install with: pip install -e ".[dev]"
-# pytest>=7.0.0
-# pytest-cov>=4.0.0
-# ruff>=0.1.0
-# mypy>=1.0.0
+pytest>=8.3.0                 # Testing framework
+pytest-cov>=6.0.0             # Coverage plugin
+pytest-asyncio>=0.24.0        # Async test support
+ruff>=0.8.0                   # Fast Python linter
+mypy>=1.13.0                  # Static type checker
+black>=24.10.0                # Code formatter
