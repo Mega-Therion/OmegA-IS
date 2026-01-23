@@ -1,0 +1,299 @@
+# OMEGA-Trinity Production Docker Compose Configuration
+# Includes all services: Redis, Milvus, Neo4j, PostgreSQL
+
+version: '3.8'
+
+services:
+  # ========================================
+  # OMEGA Gateway (Main API)
+  # ========================================
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: omega-gateway
+    ports:
+      - "8787:8787"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://redis:6379
+      - MILVUS_HOST=milvus
+      - NEO4J_URI=bolt://neo4j:7687
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+    depends_on:
+      - redis
+      - milvus
+      - neo4j
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+  # ========================================
+  # gAIng-brAin (Memory System)
+  # ========================================
+  brain:
+    build:
+      context: ./gAIng-brAin
+      dockerfile: Dockerfile
+    container_name: gaing-brain
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - REDIS_URL=redis://redis:6379
+      - MEM0_API_KEY=${MEM0_API_KEY}
+      - ENABLE_NGROK=false
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - omega-network
+    volumes:
+      - brain-data:/app/data
+
+  # ========================================
+  # Jarvis (Command Center UI)
+  # ========================================
+  jarvis:
+    build:
+      context: ./Jarvis
+      dockerfile: Dockerfile
+    container_name: jarvis-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - GAING_BRAIN_URL=http://brain:8080
+      - OMEGA_GATEWAY_URL=http://gateway:8787
+    depends_on:
+      - brain
+      - gateway
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+  # ========================================
+  # Redis (Session & Cache)
+  # ========================================
+  redis:
+    image: redis:7-alpine
+    container_name: omega-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - omega-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # ========================================
+  # Milvus (Vector Database) 
+  # ========================================
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.5
+    container_name: milvus-etcd
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - etcd-data:/etcd
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls=http://0.0.0.0:2379 --data-dir=/etcd
+    networks:
+      - omega-network
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    container_name: milvus-minio
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    volumes:
+      - minio-data:/minio_data
+    command: minio server /minio_data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - omega-network
+    restart: unless-stopped
+
+  milvus:
+    image: milvusdb/milvus:v2.3.3
+    container_name: omega-milvus
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - milvus-data:/var/lib/milvus
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    depends_on:
+      - etcd
+      - minio
+    restart: unless-stopped
+    networks:
+      - omega-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+
+  # ========================================
+  # Neo4j (Graph Database)
+  # ========================================
+  neo4j:
+    image: neo4j:5.13-community
+    container_name: omega-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password123
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms_memory_heap_max__size=2G
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+    restart: unless-stopped
+    networks:
+      - omega-network
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p password123 'RETURN 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ========================================
+  # PostgreSQL (Relational Data)
+  # ========================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: omega-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=omega
+      - POSTGRES_PASSWORD=omega_secure_password
+      - POSTGRES_DB=omega_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    networks:
+      - omega-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U omega"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ========================================
+  # Nginx (Reverse Proxy)
+  # ========================================
+  nginx:
+    image: nginx:alpine
+    container_name: omega-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - jarvis
+      - gateway
+      - brain
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+  # ========================================
+  # Prometheus (Monitoring)
+  # ========================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: omega-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+  # ========================================
+  # Grafana (Visualization)
+  # ========================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: omega-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=redis-datasource
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+# ========================================
+# Volumes
+# ========================================
+volumes:
+  brain-data:
+    driver: local
+  redis-data:
+    driver: local
+  etcd-data:
+    driver: local
+  minio-data:
+    driver: local
+  milvus-data:
+    driver: local
+  neo4j-data:
+    driver: local
+  neo4j-logs:
+    driver: local
+  postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+# ========================================
+# Networks
+# ========================================
+networks:
+  omega-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
