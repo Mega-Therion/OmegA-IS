@@ -3,6 +3,7 @@ const router = express.Router();
 const requireAuth = require('../middleware/auth');
 const supabase = require('../services/supabase');
 const mem0 = require('../services/mem0');
+const advancedMemory = require('../services/advanced-memory');
 const { toLimit } = require('../utils/helpers');
 
 // Create a memory in Supabase: POST /memories { content, tags?, metadata?, source? }
@@ -208,6 +209,91 @@ router.post('/:id/vote', requireAuth, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'server error' });
+  }
+});
+
+// ===========================
+// Advanced Memory Features
+// ===========================
+
+// Create episodic memory
+router.post('/episodes', requireAuth, async (req, res) => {
+  try {
+    const { memoryIds, summary, tags } = req.body || {};
+    const episode = await advancedMemory.createEpisode({
+      ownerId: req.authUser.id,
+      memoryIds,
+      summary,
+      tags,
+    });
+    res.json({ ok: true, episode });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Consolidate memories
+router.post('/consolidate', requireAuth, async (req, res) => {
+  try {
+    const { olderThanDays, limit } = req.body || {};
+    const result = await advancedMemory.consolidateMemories({
+      ownerId: req.authUser.id,
+      olderThanDays,
+      limit,
+    });
+    res.json({ ok: true, result });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Prune memories
+router.post('/prune', requireAuth, async (req, res) => {
+  try {
+    const { olderThanDays, limit } = req.body || {};
+    const result = await advancedMemory.pruneMemories({
+      ownerId: req.authUser.id,
+      olderThanDays,
+      limit,
+    });
+    res.json({ ok: true, result });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Memory provenance
+router.get('/:id/provenance', requireAuth, async (req, res) => {
+  try {
+    const data = await advancedMemory.getProvenance(req.params.id);
+    res.json({ ok: true, provenance: data });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Memory revisions
+router.get('/:id/revisions', requireAuth, async (req, res) => {
+  try {
+    const revisions = await advancedMemory.getRevisions(req.params.id);
+    res.json({ ok: true, revisions });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Restore a memory revision
+router.post('/:id/restore', requireAuth, async (req, res) => {
+  try {
+    const { revisionId } = req.body || {};
+    const restored = await advancedMemory.restoreRevision({
+      ownerId: req.authUser.id,
+      memoryId: req.params.id,
+      revisionId,
+    });
+    res.json({ ok: true, memory: restored });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

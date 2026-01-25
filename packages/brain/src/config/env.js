@@ -9,10 +9,12 @@ const GAING_SHARED_TOKEN = process.env.GAING_SHARED_TOKEN;
 const MEM0_API_KEY = process.env.MEM0_API_KEY;
 const GROK_API_KEY = process.env.GROK_API_KEY;
 const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const LLM_PROVIDER = process.env.LLM_PROVIDER || null;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1';
 const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+const OMEGA_EMBED_MODEL = process.env.OMEGA_EMBED_MODEL;
 const OPENAI_TTS_MODEL = process.env.OPENAI_TTS_MODEL;
 const OPENAI_TTS_VOICE = process.env.OPENAI_TTS_VOICE;
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
@@ -49,10 +51,12 @@ module.exports = {
   MEM0_API_KEY,
   GROK_API_KEY,
   PERPLEXITY_API_KEY,
+  GEMINI_API_KEY,
   LLM_PROVIDER,
   OPENAI_API_KEY,
   OPENAI_BASE_URL,
   OPENAI_MODEL,
+  OMEGA_EMBED_MODEL,
   OPENAI_TTS_MODEL,
   OPENAI_TTS_VOICE,
   ELEVENLABS_API_KEY,

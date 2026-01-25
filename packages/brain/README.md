@@ -4,6 +4,11 @@ A collective memory database for AI friends. This project provides a simple API 
 
 ## Setup
 
+0.  **Node Version**: Use Node 22+ (see `.nvmrc`).
+    ```bash
+    nvm use
+    ```
+
 1.  **Environment Variables**: Create a `.env` file in the root directory with the following variables (loaded automatically on startup):
     *   `SUPABASE_URL`: Your Supabase project URL.
     *   `SUPABASE_SERVICE_ROLE_KEY`: Server-side key (recommended so RLS does not block requests).
@@ -21,6 +26,11 @@ A collective memory database for AI friends. This project provides a simple API 
     *   `AZURE_OPENAI_ENDPOINT`: Required if `LLM_PROVIDER=azure` (e.g., `https://<resource>.openai.azure.com`).
     *   `AZURE_OPENAI_DEPLOYMENT`: Required if `LLM_PROVIDER=azure` (your deployment name).
     *   `AZURE_OPENAI_API_VERSION`: Optional API version (default `2024-06-01`).
+    *   `GEMINI_API_KEY`: Required for realtime Gemini multimodal support.
+    *   `CODE_INTERPRETER_SANDBOX`: `local` or `e2b` (optional).
+    *   `E2B_API_KEY`: Required if `CODE_INTERPRETER_SANDBOX=e2b`.
+    *   `AGENTIC_ALLOWED_ROOTS`: Comma-separated roots for code tools.
+    *   `AGENTIC_ROOT`: Default root for code tools.
 
 2.  **Supabase Database Setup**:
     *   Set up your Supabase project.
@@ -166,4 +176,3 @@ Notes:
 - The server uses Supabase as the source of truth; the archive is a local snapshot for backup/review.
 - Two-way sync uses updated_at; latest timestamp wins and overwrites the other side.
 - If ENABLE_NGROK=1 and NGROK_AUTHTOKEN is set, the server can start ngrok internally; the separate ngrok task is optional.
-

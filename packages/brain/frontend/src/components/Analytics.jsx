@@ -12,10 +12,20 @@ function Analytics({ missions, agents, analytics }) {
     completionTrend: [],
     agentUtilization: []
   })
+  const [experiments, setExperiments] = useState([])
+  const [selectedExperiment, setSelectedExperiment] = useState('')
+  const [variant, setVariant] = useState('')
+  const [score, setScore] = useState(0)
+  const [feedbackNote, setFeedbackNote] = useState('')
+  const [feedbackSummary, setFeedbackSummary] = useState({})
 
   useEffect(() => {
     calculateAnalytics()
   }, [missions, agents, timeRange])
+
+  useEffect(() => {
+    loadExperiments()
+  }, [])
 
   const calculateAnalytics = () => {
     // Missions by status
@@ -84,6 +94,46 @@ function Analytics({ missions, agents, analytics }) {
       completionTrend,
       agentUtilization
     })
+  }
+
+  const loadExperiments = async () => {
+    try {
+      const response = await fetch('/rlhf/experiments')
+      const data = await response.json()
+      if (data.ok) {
+        setExperiments(data.experiments || [])
+        if (data.experiments?.[0]) {
+          setSelectedExperiment(data.experiments[0].id)
+        }
+      }
+    } catch (err) {
+      // ignore
+    }
+  }
+
+  const submitFeedback = async () => {
+    if (!selectedExperiment || !variant) return
+    await fetch('/rlhf/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        experimentId: selectedExperiment,
+        variant,
+        score: Number(score),
+        metadata: { note: feedbackNote }
+      })
+    })
+    setFeedbackNote('')
+    loadSummary(selectedExperiment)
+  }
+
+  const loadSummary = async (experimentId) => {
+    if (!experimentId) return
+    const response = await fetch(`/rlhf/feedback/summary?experimentId=${experimentId}`)
+    const data = await response.json()
+    if (data.ok) {
+      setFeedbackSummary(data.summary || {})
+    }
   }
 
   const completionRate = missions.length > 0
@@ -283,6 +333,78 @@ function Analytics({ missions, agents, analytics }) {
                   </div>
                 </div>
               ))}
+          </div>
+        </div>
+
+        {/* RLHF Feedback Loop */}
+        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6 lg:col-span-2">
+          <h3 className="text-lg font-semibold mb-4">RLHF Feedback Loop</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <label className="text-xs text-gray-400">Experiment</label>
+              <select
+                value={selectedExperiment}
+                onChange={(e) => {
+                  setSelectedExperiment(e.target.value)
+                  loadSummary(e.target.value)
+                }}
+                className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm"
+              >
+                {experiments.length === 0 && <option value="">No experiments</option>}
+                {experiments.map(exp => (
+                  <option key={exp.id} value={exp.id}>{exp.name}</option>
+                ))}
+              </select>
+
+              <label className="text-xs text-gray-400">Variant</label>
+              <input
+                value={variant}
+                onChange={(e) => setVariant(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm"
+                placeholder="e.g. control"
+              />
+
+              <label className="text-xs text-gray-400">Score (-1 to 1)</label>
+              <input
+                type="number"
+                value={score}
+                onChange={(e) => setScore(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm"
+                min="-1"
+                max="1"
+                step="0.1"
+              />
+
+              <label className="text-xs text-gray-400">Notes</label>
+              <textarea
+                value={feedbackNote}
+                onChange={(e) => setFeedbackNote(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm min-h-[80px]"
+                placeholder="What worked or failed?"
+              />
+
+              <button
+                onClick={submitFeedback}
+                className="px-4 py-2 rounded-lg bg-omega-accent text-black font-semibold"
+              >
+                Submit Feedback
+              </button>
+            </div>
+
+            <div className="bg-black/40 border border-gray-700 rounded-lg p-4">
+              <p className="text-sm text-gray-300 mb-2">Feedback Summary</p>
+              {Object.keys(feedbackSummary).length === 0 && (
+                <p className="text-xs text-gray-500">No feedback yet.</p>
+              )}
+              {Object.entries(feedbackSummary).map(([key, stats]) => (
+                <div key={key} className="text-xs text-gray-300 mb-2">
+                  <span className="text-omega-accent font-semibold">{key}</span>
+                  <span className="ml-2 text-gray-400">
+                    {stats.count} entries · avg {Number(stats.averageScore || 0).toFixed(2)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

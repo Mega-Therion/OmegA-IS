@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createVisionSession } = require('../services/realtime-vision');
+const { createRealtimeSession } = require('../services/realtime-multimodal');
 const wsManager = require('../services/websocket');
 
 /**
@@ -12,25 +12,34 @@ const wsManager = require('../services/websocket');
 // However, we can expose some control endpoints here if needed.
 
 router.get('/status', (req, res) => {
-    res.json({ ok: true, message: 'Realtime service active' });
+    res.json({
+        ok: true,
+        message: 'Realtime service active',
+        providers: {
+            openai: Boolean(process.env.OPENAI_API_KEY),
+            gemini: Boolean(process.env.GEMINI_API_KEY),
+        },
+    });
 });
 
 /**
  * Handle a new WebSocket connection for the Realtime Agent
  * @param {WebSocket} ws The client WebSocket connection (e.g., from iPhone)
  */
-async function handleRealtimeConnection(ws) {
-    console.log('[Realtime Route] New client connected for Vision');
-    
-    const session = createVisionSession();
+async function handleRealtimeConnection(ws, options = {}) {
+    console.log('[Realtime Route] New client connected for realtime multimodal');
+    const provider = options.provider || null;
+    const session = createRealtimeSession({
+        provider,
+    });
 
     // 1. Connect to OpenAI
     try {
         await session.connect();
-        console.log('[Realtime Route] Connected to OpenAI Realtime API');
+        console.log('[Realtime Route] Connected to realtime provider');
     } catch (err) {
-        console.error('[Realtime Route] Failed to connect to OpenAI:', err);
-        ws.close(1011, 'Failed to connect to OpenAI');
+        console.error('[Realtime Route] Failed to connect to realtime provider:', err);
+        ws.close(1011, 'Failed to connect to realtime provider');
         return;
     }
 
@@ -45,9 +54,9 @@ async function handleRealtimeConnection(ws) {
                 if (msg.type === 'interrupt') {
                     session.interrupt();
                 } else if (msg.type === 'text') {
-                    session.sendMessage({ type: 'text', text: msg.text });
+                    session.sendMessage({ text: msg.text, temperature: msg.temperature });
                 } else if (msg.type === 'image') {
-                    session.addImage(msg.data);
+                    session.addImage(msg.data, msg.mimeType);
                 }
             } catch (e) {
                 // Ignore non-json or invalid
@@ -66,6 +75,12 @@ async function handleRealtimeConnection(ws) {
     session.on('transcript_delta', (event) => {
         if (ws.readyState === 1) {
             ws.send(JSON.stringify({ type: 'transcript', delta: event.delta }));
+        }
+    });
+
+    session.on('response_delta', (event) => {
+        if (ws.readyState === 1) {
+            ws.send(JSON.stringify({ type: 'response_delta', delta: event.text }));
         }
     });
 

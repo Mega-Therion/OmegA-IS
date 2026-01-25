@@ -84,4 +84,37 @@ async function speak(text, options = {}) {
     throw lastError || new Error('No TTS provider available');
 }
 
-module.exports = { speak };
+async function cloneVoice({ name, description, files }) {
+    const apiKey = process.env.ELEVENLABS_API_KEY;
+    if (!apiKey) {
+        throw new Error('ELEVENLABS_API_KEY is not set');
+    }
+    if (!files || files.length === 0) {
+        throw new Error('Audio samples required');
+    }
+
+    const form = new FormData();
+    form.append('name', name || `voice-${Date.now()}`);
+    if (description) form.append('description', description);
+    files.forEach((file) => {
+        const blob = new Blob([file.buffer], { type: file.mimetype || 'audio/mpeg' });
+        form.append('files', blob, file.originalname || 'sample.mp3');
+    });
+
+    const response = await fetch('https://api.elevenlabs.io/v1/voices/add', {
+        method: 'POST',
+        headers: {
+            'xi-api-key': apiKey
+        },
+        body: form
+    });
+
+    if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`ElevenLabs clone error: ${err}`);
+    }
+
+    return response.json();
+}
+
+module.exports = { speak, cloneVoice };

@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-import { Mic, MicOff, Send, Activity, BarChart3, MessageSquare, Target, Volume2, VolumeX, Upload, X, CheckCircle, Clock, AlertCircle, Brain } from 'lucide-react'
+import { Mic, MicOff, Send, Activity, BarChart3, MessageSquare, Target, Volume2, VolumeX, Upload, X, CheckCircle, Clock, AlertCircle, Brain, Code } from 'lucide-react'
 import MissionBoard from './components/MissionBoard'
 import AgentChat from './components/AgentChat'
 import HealthMonitor from './components/HealthMonitor'
 import Analytics from './components/Analytics'
 import VoiceInterface from './components/VoiceInterface'
 import NeuroLink from './components/NeuroLink'
+import CodeWorkbench from './components/CodeWorkbench'
 
 // Sound effects (beep sounds using Web Audio API)
 const playSound = (frequency = 800, duration = 100) => {
@@ -29,7 +30,7 @@ const playSound = (frequency = 800, duration = 100) => {
 
 function App() {
   // Navigation state
-  const [currentView, setCurrentView] = useState('mission') // mission, chat, health, analytics
+  const [currentView, setCurrentView] = useState('mission') // mission, chat, health, analytics, code
 
   // Voice state
   const [isListening, setIsListening] = useState(false)
@@ -316,7 +317,7 @@ function App() {
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
 
-    const views = ['mission', 'chat', 'health', 'analytics']
+    const views = ['mission', 'neuro', 'chat', 'health', 'analytics', 'code']
     const currentIndex = views.indexOf(currentView)
 
     if (isLeftSwipe && currentIndex < views.length - 1) {
@@ -406,7 +407,8 @@ function App() {
               { id: 'neuro', icon: Brain, label: 'Neuro-Link' },
               { id: 'chat', icon: MessageSquare, label: 'Agent Chat' },
               { id: 'health', icon: Activity, label: 'Health' },
-              { id: 'analytics', icon: BarChart3, label: 'Analytics' }
+              { id: 'analytics', icon: BarChart3, label: 'Analytics' },
+              { id: 'code', icon: Code, label: 'Code Ops' }
             ].map((view) => (
               <button
                 key={view.id}
@@ -472,6 +474,10 @@ function App() {
             agents={agents}
             analytics={analytics}
           />
+        )}
+
+        {currentView === 'code' && (
+          <CodeWorkbench />
         )}
       </main>
 
