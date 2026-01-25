@@ -16,13 +16,22 @@
  */
 
 const fs = require('fs');
+const https = require('https');
 const path = require('path');
 const { getPeacePipeProtocol } = require('./core/peace-pipe');
+const { getNeuralPulsing } = require('./services/neural-pulsing');
 
 // DEBUG: FORCE LOAD .ENV
 const envPath = path.join(__dirname, '..', '.env');
-const result = require('dotenv').config({ path: envPath, override: true }); // Force override
-const https = require('https'); // RESTORED
+const result = require('dotenv').config({ path: envPath, override: true });
+
+const pulsing = getNeuralPulsing();
+
+// Listen for global thoughts
+pulsing.onPulse((pulse) => {
+    // This allows bots to react to each other's actions real-time if needed
+    // console.log(`[NeuralPulsing] Client received thought from ${pulse.agent}: ${pulse.intent}`);
+});
 
 if (result.error) {
     console.error('[DEBUG] Failed to load .env from:', envPath);
@@ -47,35 +56,40 @@ const CREW_CONFIG = {
         token: process.env.GEMINI_BOT_TOKEN,
         apiKey: process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY, // Fallback
         model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
-        emoji: '💎'
+        emoji: '💎',
+        handle: 'Gemini_gAIng_bot'
     },
     claude: {
         name: 'Claude',
         token: process.env.CLAUDE_BOT_TOKEN,
         apiKey: process.env.ANTHROPIC_API_KEY,
         model: process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022',
-        emoji: '🧠'
+        emoji: '🧠',
+        handle: 'Claude_gAIng_bot'
     },
     codex: {
         name: 'Codex',
         token: process.env.CODEX_BOT_TOKEN,
         apiKey: process.env.OPENAI_API_KEY,
         model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
-        emoji: '⚡'
+        emoji: '⚡',
+        handle: 'Codex_gAIng_bot'
     },
     grok: {
         name: 'Grok',
         token: process.env.GROK_BOT_TOKEN,
         apiKey: process.env.GROK_API_KEY,
         model: process.env.GROK_MODEL || 'grok-beta',
-        emoji: '🚀'
+        emoji: '🚀',
+        handle: 'Grok_gAIng_bot'
     },
     perplexity: {
         name: 'Perplexity',
         token: process.env.PERPLEXITY_BOT_TOKEN,
         apiKey: process.env.PERPLEXITY_API_KEY,
         model: process.env.PERPLEXITY_MODEL || 'sonar-pro',
-        emoji: '🔍'
+        emoji: '🔍',
+        handle: 'Perplexity_gAIng_bot'
     },
     grav: {
         name: 'Grav',
@@ -398,21 +412,83 @@ async function callPerplexity(messages, config) {
     });
 }
 
+async function callOllama(messages, config) {
+    const payload = {
+        model: 'llama3.2:1b', // Ultra-fast local model
+        messages,
+        stream: false
+    };
+
+    return new Promise((resolve, reject) => {
+        const req = https.request({
+            hostname: 'localhost',
+            port: 11434,
+            path: '/api/chat',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        }, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    const json = JSON.parse(data);
+                    if (json.message?.content) {
+                        resolve(json.message.content);
+                    } else {
+                        reject(new Error('No response from local brain (Ollama)'));
+                    }
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        });
+        req.on('error', reject);
+        req.write(JSON.stringify(payload));
+        req.end();
+    });
+}
+
 async function callLLM(agent, messages, config) {
-    switch (agent) {
-        case 'gemini':
-            return callGemini(messages, config);
-        case 'claude':
-            return callClaude(messages, config);
-        case 'codex':
-        case 'grav': // Grav uses OpenAI
-            return callOpenAI(messages, config);
-        case 'grok':
-            return callGrok(messages, config);
-        case 'perplexity':
-            return callPerplexity(messages, config);
-        default:
-            throw new Error(`Unknown agent: ${agent}`);
+    try {
+        switch (agent) {
+            case 'gemini':
+                return await callGemini(messages, config);
+            case 'claude':
+                return await callClaude(messages, config);
+            case 'codex':
+            case 'grav':
+                return await callOpenAI(messages, config);
+            case 'grok':
+                return await callGrok(messages, config);
+            case 'perplexity':
+                return await callPerplexity(messages, config);
+            default:
+                throw new Error(`Unknown agent: ${agent}`);
+        }
+    } catch (error) {
+        console.warn(`[${config.name}] API Error: ${error.message}. Attempting fallback chain...`);
+
+        // FALLBACK 1: Try OpenAI (if not already failing OpenAI)
+        if (agent !== 'codex' && agent !== 'grav' && process.env.OPENAI_API_KEY) {
+            try {
+                const response = await callOpenAI(messages, {
+                    apiKey: process.env.OPENAI_API_KEY,
+                    model: 'gpt-4o-mini'
+                });
+                return `(Cloud Bridge) ${response}`;
+            } catch (fallbackError) {
+                console.warn(`[${config.name}] Cloud Bridge failed: ${fallbackError.message}`);
+            }
+        }
+
+        // FALLBACK 2: Try Local Ollama (The "Unstoppable" Brain)
+        try {
+            const response = await callOllama(messages, config);
+            return `(Local Brain) ${response}`;
+        } catch (ollamaError) {
+            console.error(`[${config.name}] Local Brain also failed:`, ollamaError.message);
+            throw error; // Throw original error if all fallbacks fail
+        }
     }
 }
 
@@ -599,18 +675,16 @@ async function handleMessage(agent, config, message) {
         }
         // partial check for username (simple implementation)
         // ideally we check entities, but text search is robust enough for now
-        const isMentioned = message.text && message.text.includes(config.name);
-        // Note: Telegram adds username to commands in groups like /start@BotName
-        // but for text, we look for name or assume reply
-        const isReply = message.reply_to_message?.from?.username?.toLowerCase().includes('gaing');
-        // Note: We don't have this bot's own username easily available without an extra API call on startup,
-        // so we'll rely on explicit mentions or if it contains the bot's "First Name" for now.
-        // Better approach: Check if text contains config.name (e.g. "Gemini")
+        const isMentioned = message.text && message.text.toLowerCase().includes(config.name.toLowerCase());
+        const isHandleMatch = message.text && config.handle && message.text.includes(`@${config.handle}`);
+        const isCrewCall = message.text && (message.text.toLowerCase().includes('crew') || message.text.toLowerCase().includes('everyone'));
 
-        const isAddressed = message.text && (
-            message.text.toLowerCase().includes(config.name.toLowerCase()) ||
-            message.text.includes('@') // broad check, assumes if @ is used they meant a bot
-        );
+        // STRICTOR CHECK: If specific handle is used, don't reply if it's not ours
+        if (message.text && message.text.includes('@') && !isHandleMatch && !isCrewCall) {
+            return;
+        }
+
+        const isAddressed = isMentioned || isHandleMatch || isCrewCall;
 
         if (!isReply && !isAddressed && !message.text?.startsWith('/')) {
             return; // Ignore general chatter in groups
@@ -709,6 +783,19 @@ async function handleMessage(agent, config, message) {
 
             // Send response
             await sendMessage(config.token, chatId, response);
+
+            // Pulse the thought to the collective (Internal Nerve Ending)
+            try {
+                pulsing.pulse(config.name, 'replied', {
+                    chatId,
+                    userId,
+                    username,
+                    content: response,
+                    platform: 'telegram'
+                });
+            } catch (e) {
+                console.warn(`[NeuralPulsing] Failed to pulse: ${e.message}`);
+            }
 
             console.log(`[${config.name}] ${username}: ${userMessage.slice(0, 50)}...`);
 
