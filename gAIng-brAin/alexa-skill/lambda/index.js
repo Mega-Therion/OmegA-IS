@@ -17,6 +17,7 @@ const http = require('http');
 const CONFIG = {
   apiUrl: process.env.OMEGA_API_URL || 'https://your-gaing-brain-api.com',
   defaultAgent: process.env.OMEGA_AGENT || 'gemini',
+  apiToken: process.env.OMEGA_API_TOKEN || '',
   skillName: 'Omega Brain'
 };
 
@@ -27,15 +28,21 @@ function apiRequest(method, path, body = null) {
     const isHttps = url.protocol === 'https:';
     const lib = isHttps ? https : http;
     
+    const headers = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'OMEGA-Alexa-Skill/1.0.0'
+    };
+
+    if (CONFIG.apiToken) {
+      headers.Authorization = `Bearer ${CONFIG.apiToken}`;
+    }
+
     const options = {
       hostname: url.hostname,
       port: url.port || (isHttps ? 443 : 80),
-      path: url.pathname,
+      path: `${url.pathname}${url.search || ''}`,
       method: method,
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'OMEGA-Alexa-Skill/1.0.0'
-      },
+      headers,
       timeout: 8000
     };
     
@@ -44,8 +51,21 @@ function apiRequest(method, path, body = null) {
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
         try {
-          resolve(JSON.parse(data));
+          const parsed = data ? JSON.parse(data) : {};
+          if (res.statusCode >= 400) {
+            const error = new Error(`API request failed with status ${res.statusCode}`);
+            error.response = parsed;
+            reject(error);
+            return;
+          }
+          resolve(parsed);
         } catch {
+          if (res.statusCode >= 400) {
+            const error = new Error(`API request failed with status ${res.statusCode}`);
+            error.response = { raw: data };
+            reject(error);
+            return;
+          }
           resolve({ raw: data });
         }
       });
@@ -63,7 +83,7 @@ function apiRequest(method, path, body = null) {
 
 // Alexa Response Builders
 const AlexaResponse = {
-  speak(text, reprompt = null) {
+  speak(text, reprompt = null, sessionAttributes = null) {
     const response = {
       version: '1.0',
       response: {
@@ -75,6 +95,10 @@ const AlexaResponse = {
       }
     };
     
+    if (sessionAttributes) {
+      response.sessionAttributes = sessionAttributes;
+    }
+
     if (reprompt) {
       response.response.reprompt = {
         outputSpeech: {
@@ -87,8 +111,8 @@ const AlexaResponse = {
     return response;
   },
   
-  card(title, content, text) {
-    const response = this.speak(text);
+  card(title, content, text, sessionAttributes = null) {
+    const response = this.speak(text, null, sessionAttributes);
     response.response.card = {
       type: 'Standard',
       title: title,
@@ -98,10 +122,18 @@ const AlexaResponse = {
   }
 };
 
+function getSessionAttributes(event) {
+  return event?.session?.attributes ? { ...event.session.attributes } : {};
+}
+
 // Intent Handlers
 const handlers = {
   // Launch: "Alexa, open Omega Brain"
   async LaunchRequest(event) {
+    const sessionAttributes = getSessionAttributes(event);
+    if (!sessionAttributes.agent) {
+      sessionAttributes.agent = CONFIG.defaultAgent;
+    }
     const welcomeText = `
       <amazon:emotion name="excited" intensity="medium">
         Welcome to ${CONFIG.skillName}!
@@ -110,30 +142,51 @@ const handlers = {
       You can ask me questions, check your mission status, or talk to specific agents.
       What would you like to do?
     `;
-    return AlexaResponse.speak(welcomeText, "You can say: ask about the project status, or talk to Claude.");
+    return AlexaResponse.speak(
+      welcomeText,
+      "You can say: ask about the project status, or talk to Claude.",
+      sessionAttributes
+    );
   },
   
   // ChatIntent: "Ask Omega Brain {query}"
   async ChatIntent(event) {
     const query = event.request.intent.slots?.query?.value;
+    const sessionAttributes = getSessionAttributes(event);
+    const agent = sessionAttributes.agent || CONFIG.defaultAgent;
     
     if (!query) {
       return AlexaResponse.speak(
         "I didn't catch that. What would you like to ask?",
-        "You can ask me anything about your projects or missions."
+        "You can ask me anything about your projects or missions.",
+        sessionAttributes
       );
     }
     
     try {
-      const response = await apiRequest('POST', '/chat', {
-        prompt: query,
-        agent: CONFIG.defaultAgent,
-        context: []
+      const response = await apiRequest('POST', '/llm/chat', {
+        messages: [
+          {
+            role: 'system',
+            content: `You are ${agent}, a helpful assistant in the OmegAI collective.`
+          },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 300,
+        temperature: 0.7
       });
-      
-      if (response.reply) {
+
+      const replyText = response?.response?.content
+        || response?.choices?.[0]?.message?.content
+        || response?.raw?.response?.content
+        || response?.raw?.choices?.[0]?.message?.content
+        || response?.reply
+        || response?.raw?.reply
+        || null;
+
+      if (replyText) {
         // Clean up response for Alexa
-        let reply = response.reply
+        let reply = replyText
           .replace(/```[\s\S]*?```/g, 'code block omitted')
           .replace(/\[.*?\]\(.*?\)/g, '')
           .replace(/[*_~`]/g, '')
@@ -141,17 +194,23 @@ const handlers = {
         
         return AlexaResponse.card(
           'Omega Brain Response',
-          response.reply.substring(0, 1000),
-          reply
+          replyText.substring(0, 1000),
+          reply,
+          sessionAttributes
         );
       } else {
-        return AlexaResponse.speak("I received the message but got an empty response. Please try again.");
+        return AlexaResponse.speak(
+          "I received the message but got an empty response. Please try again.",
+          null,
+          sessionAttributes
+        );
       }
     } catch (error) {
       console.error('Chat error:', error);
       return AlexaResponse.speak(
         "I'm having trouble connecting to the brain right now. Please check that your server is running.",
-        "Would you like to try again?"
+        "Would you like to try again?",
+        sessionAttributes
       );
     }
   },
@@ -170,10 +229,12 @@ const handlers = {
         statusText += ` I have ${agentCount} agents ready to assist you.`;
       }
       
-      return AlexaResponse.speak(statusText);
+      return AlexaResponse.speak(statusText, null, getSessionAttributes(event));
     } catch (error) {
       return AlexaResponse.speak(
-        '<amazon:emotion name="disappointed" intensity="low">I cannot reach the Omega Brain server. Please ensure it is running.</amazon:emotion>'
+        '<amazon:emotion name="disappointed" intensity="low">I cannot reach the Omega Brain server. Please ensure it is running.</amazon:emotion>',
+        null,
+        getSessionAttributes(event)
       );
     }
   },
@@ -196,12 +257,20 @@ const handlers = {
           missionText += recentMissions.map(m => m.title || m.objective).join(', ');
         }
         
-        return AlexaResponse.speak(missionText);
+        return AlexaResponse.speak(missionText, null, getSessionAttributes(event));
       } else {
-        return AlexaResponse.speak("You don't have any missions yet. Would you like me to help you create one?");
+        return AlexaResponse.speak(
+          "You don't have any missions yet. Would you like me to help you create one?",
+          null,
+          getSessionAttributes(event)
+        );
       }
     } catch (error) {
-      return AlexaResponse.speak("I couldn't retrieve your missions. Please try again later.");
+      return AlexaResponse.speak(
+        "I couldn't retrieve your missions. Please try again later.",
+        null,
+        getSessionAttributes(event)
+      );
     }
   },
   
@@ -209,27 +278,34 @@ const handlers = {
   async AgentIntent(event) {
     const agentSlot = event.request.intent.slots?.agent?.value;
     const agents = ['gemini', 'claude', 'codex', 'grok'];
+    const sessionAttributes = getSessionAttributes(event);
     
     if (!agentSlot) {
       return AlexaResponse.speak(
         "Which agent would you like to talk to? You can choose from Gemini, Claude, Codex, or Grok.",
-        "Say: talk to Gemini, or talk to Claude."
+        "Say: talk to Gemini, or talk to Claude.",
+        sessionAttributes
       );
     }
     
     const agent = agentSlot.toLowerCase();
     if (!agents.includes(agent)) {
       return AlexaResponse.speak(
-        `I don't recognize ${agentSlot}. Available agents are: Gemini for planning, Claude for reasoning, Codex for code, and Grok for real-time information.`
+        `I don't recognize ${agentSlot}. Available agents are: Gemini for planning, Claude for reasoning, Codex for code, and Grok for real-time information.`,
+        null,
+        sessionAttributes
       );
     }
     
+    sessionAttributes.agent = agent;
+
     // Update session with selected agent
     return AlexaResponse.speak(
       `<amazon:emotion name="excited" intensity="low">
         Switching to ${agent}. What would you like to ask ${agent}?
       </amazon:emotion>`,
-      `Go ahead, ask ${agent} anything.`
+      `Go ahead, ask ${agent} anything.`,
+      sessionAttributes
     );
   },
   
@@ -243,12 +319,20 @@ const handlers = {
       Say "talk to" followed by an agent name like Gemini or Claude.
       What would you like to do?
     `;
-    return AlexaResponse.speak(helpText, "You can ask me a question, or check your mission status.");
+    return AlexaResponse.speak(
+      helpText,
+      "You can ask me a question, or check your mission status.",
+      getSessionAttributes(event)
+    );
   },
   
   // Stop/Cancel
   async StopIntent(event) {
-    return AlexaResponse.speak('Goodbye! The Omega Brain is always here when you need me.');
+    return AlexaResponse.speak(
+      'Goodbye! The Omega Brain is always here when you need me.',
+      null,
+      getSessionAttributes(event)
+    );
   },
   
   async CancelIntent(event) {
@@ -259,7 +343,8 @@ const handlers = {
   async FallbackIntent(event) {
     return AlexaResponse.speak(
       "I'm not sure how to help with that. Try asking a question, or say help for more options.",
-      "You can ask me anything, or say help."
+      "You can ask me anything, or say help.",
+      getSessionAttributes(event)
     );
   },
   

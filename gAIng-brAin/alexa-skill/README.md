@@ -37,6 +37,7 @@ Voice interface for interacting with your OmegAI Brain via Amazon Echo devices.
    In AWS Lambda console, set environment variables:
    - `OMEGA_API_URL`: Your gAIng-Brain API URL (must be HTTPS)
    - `OMEGA_AGENT`: Default agent (gemini, claude, codex, grok)
+   - `OMEGA_API_TOKEN`: Supabase auth token for protected endpoints
 
 4. **Enable the Skill**
    - Go to [Alexa App](https://alexa.amazon.com)
@@ -93,7 +94,7 @@ Your gAIng-Brain API must support:
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| /chat | POST | Chat with agents |
+| /llm/chat | POST | Chat with agents (requires bearer token) |
 | /health | GET | System status |
 | /missions | GET | List missions |
 
