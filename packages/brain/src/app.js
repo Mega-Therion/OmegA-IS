@@ -7,6 +7,7 @@ const membersRoutes = require('./routes/members');
 const memoriesRoutes = require('./routes/memories');
 const mem0Routes = require('./routes/mem0');
 const llmRoutes = require('./routes/llm');
+const llmV2Routes = require('./routes/llm-v2');
 const omegaRoutes = require('./routes/omega');
 const messagesRoutes = require('./routes/messages');
 const tasksRoutes = require('./routes/tasks');
@@ -23,6 +24,13 @@ const earsRoutes = require('./routes/ears');
 const analyticsRoutes = require('./routes/analytics');
 const bridgeRoutes = require('./routes/bridge');
 const terminalRoutes = require('./routes/terminal');
+const mcpRoutes = require('./routes/mcp');
+const agenticCodingRoutes = require('./routes/agentic-coding');
+const mediaRoutes = require('./routes/media');
+const documentsRoutes = require('./routes/documents');
+const rlhfRoutes = require('./routes/rlhf');
+const codeInterpreterRoutes = require('./routes/code-interpreter');
+const orchestratorUtilsRoutes = require('./routes/orchestrator-utils');
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -81,6 +89,7 @@ app.use('/memories', memoriesRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/llm', llmRoutes);
+app.use('/v2/llm', llmV2Routes);
 app.use('/omega', omegaRoutes);
 app.use('/safa', safaRoutes);
 app.use('/agents', agentsRoutes);
@@ -94,6 +103,13 @@ app.use('/ears', earsRoutes);
 app.use('/analytics', analyticsRoutes);
 app.use('/bridge', bridgeRoutes);
 app.use('/terminal', terminalRoutes);
+app.use('/mcp', mcpRoutes);
+app.use('/code', agenticCodingRoutes);
+app.use('/media', mediaRoutes);
+app.use('/documents', documentsRoutes);
+app.use('/rlhf', rlhfRoutes);
+app.use('/code-interpreter', codeInterpreterRoutes);
+app.use('/api', orchestratorUtilsRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
 app.use('/captures', express.static('public/captures'));
 
@@ -116,8 +132,3 @@ if (vaultQueueRoutes) {
 }
 
 module.exports = app;
-
-
-
-
-

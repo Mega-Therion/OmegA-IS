@@ -7,6 +7,7 @@ const realtimeRoute = require('./src/routes/realtime');
 const grokVoiceRoute = require('./src/routes/grok-voice');
 const app = require('./src/app');
 const brain = require('./src/core/brain');
+const { initMcp } = require('./src/services/mcp-client');
 
 const PORT = process.env.PORT || 8080;
 const ENABLE_NGROK = process.env.ENABLE_NGROK === '1';
@@ -43,7 +44,8 @@ server.on('upgrade', (request, socket, head) => {
     });
   } else if (url.pathname === '/realtime') {
     wss.handleUpgrade(request, socket, head, (ws) => {
-      realtimeRoute.handleRealtimeConnection(ws);
+      const provider = url.searchParams.get('provider') || 'openai';
+      realtimeRoute.handleRealtimeConnection(ws, { provider });
     });
   } else if (url.pathname === '/grok-voice') {
     wss.handleUpgrade(request, socket, head, (ws) => {
@@ -84,6 +86,9 @@ server.listen(PORT, async () => {
 
   // WAKE THE BRAIN
   brain.awaken();
+
+  // Initialize MCP clients + tool registry
+  await initMcp();
 
   // INITIALIZE OMEGA ECONOMY
   try {

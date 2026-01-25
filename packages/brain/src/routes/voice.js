@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { speak } = require('../services/voice');
+const multer = require('multer');
+const { speak, cloneVoice } = require('../services/voice');
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/speak', async (req, res) => {
     try {
@@ -31,6 +34,17 @@ router.post('/speak', async (req, res) => {
         res.send(Buffer.from(audioBuffer));
     } catch (err) {
         console.error('[Voice Route] Error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+router.post('/clone', upload.array('files', 5), async (req, res) => {
+    try {
+        const { name, description } = req.body || {};
+        const result = await cloneVoice({ name, description, files: req.files || [] });
+        res.json({ ok: true, voice: result });
+    } catch (err) {
+        console.error('[Voice Route] Clone error:', err);
         res.status(500).json({ error: err.message });
     }
 });
