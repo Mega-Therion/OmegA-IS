@@ -120,13 +120,13 @@ async def v1_mem_query(req: QueryRequest, _: None = Depends(auth)):
     return {"hits": hits}
 
 
-# Proxy day-jobs API to Brain (Node service) so the HUD can use a single ingress.
-async def _proxy_to_brain(request: Request, path_suffix: str, idem_key: str | None):
-    target = settings.omega_brain_base_url.rstrip("/") + "/day-jobs"
+# Generic proxy to any backend service
+async def _proxy_to_service(request: Request, base_url: str, path_prefix: str, path_suffix: str, idem_key: str | None):
+    target = base_url.rstrip("/") + "/" + path_prefix.strip("/")
     if path_suffix:
-        target += "/" + path_suffix
+        target += "/" + path_suffix.strip("/")
 
-    async with httpx.AsyncClient(follow_redirects=True) as client:
+    async with httpx.AsyncClient(follow_redirects=True, timeout=60.0) as client:
         body = await request.body()
         headers = {
           k: v
@@ -135,6 +135,7 @@ async def _proxy_to_brain(request: Request, path_suffix: str, idem_key: str | No
         }
         if settings.omega_internal_token:
             headers["x-internal-token"] = settings.omega_internal_token
+        
         resp = await client.request(
             request.method,
             target,
@@ -148,20 +149,26 @@ async def _proxy_to_brain(request: Request, path_suffix: str, idem_key: str | No
         for k, v in resp.headers.items()
         if k.lower() not in {"content-encoding", "transfer-encoding", "connection"}
     }
-    response = Response(
+    return Response(
         content=resp.content,
         status_code=resp.status_code,
         headers=filtered_headers,
         media_type=resp.headers.get("content-type"),
     )
-    append_event(
-        "proxy.day-jobs",
-        {"path": path_suffix, "status": resp.status_code},
-    )
-    if idem_key and request.method.lower() in {"post", "put", "patch", "delete"}:
-        store_response(idem_key, resp.status_code, resp.content)
-    return response
 
+@router.api_route("/brain/{full_path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+async def proxy_brain(full_path: str, request: Request, _: None = Depends(auth)):
+    return await _proxy_to_service(request, settings.omega_brain_base_url, "", full_path, None)
+
+@router.api_route("/bridge/{full_path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+async def proxy_bridge(full_path: str, request: Request, _: None = Depends(auth)):
+    # Assuming bridge base is port 8000
+    bridge_url = settings.omega_brain_base_url.replace(":8080", ":8000")
+    return await _proxy_to_service(request, bridge_url, "v1", full_path, None)
+
+@router.api_route("/podcast/{full_path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+async def proxy_podcast(full_path: str, request: Request, _: None = Depends(auth)):
+    return await _proxy_to_service(request, settings.omega_brain_base_url, "podcast", full_path, None)
 
 @router.api_route("/day-jobs/{full_path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
 async def proxy_day_jobs(full_path: str, request: Request, _: None = Depends(auth)):
@@ -171,18 +178,15 @@ async def proxy_day_jobs(full_path: str, request: Request, _: None = Depends(aut
         if cached:
             status, body = cached
             return Response(content=body, status_code=status, media_type="application/json")
-    return await _proxy_to_brain(request, full_path, idem_key)
-
-
-@router.api_route("/day-jobs", methods=["GET", "POST"], include_in_schema=False)
-async def proxy_day_jobs_root(request: Request, _: None = Depends(auth)):
-    idem_key = request.headers.get("x-idempotency-key")
-    if idem_key:
-        cached = get_cached_response(idem_key)
-        if cached:
-            status, body = cached
-            return Response(content=body, status_code=status, media_type="application/json")
-    return await _proxy_to_brain(request, "", idem_key)
+    
+    response = await _proxy_to_service(request, settings.omega_brain_base_url, "day-jobs", full_path, idem_key)
+    append_event(
+        "proxy.day-jobs",
+        {"path": full_path, "status": response.status_code},
+    )
+    if idem_key and request.method.lower() in {"post", "put", "patch", "delete"}:
+        store_response(idem_key, response.status_code, response.body)
+    return response
 
 
 # Backward compatibility health path

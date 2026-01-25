@@ -30,12 +30,14 @@ interface NeuroState {
   metrics: Metrics
   ragEnabled: boolean
   qualityMode: 'ultra' | 'balanced' | 'lite'
+  activeTab: 'console' | 'terminal' | 'podcast' | 'vision'
   setMetrics: (metrics: Metrics) => void
   addMessage: (message: ChatMessage) => void
   addMemory: (memory: MemoryItem) => void
   togglePin: (id: string) => void
   toggleRag: () => void
   setQualityMode: (mode: NeuroState['qualityMode']) => void
+  setActiveTab: (tab: NeuroState['activeTab']) => void
   clearSession: () => void
 }
 
@@ -47,24 +49,26 @@ export const useNeuroStore = create<NeuroState>()(
       metrics: { fps: 60, latency: 24, memory: 512, mood: 0.5 },
       ragEnabled: true,
       qualityMode: 'balanced',
-      setMetrics: (metrics) => set({ metrics }),
-      addMessage: (message) =>
-        set((state) => ({ messages: [...state.messages, message] })),
-      addMemory: (memory) =>
-        set((state) => ({ memory: [memory, ...state.memory].slice(0, 20) })),
-      togglePin: (id) =>
-        set((state) => ({
+      activeTab: 'console',
+      setMetrics: (metrics: Metrics) => set({ metrics }),
+      addMessage: (message: ChatMessage) =>
+        set((state: NeuroState) => ({ messages: [...state.messages, message] })),
+      addMemory: (memory: MemoryItem) =>
+        set((state: NeuroState) => ({ memory: [memory, ...state.memory].slice(0, 20) })),
+      togglePin: (id: string) =>
+        set((state: NeuroState) => ({
           memory: state.memory.map((item) =>
             item.id === id ? { ...item, pinned: !item.pinned } : item
           )
         })),
-      toggleRag: () => set((state) => ({ ragEnabled: !state.ragEnabled })),
-      setQualityMode: (mode) => set({ qualityMode: mode }),
+      toggleRag: () => set((state: NeuroState) => ({ ragEnabled: !state.ragEnabled })),
+      setQualityMode: (mode: NeuroState['qualityMode']) => set({ qualityMode: mode }),
+      setActiveTab: (tab: NeuroState['activeTab']) => set({ activeTab: tab }),
       clearSession: () => set({ messages: [], memory: [] })
     }),
     {
       name: 'neuro-link-memory',
-      partialize: (state) => ({ messages: state.messages, memory: state.memory })
+      partialize: (state: NeuroState) => ({ messages: state.messages, memory: state.memory })
     }
   )
 )
