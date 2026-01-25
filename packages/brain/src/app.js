@@ -22,6 +22,7 @@ const eyesRoutes = require('./routes/eyes');
 const earsRoutes = require('./routes/ears');
 const analyticsRoutes = require('./routes/analytics');
 const bridgeRoutes = require('./routes/bridge');
+const terminalRoutes = require('./routes/terminal');
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -48,19 +49,19 @@ kernel.on('reflection', (evt) => {
 
 // CORS - allow configured origins or all in dev
 const corsOptions = {
-    origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+  origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
 
 // Rate limiting - 100 requests per minute per IP
 const limiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: process.env.RATE_LIMIT || 100,
-    message: { ok: false, error: 'Too many requests' },
-    standardHeaders: true,
-    legacyHeaders: false
+  windowMs: 60 * 1000,
+  max: process.env.RATE_LIMIT || 100,
+  message: { ok: false, error: 'Too many requests' },
+  standardHeaders: true,
+  legacyHeaders: false
 });
 app.use(limiter);
 
@@ -92,6 +93,7 @@ app.use('/eyes', eyesRoutes);
 app.use('/ears', earsRoutes);
 app.use('/analytics', analyticsRoutes);
 app.use('/bridge', bridgeRoutes);
+app.use('/terminal', terminalRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
 app.use('/captures', express.static('public/captures'));
 

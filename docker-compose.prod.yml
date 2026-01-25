@@ -244,6 +244,20 @@ services:
       - omega-network
 
   # ========================================
+  # OMEGA Ollama (Local LLM)
+  # ========================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: omega-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+    networks:
+      - omega-network
+
+  # ========================================
   # Grafana (Visualization)
   # ========================================
   grafana:
@@ -252,7 +266,7 @@ services:
     ports:
       - "3001:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=redis-datasource
     volumes:
       - grafana-data:/var/lib/grafana
@@ -286,6 +300,8 @@ volumes:
   prometheus-data:
     driver: local
   grafana-data:
+    driver: local
+  ollama-data:
     driver: local
 
 # ========================================
