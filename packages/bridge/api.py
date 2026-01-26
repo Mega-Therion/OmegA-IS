@@ -22,6 +22,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from consensus_engine import DCBFTEngine, VoteType, ConsensusDecision
+from config import settings
 from memory_layer import UnifiedMemoryLayer
 from orchestrator import Orchestrator
 from worker_pool import WorkerPool
@@ -55,7 +56,12 @@ app.add_middleware(
 memory = UnifiedMemoryLayer(working_budget=50)
 orchestrator = Orchestrator()
 worker_pool = WorkerPool()
-consensus_engine = DCBFTEngine(max_faulty_agents=1)
+consensus_engine = DCBFTEngine(
+    max_faulty_agents=1,
+    quorum_ratio=settings.consensus_quorum_ratio,
+    fallback_mode=settings.consensus_fallback_mode,
+    fallback_quorum_ratio=settings.consensus_fallback_quorum_ratio,
+)
 
 # Track active sessions
 active_sessions: Dict[str, Dict] = {}
@@ -195,8 +201,32 @@ async def health_check():
                 "completed_tasks": len(orchestrator.completed_tasks),
             },
             "worker_pool": worker_pool.get_pool_status(),
+            "config": {
+                "environment": settings.environment,
+                "log_level": settings.log_level,
+            },
         }
     )
+
+
+@app.get("/ready", tags=["Health"])
+async def readiness_check():
+    """Readiness probe for orchestration dependencies."""
+    return {
+        "ready": True,
+        "service": "bridge",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+@app.get("/live", tags=["Health"])
+async def liveness_check():
+    """Liveness probe for basic process health."""
+    return {
+        "alive": True,
+        "service": "bridge",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
 
 
 @app.get("/status", tags=["Health"])
@@ -218,6 +248,30 @@ async def system_status():
             "pending_votes": list(consensus_engine.pending_decisions.keys()),
             "finalized_votes": len(consensus_engine.finalized_decisions),
         },
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+@app.get("/ready", tags=["Health"])
+async def readiness_probe():
+    """Readiness probe - checks if core components are initialized."""
+    return {
+        "status": "ready",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "components": {
+            "memory": memory is not None,
+            "orchestrator": orchestrator is not None,
+            "worker_pool": worker_pool is not None,
+            "consensus_engine": consensus_engine is not None,
+        }
+    }
+
+
+@app.get("/live", tags=["Health"])
+async def liveness_probe():
+    """Liveness probe - simple heartbeat response."""
+    return {
+        "status": "alive",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
