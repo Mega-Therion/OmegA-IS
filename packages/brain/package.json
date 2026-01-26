@@ -46,6 +46,7 @@
         "sync:two-way": "node scripts/sync-two-way.js",
         "rotate-logs": "node scripts/rotate-logs.js",
         "test": "node scripts/smoke-test.js",
+        "test:contracts": "jest tests/contracts --passWithNoTests",
         "orchestrate": "node src/orchestrator.js",
         "orchestrate:watch": "node src/orchestrator.js watch",
         "worker:claude": "node src/agent-worker.js claude",
@@ -77,5 +78,9 @@
     },
     "optionalDependencies": {
         "@ngrok/ngrok-win32-x64-msvc": "^1.7.0"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "node-fetch": "^2.6.11"
     }
 }

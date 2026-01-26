@@ -18,10 +18,52 @@ try { streaming = require('../services/streaming'); } catch (e) { streaming = nu
 try { bridgeClient = require('../services/bridge-client'); } catch (e) { bridgeClient = null; }
 
 /**
+ * GET /health
+ * Basic health check (Kubernetes-style)
+ */
+router.get('/health', async (req, res) => {
+  const health = {
+    status: 'healthy',
+    service: 'brain',
+    timestamp: new Date().toISOString()
+  };
+
+  res.status(200).json(health);
+});
+
+/**
+ * GET /ready
+ * Readiness probe - checks if service is ready to serve traffic
+ */
+router.get('/ready', async (req, res) => {
+  const ready = {
+    ready: true,
+    service: 'brain',
+    timestamp: new Date().toISOString()
+  };
+
+  // TODO: Add dependency checks (database, cache, etc.)
+  // For now, simple check that service is up
+
+  res.status(200).json(ready);
+});
+
+/**
+ * GET /live
+ * Liveness probe - checks if service is alive
+ */
+router.get('/live', async (req, res) => {
+  res.status(200).json({
+    alive: true,
+    timestamp: new Date().toISOString()
+  });
+});
+
+/**
  * GET /system/health
  * Detailed health check
  */
-router.get('/health', async (req, res) => {
+router.get('/system/health', async (req, res) => {
   const health = {
     ok: true,
     status: 'healthy',
