@@ -200,6 +200,8 @@ cd packages/bridge && pytest
 - **HUD Documentation:** `packages/hud/README.md`
 - **Brain Documentation:** `packages/brain/README.md`
 - **Bridge Documentation:** `packages/bridge/README.md`
+- **OmegA Ultima Docs:** `docs/ultima/README.md`
+- **Ultima Sync Script:** `scripts/sync-ultima.sh` (run from repo root)
 
 ---
 
