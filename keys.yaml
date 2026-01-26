@@ -1,0 +1,45 @@
+keys.env
+
+supabase secret key: REDACTED
+
+supabase service role key: REDACTED
+
+supabase project url: REDACTED
+
+telegram gaing channel id: REDACTED
+
+telegram @safa says bot token: REDACTED
+
+Telegram @Grok_gAIng_bot: REDACTED
+
+telegram @Claude gaing bot token: REDACTED
+
+telegram @Gemini gaing bot token: REDACTED
+
+telegram @Perplexity gaing bot token: REDACTED
+
+telegram @Codex gaing bot token: REDACTED
+
+Perplexity API Key: REDACTED
+
+openai service role key: REDACTED
+
+openai api key: REDACTED
+
+gemini api key: REDACTED
+
+claude api key: REDACTED
+
+deepseek api key: REDACTED
+
+grok api key: REDACTED
+
+linear api key: REDACTED
+
+notion internal token: REDACTED
+
+eleven labs api key: REDACTED
+
+
+github access token: REDACTED
+
