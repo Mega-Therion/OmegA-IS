@@ -1,0 +1,62 @@
+groups:
+  - name: omega-trinity-alerts
+    rules:
+      # HighErrorRate - Fires when 5xx error rate exceeds 10%
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High HTTP error rate detected"
+          description: "Service {{ $labels.job }} has a 5xx error rate above 10% (current: {{ $value | printf \"%.2f\" }} req/s)"
+
+      # HighLatency - Fires when P95 latency exceeds 2 seconds
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High request latency detected"
+          description: "Service {{ $labels.job }} P95 latency is above 2 seconds (current: {{ $value | printf \"%.2f\" }}s)"
+
+      # ServiceDown - Fires when service is down
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service is down"
+          description: "Service {{ $labels.job }} on {{ $labels.instance }} has been down for more than 1 minute"
+
+      # HighMemoryUsage - Fires when heap exceeds 500MB
+      - alert: HighMemoryUsage
+        expr: nodejs_heap_size_bytes > 500000000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+          description: "Service {{ $labels.job }} heap size is above 500MB (current: {{ $value | humanize }})"
+
+      # AIServiceSlow - Fires when AI P95 response time exceeds 30s
+      - alert: AIServiceSlow
+        expr: histogram_quantile(0.95, rate(ai_response_time_seconds_bucket[5m])) > 30
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "AI service response time is slow"
+          description: "AI service P95 response time is above 30 seconds (current: {{ $value | printf \"%.2f\" }}s)"
+
+      # HighTokenUsage - Fires when token usage exceeds 100k/hour
+      - alert: HighTokenUsage
+        expr: increase(ai_tokens_total[1h]) > 100000
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: "High AI token usage"
+          description: "Token usage has exceeded 100,000 in the last hour (current: {{ $value | printf \"%.0f\" }} tokens)"

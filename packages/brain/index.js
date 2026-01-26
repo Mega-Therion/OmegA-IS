@@ -7,11 +7,14 @@ const realtimeRoute = require('./src/routes/realtime');
 const grokVoiceRoute = require('./src/routes/grok-voice');
 const app = require('./src/app');
 const brain = require('./src/core/brain');
+const { validateEnv } = require('./src/config/env');
 const { initMcp } = require('./src/services/mcp-client');
 
 const PORT = process.env.PORT || 8080;
 const ENABLE_NGROK = process.env.ENABLE_NGROK === '1';
 const NGROK_AUTHTOKEN = process.env.NGROK_AUTHTOKEN;
+
+validateEnv();
 
 // Create HTTP server + WebSocket upgrade
 const server = http.createServer(app);
