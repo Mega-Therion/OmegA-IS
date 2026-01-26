@@ -9,6 +9,7 @@
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
+    "format:check": "prettier --check .github/workflows/ci.yml package.json client/index.html chat_history_viewer/client/index.html packages/brain/package.json packages/brain/src/config/env.js packages/brain/src/config/env.schema.js packages/brain/src/routes/system.js packages/hud/package.json packages/hud/src/app/api/health/route.ts packages/hud/src/app/api/live/route.ts packages/hud/src/app/api/ready/route.ts packages/hud/src/config/env.schema.ts packages/hud/src/config/env.ts",
     "test": "vitest run",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "omega": "node scripts/omega-start.mjs",
