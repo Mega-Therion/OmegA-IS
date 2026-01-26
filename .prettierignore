@@ -33,3 +33,28 @@ pnpm-lock.yaml
 # OS files
 .DS_Store
 Thumbs.db
+
+# Legacy or large directories we don’t touch
+gAIng-brAin/
+chat_history_viewer/
+client/
+Jarvis/
+Jarvis-1/
+bridge/
+gateway/
+n8n/
+grafana/
+observability/
+prometheus/
+docs/
+drizzle/
+
+# Specific files that crash Prettier
+docker-compose.ref.yml
+keys.yaml
+
+# Brain scripts/data folders contain invalid JS/JSON
+packages/brain/scripts/
+packages/brain/data/
+packages/brain/src/orchestrator.js
+packages/brain/src/services/a2a.js

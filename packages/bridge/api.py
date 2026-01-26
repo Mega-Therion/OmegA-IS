@@ -22,7 +22,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from consensus_engine import DCBFTEngine, VoteType, ConsensusDecision
-from config import settings
+from env import settings
 from memory_layer import UnifiedMemoryLayer
 from orchestrator import Orchestrator
 from worker_pool import WorkerPool
@@ -214,6 +214,7 @@ async def readiness_check():
     """Readiness probe for orchestration dependencies."""
     return {
         "ready": True,
+        "status": "ready",
         "service": "bridge",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
@@ -224,6 +225,7 @@ async def liveness_check():
     """Liveness probe for basic process health."""
     return {
         "alive": True,
+        "status": "alive",
         "service": "bridge",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
@@ -248,30 +250,6 @@ async def system_status():
             "pending_votes": list(consensus_engine.pending_decisions.keys()),
             "finalized_votes": len(consensus_engine.finalized_decisions),
         },
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-    }
-
-
-@app.get("/ready", tags=["Health"])
-async def readiness_probe():
-    """Readiness probe - checks if core components are initialized."""
-    return {
-        "status": "ready",
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "components": {
-            "memory": memory is not None,
-            "orchestrator": orchestrator is not None,
-            "worker_pool": worker_pool is not None,
-            "consensus_engine": consensus_engine is not None,
-        }
-    }
-
-
-@app.get("/live", tags=["Health"])
-async def liveness_probe():
-    """Liveness probe - simple heartbeat response."""
-    return {
-        "status": "alive",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
