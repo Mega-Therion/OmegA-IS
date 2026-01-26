@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
+import { validateEnv } from '@/config/env'
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -82,6 +83,8 @@ export const viewport: Viewport = {
   userScalable: true,
   viewportFit: 'cover'
 }
+
+validateEnv()
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

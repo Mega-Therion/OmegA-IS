@@ -41,6 +41,29 @@ const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD;
 
 const supabaseKey = SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
 
+function validateEnv({ strict = process.env.OMEGA_STRICT_ENV === '1' } = {}) {
+  const missing = [];
+  const requireSupabase = process.env.NODE_ENV === 'production' && !DISABLE_AUTH;
+
+  if (requireSupabase && !SUPABASE_URL) {
+    missing.push('SUPABASE_URL');
+  }
+
+  if (requireSupabase && !supabaseKey) {
+    missing.push('SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_KEY');
+  }
+
+  if (missing.length) {
+    const message = `[brain] Missing env vars: ${missing.join(', ')}`;
+    if (strict) {
+      throw new Error(message);
+    }
+    console.warn(message);
+  }
+
+  return { ok: missing.length === 0, missing };
+}
+
 module.exports = {
   SUPABASE_URL,
   SUPABASE_ANON_KEY,
@@ -79,5 +102,6 @@ module.exports = {
   NEO4J_URL,
   NEO4J_USER,
   NEO4J_PASSWORD,
-  supabaseKey
+  supabaseKey,
+  validateEnv
 };

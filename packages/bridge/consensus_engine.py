@@ -4,7 +4,7 @@ Implements the DCBFT (Decentralized Collective Byzantine Fault Tolerance) protoc
 Follows the Consensus-Based Security principle as defined in the Shared Constitution.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Literal
 from datetime import datetime, timezone
 from enum import Enum
 import math
@@ -35,8 +35,17 @@ class DCBFTEngine:
     Requires super-majority (~66%) consensus for high-impact actions.
     """
     
-    def __init__(self, max_faulty_agents: int = 1):
+    def __init__(
+        self,
+        max_faulty_agents: int = 1,
+        quorum_ratio: float = 2 / 3,
+        fallback_mode: Literal["strict", "degraded"] = "strict",
+        fallback_quorum_ratio: float = 1 / 2,
+    ):
         self.max_faulty_agents = max_faulty_agents
+        self.quorum_ratio = quorum_ratio
+        self.fallback_mode = fallback_mode
+        self.fallback_quorum_ratio = fallback_quorum_ratio
         self.min_required_agents = self._calculate_min_agents()
         # Back-compat for tests and older callers.
         self.required_agents = self.min_required_agents
@@ -47,9 +56,10 @@ class DCBFTEngine:
         """Calculate minimum agents required per DCBFT formula: N >= 3f + 1."""
         return (3 * self.max_faulty_agents) + 1
     
-    def _calculate_quorum(self, total_agents: int) -> int:
+    def _calculate_quorum(self, total_agents: int, ratio: Optional[float] = None) -> int:
         """Calculate quorum (super-majority) requirement (~66%)."""
-        return math.ceil(total_agents * 2 / 3)
+        ratio = ratio if ratio is not None else self.quorum_ratio
+        return max(1, math.ceil(total_agents * ratio))
     
     def initiate_vote(self, decision_id: str, description: str, required_agents: List[str]) -> Dict[str, Any]:
         """Initiate a consensus vote for a high-impact decision.
@@ -142,6 +152,31 @@ class DCBFTEngine:
         quorum = session["quorum_required"]
         
         if len(votes) < quorum:
+            if self.fallback_mode == "degraded":
+                fallback_quorum = self._calculate_quorum(len(session["required_agents"]), self.fallback_quorum_ratio)
+                if len(votes) >= fallback_quorum:
+                    approve_count = sum(1 for v in votes.values() if v["vote"] == VoteType.APPROVE.value)
+                    reject_count = sum(1 for v in votes.values() if v["vote"] == VoteType.REJECT.value)
+                    decision_label = "approved" if approve_count >= fallback_quorum else "rejected"
+                    return {
+                        "decision_id": decision_id,
+                        "decision": decision_label,
+                        "consensus_decision": ConsensusDecision.REACHED.value
+                        if decision_label == "approved"
+                        else ConsensusDecision.FAILED.value,
+                        "vote_breakdown": {
+                            "approve": approve_count,
+                            "reject": reject_count,
+                            "abstain": sum(1 for v in votes.values() if v["vote"] == VoteType.ABSTAIN.value),
+                            "total": len(votes)
+                        },
+                        "quorum_required": quorum,
+                        "quorum_met": False,
+                        "fallback_mode": self.fallback_mode,
+                        "fallback_quorum": fallback_quorum,
+                        "warning": "Consensus reached in degraded mode",
+                    }
+
             return {
                 "decision_id": decision_id,
                 "decision": ConsensusDecision.INSUFFICIENT_VOTES.value,

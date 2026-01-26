@@ -26,7 +26,14 @@ function getMemory() {
  */
 function getConsensus(maxFaultyAgents = 1) {
     if (!_consensusInstance) {
-        _consensusInstance = new DCBFTEngine(maxFaultyAgents);
+        const quorumRatio = parseFloat(process.env.CONSENSUS_QUORUM_RATIO || '0.66');
+        const fallbackMode = process.env.CONSENSUS_FALLBACK_MODE || 'strict';
+        const fallbackQuorumRatio = parseFloat(process.env.CONSENSUS_FALLBACK_QUORUM_RATIO || '0.5');
+        _consensusInstance = new DCBFTEngine(maxFaultyAgents, {
+            quorumRatio,
+            fallbackMode,
+            fallbackQuorumRatio,
+        });
     }
     return _consensusInstance;
 }

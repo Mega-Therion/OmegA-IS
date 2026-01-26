@@ -6,6 +6,7 @@
 fastapi>=0.115.0              # Web framework for REST API (upgraded)
 uvicorn[standard]>=0.32.0     # ASGI server (upgraded)
 pydantic>=2.10.0              # Data validation (upgraded)
+pydantic-settings>=2.6.0      # Settings management (pydantic v2)
 httpx>=0.28.0                 # HTTP client for LLM API calls (upgraded)
 typing-extensions>=4.12.0     # Enhanced type hints (upgraded)
 python-dotenv>=1.0.1          # Environment variable loading (upgraded)

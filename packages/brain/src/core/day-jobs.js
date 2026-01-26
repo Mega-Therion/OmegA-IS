@@ -12,6 +12,7 @@
 const { getNeuroCreditSystem } = require('./neuro-credits');
 const https = require('https');
 const opportunityScout = require('./tasks/revenue/opportunity-scout');
+const advancedMemory = require('../services/advanced-memory');
 
 class DayJobsSystem {
     constructor() {
@@ -20,6 +21,13 @@ class DayJobsSystem {
         this.intervals = {};
         this.supabaseUrl = process.env.SUPABASE_URL;
         this.supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+        this.memoryConsolidationOwnerId = process.env.MEMORY_CONSOLIDATION_OWNER_ID || null;
+        this.memoryConsolidationDays = parseInt(process.env.MEMORY_CONSOLIDATION_DAYS || '30', 10);
+        this.memoryConsolidationLimit = parseInt(process.env.MEMORY_CONSOLIDATION_LIMIT || '50', 10);
+        this.memoryConsolidationIntervalMinutes = parseInt(
+            process.env.MEMORY_CONSOLIDATION_INTERVAL_MINUTES || '180',
+            10
+        );
     }
 
     /**
@@ -39,6 +47,7 @@ class DayJobsSystem {
         setTimeout(() => this._startProbationReview(), 5000);
         setTimeout(() => this._startSelfEducation(), 10000);
         setTimeout(() => this._startRevenueTask(), 15000);
+        setTimeout(() => this._startMemoryConsolidation(), 20000);
     }
 
     /**
@@ -85,6 +94,48 @@ class DayJobsSystem {
                 }
             });
         }, 60000);
+    }
+
+    /**
+     * DAY JOB 1B: Memory Consolidation
+     * Consolidate older episodic memories into summarized episodes.
+     */
+    _startMemoryConsolidation() {
+        if (!this.memoryConsolidationOwnerId) {
+            console.log('[DAY JOB] Memory consolidation skipped (no owner id)');
+            return;
+        }
+        if (!this.supabaseUrl || !this.supabaseKey) {
+            console.log('[DAY JOB] Memory consolidation skipped (no DB config)');
+            return;
+        }
+
+        const intervalMs = this.memoryConsolidationIntervalMinutes * 60 * 1000;
+        this.intervals.memoryConsolidation = setInterval(async () => {
+            const agent = this._selectRandomAgent();
+            console.log(`[DAY JOB] ${agent} → Memory Consolidation`);
+
+            try {
+                const result = await advancedMemory.consolidateMemories({
+                    ownerId: this.memoryConsolidationOwnerId,
+                    olderThanDays: this.memoryConsolidationDays,
+                    limit: this.memoryConsolidationLimit,
+                });
+
+                if (result?.consolidated) {
+                    await this.ncSystem.payForDayJob(agent, 'memory_consolidation');
+                    await this._logDayJob(
+                        agent,
+                        'memory_consolidation',
+                        `Consolidated memories into episode ${result.episode?.id || 'unknown'}`,
+                        0.4
+                    );
+                    console.log(`[DAY JOB] ${agent} ✓ Consolidated memories`);
+                }
+            } catch (error) {
+                console.error(`[DAY JOB] ${agent} memory consolidation failed:`, error.message);
+            }
+        }, intervalMs);
     }
 
     async _performMemoryPruning(agent) {

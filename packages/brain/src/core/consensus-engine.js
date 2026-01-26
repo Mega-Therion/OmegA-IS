@@ -28,8 +28,11 @@ class DCBFTEngine {
     /**
      * @param {number} maxFaultyAgents - Maximum number of faulty agents to tolerate
      */
-    constructor(maxFaultyAgents = 1) {
+    constructor(maxFaultyAgents = 1, { quorumRatio = 2 / 3, fallbackMode = 'strict', fallbackQuorumRatio = 1 / 2 } = {}) {
         this.maxFaultyAgents = maxFaultyAgents;
+        this.quorumRatio = quorumRatio;
+        this.fallbackMode = fallbackMode;
+        this.fallbackQuorumRatio = fallbackQuorumRatio;
         this.minRequiredAgents = this._calculateMinAgents();
         this.requiredAgents = this.minRequiredAgents; // Back-compat
         this.pendingDecisions = {};
@@ -46,8 +49,8 @@ class DCBFTEngine {
     /**
      * Calculate quorum (super-majority) requirement (~66%)
      */
-    _calculateQuorum(totalAgents) {
-        return Math.ceil(totalAgents * 2 / 3);
+    _calculateQuorum(totalAgents, ratio = this.quorumRatio) {
+        return Math.max(1, Math.ceil(totalAgents * ratio));
     }
 
     /**
@@ -129,6 +132,40 @@ class DCBFTEngine {
         const voteCount = Object.keys(votes).length;
 
         if (voteCount < quorum) {
+            if (this.fallbackMode === 'degraded') {
+                const fallbackQuorum = this._calculateQuorum(session.required_agents.length, this.fallbackQuorumRatio);
+                if (voteCount >= fallbackQuorum) {
+                    // Count votes
+                    let approveCount = 0;
+                    let rejectCount = 0;
+                    let abstainCount = 0;
+
+                    Object.values(votes).forEach(v => {
+                        if (v.vote === VoteType.APPROVE) approveCount++;
+                        else if (v.vote === VoteType.REJECT) rejectCount++;
+                        else if (v.vote === VoteType.ABSTAIN) abstainCount++;
+                    });
+
+                    const decisionLabel = approveCount >= fallbackQuorum ? 'approved' : 'rejected';
+                    return {
+                        decision_id: decisionId,
+                        decision: decisionLabel,
+                        consensus_decision: decisionLabel === 'approved' ? ConsensusDecision.REACHED : ConsensusDecision.FAILED,
+                        vote_breakdown: {
+                            approve: approveCount,
+                            reject: rejectCount,
+                            abstain: abstainCount,
+                            total: voteCount
+                        },
+                        quorum_required: quorum,
+                        quorum_met: false,
+                        fallback_mode: this.fallbackMode,
+                        fallback_quorum: fallbackQuorum,
+                        warning: 'Consensus reached in degraded mode'
+                    };
+                }
+            }
+
             return {
                 decision_id: decisionId,
                 decision: ConsensusDecision.INSUFFICIENT_VOTES,
