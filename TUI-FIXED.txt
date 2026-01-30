@@ -1,0 +1,47 @@
+✅ TUI FIXED - Miami Vice Theme Restored!
+
+═══════════════════════════════════════════════════════════════
+
+What Was Fixed:
+---------------
+✅ Miami Vice RGB colors restored (hot pink, cyan, purple, yellow, neon green)
+✅ Status indicator now shows: "α ready", "ω thinking", "Σ synthesizing"
+✅ Input prompt now shows "omega▸" INSIDE the input box (not above)
+✅ Agent status symbols colored hot pink + agent names in yellow
+✅ User messages in bold yellow, assistant in cyan
+✅ Summary line in neon green with ⚡ icon
+✅ Proper border colors (cyan, hot pink, purple)
+
+How It Looks Now:
+-----------------
+
+╔══════════════════════════════════════════════════════╗
+║  ΩmegA ◴ α ready                                     ║  (hot pink logo, purple spinner, cyan status)
+╠══════════════════════════════════════════════════════╣
+║ ┌─────────────┬──────────────────────────────────┐  ║
+║ │ Agents      │ Output                           │  ║
+║ │             │                                  │  ║
+║ │ α Alpha     │ (your questions in yellow)       │  ║
+║ │ α Beta      │ (assistant replies in cyan)      │  ║
+║ │             │                                  │  ║
+║ │             │ ⚡ done in 2500ms | tokens: 45   │  ║
+║ │             │    | phases: plan → execute      │  ║
+║ └─────────────┴──────────────────────────────────┘  ║
+║ ┌──────────────────────────────────────────────────┐ ║
+║ │ omega▸ [your input here]                         │ ║  (hot pink prompt, cyan text)
+║ └──────────────────────────────────────────────────┘ ║
+╚══════════════════════════════════════════════════════╝
+
+Test It Now:
+------------
+Just type:  omega
+
+Or if auto-start is enabled, log out and log back in!
+
+Colors:
+-------
+• Hot Pink (#FF6EC7) - ΩmegA logo, prompt, agent symbols
+• Cyan (#00D9FF) - Status, borders, assistant text
+• Purple (#BD00FF) - Spinner, borders
+• Yellow (#FFD700) - Your messages, agent names
+• Neon Green (#39FF14) - Success, summary

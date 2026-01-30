@@ -1,0 +1,67 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║          🚀 ΩmegA AUTO-LAUNCH SETUP INSTRUCTIONS 🚀          ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+✨ YOU ONLY NEED TO DO THIS ONCE! ✨
+
+
+STEP 1: Open a terminal
+------------------------
+  • Press Ctrl+Alt+T (or find Terminal in your apps)
+
+
+STEP 2: Run these two commands
+-------------------------------
+  cd ~/omega_rust
+  ./AUTO-SETUP-CLICK-ME.sh
+
+
+STEP 3: That's it!
+------------------
+  The script will do EVERYTHING for you:
+    ✅ Build ΩmegA
+    ✅ Install it
+    ✅ Set up Ollama auto-start
+    ✅ Configure auto-launch on login
+
+
+WHAT HAPPENS AFTER SETUP:
+═════════════════════════
+
+  Every time you LOG IN to your laptop:
+    1. Terminal opens automatically
+    2. Ollama starts automatically
+    3. ΩmegA is running and ready for you!
+
+  Just type your command and press Enter!
+
+
+TESTING BEFORE REBOOT:
+═════════════════════
+
+  After setup completes, you can test it immediately:
+
+    ./autostart-omega.sh
+
+  Or just run:
+
+    omega
+
+
+TROUBLESHOOTING:
+═══════════════
+
+  • If setup fails: Make sure you have Rust and Ollama installed
+  • If auto-launch doesn't work: Check ~/.config/autostart/omega.desktop
+  • Need help: Check the README.md file
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║  That's it! Just run ./AUTO-SETUP-CLICK-ME.sh and you're     ║
+║  done forever! ΩmegA will auto-start every login! 🎉         ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝

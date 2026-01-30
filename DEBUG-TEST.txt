@@ -1,0 +1,48 @@
+🔍 DEBUG VERSION INSTALLED
+
+═══════════════════════════════════════════════════════════════
+
+I've added debug logging to figure out what's wrong.
+
+TO SEE WHAT'S HAPPENING:
+
+Open TWO terminals side by side:
+
+Terminal 1 (Debug Log):
+─────────────────────────────────────────────────────────────
+tail -f ~/.omega_debug.log
+
+
+Terminal 2 (Run OmegA):
+─────────────────────────────────────────────────────────────
+omega 2> ~/.omega_debug.log
+
+
+Now in Terminal 2:
+1. Type something like "hello"
+2. Press Enter
+3. Watch Terminal 1 to see debug output
+
+═══════════════════════════════════════════════════════════════
+
+WHAT TO LOOK FOR IN DEBUG LOG:
+
+✅ "process_input called" - means input was received
+✅ "Routing to chat mode" - means it detected chat vs work
+✅ "Chat mode started" - means chat function was called
+✅ "Calling Ollama..." - means it's about to call the AI
+✅ "Streaming completed" - means response came back
+✅ "Chat complete" - means everything finished
+
+❌ If you see "ERROR" - that's the problem
+❌ If it stops before "Chat complete" - that's where it breaks
+
+═══════════════════════════════════════════════════════════════
+
+PASTE THE DEBUG LOG HERE AND I'LL FIX IT!
+
+Or if you just want to see it yourself, run:
+
+omega 2>&1 | tee omega-debug.txt
+
+Then type something, press Enter, and show me omega-debug.txt
