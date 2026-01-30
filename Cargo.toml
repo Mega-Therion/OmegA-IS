@@ -64,7 +64,7 @@ actix-web = "4.5"
 actix-cors = "0.7"
 
 # WASM Runtime for Sandboxed Skills
-wasmtime = "16.0"
+wasmtime = "24.0"
 
 # OpenAPI Specification
 utoipa = { version = "4.2", features = ["actix_extras"] }
