@@ -1,36 +1,36 @@
 #!/bin/bash
+# ΩmegΑ Sovereign Intelligence - One-Click Setup
+# For guests and secondary pilots.
 
-echo "🚀 Installing Omega CLI..."
+echo "--- ⌬ ΩmegΑ SOVEREIGN SETUP ⌬ ---"
 
-# Source cargo environment
-source "$HOME/.cargo/env"
-
-# Build in release mode
-cargo build --release
-
-# Copy to local bin
-mkdir -p ~/.local/bin
-cp target/release/omega_rust ~/.local/bin/omega
-
-# Make executable
-chmod +x ~/.local/bin/omega
-
-# Check if ~/.local/bin is in PATH
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo ""
-    echo "⚠️  Warning: ~/.local/bin is not in your PATH"
-    echo "Add this line to your ~/.bashrc or ~/.zshrc:"
-    echo ""
-    echo "export PATH=\"\$HOME/.local/bin:\$PATH\""
-    echo ""
+# 1. Check for Rust
+if ! command -v cargo &> /dev/null; then
+    echo "[...] Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source $HOME/.cargo/env
+else
+    echo "[✓] Rust is already installed."
 fi
 
-echo ""
-echo "✅ Omega installed successfully!"
-echo ""
-echo "Usage:"
-echo "  omega                    # Start interactive mode"
-echo "  omega run \"mission\"      # Run a single mission"
-echo "  omega status             # Check system status"
-echo "  omega --help             # Show all commands"
-echo ""
+# 2. Check for Ollama
+if ! command -v ollama &> /dev/null; then
+    echo "[...] Installing Ollama (Local Brain)..."
+    curl -fsSL https://ollama.com/install.sh | sh
+else
+    echo "[✓] Ollama is already installed."
+fi
+
+# 3. Pull Required Models
+echo "[...] Provisioning neural models..."
+ollama pull qwen2.5-coder:1.5b
+ollama pull llama3.2:3b
+
+# 4. Build ΩmegΑ
+echo "[...] Building the Sovereign Engine..."
+cargo build --release
+
+# 5. Finalize
+echo "--- SETUP COMPLETE ---"
+echo "To enter the cockpit, run: ./target/release/omega_rust"
+echo "For server mode, run: ./target/release/omega_rust --server"
