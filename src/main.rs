@@ -12,6 +12,7 @@ mod ui;
 mod server;
 mod modules;
 mod devices;
+mod voice;
 
 // Only compile the `tui` module when the feature is enabled
 #[cfg(feature = "tui")]
@@ -26,6 +27,9 @@ use events::UiEvent;
 #[derive(Parser)]
 #[command(author, version, about = "ΩmegA multi-agent orchestrator")]
 struct Cli {
+    /// Simple mode selector (no dashes needed): cli | server | tui
+    #[arg(value_name = "mode")]
+    mode: Option<String>,
     /// Run in plain CLI mode (no TUI)
     #[arg(long, default_value_t = false)]
     cli: bool,
@@ -44,17 +48,18 @@ struct Cli {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse arguments
     let cli = Cli::parse();
+    let mode = cli.mode.as_deref().unwrap_or("").to_lowercase();
 
     // Determine operating mode
-    if cli.server {
+    if cli.server || mode == "server" {
         server::run_server(cli.port).await?;
-    } else if cli.cli {
+    } else if cli.cli || mode == "cli" {
         // Load configuration
         let config = load_config(cli.config.as_deref());
         // Initialise core engine
         let engine = OmegaEngine::new(config);
         run_cli(engine).await?;
-    } else {
+    } else if mode == "tui" || mode.is_empty() {
         // Load configuration
         let config = load_config(cli.config.as_deref());
         // Initialise core engine
@@ -68,6 +73,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         {
             eprintln!("TUI support is not compiled in. Run with --cli or build with the 'tui' feature.");
         }
+    } else {
+        eprintln!("Unknown mode '{mode}'. Use: omega cli | omega server | omega tui");
     }
     Ok(())
 }

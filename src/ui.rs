@@ -1,6 +1,6 @@
 use colored::*;
 use indicatif::{ProgressBar, ProgressStyle};
-use std::time::Duration;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 // Miami Vice / Synthwave Color Palette
 pub struct ViceColors;
@@ -33,6 +33,26 @@ impl ViceColors {
     pub fn orange(text: &str) -> ColoredString {
         text.truecolor(251, 146, 60) // Cyber Orange
     }
+}
+
+fn shimmer_text(text: &str) -> String {
+    let palette = [
+        (255, 0, 255),   // Hot pink
+        (0, 255, 255),   // Electric cyan
+        (150, 0, 255),   // Deep purple
+        (50, 255, 180),  // Neon mint
+        (255, 200, 0),   // Neon amber
+    ];
+    let offset = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| (d.as_millis() / 120) as usize)
+        .unwrap_or(0);
+    let mut out = String::new();
+    for (i, ch) in text.chars().enumerate() {
+        let (r, g, b) = palette[(i + offset) % palette.len()];
+        out.push_str(&ch.to_string().truecolor(r, g, b).bold().to_string());
+    }
+    out
 }
 
 pub fn print_banner() {
@@ -112,7 +132,7 @@ pub fn print_banner() {
     // Cyberpunk tagline
     println!("{}{}{}",
         ViceColors::cyan("║                       "),
-        ViceColors::hot_pink("⚡ M U L T I - A G E N T  A I  S Y S T E M ⚡").bold(),
+        shimmer_text("⚡ M U L T I - A G E N T  A I  S Y S T E M ⚡"),
         ViceColors::cyan("                      ║")
     );
 
@@ -147,7 +167,7 @@ pub fn print_interactive_header() {
     println!("{}", ViceColors::magenta("║                                                                           ║"));
     println!("{}{}{}",
         ViceColors::magenta("║                  "),
-        ViceColors::cyan("◢◤◢◤ I N T E R A C T I V E  M O D E ◢◤◢◤").bold(),
+        shimmer_text("◢◤◢◤ I N T E R A C T I V E  M O D E ◢◤◢◤"),
         ViceColors::magenta("                 ║")
     );
     println!("{}", ViceColors::magenta("║                                                                           ║"));
@@ -370,7 +390,7 @@ pub fn print_shutdown() {
 }
 
 pub fn get_prompt() -> String {
-    format!("{} ", ViceColors::hot_pink("omega▸").bold())
+    format!("{} ", shimmer_text("omega▸"))
 }
 
 pub fn print_error(message: &str) {

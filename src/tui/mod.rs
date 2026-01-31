@@ -90,10 +90,11 @@ pub async fn run(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> 
             Some(ui_evt) = ui_rx.recv() => {
                 app.on_ui_event(ui_evt);
             },
-            _ = tokio::time::sleep(std::time::Duration::from_millis(500)) => {
+            _ = tokio::time::sleep(std::time::Duration::from_millis(50)) => {
                 // Periodically update device list from engine
                 let devices = engine.devices.get_all();
                 let _ = ui_tx.send(UiEvent::Devices(devices));
+                app.on_tick();
             },
         }
     }
