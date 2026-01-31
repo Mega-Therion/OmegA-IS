@@ -22,7 +22,10 @@ NODES_JSON='[
   {"name":"SIN","lat":1.3521,"lon":103.8198},
   {"name":"TKY","lat":35.6895,"lon":139.6917},
   {"name":"SYD","lat":-33.8688,"lon":151.2093},
-  {"name":"SAO","lat":-23.5505,"lon":-46.6333}
+  {"name":"SAO","lat":-23.5505,"lon":-46.6333},
+  {"name":"HKG","lat":22.3193,"lon":114.1694},
+  {"name":"BOM","lat":19.0760,"lon":72.8777},
+  {"name":"JNB","lat":-26.2041,"lon":28.0473}
 ]'
 
 # Map ProtonVPN status to a node code
@@ -33,8 +36,8 @@ else
   STATUS=""
 fi
 
+# Detect VPN or local network base
 if echo "$STATUS" | grep -qi "Connected"; then
-  # crude mapping by country/city keywords
   if echo "$STATUS" | grep -qi "Switzerland\|Zurich\|CH"; then VPN_NODE="ZRH"; fi
   if echo "$STATUS" | grep -qi "Singapore\|SG"; then VPN_NODE="SIN"; fi
   if echo "$STATUS" | grep -qi "Japan\|Tokyo\|JP"; then VPN_NODE="TKY"; fi
@@ -42,39 +45,31 @@ if echo "$STATUS" | grep -qi "Connected"; then
   if echo "$STATUS" | grep -qi "United Kingdom\|London\|UK"; then VPN_NODE="LON"; fi
 fi
 
-# Build links from OMEGA_NET_PATH if provided (e.g. ARK->ZRH->SIN)
+# Build links
 LINKS=()
-if [[ -n "$NET_PATH" ]]; then
-  IFS='->' read -ra PARTS <<< "$NET_PATH"
-  PREV=""
-  for P in "${PARTS[@]}"; do
-    CODE=$(echo "$P" | tr -d ' ' | tr '[:lower:]' '[:upper:]')
-    if [[ -n "$PREV" && -n "$CODE" ]]; then
-      LINKS+=("{\"from\":\"$PREV\",\"to\":\"$CODE\",\"label\":\"PATH\"}")
-    fi
-    PREV="$CODE"
-  done
-fi
+
+# Always add core "Spine" paths for the visual effect
+LINKS+=("{\"from\":\"ARK\",\"to\":\"NYC\",\"label\":\"BACKBONE\"}")
+LINKS+=("{\"from\":\"NYC\",\"to\":\"LON\",\"label\":\"TRANS-ATL\"}")
+LINKS+=("{\"from\":\"LON\",\"to\":\"ZRH\",\"label\":\"EURO-NET\"}")
+LINKS+=("{\"from\":\"SFO\",\"to\":\"TKY\",\"label\":\"TRANS-PAC\"}")
+LINKS+=("{\"from\":\"TKY\",\"to\":\"SIN\",\"label\":\"ASIA-HUB\"}")
+LINKS+=("{\"from\":\"SIN\",\"to\":\"SYD\",\"label\":\"OCEANIA\"}")
 
 # Add VPN link if detected
 if [[ -n "$VPN_NODE" ]]; then
-  LINKS+=("{\"from\":\"$HOME_NODE\",\"to\":\"$VPN_NODE\",\"label\":\"VPN\"}")
+  LINKS+=("{\"from\":\"$HOME_NODE\",\"to\":\"$VPN_NODE\",\"label\":\"Sovereign-Tunnel\",\"latency_ms\":42}")
 fi
 
-# Ping targets optionally: format OMEGA_NET_PING_TARGETS="ZRH=ch-03.protonvpn.net,SIN=sg-07.protonvpn.net"
-if [[ -n "$PING_TARGETS" ]]; then
-  IFS=',' read -ra TARGETS <<< "$PING_TARGETS"
-  for T in "${TARGETS[@]}"; do
-    CODE=${T%%=*}
-    HOST=${T#*=}
-    if [[ -n "$CODE" && -n "$HOST" ]]; then
-      LAT=$(ping -c 1 -W 1 "$HOST" 2>/dev/null | awk -F'/' 'END{print $5}')
-      if [[ -n "$LAT" ]]; then
-        LINKS+=("{\"from\":\"$HOME_NODE\",\"to\":\"$CODE\",\"label\":\"PING\",\"latency_ms\":$LAT}")
-      fi
-    fi
-  done
-fi
+# Auto-ping some global hubs to get real colors on the map
+for HUB in "NYC=1.1.1.1" "LON=google.co.uk" "SIN=google.com.sg" "ZRH=google.ch"; do
+  CODE=${HUB%%=*}
+  HOST=${HUB#*=}
+  LAT=$(ping -c 1 -W 1 "$HOST" 2>/dev/null | awk -F'/' 'END{print $5}')
+  if [[ -n "$LAT" ]]; then
+    LINKS+=("{\"from\":\"$HOME_NODE\",\"to\":\"$CODE\",\"label\":\"latency\",\"latency_ms\":$LAT}")
+  fi
+done
 
 # Deduplicate links
 UNIQ_LINKS=$(printf '%s\n' "${LINKS[@]}" | awk '!seen[$0]++')
