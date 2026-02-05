@@ -84,7 +84,19 @@ services:
       - omega_n8n_data:/home/node/.n8n
       - ./n8n/workflows:/workflows:ro
 
+  omega-neo4j:
+    image: neo4j:5-community
+    container_name: omega-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/omega-knowledge
+    volumes:
+      - omega_neo4j_data:/data
+
 volumes:
   omega_db_data:
   omega_ollama_data:
   omega_n8n_data:
+  omega_neo4j_data:

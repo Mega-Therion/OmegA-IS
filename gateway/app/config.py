@@ -39,4 +39,13 @@ class Settings(BaseSettings):
     omega_api_bearer_token: str = ""
     omega_log_level: str = "INFO"
 
+    # --- Neo4j (Knowledge Graph) ---
+    neo4j_uri: str = "bolt://localhost:7687"
+    neo4j_user: str = "neo4j"
+    neo4j_password: str = "omega-knowledge"
+    
+    # --- Internal ---
+    omega_internal_token: str = ""
+    omega_brain_base_url: str = "http://localhost:8080"
+
 settings = Settings()
