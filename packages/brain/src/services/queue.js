@@ -8,9 +8,25 @@ class TaskQueue {
       return;
     }
 
-    this.redis = new Redis(redisUrl);
-    this.enabled = true;
-    this.pubsub = new Redis(redisUrl); // Separate connection for pub/sub
+    try {
+      const options = { maxRetriesPerRequest: 1 };
+      this.redis = new Redis(redisUrl, options);
+      this.pubsub = new Redis(redisUrl, options);
+      this.enabled = true;
+
+      this.redis.on('error', (err) => {
+        console.error('[TaskQueue] Redis error:', err.message);
+        this.enabled = false;
+      });
+
+      this.pubsub.on('error', (err) => {
+        console.error('[TaskQueue] PubSub error:', err.message);
+        this.enabled = false;
+      });
+    } catch (err) {
+      console.warn('[TaskQueue] Failed to init Redis:', err.message);
+      this.enabled = false;
+    }
   }
 
   // Enqueue a task with priority (higher = more urgent)
