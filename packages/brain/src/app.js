@@ -31,6 +31,7 @@ const documentsRoutes = require('./routes/documents');
 const rlhfRoutes = require('./routes/rlhf');
 const codeInterpreterRoutes = require('./routes/code-interpreter');
 const orchestratorUtilsRoutes = require('./routes/orchestrator-utils');
+const alexaRoutes = require('./routes/alexa');
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -111,6 +112,7 @@ app.use('/rlhf', rlhfRoutes);
 app.use('/code-interpreter', codeInterpreterRoutes);
 app.use('/api', orchestratorUtilsRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
+app.use('/api/alexa', alexaRoutes);
 app.use('/captures', express.static('public/captures'));
 
 // Podcast routes

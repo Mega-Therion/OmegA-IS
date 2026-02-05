@@ -8,9 +8,14 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { config } from "dotenv";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
+
+// Load root .env
+config({ path: path.join(repoRoot, ".env") });
+
 const pythonCmd = path.join(repoRoot, ".venv/bin/python");
 const isWin = process.platform === "win32";
 
@@ -41,7 +46,7 @@ const services = [
   },
   {
     name: "gaing-brain",
-    cwd: path.join(repoRoot, "gAIng-brAin"),
+    cwd: path.join(repoRoot, "packages", "brain"),
     cmd: "npm",
     args: ["start"],
     env: {

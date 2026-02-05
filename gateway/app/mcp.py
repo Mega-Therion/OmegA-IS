@@ -1,8 +1,7 @@
 import json
 import asyncio
 import logging
-from mcp import ClientSession, stdio_client
-from mcp.types import StdioServerParameters
+from mcp import ClientSession, stdio_client, StdioServerParameters
 
 logger = logging.getLogger("omega.mcp")
 
