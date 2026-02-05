@@ -8,3 +8,5 @@ psycopg[binary]==3.2.1
 numpy==2.0.1
 python-dotenv==1.0.1
 redis==5.0.8
+neo4j==5.24.0
+mcp==1.2.1
