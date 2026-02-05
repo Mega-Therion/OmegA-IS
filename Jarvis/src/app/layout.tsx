@@ -1,5 +1,7 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
+import { VoiceInterface } from '../components/VoiceInterface'
+import { VoiceOutput } from '../components/VoiceOutput'
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'gAIng Collective' }],
   creator: 'gAIng Collective',
   publisher: 'gAIng Collective',
-  
+
   // Open Graph
   openGraph: {
     type: 'website',
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
       }
     ]
   },
-  
+
   // Twitter
   twitter: {
     card: 'summary_large_image',
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
     description: 'AI Command Interface with RAG and Memory',
     images: ['/og-jarvis.png']
   },
-  
+
   // PWA & Icons
   manifest: '/manifest.json',
   icons: {
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180' }
     ]
   },
-  
+
   // App
   applicationName: 'JARVIS',
   appleWebApp: {
@@ -58,7 +60,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     title: 'JARVIS'
   },
-  
+
   // Robots
   robots: {
     index: true,
@@ -88,8 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="font-sans antialiased">
         {/* Skip to content for accessibility */}
-        <a 
-          href="#main-content" 
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-black focus:rounded"
         >
           Skip to content
@@ -97,6 +99,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content">
           {children}
         </main>
+        <VoiceInterface />
+        <VoiceOutput />
       </body>
     </html>
   )
