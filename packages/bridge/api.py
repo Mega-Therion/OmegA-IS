@@ -21,6 +21,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+try:
+    from prometheus_fastapi_instrumentator import Instrumentator
+    HAS_PROMETHEUS = True
+except ImportError:
+    HAS_PROMETHEUS = False
+
 from consensus_engine import DCBFTEngine, VoteType, ConsensusDecision
 from env import settings
 from memory_layer import UnifiedMemoryLayer
@@ -771,6 +777,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 @app.on_event("startup")
 async def startup_event():
     """Initialize components on startup."""
+    if HAS_PROMETHEUS:
+        Instrumentator().instrument(app).expose(app)
+        print("Prometheus metrics enabled at /metrics")
+    
     print("=" * 50)
     print("OMEGA Bridge - Consensus Layer Starting")
     print("=" * 50)

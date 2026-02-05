@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
-const pythonCmd = process.env.PYTHON_CMD || "python";
+const pythonCmd = path.join(repoRoot, ".venv/bin/python");
 const isWin = process.platform === "win32";
 
 const services = [

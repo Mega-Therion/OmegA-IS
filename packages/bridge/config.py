@@ -38,9 +38,19 @@ class Settings(BaseSettings):
         description="OpenAI API key for OpenAI provider",
     )
 
-    llm_provider: Literal["github", "openai", "azure"] = Field(
+    llm_provider: Literal["github", "openai", "azure", "ollama"] = Field(
         default="github",
-        description="LLM provider selection: 'github', 'openai', or 'azure'",
+        description="LLM provider selection: 'github', 'openai', 'azure', or 'ollama'",
+    )
+
+    ollama_base_url: str = Field(
+        default="http://localhost:11434/v1",
+        description="Ollama base URL (OpenAI-compatible)",
+    )
+
+    ollama_model: str = Field(
+        default="llama3",
+        description="Ollama model to use",
     )
 
     # -------------------------------------------------------------------------
