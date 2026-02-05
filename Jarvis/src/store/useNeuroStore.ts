@@ -37,6 +37,13 @@ interface NeuroState {
   toggleRag: () => void
   setQualityMode: (mode: NeuroState['qualityMode']) => void
   clearSession: () => void
+
+  // Voice & Input State
+  isListening: boolean
+  setIsListening: (isListening: boolean) => void
+  inputText: string
+  setInputText: (text: string) => void
+  submitMessage: (text: string) => void
 }
 
 export const useNeuroStore = create<NeuroState>()(
@@ -60,7 +67,22 @@ export const useNeuroStore = create<NeuroState>()(
         })),
       toggleRag: () => set((state) => ({ ragEnabled: !state.ragEnabled })),
       setQualityMode: (mode) => set({ qualityMode: mode }),
-      clearSession: () => set({ messages: [], memory: [] })
+      clearSession: () => set({ messages: [], memory: [] }),
+
+      // Voice & Input State
+      isListening: false,
+      setIsListening: (isListening) => set({ isListening }),
+      inputText: "",
+      setInputText: (inputText) => set({ inputText }),
+      // Placeholder for submitMessage - in a real app this might trigger an effect or API call
+      submitMessage: (text) => set((state) => ({
+        messages: [...state.messages, {
+          id: Date.now().toString(),
+          role: 'user',
+          content: text,
+          timestamp: new Date().toISOString()
+        }]
+      })),
     }),
     {
       name: 'neuro-link-memory',
