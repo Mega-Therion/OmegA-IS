@@ -40,6 +40,7 @@ langchain-community>=0.3.0    # LangChain community integrations
 # Development Dependencies
 # ------------------------
 # Install with: pip install -e ".[dev]"
+prometheus-fastapi-instrumentator>=7.0.0 # Metrics for Prometheus
 pytest>=8.3.0                 # Testing framework
 pytest-cov>=6.0.0             # Coverage plugin
 pytest-asyncio>=0.24.0        # Async test support

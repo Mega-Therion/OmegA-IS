@@ -44,6 +44,11 @@ class LLMClient:
             "base_url": "https://api.anthropic.com/v1/messages",
             "model": "claude-3-5-sonnet-20241022",
             "requires": "ANTHROPIC_API_KEY"
+        },
+        "ollama": {
+            "base_url": "http://localhost:11434/v1/chat/completions",
+            "model": "llama3",
+            "requires": None
         }
     }
     
@@ -82,6 +87,10 @@ class LLMClient:
             self._api_key = os.getenv("ANTHROPIC_API_KEY")
             self._base_url = config["base_url"]
             self._model = os.getenv("ANTHROPIC_MODEL", config["model"])
+        elif self.provider == "ollama":
+            self._api_key = "ollama"  # Dummy key for availability check
+            self._base_url = os.getenv("OLLAMA_BASE_URL", config["base_url"])
+            self._model = os.getenv("OLLAMA_MODEL", config["model"])
     
     @property
     def is_available(self) -> bool:
@@ -156,7 +165,7 @@ class LLMClient:
             if system_content:
                 payload["system"] = system_content
         else:
-            # OpenAI-compatible format (GitHub, OpenAI, Azure)
+            # OpenAI-compatible format (GitHub, OpenAI, Azure, Ollama)
             payload = {
                 "model": self._model,
                 "messages": messages,

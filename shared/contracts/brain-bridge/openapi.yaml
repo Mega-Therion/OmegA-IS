@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: OMEGA Trinity Contract
+  description: Unified API contract for Brain ↔ Bridge communication within the Project OmegA ecosystem.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: OMEGA Bridge (Consensus Layer)
+  - url: http://localhost:8080
+    description: OMEGA Brain (Cognitive Layer)
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      tags: [System]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /metrics:
+    get:
+      summary: Prometheus metrics
+      tags: [Observability]
+      responses:
+        '200':
+          description: Prometheus metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /orchestrate:
+    post:
+      summary: Decompose objective into sub-goals
+      tags: [Orchestrator]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectiveRequest'
+      responses:
+        '200':
+          description: Objective decomposed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /consensus/initiate:
+    post:
+      summary: Initiate a consensus vote
+      tags: [Consensus]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoteInitiate'
+      responses:
+        '200':
+          description: Vote initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  decision_id: { type: string }
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status: { type: string }
+        service: { type: string }
+        timestamp: { type: string, format: date-time }
+        components: { type: object }
+
+    ObjectiveRequest:
+      type: object
+      required: [objective]
+      properties:
+        objective: { type: string }
+        max_goals: { type: integer, default: 5 }
+
+    Task:
+      type: object
+      properties:
+        task_id: { type: string }
+        objective: { type: string }
+        status: { type: string }
+        sub_goals:
+          type: array
+          items: { type: string }
+
+    VoteInitiate:
+      type: object
+      required: [decision_id, description, agents]
+      properties:
+        decision_id: { type: string }
+        description: { type: string }
+        agents:
+          type: array
+          items: { type: string }
