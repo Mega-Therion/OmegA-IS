@@ -47,7 +47,7 @@ const COMPONENTS = [
   {
     id: "gaing-brain",
     label: "gAIng-brAin (Node)",
-    path: "gAIng-brAin",
+    path: "packages/brain",
     entryFiles: ["index.js", "package.json"],
     start: "npm start",
     envRequired: ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"],

@@ -7,6 +7,8 @@ const membersRoutes = require('./routes/members');
 const memoriesRoutes = require('./routes/memories');
 const mem0Routes = require('./routes/mem0');
 const llmRoutes = require('./routes/llm');
+const llmV2Routes = require('./routes/llm-v2');
+const omegaRoutes = require('./routes/omega');
 const messagesRoutes = require('./routes/messages');
 const tasksRoutes = require('./routes/tasks');
 const systemRoutes = require('./routes/system');
@@ -15,10 +17,21 @@ const agentsRoutes = require('./routes/agents');
 const realtimeRoutes = require('./routes/realtime').router;
 const grokVoiceRoutes = require('./routes/grok-voice').router;
 const missionRoutes = require('./routes/mission');
+const missionsRoutes = require('./routes/missions');
 const voiceRoutes = require('./routes/voice');
 const eyesRoutes = require('./routes/eyes');
 const earsRoutes = require('./routes/ears');
 const analyticsRoutes = require('./routes/analytics');
+const bridgeRoutes = require('./routes/bridge');
+const terminalRoutes = require('./routes/terminal');
+const mcpRoutes = require('./routes/mcp');
+const agenticCodingRoutes = require('./routes/agentic-coding');
+const mediaRoutes = require('./routes/media');
+const documentsRoutes = require('./routes/documents');
+const rlhfRoutes = require('./routes/rlhf');
+const codeInterpreterRoutes = require('./routes/code-interpreter');
+const orchestratorUtilsRoutes = require('./routes/orchestrator-utils');
+const alexaRoutes = require('./routes/alexa');
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -45,19 +58,19 @@ kernel.on('reflection', (evt) => {
 
 // CORS - allow configured origins or all in dev
 const corsOptions = {
-    origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Internal-Token']
+  origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
 
 // Rate limiting - 100 requests per minute per IP
 const limiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: process.env.RATE_LIMIT || 100,
-    message: { ok: false, error: 'Too many requests' },
-    standardHeaders: true,
-    legacyHeaders: false
+  windowMs: 60 * 1000,
+  max: process.env.RATE_LIMIT || 100,
+  message: { ok: false, error: 'Too many requests' },
+  standardHeaders: true,
+  legacyHeaders: false
 });
 app.use(limiter);
 
@@ -70,21 +83,6 @@ if (observability) {
 app.use(express.json());
 app.use('/ui', express.static('public'));
 
-// Internal auth guard (skip health/metrics)
-const INTERNAL_TOKEN = process.env.INTERNAL_TOKEN || process.env.OMEGA_INTERNAL_TOKEN;
-const INTERNAL_SKIP = ['/system/health', '/health', '/system/metrics'];
-app.use((req, res, next) => {
-  if (!INTERNAL_TOKEN) return next();
-  if (INTERNAL_SKIP.includes(req.path)) return next();
-  const headerToken =
-    req.headers['x-internal-token'] ||
-    (req.headers.authorization && req.headers.authorization.split(' ')[1]);
-  if (headerToken !== INTERNAL_TOKEN) {
-    return res.status(401).json({ ok: false, error: 'Internal token required' });
-  }
-  return next();
-});
-
 app.use('/', systemRoutes);
 app.use('/', mem0Routes);
 app.use('/members', membersRoutes);
@@ -92,16 +90,29 @@ app.use('/memories', memoriesRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/llm', llmRoutes);
+app.use('/v2/llm', llmV2Routes);
+app.use('/omega', omegaRoutes);
 app.use('/safa', safaRoutes);
 app.use('/agents', agentsRoutes);
 app.use('/realtime', realtimeRoutes);
 app.use('/grok-voice', grokVoiceRoutes);
 app.use('/mission', missionRoutes);
+app.use('/missions', missionsRoutes);
 app.use('/voice', voiceRoutes);
 app.use('/eyes', eyesRoutes);
 app.use('/ears', earsRoutes);
 app.use('/analytics', analyticsRoutes);
+app.use('/bridge', bridgeRoutes);
+app.use('/terminal', terminalRoutes);
+app.use('/mcp', mcpRoutes);
+app.use('/code', agenticCodingRoutes);
+app.use('/media', mediaRoutes);
+app.use('/documents', documentsRoutes);
+app.use('/rlhf', rlhfRoutes);
+app.use('/code-interpreter', codeInterpreterRoutes);
+app.use('/api', orchestratorUtilsRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
+app.use('/api/alexa', alexaRoutes);
 app.use('/captures', express.static('public/captures'));
 
 // Podcast routes
@@ -123,7 +134,3 @@ if (vaultQueueRoutes) {
 }
 
 module.exports = app;
-
-
-
-
