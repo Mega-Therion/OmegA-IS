@@ -114,6 +114,9 @@
       "wouter@3.7.1": "patches/wouter@3.7.1.patch"
     },
     "overrides": {
+      "esbuild": "0.25.10",
+      "fast-xml-parser": "5.3.4",
+      "qs": "6.14.1",
       "lodash": "4.17.23",
       "lodash-es": "4.17.23",
       "mdast-util-to-hast": "13.2.1",
