@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export function Vision() {
@@ -51,10 +52,12 @@ export function Vision() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto pr-2 custom-scrollbar">
                     {captures.map((file, i) => (
                         <div key={i} className="group relative rounded-2xl overflow-hidden border border-cyan-400/20 bg-black shadow-lg aspect-video">
-                            <img
+                            <Image
                                 src={`/api/brain/captures/${file}`}
                                 alt={`Capture ${file}`}
-                                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                fill
+                                sizes="(min-width: 640px) 50vw, 100vw"
+                                className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                             />
                             <div className="absolute bottom-0 inset-x-0 bg-black/60 p-2 text-[10px] text-cyan-100/60 font-mono">
                                 {file}
