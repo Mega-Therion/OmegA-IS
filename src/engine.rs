@@ -252,6 +252,15 @@ impl OmegaEngine {
         let cloud = Arc::new(CloudClient::new(&config.supabase));
         let voice = voice::init_voice();
         let ear = ear::init_ear().map(Arc::new);
+
+        // Ensure Mic is unmuted on startup
+        let _ = std::process::Command::new("wpctl")
+            .args(["set-mute", "@DEFAULT_AUDIO_SOURCE@", "0"])
+            .status();
+        let _ = std::process::Command::new("wpctl")
+            .args(["set-volume", "@DEFAULT_AUDIO_SOURCE@", "1.00"])
+            .status();
+
         Self {
             config,
             orchestrator,

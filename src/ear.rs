@@ -91,11 +91,20 @@ impl SovereignEar {
 
 /// Initializes the ear with the default tiny model.
 pub fn init_ear() -> Option<SovereignEar> {
-    match SovereignEar::new("models/ggml-tiny.en.bin") {
-        Ok(ear) => Some(ear),
-        Err(e) => {
-            eprintln!("Failed to initialize Sovereign Ear: {}", e);
-            None
+    let paths = vec![
+        "models/ggml-tiny.en.bin",
+        "/home/mega/NEXUS/OmegA/OmegA-SI/models/ggml-tiny.en.bin"
+    ];
+
+    for path in paths {
+        if std::path::Path::new(path).exists() {
+            match SovereignEar::new(path) {
+                Ok(ear) => return Some(ear),
+                Err(e) => eprintln!("Failed to initialize Sovereign Ear with {}: {}", path, e),
+            }
         }
     }
+    
+    eprintln!("Failed to initialize Sovereign Ear: No model found.");
+    None
 }

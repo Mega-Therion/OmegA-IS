@@ -378,7 +378,7 @@ async fn post_device_telemetry(
 
 #[derive(OpenApi)]
 #[openapi(
-    paths(chat_handler, health_check, get_devices, get_device, get_device_telemetry, post_device_command, post_device_telemetry, discover_devices, get_skills, post_skill_execute, voice_listen, voice_speak, voice_synthesize),
+    paths(chat_handler, health_check, get_devices, get_device, /*get_device_telemetry,*/ post_device_command, post_device_telemetry, discover_devices, get_skills, post_skill_execute, voice_listen, voice_speak, voice_synthesize),
     components(schemas(ChatRequest, ChatResponse, CommandRequest, PhysicalEntity, EntityType, TelemetryReading, RobotState, SkillExecuteRequest, ListenRequest, ListenResponse, SpeakRequest, SpeakResponse))
 )]
 struct ApiDoc;
@@ -418,7 +418,7 @@ pub async fn run_server(port: u16) -> std::io::Result<()> {
             .route("/api/devices", web::get().to(get_devices))
             .route("/api/devices/discover", web::post().to(discover_devices))
             .route("/api/devices/{id}", web::get().to(get_device))
-            .route("/api/devices/{id}/telemetry", web::get().to(get_device_telemetry))
+            // .route("/api/devices/{id}/telemetry", web::get().to(get_device_telemetry))
             .route("/api/devices/{id}/telemetry", web::post().to(post_device_telemetry))
             .route("/api/devices/{id}/command", web::post().to(post_device_command))
             .route("/api/skills", web::get().to(get_skills))

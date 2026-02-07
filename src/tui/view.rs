@@ -11,6 +11,7 @@ const TERMINAL_GREEN: Color = Color::Rgb(50, 205, 50);
 const WARNING_ORANGE: Color = Color::Rgb(255, 165, 0);
 const SLATE_GRAY: Color = Color::Rgb(112, 128, 144);
 const DARK_BG: Color = Color::Rgb(10, 10, 15);
+const GLASS_BG: Color = Color::Rgb(8, 12, 20);
 
 fn agent_symbol(name: &str) -> &'static str {
     match name {
@@ -78,6 +79,38 @@ fn shimmer_spans(text: &str, step: usize, base: Color, glow: Color) -> Vec<Span<
     spans
 }
 
+fn spinner_glyph(step: usize) -> &'static str {
+    if step % 2 == 0 { "α" } else { "ω" }
+}
+
+fn wrap_text(text: &str, width: usize) -> Vec<String> {
+    if width == 0 {
+        return vec![text.to_string()];
+    }
+    let mut out = Vec::new();
+    let mut line = String::new();
+    for word in text.split_whitespace() {
+        if line.is_empty() {
+            line.push_str(word);
+            continue;
+        }
+        if line.len() + 1 + word.len() <= width {
+            line.push(' ');
+            line.push_str(word);
+        } else {
+            out.push(line);
+            line = word.to_string();
+        }
+    }
+    if !line.is_empty() {
+        out.push(line);
+    }
+    if out.is_empty() {
+        out.push(String::new());
+    }
+    out
+}
+
 pub fn ui(f: &mut Frame, app: &mut App) {
     let size = f.area();
     let background = Block::default().bg(DARK_BG);
@@ -109,6 +142,7 @@ fn draw_cli_layout(f: &mut Frame, app: &mut App, area: Rect) {
         .direction(Direction::Vertical)
         .constraints([
             Constraint::Length(3),  // Header
+            Constraint::Length(5),  // HUD
             Constraint::Min(6),     // Chat
             Constraint::Length(3),  // Agents strip
             Constraint::Length(3),  // Input
@@ -116,9 +150,10 @@ fn draw_cli_layout(f: &mut Frame, app: &mut App, area: Rect) {
         .split(area);
 
     draw_header(f, app, chunks[0]);
-    draw_output(f, app, chunks[1]);
-    draw_agents_strip(f, app, chunks[2]);
-    draw_input(f, app, chunks[3]);
+    draw_hud(f, app, chunks[1]);
+    draw_output(f, app, chunks[2]);
+    draw_agents_strip(f, app, chunks[3]);
+    draw_input(f, app, chunks[4]);
     draw_task_overlay(f, app, area);
 }
 
@@ -161,6 +196,7 @@ fn draw_header(f: &mut Frame, app: &App, area: Rect) {
 
     let right_text = Line::from(vec![
         Span::styled(format!(" MODE: {} ", app.mode), Style::default().fg(brand_color).add_modifier(Modifier::BOLD)),
+        Span::styled(format!(" {} ", spinner_glyph(app.spinner_index)), Style::default().fg(NEON_CYAN)),
     ]);
     f.render_widget(
         Paragraph::new(right_text)
@@ -172,6 +208,50 @@ fn draw_header(f: &mut Frame, app: &App, area: Rect) {
             ),
         layout[2],
     );
+}
+
+fn draw_hud(f: &mut Frame, app: &App, area: Rect) {
+    let block = Block::default()
+        .borders(Borders::ALL)
+        .border_style(Style::default().fg(pulse_color(app.spinner_index, NEON_CYAN)))
+        .title(Span::styled(" STATUS HUD ", Style::default().fg(NEON_CYAN)))
+        .style(Style::default().bg(GLASS_BG));
+    let inner = block.inner(area);
+    f.render_widget(block, area);
+
+    let cols = Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints([Constraint::Percentage(35), Constraint::Percentage(35), Constraint::Percentage(30)])
+        .split(inner);
+
+    let sparkline = Sparkline::default()
+        .data(&app.metrics.load)
+        .style(Style::default().fg(NEON_CYAN))
+        .block(Block::default().title(" CPU PULSE ").borders(Borders::NONE));
+    f.render_widget(sparkline, cols[0]);
+
+    let mem = (app.metrics.memory_used * 100.0).round() as u16;
+    let gauge = Gauge::default()
+        .block(Block::default().title(" MEMORY ").borders(Borders::NONE))
+        .gauge_style(Style::default().fg(NEON_PINK))
+        .ratio(app.metrics.memory_used as f64)
+        .label(format!("{}%", mem));
+    f.render_widget(gauge, cols[1]);
+
+    let status = Line::from(vec![
+        Span::styled("LINK ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("OK ", Style::default().fg(TERMINAL_GREEN)),
+        Span::styled("· ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("TOOLS ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("ARMED ", Style::default().fg(NEON_CYAN)),
+        Span::styled("· ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("SYNC ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("LIVE", Style::default().fg(NEON_PINK)),
+    ]);
+    let paragraph = Paragraph::new(status)
+        .alignment(Alignment::Center)
+        .block(Block::default().borders(Borders::NONE));
+    f.render_widget(paragraph, cols[2]);
 }
 
 fn draw_body(f: &mut Frame, app: &mut App, area: Rect) {
@@ -259,6 +339,7 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
             Span::styled(" CHAT ", Style::default().fg(Color::White)),
             Span::styled(scroll_indicator, Style::default().fg(WARNING_ORANGE).add_modifier(Modifier::BOLD)),
         ]);
+    let block = block.style(Style::default().bg(GLASS_BG));
     
     let inner_area = block.inner(area);
     f.render_widget(block, area);
@@ -271,38 +352,26 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
 
     let mut lines: Vec<Line> = Vec::new();
     for msg in &app.messages {
-        if msg.from_user {
-            let mut msg_lines = msg.text.lines();
-            if let Some(first) = msg_lines.next() {
-                lines.push(Line::from(vec![
-                    Span::styled("You", Style::default().fg(NEON_PINK).add_modifier(Modifier::BOLD)),
-                    Span::styled(": ", Style::default().fg(SLATE_GRAY)),
-                    Span::styled(first, Style::default().fg(Color::White)),
-                ]));
-                for line in msg_lines {
-                    lines.push(Line::from(vec![
-                        Span::styled("  ", Style::default().fg(SLATE_GRAY)),
-                        Span::styled(line, Style::default().fg(Color::White)),
-                    ]));
-                }
-            }
-        } else {
-            let mut msg_lines = msg.text.lines();
-            let label = app.profile.assistant_name.to_string();
-            if let Some(first) = msg_lines.next() {
-                lines.push(Line::from(vec![
-                    Span::styled(label, Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD)),
-                    Span::styled(": ", Style::default().fg(SLATE_GRAY)),
-                    Span::styled(first, Style::default().fg(Color::Rgb(200, 200, 200))),
-                ]));
-                for line in msg_lines {
-                    lines.push(Line::from(vec![
-                        Span::styled("  ", Style::default().fg(SLATE_GRAY)),
-                        Span::styled(line, Style::default().fg(Color::Rgb(200, 200, 200))),
-                    ]));
-                }
-            }
+        let label = if msg.from_user { "YOU" } else { &app.profile.assistant_name };
+        let accent = if msg.from_user { NEON_PINK } else { NEON_CYAN };
+        let text_color = if msg.from_user { Color::White } else { Color::Rgb(200, 200, 200) };
+        let width = content_area.width.saturating_sub(4) as usize;
+        let wrapped = wrap_text(&msg.text, width.max(1));
+
+        lines.push(Line::from(vec![
+            Span::styled("╭─ ", Style::default().fg(SLATE_GRAY)),
+            Span::styled(format!("{} ", label), Style::default().fg(accent).add_modifier(Modifier::BOLD)),
+            Span::styled(format!("{} ", spinner_glyph(app.spinner_index)), Style::default().fg(accent)),
+        ]));
+        for line in wrapped {
+            lines.push(Line::from(vec![
+                Span::styled("│ ", Style::default().fg(SLATE_GRAY)),
+                Span::styled(line, Style::default().fg(text_color)),
+            ]));
         }
+        lines.push(Line::from(vec![
+            Span::styled("╰────────────────────────────────────────", Style::default().fg(SLATE_GRAY)),
+        ]));
         lines.push(Line::raw(""));
     }
 
@@ -353,7 +422,7 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
 
     if app.status != StatusState::Ready {
         let shimmer = Line::from(shimmer_spans(
-            " ω synthesizing … ",
+            " α ω synthesizing … ",
             app.spinner_index / 2,
             SLATE_GRAY,
             NEON_CYAN,

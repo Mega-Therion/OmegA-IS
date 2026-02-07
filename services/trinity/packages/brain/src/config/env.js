@@ -12,6 +12,7 @@ const NGROK_AUTHTOKEN = process.env.NGROK_AUTHTOKEN;
 const ENABLE_NGROK = process.env.ENABLE_NGROK === "1";
 const GAING_SHARED_TOKEN = process.env.GAING_SHARED_TOKEN;
 const MEM0_API_KEY = process.env.MEM0_API_KEY;
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GROK_API_KEY = process.env.GROK_API_KEY;
 const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -20,6 +21,9 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_BASE_URL =
   process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
+const OMEGA_LOCAL_BASE_URL = process.env.OMEGA_LOCAL_BASE_URL;
+const OMEGA_LOCAL_MODEL = process.env.OMEGA_LOCAL_MODEL;
+const OMEGA_LOCAL_API_KEY = process.env.OMEGA_LOCAL_API_KEY;
 const OMEGA_EMBED_MODEL = process.env.OMEGA_EMBED_MODEL;
 const OPENAI_TTS_MODEL = process.env.OPENAI_TTS_MODEL;
 const OPENAI_TTS_VOICE = process.env.OPENAI_TTS_VOICE;
@@ -118,6 +122,7 @@ module.exports = {
   ENABLE_NGROK,
   GAING_SHARED_TOKEN,
   MEM0_API_KEY,
+  ANTHROPIC_API_KEY,
   GROK_API_KEY,
   PERPLEXITY_API_KEY,
   GEMINI_API_KEY,
@@ -125,6 +130,9 @@ module.exports = {
   OPENAI_API_KEY,
   OPENAI_BASE_URL,
   OPENAI_MODEL,
+  OMEGA_LOCAL_BASE_URL,
+  OMEGA_LOCAL_MODEL,
+  OMEGA_LOCAL_API_KEY,
   OMEGA_EMBED_MODEL,
   OPENAI_TTS_MODEL,
   OPENAI_TTS_VOICE,

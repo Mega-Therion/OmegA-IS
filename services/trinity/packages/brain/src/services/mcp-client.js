@@ -54,7 +54,11 @@ class McpClientManager extends EventEmitter {
   async connectAll() {
     const servers = await this.loadConfig();
     for (const server of servers) {
-      await this.connectServer(server);
+      try {
+        await this.connectServer(server);
+      } catch (error) {
+        console.warn(`[MCP] Skipping ${server.name}: ${error.message}`);
+      }
     }
     return this.getStatus();
   }

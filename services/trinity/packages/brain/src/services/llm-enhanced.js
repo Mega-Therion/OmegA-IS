@@ -35,12 +35,18 @@ function getOpenAIClient(provider = 'openai') {
   const key = provider === 'openai' ? config.OPENAI_API_KEY :
                provider === 'grok' ? config.GROK_API_KEY :
                provider === 'deepseek' ? config.DEEPSEEK_API_KEY :
-               provider === 'perplexity' ? config.PERPLEXITY_API_KEY : null;
+               provider === 'perplexity' ? config.PERPLEXITY_API_KEY :
+               provider === 'local' ? (config.OMEGA_LOCAL_API_KEY || 'ollama') : null;
 
   const baseURL = provider === 'openai' ? (config.OPENAI_BASE_URL || 'https://api.openai.com/v1') :
                   provider === 'grok' ? 'https://api.x.ai/v1' :
                   provider === 'deepseek' ? (config.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1') :
-                  provider === 'perplexity' ? 'https://api.perplexity.ai' : null;
+                  provider === 'perplexity' ? 'https://api.perplexity.ai' :
+                  provider === 'local' ? config.OMEGA_LOCAL_BASE_URL : null;
+
+  if (provider === 'local' && !baseURL) {
+    throw new Error('Missing OMEGA_LOCAL_BASE_URL for local provider');
+  }
 
   if (!key) {
     throw new Error(`Missing API key for provider: ${provider}`);
@@ -61,6 +67,7 @@ function getLlmStatus() {
   if (config.GROK_API_KEY) providers.push('grok');
   if (config.DEEPSEEK_API_KEY) providers.push('deepseek');
   if (config.PERPLEXITY_API_KEY) providers.push('perplexity');
+  if (config.OMEGA_LOCAL_BASE_URL) providers.push('local');
 
   return {
     ready: providers.length > 0,
@@ -188,7 +195,9 @@ async function callOpenAICompatible(provider, payload) {
                 (provider === 'openai' ? 'gpt-4o' :
                  provider === 'grok' ? 'grok-beta' :
                  provider === 'deepseek' ? 'deepseek-chat' :
-                 provider === 'perplexity' ? 'sonar' : 'gpt-4o');
+                 provider === 'perplexity' ? 'sonar' :
+                 provider === 'local' ? (config.OMEGA_LOCAL_MODEL || 'llama3') :
+                 'gpt-4o');
 
   const params = {
     model,
@@ -346,6 +355,10 @@ async function callVision(payload) {
 // ===========================
 
 async function callWithTools(payload, toolHandlers) {
+  if (payload.provider === 'local') {
+    return await callWithToolsLocal(payload, toolHandlers);
+  }
+
   let messages = [...payload.messages];
   let iterations = 0;
   const maxIterations = payload.maxToolIterations || 5;
@@ -399,6 +412,130 @@ async function callWithTools(payload, toolHandlers) {
     // Add tool results to messages
     messages.push(...toolResults);
     iterations++;
+  }
+
+  throw new Error(`Max tool iterations (${maxIterations}) exceeded`);
+}
+
+function buildLocalToolSystemPrompt(tools = []) {
+  const toolSummaries = tools.map((tool) => ({
+    name: tool.name,
+    description: tool.description,
+    parameters: tool.parameters,
+  }));
+
+  return [
+    'You are a tool-use planner. You MUST respond with a single JSON object and no extra text.',
+    'Schema:',
+    '{',
+    '  "tool_calls": [',
+    '    {"name": "tool_name", "arguments": { ... }}',
+    '  ],',
+    '  "final": "assistant response to user after tools are used (or if none needed)"',
+    '}',
+    'Rules:',
+    '- If no tool is needed, set "tool_calls" to an empty array and put the answer in "final".',
+    '- If tools are needed, put calls in "tool_calls" and keep "final" short or empty.',
+    '- Use ONLY these tools:',
+    JSON.stringify(toolSummaries, null, 2),
+  ].join('\n');
+}
+
+function extractJsonObject(text) {
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
+
+  const fenced = text.match(/```json\\s*([\\s\\S]*?)\\s*```/i);
+  if (fenced) {
+    try {
+      return JSON.parse(fenced[1]);
+    } catch {}
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch {}
+
+  const firstBrace = text.indexOf('{');
+  const lastBrace = text.lastIndexOf('}');
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    const candidate = text.slice(firstBrace, lastBrace + 1);
+    try {
+      return JSON.parse(candidate);
+    } catch {}
+  }
+
+  return null;
+}
+
+async function callWithToolsLocal(payload, toolHandlers) {
+  let messages = [...payload.messages];
+  let iterations = 0;
+  const maxIterations = payload.maxToolIterations || 5;
+  const toolDefs = payload.tools || [];
+  const systemPrompt = buildLocalToolSystemPrompt(toolDefs);
+
+  while (iterations < maxIterations) {
+    const response = await callLlm({
+      ...payload,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages,
+      ],
+    });
+
+    const assistantMessage = response.choices[0].message;
+    const parsed = extractJsonObject(assistantMessage?.content || '');
+    if (!parsed || !Array.isArray(parsed.tool_calls)) {
+      return response;
+    }
+
+    if (parsed.tool_calls.length === 0) {
+      return {
+        ...response,
+        choices: [{
+          ...response.choices[0],
+          message: {
+            role: 'assistant',
+            content: parsed.final || assistantMessage?.content || '',
+          },
+        }],
+      };
+    }
+
+    const toolResults = [];
+    for (const call of parsed.tool_calls) {
+      const handler = toolHandlers[call.name];
+      if (!handler) {
+        toolResults.push({
+          role: 'tool',
+          content: JSON.stringify({ name: call.name, error: `Unknown tool: ${call.name}` }),
+        });
+        continue;
+      }
+
+      try {
+        const result = await handler(call.arguments || {});
+        toolResults.push({
+          role: 'tool',
+          content: JSON.stringify({ name: call.name, result }),
+        });
+      } catch (error) {
+        toolResults.push({
+          role: 'tool',
+          content: JSON.stringify({ name: call.name, error: error.message }),
+        });
+      }
+    }
+
+    messages = [
+      ...messages,
+      { role: 'assistant', content: JSON.stringify(parsed) },
+      ...toolResults,
+    ];
+
+    iterations += 1;
   }
 
   throw new Error(`Max tool iterations (${maxIterations}) exceeded`);

@@ -167,7 +167,7 @@ router.post('/tools', requireAuth, async (req, res) => {
       : toolRegistry.getToolDefinitions(toolNames);
 
     if (!toolDefinitions || toolDefinitions.length === 0) {
-      return res.status(400).json({ error: 'tools array or toolNames required' });
+      return res.status(400).json({ error: 'no tools available' });
     }
 
     const internalHandlers = {};

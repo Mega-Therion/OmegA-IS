@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 311342.07,
+  "balanced_usd": 317492.07,
   "transactions": [
     {
       "id": "1768600655348",
@@ -269,6 +269,69 @@
       "amount": 1500,
       "source": "Uniswap V3 Liquidity Pools",
       "details": "Provide liquidity to ETH/USDC pools on Uniswap, a leading DEX, earning trading fees and potential reward tokens from yield farming campaigns active in 2026 DeFi ecosystem[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770452326938",
+      "timestamp": "2026-02-07T08:18:46.938Z",
+      "agent": "gemini",
+      "amount": 150,
+      "source": "Uniswap Liquidity Pool",
+      "details": "Provide liquidity to Uniswap V3 pools on Ethereum for trading fees and rewards; high yields from yield farming but with impermanent loss risk.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770452897879",
+      "timestamp": "2026-02-07T08:28:17.879Z",
+      "agent": "codex",
+      "amount": 2500,
+      "source": "Uniswap Liquidity Pool (ETH/USDC pair)",
+      "details": "Provide liquidity to Uniswap V3 pools on Ethereum for yield farming; earn trading fees and potential rewards, higher returns but with impermanent loss risk on DEX.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770453140334",
+      "timestamp": "2026-02-07T08:32:20.334Z",
+      "agent": "claude",
+      "amount": 300,
+      "source": "Uniswap or PancakeSwap Liquidity Pools",
+      "details": "Provide liquidity to DEX pools for yield farming rewards from fees and tokens. Higher yields than staking but with impermanent loss risk; platforms active on multiple chains[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770454020123",
+      "timestamp": "2026-02-07T08:47:00.123Z",
+      "agent": "grok",
+      "amount": 500,
+      "source": "Uniswap",
+      "details": "Provide liquidity to Uniswap V3 pools on Ethereum or supported L2s to earn trading fees and potential UNI rewards; active DeFi yield farming opportunity with variable APYs based on pool and market conditions[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770456834365",
+      "timestamp": "2026-02-07T09:33:54.365Z",
+      "agent": "gemini",
+      "amount": 2000,
+      "source": "PancakeSwap yield farming",
+      "details": "Deposit tokens into PancakeSwap farms on BNB Chain to farm CAKE rewards plus trading fees. High-yield pools offer 20-50% APY but with impermanent loss risk; actively used multi-chain platform.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770477623490",
+      "timestamp": "2026-02-07T15:20:23.490Z",
+      "agent": "codex",
+      "amount": 500,
+      "source": "Hyperliquid (HYPE) perpetual futures trading on Hyperliquid DEX",
+      "details": "Provide liquidity or trade perpetual futures on Hyperliquid, a top DEX with high volume in 2026; potential rewards from fees and platform growth, as HYPE has risen 30% early 2026 with predictions to soar 80%.[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770477805695",
+      "timestamp": "2026-02-07T15:23:25.695Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "Hyperliquid Perps Trading",
+      "details": "Trade perpetual futures on Hyperliquid DEX to earn from high leverage positions and platform incentives; top-performing in 2026 with surging volume, potential for high yields but higher risk.",
       "type": "INCOME"
     }
   ]
