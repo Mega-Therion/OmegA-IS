@@ -34,6 +34,7 @@ export interface Database {
           pinned?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       chat_sessions: {
         Row: {
@@ -54,6 +55,7 @@ export interface Database {
           title?: string
           updated_at?: string
         }
+        Relationships: []
       }
       chat_messages: {
         Row: {
@@ -77,6 +79,7 @@ export interface Database {
         Update: {
           content?: string
         }
+        Relationships: []
       }
       user_preferences: {
         Row: {
@@ -103,17 +106,23 @@ export interface Database {
           preferred_agent?: string
           updated_at?: string
         }
+        Relationships: []
       }
     }
+    Views: {}
+    Functions: {}
+    Enums: {}
+    CompositeTypes: {}
   }
 }
 
 // Environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabaseEnabled = Boolean(supabaseUrl && supabaseAnonKey)
 
 // Validate configuration
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!supabaseEnabled) {
   console.warn(
     '⚠️ Supabase credentials not configured. Running in offline mode.\n' +
     'Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file.'
@@ -121,7 +130,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 // Create Supabase client
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+const safeSupabaseUrl = supabaseUrl || 'http://localhost:54321'
+const safeSupabaseAnonKey = supabaseAnonKey || 'public-anon-key'
+
+export const supabase = createClient<Database>(safeSupabaseUrl, safeSupabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
@@ -130,7 +142,7 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
 })
 
 // Helper to check if Supabase is configured
-export const isSupabaseConfigured = () => Boolean(supabaseUrl && supabaseAnonKey)
+export const isSupabaseConfigured = () => supabaseEnabled
 
 // Auth helpers
 export const auth = {
@@ -138,6 +150,9 @@ export const auth = {
    * Sign in with email and password
    */
   signIn: async (email: string, password: string) => {
+    if (!supabaseEnabled) {
+      return { data: null, error: new Error('Supabase not configured') }
+    }
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -149,6 +164,9 @@ export const auth = {
    * Sign up with email and password
    */
   signUp: async (email: string, password: string) => {
+    if (!supabaseEnabled) {
+      return { data: null, error: new Error('Supabase not configured') }
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -163,6 +181,9 @@ export const auth = {
    * Sign in with OAuth provider (Google, GitHub, etc.)
    */
   signInWithOAuth: async (provider: 'google' | 'github' | 'discord') => {
+    if (!supabaseEnabled) {
+      return { data: null, error: new Error('Supabase not configured') }
+    }
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
@@ -176,6 +197,9 @@ export const auth = {
    * Sign out
    */
   signOut: async () => {
+    if (!supabaseEnabled) {
+      return { error: new Error('Supabase not configured') }
+    }
     const { error } = await supabase.auth.signOut()
     return { error }
   },
@@ -184,6 +208,9 @@ export const auth = {
    * Get current user
    */
   getUser: async () => {
+    if (!supabaseEnabled) {
+      return { user: null, error: new Error('Supabase not configured') }
+    }
     const { data: { user }, error } = await supabase.auth.getUser()
     return { user, error }
   },
@@ -192,6 +219,9 @@ export const auth = {
    * Get current session
    */
   getSession: async () => {
+    if (!supabaseEnabled) {
+      return { session: null, error: new Error('Supabase not configured') }
+    }
     const { data: { session }, error } = await supabase.auth.getSession()
     return { session, error }
   },
@@ -200,6 +230,11 @@ export const auth = {
    * Subscribe to auth changes
    */
   onAuthStateChange: (callback: (event: string, session: unknown) => void) => {
+    if (!supabaseEnabled) {
+      return {
+        data: { subscription: { unsubscribe: () => undefined } },
+      }
+    }
     return supabase.auth.onAuthStateChange(callback)
   }
 }
@@ -356,7 +391,11 @@ export const preferences = {
    */
   upsert: async (
     userId: string,
-    prefs: { quality_mode?: string; rag_enabled?: boolean; preferred_agent?: string }
+    prefs: {
+      quality_mode?: 'ultra' | 'balanced' | 'lite'
+      rag_enabled?: boolean
+      preferred_agent?: string
+    }
   ) => {
     const { data, error } = await supabase
       .from('user_preferences')
