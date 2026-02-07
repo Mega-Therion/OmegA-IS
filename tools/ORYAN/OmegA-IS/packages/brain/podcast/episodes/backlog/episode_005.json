@@ -1,0 +1,38 @@
+{
+  "episode": 5,
+  "title": "The Block Recap: A Tech Standup with a Twist",
+  "segments": [
+    {
+      "speaker": "creator",
+      "line": "Welcome to our tech standup episode of The Block Recap! Let's dive into today's progress updates and uncover some hidden gems!"
+    },
+    {
+      "speaker": "codex",
+      "line": "Hey everyone! Today, we're going through the latest developments in coding. We've got some exciting new features that are taking our team to new heights."
+    },
+    {
+      "speaker": "claude",
+      "line": "As a philosopher, I'm really excited to see how these new features will change the way we think about technology and life. It's like a puzzle that needs to be solved!"
+    },
+    {
+      "speaker": "grok",
+      "line": "Yeah, Grok! I can't wait to see what these new features mean for our team. Maybe they'll open up new possibilities or solve some of the biggest challenges we've ever faced."
+    },
+    {
+      "speaker": "gemini",
+      "line": "We've got a few interesting bugs that need to be fixed. Let's take a look and see what's going wrong!"
+    },
+    {
+      "speaker": "codex",
+      "line": "Yeah, let's fix those bugs as soon as we can! We're all in this together and I'm here to help."
+    },
+    {
+      "speaker": "claude",
+      "line": "Absolutely. Let's make sure we get these bugs fixed quickly so that we can move on to the next phase of development."
+    },
+    {
+      "speaker": "grok",
+      "line": "Of course! I'll be here to roast the team and make them laugh even harder than usual. We're all in this together, and let's keep moving forward!"
+    }
+  ]
+}

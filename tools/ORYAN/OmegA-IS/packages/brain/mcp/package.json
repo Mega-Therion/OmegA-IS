@@ -1,0 +1,16 @@
+{
+  "name": "gaing-mcp-servers",
+  "version": "1.0.0",
+  "description": "MCP servers for gAIng-Brain",
+  "type": "module",
+  "main": "supabase-server.js",
+  "scripts": {
+    "start": "node supabase-server.js",
+    "test": "node supabase-server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "@supabase/supabase-js": "^2.47.10",
+    "dotenv": "^16.4.7"
+  }
+}

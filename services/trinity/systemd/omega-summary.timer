@@ -1,0 +1,10 @@
+[Unit]
+Description=OMEGA Summary Timer
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=5m
+Unit=omega-summary.service
+
+[Install]
+WantedBy=timers.target

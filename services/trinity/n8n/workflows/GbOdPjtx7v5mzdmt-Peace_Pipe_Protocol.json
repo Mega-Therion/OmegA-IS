@@ -1,0 +1,290 @@
+{
+  "name": "Peace Pipe Protocol",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "721be606-0595-4703-8494-54705bc2375b",
+      "name": "Daily 8 AM Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-peace-pipe-lite",
+        "options": {}
+      },
+      "id": "972896df-c1cb-4291-ae9a-7642a86b0958",
+      "name": "Omega Peace Pipe Webhook (Lite)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -128
+      ],
+      "webhookId": "a8e37b07-4a6f-4d9a-9a6e-4e9bd6c4f1b1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "workflow_name",
+              "value": "Peace Pipe Protocol",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "execution_time",
+              "value": "={{ $now }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'peace_pipe_lite', event_type: $json.event_type || 'daily', timestamp: $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bddcdd18-193f-46b2-99bc-9629b917f5b8",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "members",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "active"
+            }
+          ]
+        }
+      },
+      "id": "f9b4c865-44a7-4fd3-a5fa-711486a47e48",
+      "name": "Get Active Members",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ 'Active Members: ' + JSON.stringify($('Get Active Members').all()) }}",
+        "options": {
+          "systemMessage": "You are the OMEGA Coordinator. Take the list of active agents and generate a brief morning status report and a strategic synthesis for the day. Simulate a check-in from each agent."
+        }
+      },
+      "id": "c63b7f44-ff2c-48d5-9394-9b27b121d1f0",
+      "name": "OMEGA Coordinator Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        672,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-3-5-sonnet-20241022"
+        },
+        "options": {}
+      },
+      "id": "8f10725e-4ba9-423f-a0eb-da72d39156e4",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        744,
+        224
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "financial_ledger",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "agent_id",
+              "fieldValue": "System"
+            },
+            {
+              "fieldId": "transaction_type",
+              "fieldValue": "expense"
+            },
+            {
+              "fieldId": "amount",
+              "fieldValue": "0.05"
+            },
+            {
+              "fieldId": "description",
+              "fieldValue": "Daily Peace Pipe Protocol"
+            }
+          ]
+        }
+      },
+      "id": "4f5899de-e5fa-4da1-a482-990e57c63ac4",
+      "name": "Insert Financial Ledger Entry",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        0
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7562208577",
+        "text": "={{ $('OMEGA Coordinator Agent').item.json.output }}",
+        "additionalFields": {}
+      },
+      "id": "21deeab8-dcce-4378-9dc2-782d20e0e7ed",
+      "name": "Send Telegram Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1248,
+        0
+      ],
+      "webhookId": "890b4b4c-3a2a-4c9f-9267-229af32910a5",
+      "credentials": {
+        "telegramApi": {
+          "id": "0HMcudxH4kVEyj8c",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 8 AM Trigger": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Peace Pipe Webhook (Lite)": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Get Active Members",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Members": {
+      "main": [
+        [
+          {
+            "node": "OMEGA Coordinator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "OMEGA Coordinator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OMEGA Coordinator Agent": {
+      "main": [
+        [
+          {
+            "node": "Insert Financial Ledger Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Financial Ledger Entry": {
+      "main": [
+        [
+          {
+            "node": "Send Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": null
+}

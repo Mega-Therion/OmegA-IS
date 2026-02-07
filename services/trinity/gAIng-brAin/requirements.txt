@@ -1,0 +1,112 @@
+# gAIng-Brain Python Requirements
+# =================================
+# Python version: 3.11+
+
+# Core Web Framework
+# ------------------
+fastapi>=0.115.0              # REST API framework
+uvicorn[standard]>=0.32.0     # ASGI server
+pydantic>=2.10.0              # Data validation
+python-dotenv>=1.0.1          # Environment variables
+
+# AI/ML Core Frameworks
+# ---------------------
+tensorflow>=2.18.0            # Deep learning framework
+keras>=3.7.0                  # High-level neural networks API
+torch>=2.5.0                  # PyTorch deep learning
+torchvision>=0.20.0           # Computer vision for PyTorch
+torchaudio>=2.5.0             # Audio processing for PyTorch
+
+# NLP and Transformers
+# --------------------
+transformers>=4.46.0          # Hugging Face transformers
+sentence-transformers>=3.3.0  # Sentence embeddings
+tokenizers>=0.20.0            # Fast tokenizers
+
+# Data Science & Computing
+# ------------------------
+numpy>=2.1.0                  # Numerical computing
+pandas>=2.2.0                 # Data manipulation
+scikit-learn>=1.6.0           # Machine learning utilities
+scipy>=1.14.0                 # Scientific computing
+
+# Database & Storage
+# ------------------
+supabase>=2.9.0               # Supabase client
+psycopg2-binary>=2.9.9        # PostgreSQL adapter
+sqlalchemy>=2.0.35            # SQL toolkit and ORM
+redis>=5.2.0                  # Redis client
+pymilvus>=2.4.0               # Milvus vector database
+neo4j>=5.26.0                 # Graph database
+
+# Memory & Embeddings
+# -------------------
+mem0ai>=0.1.0                 # Memory management
+chromadb>=0.5.0               # Vector database
+faiss-cpu>=1.9.0              # Facebook AI Similarity Search
+
+# LLM Providers
+# -------------
+openai>=1.54.0                # OpenAI API
+anthropic>=0.39.0             # Claude API
+google-generativeai>=0.8.0    # Gemini API
+
+# LLM Orchestration
+# -----------------
+langchain>=0.3.0              # LLM framework
+langchain-core>=0.3.0         # LangChain core
+langchain-community>=0.3.0    # LangChain community
+langchain-openai>=0.2.0       # OpenAI integration
+langchain-anthropic>=0.2.0    # Anthropic integration
+llama-index>=0.11.0           # Data framework for LLMs
+
+# Computer Vision
+# ---------------
+opencv-python>=4.10.0         # Computer vision library
+pillow>=11.0.0                # Image processing
+matplotlib>=3.9.0             # Plotting library
+
+# Audio Processing
+# ----------------
+speechrec recognition>=3.11.0        # Speech recognition
+pyttsx3>=2.98                 # Text-to-speech
+librosa>=0.10.0               # Audio analysis
+soundfile>=0.12.0             # Audio file I/O
+
+# Web Scraping & HTTP
+# -------------------
+httpx>=0.28.0                 # Async HTTP client
+requests>=2.32.0              # HTTP library
+beautifulsoup4>=4.12.0        # HTML parsing
+selenium>=4.26.0              # Browser automation
+
+# Task Queue & Background Jobs
+# ----------------------------
+celery>=5.4.0                 # Distributed task queue
+rq>=2.0.0                     # Simple job queue
+
+# Utilities
+# ---------
+python-multipart>=0.0.12      # Multipart form data
+python-jose[cryptography]>=3.3.0  # JWT tokens
+passlib[bcrypt]>=1.7.4        # Password hashing
+email-validator>=2.2.0        # Email validation
+typing-extensions>=4.12.0     # Type hints
+
+# Monitoring & Logging
+# --------------------
+loguru>=0.7.2                 # Advanced logging
+prometheus-client>=0.21.0     # Metrics
+sentry-sdk>=2.18.0            # Error tracking
+
+# Development Tools
+# -----------------
+pytest>=8.3.0                 # Testing framework
+pytest-cov>=6.0.0             # Coverage
+pytest-asyncio>=0.24.0        # Async testing
+black>=24.10.0                # Code formatter
+ruff>=0.8.0                   # Linter
+mypy>=1.13.0                  # Type checker
+ipython>=8.29.0               # Interactive shell
+jupyter>=1.1.0                # Jupyter notebooks
+ipykernel>=6.29.0             # Jupyter kernel

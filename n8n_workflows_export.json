@@ -1,0 +1,2659 @@
+[
+  {
+    "id": "c587JPJrhWpYIrS8",
+    "name": "Peace Pipe Protocol",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 8
+              }
+            ]
+          }
+        },
+        "id": "721be606-0595-4703-8494-54705bc2375b",
+        "name": "Daily 8 AM Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-peace-pipe-lite",
+          "options": {}
+        },
+        "id": "972896df-c1cb-4291-ae9a-7642a86b0958",
+        "name": "Omega Peace Pipe Webhook (Lite)",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          -128
+        ],
+        "webhookId": "a8e37b07-4a6f-4d9a-9a6e-4e9bd6c4f1b1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "workflow_name",
+                "value": "Peace Pipe Protocol",
+                "type": "string"
+              },
+              {
+                "id": "id-2",
+                "name": "execution_time",
+                "value": "={{ $now }}",
+                "type": "string"
+              },
+              {
+                "id": "id-3",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'peace_pipe_lite', event_type: $json.event_type || 'daily', timestamp: $now.toISO() } }}",
+                "type": "object"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "bddcdd18-193f-46b2-99bc-9629b917f5b8",
+        "name": "Workflow Configuration",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          224,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "members",
+          "returnAll": true,
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "status",
+                "condition": "eq",
+                "keyValue": "active"
+              }
+            ]
+          }
+        },
+        "id": "f9b4c865-44a7-4fd3-a5fa-711486a47e48",
+        "name": "Get Active Members",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          448,
+          0
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ 'Active Members: ' + JSON.stringify($('Get Active Members').all()) }}",
+          "options": {
+            "systemMessage": "You are the OMEGA Coordinator. Take the list of active agents and generate a brief morning status report and a strategic synthesis for the day. Simulate a check-in from each agent."
+          }
+        },
+        "id": "c63b7f44-ff2c-48d5-9394-9b27b121d1f0",
+        "name": "OMEGA Coordinator Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          672,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "id",
+            "value": "claude-3-5-sonnet-20241022"
+          },
+          "options": {}
+        },
+        "id": "8f10725e-4ba9-423f-a0eb-da72d39156e4",
+        "name": "Anthropic Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "typeVersion": 1.3,
+        "position": [
+          744,
+          224
+        ]
+      },
+      {
+        "parameters": {
+          "tableId": "financial_ledger",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "agent_id",
+                "fieldValue": "System"
+              },
+              {
+                "fieldId": "transaction_type",
+                "fieldValue": "expense"
+              },
+              {
+                "fieldId": "amount",
+                "fieldValue": "0.05"
+              },
+              {
+                "fieldId": "description",
+                "fieldValue": "Daily Peace Pipe Protocol"
+              }
+            ]
+          }
+        },
+        "id": "4f5899de-e5fa-4da1-a482-990e57c63ac4",
+        "name": "Insert Financial Ledger Entry",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1024,
+          0
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "chatId": "7562208577",
+          "text": "={{ $('OMEGA Coordinator Agent').item.json.output }}",
+          "additionalFields": {}
+        },
+        "id": "21deeab8-dcce-4378-9dc2-782d20e0e7ed",
+        "name": "Send Telegram Message",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1248,
+          0
+        ],
+        "webhookId": "890b4b4c-3a2a-4c9f-9267-229af32910a5",
+        "credentials": {
+          "telegramApi": {
+            "id": "0HMcudxH4kVEyj8c",
+            "name": "Telegram account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Daily 8 AM Trigger": {
+        "main": [
+          [
+            {
+              "node": "Workflow Configuration",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Peace Pipe Webhook (Lite)": {
+        "main": [
+          [
+            {
+              "node": "Workflow Configuration",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow Configuration": {
+        "main": [
+          [
+            {
+              "node": "Get Active Members",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Active Members": {
+        "main": [
+          [
+            {
+              "node": "OMEGA Coordinator Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Anthropic Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "OMEGA Coordinator Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OMEGA Coordinator Agent": {
+        "main": [
+          [
+            {
+              "node": "Insert Financial Ledger Entry",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert Financial Ledger Entry": {
+        "main": [
+          [
+            {
+              "node": "Send Telegram Message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "callerPolicy": "workflowsFromSameOwner"
+    }
+  },
+  {
+    "id": "mqpQSyzCW8i2BapK",
+    "name": "Peace Pipe Protocol",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "toolDescription": "Reads the latest technology news from The Verge RSS feed",
+          "url": "https://www.theverge.com/rss/index.xml",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.rssFeedReadTool",
+        "typeVersion": 1.2,
+        "position": [
+          1264,
+          2592
+        ],
+        "id": "303e9b4e-cc4e-4d8a-8ede-7550f070d212",
+        "name": "Get Tech News"
+      },
+      {
+        "parameters": {
+          "toolDescription": "Reads the latest world news from BBC News RSS feed",
+          "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.rssFeedReadTool",
+        "typeVersion": 1.2,
+        "position": [
+          1392,
+          2592
+        ],
+        "id": "4090a753-f131-40b1-87c3-cf74d5a7e325",
+        "name": "Get World News"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 8
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          912,
+          2512
+        ],
+        "id": "651543b5-0213-433f-8760-57d62b8d6d64",
+        "name": "Run every day at 7AM",
+        "notesInFlow": true,
+        "notes": "Double-click to open"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "85b5c530-2c13-4424-ab83-05979bc879a5",
+                "name": "output",
+                "value": "={ $json.output }",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1600,
+          2128
+        ],
+        "id": "99f7bb9e-f8c0-43ca-a9a8-a76634ac9611",
+        "name": "Output",
+        "notesInFlow": true,
+        "notes": "Double-click to open"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          912,
+          2128
+        ],
+        "id": "a0390291-6794-4673-9a6a-5c3d3a5d9e4b",
+        "name": "Click \u2018Execute workflow\u2019 to run"
+      },
+      {
+        "parameters": {
+          "content": "## \u26a1 Start here:",
+          "height": 224,
+          "width": 224,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          848,
+          2448
+        ],
+        "id": "fac5929f-e065-4474-96b1-7bcc06834238",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "id",
+            "value": "gpt-4o-mini"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          1136,
+          2592
+        ],
+        "id": "b16482e8-0d48-4426-aa93-c3fee11dd3cd",
+        "name": "OpenAI Model",
+        "notesInFlow": true,
+        "credentials": {
+          "openAiApi": {
+            "id": "lAa2XcLLpba4XJh5",
+            "name": "n8n free OpenAI API credits"
+          }
+        },
+        "notes": "Double-click to open"
+      },
+      {
+        "parameters": {
+          "content": "@[youtube](cMyOkQ4N-5M)",
+          "height": 512,
+          "width": 902,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1296,
+          1776
+        ],
+        "id": "ec65e69e-77fa-4912-a4af-49e0a248e2c8",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Summarize world news and tech news from the last 24 hours. Skip your comments. The titles should be \"World news:\" and \"Tech news:\" Today is {{ $today }}",
+          "options": {
+            "systemMessage": "You are a professional news summarizer. Your role is to analyze news feeds and create concise, informative summaries. Focus on key facts and present information clearly without editorial comments."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 2.2,
+        "position": [
+          1184,
+          2368
+        ],
+        "id": "084d56aa-d157-4964-9073-b36d9d9589c5",
+        "name": "AI Summary Agent",
+        "notesInFlow": true,
+        "notes": "Double-click to open"
+      },
+      {
+        "parameters": {
+          "content": "### Double click here to see the results:",
+          "height": 240,
+          "width": 192,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1552,
+          2432
+        ],
+        "id": "a4b7a69a-0db8-4b9b-a81d-fd83378043a3",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "### \ud83d\udcf0 Daily AI Summary\n\n\nThis workflow gets the latest news and asks AI to summarize it for you.\n\n\u2b50 Bonus: Send the summary via email by connecting your Gmail account\n\n\u25b6 Watch the video to get started ",
+          "height": 272,
+          "width": 224,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          848,
+          2016
+        ],
+        "id": "74d80857-5e63-47a8-8e86-8ecd10fd5f9e",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "sendTo": "viewsbyryan@gmail.com",
+          "subject": "Your news daily summary",
+          "emailType": "text",
+          "message": "={{ $json.output }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          1824,
+          2128
+        ],
+        "id": "45625d0d-bf26-4379-9eed-7bbc8e5d87a5",
+        "name": "Send summary by email",
+        "webhookId": "093b04f1-5e78-4926-9863-1b100d6f2ead",
+        "notesInFlow": true,
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "xvbnz9ZRfGwzQICP",
+            "name": "Gmail account 2"
+          }
+        },
+        "notes": "Double-click to open"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-news-summary",
+          "options": {}
+        },
+        "id": "cb626ae7-b81d-4713-990b-475f572ec9f4",
+        "name": "Omega System Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          912,
+          2944
+        ],
+        "webhookId": "1dd00b5f-66c7-49a5-88c2-2237f3e29c0d"
+      },
+      {
+        "parameters": {
+          "enableResponseOutput": true,
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "id": "1300016a-6b20-4da9-8343-082c2fba67aa",
+        "name": "Send Response to Omega",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          1824,
+          2320
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://localhost:3000/council",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "26eb9456-952e-42a7-b020-a6670d31e75e",
+        "name": "Send to Omega System",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1824,
+          2512
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "summary",
+                "value": "={{ $('Output').item.json.output }}",
+                "type": "string"
+              },
+              {
+                "id": "id-2",
+                "name": "timestamp",
+                "value": "={{ $now }}",
+                "type": "string"
+              },
+              {
+                "id": "id-3",
+                "name": "source",
+                "value": "AI News Summary",
+                "type": "string"
+              },
+              {
+                "id": "id-4",
+                "name": "tech_news",
+                "value": "={{ JSON.stringify($('Get Tech News').item.json) }}",
+                "type": "object"
+              },
+              {
+                "id": "id-5",
+                "name": "world_news",
+                "value": "={{ JSON.stringify($('Get World News').item.json) }}",
+                "type": "object"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "6b4ce73c-5652-4860-8187-1dc2ccef94ac",
+        "name": "Format for Omega",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1600,
+          2512
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "members",
+          "returnAll": true,
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "status",
+                "condition": "eq",
+                "keyValue": "active"
+              }
+            ]
+          }
+        },
+        "id": "f6b37c0c-e4db-4da4-8aa6-ae410d69c7a9",
+        "name": "Get Active Agents",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1248,
+          2896
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "agent_name",
+          "options": {}
+        },
+        "id": "bcf47c61-65c4-4345-ba7c-3fc8a5e1ff7f",
+        "name": "Split Agents for Processing",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          1600,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "memories",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "agent_name",
+                "condition": "eq",
+                "keyValue": "={{ $json.agent_name }}"
+              },
+              {
+                "keyName": "created_at",
+                "condition": "gt",
+                "keyValue": "={{ $now.minus({ days: 1 }).toISO() }}"
+              }
+            ]
+          }
+        },
+        "id": "816eaa09-973b-49f4-985c-46946678f30f",
+        "name": "Get Agent Memories",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1824,
+          2896
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Analyze the following agent activity data and generate a status report for {{ $('Split Agents for Processing').item.json.agent_name }}. Review their memories from the last 24 hours: {{ JSON.stringify($json) }}. Provide: 1) Activity summary, 2) Key accomplishments, 3) Current status, 4) Any concerns or blockers.",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "You are an AI agent coordinator analyzing agent performance and activities. Provide concise, actionable status reports."
+          }
+        },
+        "id": "cfa56082-d35c-4d67-ab19-06bc64991cf0",
+        "name": "Generate Agent Status Report",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          2048,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "id",
+            "value": "gpt-4o-mini"
+          },
+          "builtInTools": {},
+          "options": {
+            "temperature": 0.7
+          }
+        },
+        "id": "1f25086b-4aac-4ba4-8cfe-d46501e98a20",
+        "name": "OpenAI Chat Model for Reports",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          2048,
+          3120
+        ],
+        "credentials": {
+          "openAiApi": {
+            "id": "lAa2XcLLpba4XJh5",
+            "name": "n8n free OpenAI API credits"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schemaType": "manual",
+          "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"agent_name\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Name of the agent\"\n\t\t},\n\t\t\"activity_summary\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Summary of agent activities in last 24 hours\"\n\t\t},\n\t\t\"accomplishments\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Key accomplishments\"\n\t\t},\n\t\t\"status\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Current operational status\"\n\t\t},\n\t\t\"concerns\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Any issues or blockers\"\n\t\t}\n\t}\n}"
+        },
+        "id": "62817fb3-68bf-49ba-b5f8-510cc950abc2",
+        "name": "Structure Agent Report Output",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          2176,
+          3120
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "const inputTokens = $json.usage?.promptTokens || 0;\nconst outputTokens = $json.usage?.completionTokens || 0;\nconst inputCost = (inputTokens / 1000000) * 0.15;\nconst outputCost = (outputTokens / 1000000) * 0.60;\nconst totalCost = inputCost + outputCost;\n\nreturn [{\n  json: {\n    ...($json || {}),\n    api_cost: totalCost,\n    input_tokens: inputTokens,\n    output_tokens: outputTokens,\n    model: 'gpt-4o-mini',\n    operation: 'agent_status_report'\n  }\n}];"
+        },
+        "id": "7815b461-35cc-46d1-9aa8-365641789de8",
+        "name": "Calculate API Cost",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2400,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "tableId": "financial_ledger",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "agent_name",
+                "fieldValue": "={{ $json.agent_name }}"
+              },
+              {
+                "fieldId": "operation",
+                "fieldValue": "={{ $json.operation }}"
+              },
+              {
+                "fieldId": "model",
+                "fieldValue": "={{ $json.model }}"
+              },
+              {
+                "fieldId": "input_tokens",
+                "fieldValue": "={{ $json.input_tokens }}"
+              },
+              {
+                "fieldId": "output_tokens",
+                "fieldValue": "={{ $json.output_tokens }}"
+              },
+              {
+                "fieldId": "cost_usd",
+                "fieldValue": "={{ $json.api_cost }}"
+              },
+              {
+                "fieldId": "timestamp",
+                "fieldValue": "={{ $now.toISO() }}"
+              }
+            ]
+          }
+        },
+        "id": "e1483a64-47c9-4ec2-b441-e9afec73a3ef",
+        "name": "Log API Cost to Ledger",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          2624,
+          2896
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "options": {}
+        },
+        "id": "b3b11714-6b49-4603-a516-9477583174ad",
+        "name": "Combine Agent Reports",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          2848,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Based on the following individual agent reports, generate a strategic synthesis for the gAIng-Brain collective. Agent Reports: {{ JSON.stringify($json) }}. Provide: 1) Overall system health, 2) Collective achievements, 3) Strategic insights, 4) Recommended actions, 5) Resource allocation suggestions.",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "You are the strategic coordinator for a multi-agent AI system. Synthesize individual agent reports into actionable strategic guidance for the collective."
+          }
+        },
+        "id": "a7979ce7-d17e-4d2d-8bb0-64c9d35107b5",
+        "name": "Generate Strategic Synthesis",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          3072,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "id",
+            "value": "gpt-4o-mini"
+          },
+          "builtInTools": {},
+          "options": {
+            "temperature": 0.8
+          }
+        },
+        "id": "ff3e7ed7-a591-4c83-9e4f-c6b9645cf5bd",
+        "name": "OpenAI Chat Model for Synthesis",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          3072,
+          3120
+        ],
+        "credentials": {
+          "openAiApi": {
+            "id": "lAa2XcLLpba4XJh5",
+            "name": "n8n free OpenAI API credits"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsonSchemaExample": "{\n\t\"system_health\": \"Overall health status of the agent collective\",\n\t\"collective_achievements\": \"Key achievements across all agents\",\n\t\"strategic_insights\": \"Strategic observations and patterns\",\n\t\"recommended_actions\": \"Recommended next steps\",\n\t\"resource_allocation\": \"Suggestions for resource distribution\"\n}"
+        },
+        "id": "fd94eed8-8006-40b9-9de0-04149c933317",
+        "name": "Structure Synthesis Output",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          3200,
+          3120
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "telegram_message",
+                "value": "=\ud83c\udf05 *Peace Pipe Protocol - Daily Report*\n\ud83d\udcc5 {{ $now.toFormat('MMMM dd, yyyy') }}\n\n\ud83c\udfe5 *System Health:* {{ $json.system_health }}\n\n\ud83c\udfaf *Collective Achievements:*\n{{ $json.collective_achievements }}\n\n\ud83d\udca1 *Strategic Insights:*\n{{ $json.strategic_insights }}\n\n\u2705 *Recommended Actions:*\n{{ $json.recommended_actions }}\n\n\ud83d\udcca *Resource Allocation:*\n{{ $json.resource_allocation }}\n\n\ud83d\udd25 Transmitted via Peace Pipe Protocol",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "86d30c60-a4cb-468b-9913-67cc0ccc69c6",
+        "name": "Format Telegram Message",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3872,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "-1003595805129",
+          "text": "={{ $json.telegram_message }}",
+          "additionalFields": {
+            "parse_mode": "Markdown"
+          }
+        },
+        "id": "8b74c459-ce34-46f8-b2a3-d22f6ca95133",
+        "name": "Send Peace Pipe Report",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          4096,
+          2896
+        ],
+        "webhookId": "107425e3-33b1-4185-ad81-de6ae51bd971",
+        "credentials": {
+          "telegramApi": {
+            "id": "0HMcudxH4kVEyj8c",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "tableId": "financial_ledger",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "agent_name",
+                "fieldValue": "System"
+              },
+              {
+                "fieldId": "operation",
+                "fieldValue": "={{ $json.operation }}"
+              },
+              {
+                "fieldId": "model",
+                "fieldValue": "={{ $json.model }}"
+              },
+              {
+                "fieldId": "input_tokens",
+                "fieldValue": "={{ $json.input_tokens }}"
+              },
+              {
+                "fieldId": "output_tokens",
+                "fieldValue": "={{ $json.output_tokens }}"
+              },
+              {
+                "fieldId": "cost_usd",
+                "fieldValue": "={{ $json.api_cost }}"
+              },
+              {
+                "fieldId": "timestamp",
+                "fieldValue": "={{ $now.toISO() }}"
+              }
+            ]
+          }
+        },
+        "id": "477417fd-d763-438c-a731-91b815232e9e",
+        "name": "Log Synthesis Cost",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          3648,
+          2896
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "const inputTokens = $json.usage?.promptTokens || 0;\nconst outputTokens = $json.usage?.completionTokens || 0;\nconst inputCost = (inputTokens / 1000000) * 0.15;\nconst outputCost = (outputTokens / 1000000) * 0.60;\nconst totalCost = inputCost + outputCost;\n\nreturn [{\n  json: {\n    ...($json || {}),\n    api_cost: totalCost,\n    input_tokens: inputTokens,\n    output_tokens: outputTokens,\n    model: 'gpt-4o-mini',\n    operation: 'strategic_synthesis'\n  }\n}];"
+        },
+        "id": "bd74ae4c-cf91-4c01-9a3d-0032884bca93",
+        "name": "Calculate Synthesis Cost",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3424,
+          2896
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-peace-pipe",
+          "options": {}
+        },
+        "id": "60f46719-02f2-4672-9dc2-8049b19075f9",
+        "name": "Omega Peace Pipe Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          912,
+          2272
+        ],
+        "webhookId": "9f24f3d3-55cb-48ce-8c76-7f3d9f2f6b0f"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'peace_pipe', event_type: $json.event_type || 'daily', timestamp: $now.toISO() } }}",
+                "type": "object"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "92f3291f-e0e6-4ee6-a0c5-6a1c77e0c8c1",
+        "name": "Omega Context",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1136,
+          2272
+        ]
+      }
+    ],
+    "connections": {
+      "Get Tech News": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Summary Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get World News": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Summary Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Run every day at 7AM": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Click \u2018Execute workflow\u2019 to run": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Summary Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Summary Agent": {
+        "main": [
+          [
+            {
+              "node": "Output",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Format for Omega",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Output": {
+        "main": [
+          [
+            {
+              "node": "Send summary by email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega System Webhook": {
+        "main": [
+          [
+            {
+              "node": "AI Summary Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Format for Omega": {
+        "main": [
+          [
+            {
+              "node": "Send to Omega System",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Send Response to Omega",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Active Agents": {
+        "main": [
+          [
+            {
+              "node": "Split Agents for Processing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Agents for Processing": {
+        "main": [
+          [
+            {
+              "node": "Get Agent Memories",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Agent Memories": {
+        "main": [
+          [
+            {
+              "node": "Generate Agent Status Report",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model for Reports": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Generate Agent Status Report",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structure Agent Report Output": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "Generate Agent Status Report",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Agent Status Report": {
+        "main": [
+          [
+            {
+              "node": "Calculate API Cost",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calculate API Cost": {
+        "main": [
+          [
+            {
+              "node": "Log API Cost to Ledger",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log API Cost to Ledger": {
+        "main": [
+          [
+            {
+              "node": "Combine Agent Reports",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Combine Agent Reports": {
+        "main": [
+          [
+            {
+              "node": "Generate Strategic Synthesis",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model for Synthesis": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Generate Strategic Synthesis",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structure Synthesis Output": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "Generate Strategic Synthesis",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Strategic Synthesis": {
+        "main": [
+          [
+            {
+              "node": "Calculate Synthesis Cost",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Calculate Synthesis Cost": {
+        "main": [
+          [
+            {
+              "node": "Log Synthesis Cost",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Synthesis Cost": {
+        "main": [
+          [
+            {
+              "node": "Format Telegram Message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Format Telegram Message": {
+        "main": [
+          [
+            {
+              "node": "Send Peace Pipe Report",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Peace Pipe Webhook": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Context": {
+        "main": [
+          [
+            {
+              "node": "AI Summary Agent",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Get Active Agents",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "saveExecutionProgress": true,
+      "callerPolicy": "any",
+      "executionOrder": "v0"
+    }
+  },
+  {
+    "id": "gRIoidlBPDCS8w1B",
+    "name": "Apprentice Loop - Feedback Learning System",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "updates": [
+            "message"
+          ],
+          "additionalFields": {}
+        },
+        "id": "ea11d758-8aee-484d-8648-875f8fa3af11",
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          16,
+          64
+        ],
+        "webhookId": "b01dd3c8-6977-4a90-bb9c-931b26f95a58",
+        "credentials": {
+          "telegramApi": {
+            "id": "0HMcudxH4kVEyj8c",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-apprentice-feedback",
+          "options": {}
+        },
+        "id": "5b2772b3-2f19-4588-b9b3-0f92ce9b2a5e",
+        "name": "Omega Feedback Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          16,
+          -128
+        ],
+        "webhookId": "1b3ce02a-823d-4c67-9c54-699b8bde6a2b"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'apprentice_loop', event_type: $json.event_type || 'feedback', timestamp: $now.toISO() } }}",
+                "type": "object"
+              },
+              {
+                "id": "id-2",
+                "name": "message_text",
+                "value": "={{ $json.message?.text || $json.text || $json.body?.text || '' }}",
+                "type": "string"
+              },
+              {
+                "id": "id-3",
+                "name": "chat_id",
+                "value": "={{ $json.message?.chat?.id || $json.body?.chat_id || $json.chat_id || '' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "b51ece08-aef8-4f29-8d10-c67a843fe253",
+        "name": "Omega Context",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          240,
+          -32
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": false,
+              "leftValue": "",
+              "typeValidation": "loose"
+            },
+            "conditions": [
+              {
+                "id": "id-1",
+                "leftValue": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+                "rightValue": "Correction:",
+                "operator": {
+                  "type": "string",
+                  "operation": "startsWith"
+                }
+              },
+              {
+                "id": "id-2",
+                "leftValue": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+                "rightValue": "Actually,",
+                "operator": {
+                  "type": "string",
+                  "operation": "startsWith"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "id": "59bfa0bf-5ce8-487f-ab42-fa4e95c82cf2",
+        "name": "Filter Feedback Messages",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          240,
+          64
+        ]
+      },
+      {
+        "parameters": {
+          "schemaType": "manual",
+          "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"pattern\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected pattern or rule from the user feedback\"\n\t\t},\n\t\t\"context\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The context or situation where this rule applies\"\n\t\t}\n\t}\n}"
+        },
+        "id": "957b7c47-e539-47dc-afce-ec890ad9fafa",
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          608,
+          288
+        ]
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "You are a preference extraction assistant. Your task is to analyze user feedback messages and extract the underlying preference or rule. Summarize it clearly and concisely."
+          }
+        },
+        "id": "2714f8ea-ef10-4765-8fec-8fc076bc7e25",
+        "name": "Extract Preference Rule",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          464,
+          64
+        ]
+      },
+      {
+        "parameters": {
+          "tableId": "probation_queue",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "detected_pattern",
+                "fieldValue": "={{ $json.pattern }}"
+              },
+              {
+                "fieldId": "source_context",
+                "fieldValue": "={{ $json.context }}"
+              },
+              {
+                "fieldId": "status",
+                "fieldValue": "pending"
+              }
+            ]
+          }
+        },
+        "id": "871ad370-9c90-4c69-9ceb-8b76f1c88175",
+        "name": "Insert to Probation Queue",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          816,
+          64
+        ],
+        "credentials": {
+          "supabaseApi": {
+            "id": "v3BU8S5RO8EWdBon",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $node['Omega Context'].json.chat_id || $('Telegram Trigger').item.json.message.chat.id }}",
+          "text": "Message received. I have added this lesson to the Probation Queue for your review.",
+          "additionalFields": {}
+        },
+        "id": "0913bb7f-ec5d-4957-834c-766f99f13e0b",
+        "name": "Send Confirmation",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1040,
+          64
+        ],
+        "webhookId": "5ac9b4e1-9817-4577-8767-43d040855ad4",
+        "credentials": {
+          "telegramApi": {
+            "id": "0HMcudxH4kVEyj8c",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "id",
+            "value": "gpt-4o-mini"
+          },
+          "options": {}
+        },
+        "id": "228a1e33-baea-41cc-840a-364311b3e27b",
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1,
+        "position": [
+          480,
+          288
+        ],
+        "credentials": {
+          "openAiApi": {
+            "id": "lAa2XcLLpba4XJh5",
+            "name": "n8n free OpenAI API credits"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Telegram Trigger": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Feedback Webhook": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Context": {
+        "main": [
+          [
+            {
+              "node": "Filter Feedback Messages",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filter Feedback Messages": {
+        "main": [
+          [
+            {
+              "node": "Extract Preference Rule",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "Extract Preference Rule",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Preference Rule": {
+        "main": [
+          [
+            {
+              "node": "Insert to Probation Queue",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert to Probation Queue": {
+        "main": [
+          [
+            {
+              "node": "Send Confirmation",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Extract Preference Rule",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "callerPolicy": "workflowsFromSameOwner"
+    }
+  },
+  {
+    "id": "DruPH2XGTK84FDkw",
+    "name": "Neural Bridge",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-ingress",
+          "options": {}
+        },
+        "id": "3b63297d-9559-40f7-b259-ee01b0c340a6",
+        "name": "Omega Ingress Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -448,
+          16
+        ],
+        "webhookId": "b057a6de-6e60-4877-98e6-512bc421b9e5"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || $json.body?.source || 'neural_bridge', event_type: $json.event_type || 'ingress', timestamp: $now.toISO() } }}",
+                "type": "object"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "e33263fb-f014-48ee-aade-56dfee223f30",
+        "name": "Workflow Configuration",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -224,
+          16
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body?.source || $json.source }}",
+                      "rightValue": "alexa",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "alexa"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body?.source || $json.source }}",
+                      "rightValue": "telegram",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "telegram"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body?.source || $json.source }}",
+                      "rightValue": "desktop_app",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "desktop_app"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "d2d29d4a-2a2f-4225-94c2-9a77bacb88e7",
+        "name": "Route by Source",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $env.OMEGA_API_URL || $env.OMEGA_GATEWAY_URL || $json.omega_context?.omega_api_url || '' }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "={{ 'Bearer ' + $env.OMEGA_API_BEARER_TOKEN }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json.body || $json }}",
+          "options": {}
+        },
+        "id": "f76581d3-454f-4fc6-a9f3-f960bda648bf",
+        "name": "Query Omega API",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          224,
+          16
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "cd52fe9e-b6f7-4119-8ee8-704348456215",
+        "name": "Return Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          448,
+          16
+        ]
+      }
+    ],
+    "connections": {
+      "Omega Ingress Webhook": {
+        "main": [
+          [
+            {
+              "node": "Workflow Configuration",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow Configuration": {
+        "main": [
+          [
+            {
+              "node": "Route by Source",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Route by Source": {
+        "main": [
+          [
+            {
+              "node": "Query Omega API",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Query Omega API",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Query Omega API",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Query Omega API": {
+        "main": [
+          [
+            {
+              "node": "Return Response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "callerPolicy": "workflowsFromSameOwner"
+    }
+  },
+  {
+    "id": "F424y311ZfRtSzfo",
+    "name": "Jarvis - CollectiveBrain Webhook",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "b0d5b1a6-f665-4050-8127-fa4f288ce4b7",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "2f3b101b-322b-47a2-aeae-cbb06454ce08",
+        "name": "Webhook",
+        "webhookId": "b0d5b1a6-f665-4050-8127-fa4f288ce4b7"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-jarvis-collectivebrain",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          -144
+        ],
+        "id": "4040a3dc-2893-4172-9e93-d18b48fb9f9e",
+        "name": "Omega Jarvis Webhook",
+        "webhookId": "f09172c9-7f4b-4368-9bc6-1824de7d5a83"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'jarvis', event_type: $json.event_type || 'jarvis_query', timestamp: $now.toISO() } }}",
+                "type": "object"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          208,
+          -96
+        ],
+        "id": "005e9ab3-d0b3-44d3-a58b-b0011512445a",
+        "name": "Omega Context"
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * n8n Code Node (JavaScript)\n * Purpose: Turn webhook payload into an authenticated call to gAIng-brAin and return an Alexa-friendly response.\n *\n * Expected incoming body (example):\n * {\n *   \"query\": \"What did I say about the mission loop?\",\n *   \"userId\": \"ry\",\n *   \"sessionId\": \"alexa-session-123\",\n *   \"channel\": \"alexa\"\n * }\n */\n\n// 1) Read inbound payload\nconst item = $input.first();\nconst body = item.json?.body ?? item.json ?? {};\nconst query = (body.query || body.text || body.utterance || \"\").toString().trim();\n\nif (!query) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"I didn't catch that. Please say your question again.\",\n      response: \"I didn't catch that. Please say your question again.\",\n      error: \"Missing query\"\n    }\n  }];\n}\n\n// 2) Normalize metadata\nconst userId = (body.userId || body.user || \"unknown\").toString();\nconst sessionId = (body.sessionId || body.session || `sess-${Date.now()}`).toString();\nconst channel = (body.channel || \"alexa\").toString();\nconst locale = (body.locale || \"en-US\").toString();\n\n// 3) Configure target\n// Preferred: set these as n8n environment variables OR replace with n8n credentials usage patterns.\nconst baseUrl = (process.env.GAING_BRAIN_BASE_URL || \"\").replace(/\\/+$/, \"\");\nconst bearerToken = process.env.GAING_BRAIN_BEARER_TOKEN || \"\";  // Supabase JWT or service token\n\nif (!baseUrl || !bearerToken) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"The service is not configured yet. Please check the connection settings.\",\n      response: \"The service is not configured yet. Please check the connection settings.\",\n      error: \"Missing GAING_BRAIN_BASE_URL or GAING_BRAIN_BEARER_TOKEN\"\n    }\n  }];\n}\n\n// 4) Call gAIng-brAin\n// Note: this.helpers.httpRequest is supported in n8n Code node for outbound HTTP.\nlet result;\ntry {\n  result = await this.helpers.httpRequest({\n    method: \"POST\",\n    url: `${baseUrl}/llm/chat`,\n    headers: {\n      Authorization: `Bearer ${bearerToken}`,\n      \"Content-Type\": \"application/json\"\n    },\n    body: {\n      query,\n      userId,\n      sessionId,\n      channel,\n      locale,\n      // Optional flags for future mission loop alignment\n      mode: \"chat\",\n      memory: {\n        enabled: true,\n        writeBack: true\n      }\n    },\n    json: true,\n    timeout: 30000\n  });\n} catch (e) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"I had trouble reaching the brain service. Please try again in a moment.\",\n      response: \"I had trouble reaching the brain service. Please try again in a moment.\",\n      error: e?.message || \"Request failed\"\n    }\n  }];\n}\n\n// 5) Shape output\nconst answer = (result && (result.answer || result.response || result.text)) || \n  \"I received a response, but it was not in the expected format.\";\n\nreturn [{\n  json: {\n    ok: true,\n    answer,\n    response: answer,\n    meta: {\n      userId,\n      sessionId,\n      channel,\n      locale,\n      // Keep the raw result for debugging (remove once stable)\n      raw: result\n    }\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          208,
+          0
+        ],
+        "id": "51842451-b0d2-4061-9e48-a0e3331b9671",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "options": {
+            "responseKey": "=={ \"version\": \"1.0\", \"response\": { \"outputSpeech\": { \"type\": \"PlainText\", \"text\": $json.response }, \"shouldEndSession\": true } }"
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          416,
+          0
+        ],
+        "id": "def8a42b-3800-4b10-acf7-f6a3a796ac25",
+        "name": "Respond to Webhook"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Jarvis Webhook": {
+        "main": [
+          [
+            {
+              "node": "Omega Context",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Omega Context": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false
+    }
+  },
+  {
+    "id": "UB7bc0ej8KybVs6P",
+    "name": "Omega Orchestrator",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-orchestrator",
+          "responseMode": "onReceived",
+          "options": {}
+        },
+        "id": "a449ce2f-7ac1-444b-a36c-8d10ce91c47a",
+        "name": "Omega Orchestrator Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          0
+        ],
+        "webhookId": "3a6c22e3-7d18-4a1f-874f-5aa5eebfe2f8"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 8
+              }
+            ]
+          }
+        },
+        "id": "531cc791-fc9f-4a5c-a8ce-7d23cffee6f2",
+        "name": "Daily Orchestrator Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          0,
+          160
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "7ad482cc-7de9-4130-abb0-25a22f6cdf17",
+        "name": "Manual Orchestrator Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          320
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || $json.body?.source || 'orchestrator', event_type: $json.event_type || $json.body?.event_type || 'daily', timestamp: $now.toISO() } }}",
+                "type": "object"
+              },
+              {
+                "id": "id-2",
+                "name": "body",
+                "value": "={{ $json.body || $json.payload || $json }}",
+                "type": "object"
+              }
+            ]
+          },
+          "includeOtherFields": false,
+          "options": {}
+        },
+        "id": "5bc2b772-515d-4c30-889d-0ee6f9caa89a",
+        "name": "Normalize Event",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          240,
+          160
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "daily",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "daily"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "feedback",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "feedback"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "ingress",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "ingress"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "clerk",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "clerk"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "jarvis",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "jarvis"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose"
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.omega_context.event_type }}",
+                      "rightValue": "news",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "news"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "c7447a13-2cca-42e6-9764-17b7e51f9aa4",
+        "name": "Route by Event Type",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          464,
+          160
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-peace-pipe' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "042da0fa-264f-4cd8-bbf8-3bf26a34b666",
+        "name": "Trigger Peace Pipe",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          32
+        ],
+        "continueOnFail": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-apprentice-feedback' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "4cc50ed8-15c3-4efc-bb12-dc4fa753f7af",
+        "name": "Trigger Apprentice Loop",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          128
+        ],
+        "continueOnFail": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-ingress' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "33268e10-cb54-44f8-bdc5-ce838f8d17fe",
+        "name": "Trigger Neural Bridge",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          224
+        ],
+        "continueOnFail": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-clerk-archive' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "dd071da6-e1ac-4396-bb4e-de8b98e3dbf4",
+        "name": "Trigger Clerk Archive",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          320
+        ],
+        "continueOnFail": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-jarvis-collectivebrain' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "3de60443-b278-4a23-9293-c23914ccaa89",
+        "name": "Trigger Jarvis Webhook",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          416
+        ],
+        "continueOnFail": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-news-summary' }}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+          "options": {}
+        },
+        "id": "f157e08f-46f3-4f93-9de4-8ce39262aac2",
+        "name": "Trigger News Summary",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          512
+        ],
+        "continueOnFail": true
+      }
+    ],
+    "connections": {
+      "Omega Orchestrator Webhook": {
+        "main": [
+          [
+            {
+              "node": "Normalize Event",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Daily Orchestrator Trigger": {
+        "main": [
+          [
+            {
+              "node": "Normalize Event",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Manual Orchestrator Trigger": {
+        "main": [
+          [
+            {
+              "node": "Normalize Event",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalize Event": {
+        "main": [
+          [
+            {
+              "node": "Route by Event Type",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Route by Event Type": {
+        "main": [
+          [
+            {
+              "node": "Trigger Peace Pipe",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Trigger Apprentice Loop",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Trigger Neural Bridge",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Trigger Clerk Archive",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Trigger Jarvis Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Trigger News Summary",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "callerPolicy": "workflowsFromSameOwner"
+    }
+  },
+  {
+    "id": "7ReRRM0SjviWFoSk",
+    "name": "The Clerk - Council Decision Archive to GitHub",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "omega-clerk-archive",
+          "options": {}
+        },
+        "id": "5480d868-19b9-477b-a8ed-0cfc36d129d5",
+        "name": "Webhook - omega-clerk-archive",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          0
+        ],
+        "webhookId": "e595d892-6349-4b87-8852-299aef2baeb7"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "id-1",
+                "name": "omega_context",
+                "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'clerk', event_type: $json.event_type || 'clerk_archive', timestamp: $now.toISO() } }}",
+                "type": "object"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "117cb79f-ebbc-4085-825d-f45040644dba",
+        "name": "Workflow Configuration",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          224,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "file",
+          "owner": {
+            "__rl": true,
+            "mode": "name",
+            "value": "megas-DIO"
+          },
+          "repository": {
+            "__rl": true,
+            "mode": "name",
+            "value": "gAIng-brAin"
+          },
+          "filePath": "={{ 'resolutions/' + $json.body.council_id + '/transcript.md' }}",
+          "fileContent": "={{ $json.body.transcript_content }}",
+          "commitMessage": "={{ 'Archiving Council Session ' + $json.body.council_id }}"
+        },
+        "id": "5f80736a-fee3-4c34-8e7f-de61528d174f",
+        "name": "GitHub - Archive Transcript",
+        "type": "n8n-nodes-base.github",
+        "typeVersion": 1.1,
+        "position": [
+          448,
+          0
+        ],
+        "webhookId": "2cac19d4-cf6e-4367-850d-12bf686725e1"
+      },
+      {
+        "parameters": {
+          "chatId": "7562208577",
+          "text": "={{ '\ud83d\udcdc Scripture Filed! Council Session ' + $json.body.council_id + ' has been archived to GitHub.' }}",
+          "additionalFields": {}
+        },
+        "id": "71aef219-33a5-4890-bd81-755c7586a95f",
+        "name": "Telegram - Notify Archive Complete",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          672,
+          0
+        ],
+        "webhookId": "5456c81a-567b-4783-bb18-6b19b4966f13",
+        "credentials": {
+          "telegramApi": {
+            "id": "0HMcudxH4kVEyj8c",
+            "name": "Telegram account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook - omega-clerk-archive": {
+        "main": [
+          [
+            {
+              "node": "Workflow Configuration",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow Configuration": {
+        "main": [
+          [
+            {
+              "node": "GitHub - Archive Transcript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GitHub - Archive Transcript": {
+        "main": [
+          [
+            {
+              "node": "Telegram - Notify Archive Complete",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "availableInMCP": false,
+      "timeSavedMode": "fixed",
+      "callerPolicy": "workflowsFromSameOwner"
+    }
+  }
+]

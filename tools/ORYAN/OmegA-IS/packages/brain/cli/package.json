@@ -1,0 +1,34 @@
+{
+  "name": "@omega/cli",
+  "version": "1.0.0",
+  "description": "Command Line Interface for OmegAI Brain",
+  "main": "omega.js",
+  "bin": {
+    "omega": "./omega.js"
+  },
+  "scripts": {
+    "start": "node omega.js",
+    "test": "node omega.js status",
+    "link": "npm link"
+  },
+  "keywords": [
+    "omega",
+    "ai",
+    "cli",
+    "brain",
+    "agents"
+  ],
+  "author": "gAIng Collective",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/megas-DIO/gAIng-brAin"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "omega.js",
+    "README.md"
+  ]
+}

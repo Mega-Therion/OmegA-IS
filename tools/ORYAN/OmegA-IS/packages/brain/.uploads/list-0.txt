@@ -1,0 +1,28 @@
+C:\Users\mega_\iCloudDrive\gAIng ??\AI Agent Build Strategy and Guide.pdf|AI Agent Build Strategy and Guide.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\C zip_.zip|C zip_.zip
+C:\Users\mega_\iCloudDrive\gAIng ??\chat 2.zip|chat 2.zip
+C:\Users\mega_\iCloudDrive\gAIng ??\chat.html|chat.html
+C:\Users\mega_\iCloudDrive\gAIng ??\chat.zip|chat.zip
+C:\Users\mega_\iCloudDrive\gAIng ??\From Claude.pdf|From Claude.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\From DeepSeek.pdf|From DeepSeek.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\From Grok.pdf|From Grok.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\From Kimi.pdf|From Kimi.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\From Perplexity.pdf|From Perplexity.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\From Safa.pdf|From Safa.pdf
+C:\Users\mega_\iCloudDrive\gAIng ??\GAING Replies_.zip|GAING Replies_.zip
+C:\Users\mega_\iCloudDrive\gAIng ??\gAIng-Brain_System_Analysis.md|gAIng-Brain_System_Analysis.md
+C:\Users\mega_\iCloudDrive\gAIng ??\gAIng_Status_Report_Vol_1 2.txt|gAIng_Status_Report_Vol_1 2.txt
+C:\Users\mega_\iCloudDrive\gAIng ??\gAIng_Status_Report_Vol_1.txt|gAIng_Status_Report_Vol_1.txt
+C:\Users\mega_\iCloudDrive\gAIng ??\Gemini_Response_to_Safa 2.txt|Gemini_Response_to_Safa 2.txt
+C:\Users\mega_\iCloudDrive\gAIng ??\Gemini_Response_to_Safa.txt|Gemini_Response_to_Safa.txt
+C:\Users\mega_\iCloudDrive\gAIng ??\group_chats.json|group_chats.json
+C:\Users\mega_\iCloudDrive\gAIng ??\INSTRUCTIONS_FOR_COMET 2.md|INSTRUCTIONS_FOR_COMET 2.md
+C:\Users\mega_\iCloudDrive\gAIng ??\INSTRUCTIONS_FOR_COMET.md|INSTRUCTIONS_FOR_COMET.md
+C:\Users\mega_\iCloudDrive\gAIng ??\message_feedback.json|message_feedback.json
+C:\Users\mega_\iCloudDrive\gAIng ??\Origin_Story_The_gAIng_Collective.md|Origin_Story_The_gAIng_Collective.md
+C:\Users\mega_\iCloudDrive\gAIng ??\shared_conversations.json|shared_conversations.json
+C:\Users\mega_\iCloudDrive\gAIng ??\shopping.json|shopping.json
+C:\Users\mega_\iCloudDrive\gAIng ??\sora.json|sora.json
+C:\Users\mega_\iCloudDrive\gAIng ??\user.json|user.json
+C:\Users\mega_\iCloudDrive\gAIng ??\C zip_\conversations.json|C zip_\conversations.json
+C:\Users\mega_\iCloudDrive\gAIng ??\C zip_\conversations.zip|C zip_\conversations.zip

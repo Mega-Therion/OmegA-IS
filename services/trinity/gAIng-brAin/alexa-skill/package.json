@@ -1,0 +1,20 @@
+{
+  "name": "omega-brain-alexa-skill",
+  "version": "1.0.0",
+  "description": "Alexa Custom Skill for OmegAI Brain voice interaction",
+  "main": "lambda/index.js",
+  "scripts": {
+    "test": "node -e \"require('./lambda/index.js')\"",
+    "deploy": "ask deploy",
+    "logs": "ask smapi get-skill-credentials"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "omega",
+    "ai",
+    "voice"
+  ],
+  "author": "gAIng Collective",
+  "license": "MIT"
+}

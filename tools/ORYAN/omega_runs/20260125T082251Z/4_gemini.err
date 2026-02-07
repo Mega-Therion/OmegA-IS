@@ -1,0 +1,2 @@
+Error executing tool write_file: Tool "write_file" not found in registry.
+Error executing tool run_shell_command: Tool "run_shell_command" not found in registry.

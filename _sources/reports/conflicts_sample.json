@@ -1,0 +1,2422 @@
+[
+  {
+    "path": "gAIng-Brain.code-workspace",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "6c1bea9003dcab826f07ae4d5ce02073ce788cc6f5b52d2345c67864f90b8a04",
+        "size": 320
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "6c1bea9003dcab826f07ae4d5ce02073ce788cc6f5b52d2345c67864f90b8a04",
+        "size": 320
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "d7047f05c8f5054a2d317644303786d58b77ef8f8587db9418e5c40cec467fd4",
+        "size": 3882
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "6c1bea9003dcab826f07ae4d5ce02073ce788cc6f5b52d2345c67864f90b8a04",
+        "size": 320
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "6c1bea9003dcab826f07ae4d5ce02073ce788cc6f5b52d2345c67864f90b8a04",
+        "size": 320
+      }
+    ]
+  },
+  {
+    "path": "CLAUDE.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "1438daba25960723c571595141cf6f5660d1c6e2968e2d575254093dab9c7aab",
+        "size": 7720
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "1438daba25960723c571595141cf6f5660d1c6e2968e2d575254093dab9c7aab",
+        "size": 7720
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "0442779f079f8dfe5ce03a7500ced24ecbb7cad5ae444d1175bd345b6fa8b70f",
+        "size": 21134
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "fda1f16b7cef207ec47cd659896cab0450d965eefea4afc71564595e7484351e",
+        "size": 4473
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "1438daba25960723c571595141cf6f5660d1c6e2968e2d575254093dab9c7aab",
+        "size": 7720
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "1438daba25960723c571595141cf6f5660d1c6e2968e2d575254093dab9c7aab",
+        "size": 7720
+      }
+    ]
+  },
+  {
+    "path": "docker-compose.yml",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "5ef654088e4d933492de36acd0683334a4fc39d852deca95df5e37d53bfb4607",
+        "size": 3135
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "5ef654088e4d933492de36acd0683334a4fc39d852deca95df5e37d53bfb4607",
+        "size": 3135
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-CL",
+        "sha256": "433df2503ca8f1137ed3689d50b73d89b5ddf5835a44d5a2623784a4be5932af",
+        "size": 2247
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "1bb180f81fe05a300654af6ae83b06208617344c8266bfdc67506d31ed047428",
+        "size": 4565
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "881023c229ca58d1392639162af5f1f6d38ad2f627b9313956765b4a764e6add",
+        "size": 2885
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "881023c229ca58d1392639162af5f1f6d38ad2f627b9313956765b4a764e6add",
+        "size": 2885
+      }
+    ]
+  },
+  {
+    "path": "tsconfig.node.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "1a270cb8020d1fa879262423b9c222fa38d94b830ec61164a46b558ea9d2a526",
+        "size": 479
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "1a270cb8020d1fa879262423b9c222fa38d94b830ec61164a46b558ea9d2a526",
+        "size": 479
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "a96b9ba5e40d95b92adf56431fdf9cbe25b5c2557621f0666615bff6889dfc50",
+        "size": 481
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "1a270cb8020d1fa879262423b9c222fa38d94b830ec61164a46b558ea9d2a526",
+        "size": 479
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "1a270cb8020d1fa879262423b9c222fa38d94b830ec61164a46b558ea9d2a526",
+        "size": 479
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "a96b9ba5e40d95b92adf56431fdf9cbe25b5c2557621f0666615bff6889dfc50",
+        "size": 481
+      }
+    ]
+  },
+  {
+    "path": "package.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "d59f08b12762cb76a60cc9f7ed33fa2242178ed9563a509dc1854af288ce5bde",
+        "size": 4558
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "d59f08b12762cb76a60cc9f7ed33fa2242178ed9563a509dc1854af288ce5bde",
+        "size": 4558
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "c82a519c6018133054b95c819dccbe6e7db612b8d27b5a2ee34745054914d577",
+        "size": 2781
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "0b0b378b1dfa2888cc61971b05f3320edc463a65f538f27cdd570ce07c32e311",
+        "size": 2519
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "3ddf4e2c9cff17a8213baa45d36003d6511388c51fffa360a3e7f6f476355d03",
+        "size": 706
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "d59f08b12762cb76a60cc9f7ed33fa2242178ed9563a509dc1854af288ce5bde",
+        "size": 4558
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "e6f854ab8a3e72a03204f7263ca41d700edc3eac791efa80bbff86fbe053f179",
+        "size": 4558
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "c82a519c6018133054b95c819dccbe6e7db612b8d27b5a2ee34745054914d577",
+        "size": 2781
+      }
+    ]
+  },
+  {
+    "path": "tsconfig.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "4bea0e0003e3c943f455346abc4854d1666d604adbaa6aa8eda11f94fb8f1396",
+        "size": 657
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "4bea0e0003e3c943f455346abc4854d1666d604adbaa6aa8eda11f94fb8f1396",
+        "size": 657
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "3a667cdf83b8335029de6380d1dc190d298d976df6c16259d562786ef13e3f07",
+        "size": 369
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "147b39c9c92e2ac9296716e31a01886bb148be3789c4f07b6aacf073d60c0887",
+        "size": 688
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "4bea0e0003e3c943f455346abc4854d1666d604adbaa6aa8eda11f94fb8f1396",
+        "size": 657
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "4bea0e0003e3c943f455346abc4854d1666d604adbaa6aa8eda11f94fb8f1396",
+        "size": 657
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "3a667cdf83b8335029de6380d1dc190d298d976df6c16259d562786ef13e3f07",
+        "size": 369
+      }
+    ]
+  },
+  {
+    "path": "GEMINI.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "047860e33bc0ddbdeffd213b9b16ebdc58e7961f5facafe145cf615165667fd3",
+        "size": 1361
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "047860e33bc0ddbdeffd213b9b16ebdc58e7961f5facafe145cf615165667fd3",
+        "size": 1361
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "63c2d8aa9eb47b0c94a01259d2722002fa502674cc68173cc42913c1ab36e4ed",
+        "size": 2874
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "047860e33bc0ddbdeffd213b9b16ebdc58e7961f5facafe145cf615165667fd3",
+        "size": 1361
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "047860e33bc0ddbdeffd213b9b16ebdc58e7961f5facafe145cf615165667fd3",
+        "size": 1361
+      }
+    ]
+  },
+  {
+    "path": "CONTRIBUTING.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "994c31d254f19b574d5ac83805a0321a47042a91e09d13764b38d65c61f8579b",
+        "size": 7374
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "994c31d254f19b574d5ac83805a0321a47042a91e09d13764b38d65c61f8579b",
+        "size": 7374
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "4d3b392b7802c9e7fcda596fff21043729c24613e145616b2a4588b5bc78281e",
+        "size": 4005
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "994c31d254f19b574d5ac83805a0321a47042a91e09d13764b38d65c61f8579b",
+        "size": 7374
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "994c31d254f19b574d5ac83805a0321a47042a91e09d13764b38d65c61f8579b",
+        "size": 7374
+      }
+    ]
+  },
+  {
+    "path": "vite.config.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "f19fb18a4c66066b56a641664f098b5d266bf98d542506d152868f6412907185",
+        "size": 1235
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "f19fb18a4c66066b56a641664f098b5d266bf98d542506d152868f6412907185",
+        "size": 1235
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "658d476080e9d11500cd23bec4cb7260a660632b7da4b468bbb2b19579a08d42",
+        "size": 476
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "f19fb18a4c66066b56a641664f098b5d266bf98d542506d152868f6412907185",
+        "size": 1235
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "f19fb18a4c66066b56a641664f098b5d266bf98d542506d152868f6412907185",
+        "size": 1235
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "14170e70fba21d0ea3bf4c905ec6f3c8979e80f992cd41b960a4f1c66a695ee4",
+        "size": 454
+      }
+    ]
+  },
+  {
+    "path": "package-lock.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "ed37c945cae07025b84c2cc438e86ba2ea8893221c57d36ab0ddab9e9003bcbf",
+        "size": 534518
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "ed37c945cae07025b84c2cc438e86ba2ea8893221c57d36ab0ddab9e9003bcbf",
+        "size": 534518
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "83cfd1cf281f4e8cdd31c7e94bf18759af46a0a8ba4e24f7e86265c2aabccff5",
+        "size": 243634
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "c256256387344969328469994a36a0657ef3d1a8ca0324bb01519ef1d3fc935b",
+        "size": 152657
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "052c7db19456937a208f04e9b985e2e46f372715454dcd7dfecf9720682bf8e4",
+        "size": 59058
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "ed37c945cae07025b84c2cc438e86ba2ea8893221c57d36ab0ddab9e9003bcbf",
+        "size": 534518
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "ed37c945cae07025b84c2cc438e86ba2ea8893221c57d36ab0ddab9e9003bcbf",
+        "size": 534518
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "a226cc8de80f8dc4769868a40bcb8704f55e8213a1c790ba4026c87f1e81a20f",
+        "size": 245738
+      }
+    ]
+  },
+  {
+    "path": "log.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "066d6b699f293d3c249ecd169f6e4572c4cc0d80d70d635f575fc97d779c44c4",
+        "size": 827
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "066d6b699f293d3c249ecd169f6e4572c4cc0d80d70d635f575fc97d779c44c4",
+        "size": 827
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "b5d8979fcb3a15463d9b7afb6ea434982d64313e848a9441c7ed0fdc765b5a05",
+        "size": 10712
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "066d6b699f293d3c249ecd169f6e4572c4cc0d80d70d635f575fc97d779c44c4",
+        "size": 827
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "066d6b699f293d3c249ecd169f6e4572c4cc0d80d70d635f575fc97d779c44c4",
+        "size": 827
+      }
+    ]
+  },
+  {
+    "path": "pnpm-lock.yaml",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "41504d59566da3411818a917b8d3e63bb0e21b8c62f54a2549322afde628404f",
+        "size": 324944
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "41504d59566da3411818a917b8d3e63bb0e21b8c62f54a2549322afde628404f",
+        "size": 324944
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "41504d59566da3411818a917b8d3e63bb0e21b8c62f54a2549322afde628404f",
+        "size": 324944
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "d1168cc9d8ecb808d66627fe9c66741c49401931394a008fc4baa89f7e32878d",
+        "size": 324944
+      }
+    ]
+  },
+  {
+    "path": "start-omega.sh",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "0aa4f051d79fe9d7bfd1ce9740632e951f9635e28074ccb3c6c62c1a52c7c764",
+        "size": 4175
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "0aa4f051d79fe9d7bfd1ce9740632e951f9635e28074ccb3c6c62c1a52c7c764",
+        "size": 4175
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "d9549e843c629e1fea6a675a1a334f0d4516511bd7f3685e4cd865f868879b10",
+        "size": 711
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "d9549e843c629e1fea6a675a1a334f0d4516511bd7f3685e4cd865f868879b10",
+        "size": 711
+      }
+    ]
+  },
+  {
+    "path": "components.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "8be0e54515838be398164884e96319b52bcfcbd52b2e63171d51df4131cfcb03",
+        "size": 388
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "8be0e54515838be398164884e96319b52bcfcbd52b2e63171d51df4131cfcb03",
+        "size": 388
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "9820835141c54e5b5dfbb68b3c3790db73c9ebfb967884ae3fccd058d698a1a6",
+        "size": 414
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "8be0e54515838be398164884e96319b52bcfcbd52b2e63171d51df4131cfcb03",
+        "size": 388
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "8be0e54515838be398164884e96319b52bcfcbd52b2e63171d51df4131cfcb03",
+        "size": 388
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "9820835141c54e5b5dfbb68b3c3790db73c9ebfb967884ae3fccd058d698a1a6",
+        "size": 414
+      }
+    ]
+  },
+  {
+    "path": "README.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "d042a5e608dd8c6b20beb5c8fffbf637ffb8494a9c14645c38301faf50e18af6",
+        "size": 8176
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "d042a5e608dd8c6b20beb5c8fffbf637ffb8494a9c14645c38301faf50e18af6",
+        "size": 8176
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega-trinity",
+        "sha256": "bfce64af5cb5e3da697198012107501f1dd2aa8bc35e82d8bb5f5e32c042a97a",
+        "size": 721
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "bc06b699eaf7f857af08489a4d612becb391683bc0e568300848cae3fb4186f0",
+        "size": 2421
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-CL",
+        "sha256": "439e9c533fdffd29bcbe3b53b856bb39f88821c985200222e399ae26a2c9d703",
+        "size": 9544
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "a3ef30190d789fc64541d808dc71b38e44efa6b0ed7f19c0caa9086b4e153640",
+        "size": 6825
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "067ce18546d82f87d4db74e7859a901971b8b33ff80c18c572fabef71f60535f",
+        "size": 4696
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "31fe442b56ea0d120a8e24e229e6c9412f2626f454bccdbfc2e6ff3d960788a9",
+        "size": 1681
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "31fe442b56ea0d120a8e24e229e6c9412f2626f454bccdbfc2e6ff3d960788a9",
+        "size": 1681
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "d042a5e608dd8c6b20beb5c8fffbf637ffb8494a9c14645c38301faf50e18af6",
+        "size": 8176
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "d042a5e608dd8c6b20beb5c8fffbf637ffb8494a9c14645c38301faf50e18af6",
+        "size": 8176
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "bc06b699eaf7f857af08489a4d612becb391683bc0e568300848cae3fb4186f0",
+        "size": 2421
+      }
+    ]
+  },
+  {
+    "path": "gateway/requirements.txt",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "238b8c3c3dd1876d9870147dd2d3e43630687ddc7fe628946fb2c616d982cb18",
+        "size": 212
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "238b8c3c3dd1876d9870147dd2d3e43630687ddc7fe628946fb2c616d982cb18",
+        "size": 212
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "ff28617273a8e70f7b737120385d59966aae5093d823b32c0fff5f800a0ca09c",
+        "size": 187
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "ff28617273a8e70f7b737120385d59966aae5093d823b32c0fff5f800a0ca09c",
+        "size": 187
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/llm.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "4ab5f90fb6ef0286e9b1aa58527d699c67740d72aa6d40cc2e418b420cb62a14",
+        "size": 6550
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b2ea2e9ec10f59dbfeea9892a56a714b1cc48f7eb00270a5b54dcf9027b8786c",
+        "size": 6412
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "4ab5f90fb6ef0286e9b1aa58527d699c67740d72aa6d40cc2e418b420cb62a14",
+        "size": 6550
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "4ab5f90fb6ef0286e9b1aa58527d699c67740d72aa6d40cc2e418b420cb62a14",
+        "size": 6550
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/config.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "ec0b490f07db2f1617e1cf35d5bfd5f0a48bc924ae6d0bf712c9b1b69be8460c",
+        "size": 1645
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "dbc9573630cfb83ec6261a4f879c020340c73134cc4f567ad4c32dcc3c795ac1",
+        "size": 1689
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "2852fa4c9e6e98c1e6504da9eba804b0070536e6ba3b1dfe7ec156351cfdfb3f",
+        "size": 1368
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "2852fa4c9e6e98c1e6504da9eba804b0070536e6ba3b1dfe7ec156351cfdfb3f",
+        "size": 1368
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/events.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "44e225494b7824bbbe6cc38238797ba162ce80c4f279fa234b2fb54c50d6f331",
+        "size": 852
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b028a27a062714b27258bfcfcc0f4d1d2e7027c30a269e42ecbbe7beeaa795b8",
+        "size": 947
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "44e225494b7824bbbe6cc38238797ba162ce80c4f279fa234b2fb54c50d6f331",
+        "size": 852
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "44e225494b7824bbbe6cc38238797ba162ce80c4f279fa234b2fb54c50d6f331",
+        "size": 852
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/embeddings.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "439ec8517a8aa22d1ee4d9ca27fa582a3732dd31668285f4be67e1d4bbe67437",
+        "size": 1938
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "77de85d87e2a07414740c2437cead277aa054ef6f20fa7a9be727c50c21f7731",
+        "size": 1914
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "439ec8517a8aa22d1ee4d9ca27fa582a3732dd31668285f4be67e1d4bbe67437",
+        "size": 1938
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "439ec8517a8aa22d1ee4d9ca27fa582a3732dd31668285f4be67e1d4bbe67437",
+        "size": 1938
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/idempotency.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "f0d24181398b51825f6b4e86806eba5bd4dd0c5d01d308add43a79d65cfb1c13",
+        "size": 1003
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "51924a86ea7ede7eccf6bf17732adb1214a8aa33f77d6bb8c30b0d01e580f170",
+        "size": 1119
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "f0d24181398b51825f6b4e86806eba5bd4dd0c5d01d308add43a79d65cfb1c13",
+        "size": 1003
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "f0d24181398b51825f6b4e86806eba5bd4dd0c5d01d308add43a79d65cfb1c13",
+        "size": 1003
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/db.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "481a7f7e1a52cde3ca1d59afe122c0bb53c28811c2fbcce9896827338cbfad3f",
+        "size": 3776
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "6a230179310a1b76e202e8156c9554aced59a4af1c1a59ebc5f84bf4f79dbc82",
+        "size": 4575
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "2558a1d1c8851f9aa37a67cbbcccbcd919781f026c75076c14fd17f55d0181c3",
+        "size": 1926
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "2558a1d1c8851f9aa37a67cbbcccbcd919781f026c75076c14fd17f55d0181c3",
+        "size": 1926
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/mcp.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "9cc09cfa289d4d641511281b7f8919b4b1ca6c4ba5d61b2742bc3adc88c73844",
+        "size": 2322
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "9df9585f9e0a087ba7bca4a7444aefa16e7df599697696db2bdb06c49586c12c",
+        "size": 2301
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/main.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "ef6156d8843ced4b335967975af675809b0bf5eb9610f786707fe092ceb35e7f",
+        "size": 9593
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b6c76d38a9e441c3ae4de0a324d58592df77834ff7e77d13d430e6d6d7e7b9b2",
+        "size": 9509
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "98c11206fbf394304594f6238314d1b975ef81e3a14f5faa17340a453b716bac",
+        "size": 7910
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "98c11206fbf394304594f6238314d1b975ef81e3a14f5faa17340a453b716bac",
+        "size": 7910
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/memory.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "c6a39ded09c8f2a0c8b4790052cc874096971ba267bc221f0be0d8a8fd42fc29",
+        "size": 3414
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "c6a39ded09c8f2a0c8b4790052cc874096971ba267bc221f0be0d8a8fd42fc29",
+        "size": 3414
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "4579af26f7bbc67c7ef65a5d4d4af052d2893f74af7c4bcb795f1c23e231e85c",
+        "size": 1722
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "4579af26f7bbc67c7ef65a5d4d4af052d2893f74af7c4bcb795f1c23e231e85c",
+        "size": 1722
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/consciousness/state.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "8557a4bc7653907ebd31807be775915a4c738151c59345a2a569e157d2a0900f",
+        "size": 10096
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "aab9c975ad094f82a74094c2e450c4bfe7ac24903e868c493d716857380f1d07",
+        "size": 10456
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "8557a4bc7653907ebd31807be775915a4c738151c59345a2a569e157d2a0900f",
+        "size": 10096
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "8557a4bc7653907ebd31807be775915a4c738151c59345a2a569e157d2a0900f",
+        "size": 10096
+      }
+    ]
+  },
+  {
+    "path": "gateway/app/consciousness/identity.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "d5449852a9b990e5fb5e2e207480f9ef5621ab0e924d0eb769c2f40054215cfe",
+        "size": 10748
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "131aaa85c4fc23dbb47632b5342cf6332ce9fc5cf13d36922c5b2e93ec68225e",
+        "size": 11144
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "d5449852a9b990e5fb5e2e207480f9ef5621ab0e924d0eb769c2f40054215cfe",
+        "size": 10748
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "d5449852a9b990e5fb5e2e207480f9ef5621ab0e924d0eb769c2f40054215cfe",
+        "size": 10748
+      }
+    ]
+  },
+  {
+    "path": "gAIng-brAin/package.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "8ff6e2aba658daedf0cb1e113e8d47df320dd4f845d4630bcb00e529ba16fc77",
+        "size": 2569
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "2bbddc64808d0832ce3c163154391f2689fa95667338d258a19b9e95d438862a",
+        "size": 2519
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "8ff6e2aba658daedf0cb1e113e8d47df320dd4f845d4630bcb00e529ba16fc77",
+        "size": 2569
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "8ff6e2aba658daedf0cb1e113e8d47df320dd4f845d4630bcb00e529ba16fc77",
+        "size": 2569
+      }
+    ]
+  },
+  {
+    "path": "gAIng-brAin/src/app.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "6f422e726fa790f1e16a978bf3152a026dd1758ce0e74308244a4d2641469db4",
+        "size": 4516
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "8e692bd9fc63d1717ea14f965a711270ba2addb744b619724d184ecbaf1a7442",
+        "size": 5030
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "6f422e726fa790f1e16a978bf3152a026dd1758ce0e74308244a4d2641469db4",
+        "size": 4516
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "6f422e726fa790f1e16a978bf3152a026dd1758ce0e74308244a4d2641469db4",
+        "size": 4516
+      }
+    ]
+  },
+  {
+    "path": "gAIng-brAin/data/stream.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "14791f126f551baef5a4912dd0a91c4d3ef40e8263ebe1757bfa9b75cf4a1bc8",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "942c080db51ec0c5f7253bb8100272fac508bfb44c4990120489b6a4cb88877d",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "14791f126f551baef5a4912dd0a91c4d3ef40e8263ebe1757bfa9b75cf4a1bc8",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "14791f126f551baef5a4912dd0a91c4d3ef40e8263ebe1757bfa9b75cf4a1bc8",
+        "size": 189
+      }
+    ]
+  },
+  {
+    "path": "scripts/omega-doctor.mjs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "c6b1a85ba745732cc6b5ca4035dc700100b2074f949940b832ffb3116a144f18",
+        "size": 8012
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b3e5d22070783b6a3fbdda24853ca34baa0ac3a45bfdecd09985a9a8fd6c27be",
+        "size": 8015
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "c6b1a85ba745732cc6b5ca4035dc700100b2074f949940b832ffb3116a144f18",
+        "size": 8012
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "c6b1a85ba745732cc6b5ca4035dc700100b2074f949940b832ffb3116a144f18",
+        "size": 8012
+      }
+    ]
+  },
+  {
+    "path": "scripts/omega-start.mjs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "d613a6edafee9665fba885aa091105e59088f783981881b70963b00160b74c93",
+        "size": 3620
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "05487a5fbe0d2ce366260b74372d0bfdf81faed92974bff6c16f075b715aa2dc",
+        "size": 3943
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "ba65012cf7f9b758da4f14515a131744dba5be0ec2c33db588dcf756976cf0bb",
+        "size": 3615
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "ba65012cf7f9b758da4f14515a131744dba5be0ec2c33db588dcf756976cf0bb",
+        "size": 3615
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/index.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "4d3c85f762a8de322bcd8b0806e56474ae06e66214b0aa7b078bfb2d97e170da",
+        "size": 5373
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "da2b3ac53e451ea5de7ee1e256c8e4d045ede68f1aead039c0c238177c06b682",
+        "size": 5641
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "4d3c85f762a8de322bcd8b0806e56474ae06e66214b0aa7b078bfb2d97e170da",
+        "size": 5373
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "4d3c85f762a8de322bcd8b0806e56474ae06e66214b0aa7b078bfb2d97e170da",
+        "size": 5373
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/package.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "e9b70ed22b5f7db1778a94ab4386362f3f2ac64b79aed5da8767d7989833d2e4",
+        "size": 2985
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "baaf589d7ed929f648702551a9d96379ab3057c77e59bc48050c240a54782207",
+        "size": 2984
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "afdc94a3238dc77dd170e7b751e47ae301cd69663053fd27b7a565b93324573b",
+        "size": 3018
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "4c00a5d92e43e928dcd4d5dc9c50eaccd6cda172ef1e09891cea30e936295b0f",
+        "size": 3169
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/package-lock.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "23df39e5cbfdd7cdfec1c19dfb5e41e75594a8721ba647d6f102523007aa7281",
+        "size": 529532
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "1091857502e45ada6d5cfef99284bcb6419bd24e09af5e9d76f5bd3a3359e904",
+        "size": 526977
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "ee61e04021d93cc3d95796afc86bbea27a8b18311feba8a204f48805f4065ca0",
+        "size": 527813
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/log.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "1189f1dc1d00a4fca582347f30b093a296b344bfad3e45f7299c1a44b968ff69",
+        "size": 12081
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "1cc071ff5ec4c24b957d01c4c85c65e3e617375740b64c6d35f654214a3cfe2b",
+        "size": 12345
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "1189f1dc1d00a4fca582347f30b093a296b344bfad3e45f7299c1a44b968ff69",
+        "size": 12081
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "1189f1dc1d00a4fca582347f30b093a296b344bfad3e45f7299c1a44b968ff69",
+        "size": 12081
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/mcp/README.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "a9b9aa2266ff112d3142126d9be78327d18df49f6d32b14eebedc920848e40e8",
+        "size": 5552
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "a9b9aa2266ff112d3142126d9be78327d18df49f6d32b14eebedc920848e40e8",
+        "size": 5552
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "a9b9aa2266ff112d3142126d9be78327d18df49f6d32b14eebedc920848e40e8",
+        "size": 5552
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "549c769a70167b7d950fcc2819a87fbae105fc0e4cdfba769d2c5fbee51c812d",
+        "size": 10097
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/mcp/servers.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "d820314766786dc7f65a7225188e1a0548de873224b358a03f11835eb8e7f7ac",
+        "size": 3394
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "d820314766786dc7f65a7225188e1a0548de873224b358a03f11835eb8e7f7ac",
+        "size": 3394
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "cd3eb8d377199dba21dc293b381db1b5514458f8fee1ece60e33567af6f914b1",
+        "size": 672
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "6ff5f664b195623bbedac554c9f0bdb2474c73985c189ee4be7bbe35faf769cd",
+        "size": 17603
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/app.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "5dfd91124bbd980c18b119f8e244e766d873323b0d2708135b0a9617b19edaf1",
+        "size": 4947
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "8e692bd9fc63d1717ea14f965a711270ba2addb744b619724d184ecbaf1a7442",
+        "size": 5030
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "5dfd91124bbd980c18b119f8e244e766d873323b0d2708135b0a9617b19edaf1",
+        "size": 4947
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "5dfd91124bbd980c18b119f8e244e766d873323b0d2708135b0a9617b19edaf1",
+        "size": 4947
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/services/llm.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "325e8512bf6a018325cb71fa19a2a589dc9a4666b629313c40f4582344f019a8",
+        "size": 2332
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b85fafbab0ce3965ee6b5813c62e0c114a153cb79fde088a91b55299ae400a46",
+        "size": 4389
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "325e8512bf6a018325cb71fa19a2a589dc9a4666b629313c40f4582344f019a8",
+        "size": 2332
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "325e8512bf6a018325cb71fa19a2a589dc9a4666b629313c40f4582344f019a8",
+        "size": 2332
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/services/mcp-client.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "b241095c43933c07e2649c1f3be7afc4d4d75c92bc409dfb5e49d9c3ee3c3850",
+        "size": 4545
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "bc485e344363d3ead35bd7172affece58a68f3ab1bbc34dc7d89cec1fd3925b9",
+        "size": 5153
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "b241095c43933c07e2649c1f3be7afc4d4d75c92bc409dfb5e49d9c3ee3c3850",
+        "size": 4545
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "b241095c43933c07e2649c1f3be7afc4d4d75c92bc409dfb5e49d9c3ee3c3850",
+        "size": 4545
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/services/neural-pulsing.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "54676cd72888d167f2621de13719cc881eb0e3622d7b4cac7cb69ee82e156e31",
+        "size": 1820
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "49f0ce2e61de41ee625497e8ce7fd5e4d658e99ab127b5c4c882a41cd10835bd",
+        "size": 2714
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "54676cd72888d167f2621de13719cc881eb0e3622d7b4cac7cb69ee82e156e31",
+        "size": 1820
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "54676cd72888d167f2621de13719cc881eb0e3622d7b4cac7cb69ee82e156e31",
+        "size": 1820
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/services/queue.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "eeec9e52766d615dd22334a48a08fc1386838bb5672c5cb0cce266951707f507",
+        "size": 3268
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "256dd274ca067107dd4f0cbf1f699dc80817fee856f4a63a896f443edafc9a2a",
+        "size": 3734
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "eeec9e52766d615dd22334a48a08fc1386838bb5672c5cb0cce266951707f507",
+        "size": 3268
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "eeec9e52766d615dd22334a48a08fc1386838bb5672c5cb0cce266951707f507",
+        "size": 3268
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/core/day-jobs.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "99494cc4611e607d06ae53d4772834aa7a234f0abbc3fe062847cacfb430f6b3",
+        "size": 13707
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "99494cc4611e607d06ae53d4772834aa7a234f0abbc3fe062847cacfb430f6b3",
+        "size": 13707
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "76ccd0a2f6343e5579fccb8b228ad32a224994d8fa9f055937477c4700662ef6",
+        "size": 14814
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "99494cc4611e607d06ae53d4772834aa7a234f0abbc3fe062847cacfb430f6b3",
+        "size": 13707
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/core/llm-client.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "37433fca56e1c10b3c724e4af57283d0215a9498b2b2eb7a11edeb5b5b25c84c",
+        "size": 9126
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "aebadd2f66b84a1313f0b90df1649e0139babf2dbeba1206a1d2cf13f4d02a03",
+        "size": 9810
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "37433fca56e1c10b3c724e4af57283d0215a9498b2b2eb7a11edeb5b5b25c84c",
+        "size": 9126
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "37433fca56e1c10b3c724e4af57283d0215a9498b2b2eb7a11edeb5b5b25c84c",
+        "size": 9126
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/core/revenue-governor.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "54a7a7905c51d18f8df3ba72d854661d65ca36342de11df3053a0c78567f493f",
+        "size": 3242
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "54a7a7905c51d18f8df3ba72d854661d65ca36342de11df3053a0c78567f493f",
+        "size": 3242
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "c37ee0847ac7edab7bd190f0d61493efa39c53fffb6071146d03e207add48507",
+        "size": 5782
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "54a7a7905c51d18f8df3ba72d854661d65ca36342de11df3053a0c78567f493f",
+        "size": 3242
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/src/core/tasks/revenue/opportunity-scout.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "2fcf152d5c6bc70b79087048c8975daa87cfbf7fbf2cb59d7cc1c9c21654aa54",
+        "size": 5254
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "2fcf152d5c6bc70b79087048c8975daa87cfbf7fbf2cb59d7cc1c9c21654aa54",
+        "size": 5254
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "47876aba460985d6e098cf40b52a346cb8e6d2c72a765c3750fbdaecc4820be0",
+        "size": 5888
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "2fcf152d5c6bc70b79087048c8975daa87cfbf7fbf2cb59d7cc1c9c21654aa54",
+        "size": 5254
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/database/revenue-ledger.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "7a6d927c00cd446803dc8c3e4957a331290dac0f3127aa8a59a3ac02b51ac709",
+        "size": 4050
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "26f904918101a40d7c6d1cbf644adaa9671e2a69ea8bd062d5c07475afa3466e",
+        "size": 11203
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "7a6d927c00cd446803dc8c3e4957a331290dac0f3127aa8a59a3ac02b51ac709",
+        "size": 4050
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "7a6d927c00cd446803dc8c3e4957a331290dac0f3127aa8a59a3ac02b51ac709",
+        "size": 4050
+      }
+    ]
+  },
+  {
+    "path": "packages/brain/data/stream.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "864122901e490706810a6de4ecbb4c5a378038ec4b5f8e152d974dcc7b121dbe",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "c8aa7bdef2bb690bb4194f3c7db06abe121b13c7e8588433fc4a253e0a75a11b",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "7c5d32d3a62381ffc925fce1bc2eb7ad6180b699ef52a368f69239891084943f",
+        "size": 189
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "7c5d32d3a62381ffc925fce1bc2eb7ad6180b699ef52a368f69239891084943f",
+        "size": 189
+      }
+    ]
+  },
+  {
+    "path": "packages/bridge/requirements.txt",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "6c75f7ed3196784a354661046c9ee931ca7327f93eb38d5efd8ebcc4888cfdbb",
+        "size": 2172
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "6c75f7ed3196784a354661046c9ee931ca7327f93eb38d5efd8ebcc4888cfdbb",
+        "size": 2172
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "b79e2460fe4801ed9fdc07e31fa357cfb0553bfe931e6a684e49f245ad09e37d",
+        "size": 2106
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "b79e2460fe4801ed9fdc07e31fa357cfb0553bfe931e6a684e49f245ad09e37d",
+        "size": 2106
+      }
+    ]
+  },
+  {
+    "path": "packages/bridge/config.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "6b1276ff7ff0c098b77425e8e5ba4b424ca7da505e45b5c5b1f359a9650600fb",
+        "size": 5172
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "6b1276ff7ff0c098b77425e8e5ba4b424ca7da505e45b5c5b1f359a9650600fb",
+        "size": 5172
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "c38fc1ef63cf8ff0ca4d58fb66bd1fe2f5bcbdeecf3f12c071f6f34c5eb2f5d7",
+        "size": 4900
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "c38fc1ef63cf8ff0ca4d58fb66bd1fe2f5bcbdeecf3f12c071f6f34c5eb2f5d7",
+        "size": 4900
+      }
+    ]
+  },
+  {
+    "path": "packages/bridge/llm_client.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "2cb5c1dd7629169f15274f2b726fc926491713c4b9ad8ee2c05c0d232a5eed24",
+        "size": 11255
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "2cb5c1dd7629169f15274f2b726fc926491713c4b9ad8ee2c05c0d232a5eed24",
+        "size": 11255
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "2e759845366f3944dce424a34733eb900b5fa1931aebf404ab743872a198c15e",
+        "size": 10826
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "2e759845366f3944dce424a34733eb900b5fa1931aebf404ab743872a198c15e",
+        "size": 10826
+      }
+    ]
+  },
+  {
+    "path": "packages/bridge/api.py",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "dc60d503cbf0561ea542532726f7392acf514f3f4ce201859f96b757a135d56c",
+        "size": 24197
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "dc60d503cbf0561ea542532726f7392acf514f3f4ce201859f96b757a135d56c",
+        "size": 24197
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "e9262e060a22e98a8d006f07cfbfa1e73d3248f2017d94650c216f4ea385062d",
+        "size": 23916
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "e9262e060a22e98a8d006f07cfbfa1e73d3248f2017d94650c216f4ea385062d",
+        "size": 23916
+      }
+    ]
+  },
+  {
+    "path": "Jarvis/package-lock.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "052c7db19456937a208f04e9b985e2e46f372715454dcd7dfecf9720682bf8e4",
+        "size": 59058
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "052c7db19456937a208f04e9b985e2e46f372715454dcd7dfecf9720682bf8e4",
+        "size": 59058
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "5286ae762d7b245b5223add8fd8129bab6d37aac3140086753965e1b5891552c",
+        "size": 59198
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "5286ae762d7b245b5223add8fd8129bab6d37aac3140086753965e1b5891552c",
+        "size": 59198
+      }
+    ]
+  },
+  {
+    "path": "Jarvis/src/app/layout.tsx",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "61138e7a08617e58f85a4d4ffc001edae1f94436ae77baf64665c0f1049655c2",
+        "size": 2863
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "61138e7a08617e58f85a4d4ffc001edae1f94436ae77baf64665c0f1049655c2",
+        "size": 2863
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "792acc459cb75dc9b143b958b93f7c90e32a8cf4682eb70d60c4a13592b38ccc",
+        "size": 2706
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "792acc459cb75dc9b143b958b93f7c90e32a8cf4682eb70d60c4a13592b38ccc",
+        "size": 2706
+      }
+    ]
+  },
+  {
+    "path": "Jarvis/src/app/api/omega/route.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "b7733fec9e726d22c7061ab8fb6f87949937feef96181062907b5eb517366110",
+        "size": 2021
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "b7733fec9e726d22c7061ab8fb6f87949937feef96181062907b5eb517366110",
+        "size": 2021
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "b7733fec9e726d22c7061ab8fb6f87949937feef96181062907b5eb517366110",
+        "size": 2021
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "d4eab95804b6b3796cba2635be41ea4126ac875087797eba372037a47e4cd24d",
+        "size": 2094
+      }
+    ]
+  },
+  {
+    "path": "Jarvis/src/app/api/omega/memory/route.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "fd3cc2f9adf34c13341bc25031da60e679322bf03f345ce033fa991d2a764af7",
+        "size": 2529
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "fd3cc2f9adf34c13341bc25031da60e679322bf03f345ce033fa991d2a764af7",
+        "size": 2529
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "fd3cc2f9adf34c13341bc25031da60e679322bf03f345ce033fa991d2a764af7",
+        "size": 2529
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "ef5d8788c13b65c91696a40540eb7508f0afb99895fb00f907c9335413a4bba8",
+        "size": 2600
+      }
+    ]
+  },
+  {
+    "path": "Jarvis/src/store/useNeuroStore.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-IS",
+        "sha256": "5abf0718462c80308d9cae5e731aba45d361c3e62cfa1197e0acd259d8a14c8e",
+        "size": 2612
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+        "sha256": "5abf0718462c80308d9cae5e731aba45d361c3e62cfa1197e0acd259d8a14c8e",
+        "size": 2612
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+        "sha256": "219e28fd0ad30bb06336a2b258d1974ddd94969153222bf463e6695dca9561e6",
+        "size": 1882
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+        "sha256": "219e28fd0ad30bb06336a2b258d1974ddd94969153222bf463e6695dca9561e6",
+        "size": 1882
+      }
+    ]
+  },
+  {
+    "path": "LICENSE",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/omega-trinity",
+        "sha256": "078ee2f85ce0765e69f86ec70837020f1503272adb6d9e253cca619736760dec",
+        "size": 26
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-CL",
+        "sha256": "ab974d9fee1962fb9e06067c82fe54a62f774e57b6cf4dfd3c9b66ee8a470fa5",
+        "size": 1073
+      }
+    ]
+  },
+  {
+    "path": "postcss.config.js",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "e32657baf631d7c5f4dc67b4b2ee0ec8e7d5b3c41860e09cddce7c0377cd80bc",
+        "size": 81
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "b9357981319940ed660b848c7a15ea479915885b7cbe60d6951b5d5cef5b509d",
+        "size": 80
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "e32657baf631d7c5f4dc67b4b2ee0ec8e7d5b3c41860e09cddce7c0377cd80bc",
+        "size": 81
+      }
+    ]
+  },
+  {
+    "path": "tailwind.config.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "d3dbc626e0df904c06a19b266672c1a4472fb23cf6fd3133151e4c70384f8aa3",
+        "size": 4070
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "3623bf7fa7d7e1e2958ad31da191d96ca8d07a1f08b911eb44118c9d166a7871",
+        "size": 610
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "d3dbc626e0df904c06a19b266672c1a4472fb23cf6fd3133151e4c70384f8aa3",
+        "size": 4070
+      }
+    ]
+  },
+  {
+    "path": "src/App.tsx",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "cc51369aede445e4568f6b42b8900e1cc03c6c8d782a7cb533d2ee31723b0bff",
+        "size": 2343
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "4e69ef9f71a824d0a6b0965300a4738f34e54a39d58433104162a61b6d072d49",
+        "size": 871
+      }
+    ]
+  },
+  {
+    "path": "src/index.css",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "6059054e604c0e076e90ab5ca0804f47e68b8307f55ee405c61d48521112601e",
+        "size": 6801
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "9185d9b8e3e6e7af7c5579a73fbda2103e0f8c03437047c39990ecf50fb7f9dc",
+        "size": 5178
+      }
+    ]
+  },
+  {
+    "path": "src/pages/Index.tsx",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "fb475e17f1225bacb48e82b32cb59a441a97863d74300a26d2e8d5397b29b378",
+        "size": 3361
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "ee9f16281cf7f4685300a086c6186b25a4835379917c0dcf4589efbdf1cf90de",
+        "size": 2300
+      }
+    ]
+  },
+  {
+    "path": "src/integrations/supabase/types.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "9a5fa7a8b042a006d6e3365bd50e898c48a6173cc6a71df02791db8a145e01c0",
+        "size": 7860
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "cbe3d95edc6d62de52fce56aab60191c1aa91639a8caad5d2346ddff3e22b38a",
+        "size": 5033
+      }
+    ]
+  },
+  {
+    "path": "src/lib/types.ts",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "73a89781ae748296b48da58e8a04ad4131d8943c7fe36524fb71833e3e677efb",
+        "size": 2222
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "1dff7b34eecc3b1e244622bad8b60c5c9d39d4f1529be27652bd8071277da6d4",
+        "size": 2207
+      }
+    ]
+  },
+  {
+    "path": "src/components/layout/AppSidebar.tsx",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "5eb6d15e58b6bca15e6db13974d243fa0d558e25f8123d821b58741cf865b7b9",
+        "size": 10903
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "959f7e7450ebf5212aa6f2d43a805a395b6597a615c9731bb2426b2bcb2b5fca",
+        "size": 8908
+      }
+    ]
+  },
+  {
+    "path": "src/components/settings/SettingsView.tsx",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-UI",
+        "sha256": "30bcd02f36d75b80b55f5dc797d2a3f02bde436151e2d1c8c81488ee8d19cdc8",
+        "size": 20566
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+        "sha256": "35650b5e88a4c6df88ec33c43d63438e505e7ab3fc199e0bbc3e3d7e0146f2bb",
+        "size": 20567
+      }
+    ]
+  },
+  {
+    "path": "requirements.txt",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-CL",
+        "sha256": "0bbbe950e16b815521216a67b92d3ea346cfa241dbd2807136ea59f0e862a84d",
+        "size": 984
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "e2da6b2f819e237a68c8bc8367bfa361e9a3270b586f63b62462501e5695ae45",
+        "size": 14
+      }
+    ]
+  },
+  {
+    "path": "Dockerfile",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-CL",
+        "sha256": "3991b855ed037ff8dee33e5858a7fcdd188ff11d65d43a191f54b7aa985141aa",
+        "size": 1142
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "f042c9ce3b8fe894f69bc9ed32fbbc736d067ee74fd84e45226569832f20ad14",
+        "size": 2220
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "b272f2d63e91831b2f2f2415b399c43cb39c3d143b4408c1055851f6e570d29e",
+        "size": 1433
+      }
+    ]
+  },
+  {
+    "path": "public/manifest.json",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-AI",
+        "sha256": "e9e2bcb6434c7950f6361c0c46a411e48cf44447c4d05e92ebb2178c415c1eff",
+        "size": 579
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-NL",
+        "sha256": "2d8762f2f8a689caffd00d9b50d207c9ff812dff4f76749cc39ea5687d15c109",
+        "size": 1883
+      }
+    ]
+  },
+  {
+    "path": "Cargo.lock",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "8f4b76a38320d938930fc1ca2bd5bef2eee06b7ea2b6182135b8cf07c6e94133",
+        "size": 126561
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega-skills",
+        "sha256": "30f13bc106a823e2a959692db5560b36e86fc4435ac90fd91be13acc6f0a2fa7",
+        "size": 2654
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "eb0e61423e2304262a4d57b228eb3a6f672705cb10d93f16f81e231962cbcb35",
+        "size": 104268
+      }
+    ]
+  },
+  {
+    "path": "autostart-omega.sh",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "ee566a45eadb0fd1863b02a8c74a14d505cc291bfbaee841041dd381b5665792",
+        "size": 1412
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "d9f9e03ac2eac2870bb3e7618745c488b1a0f4cb2d2a766e92f28b9bb2d0c693",
+        "size": 2173
+      }
+    ]
+  },
+  {
+    "path": "WHATS_NEW.md",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "aa635b07894334245b10da5d843e8eb2e602a27db2f0cbaad3e81239d37f18cf",
+        "size": 2529
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "47c1eefbadee3e9b168bac80ef4757eddc3abe94930f05272092e2312f70e52f",
+        "size": 7100
+      }
+    ]
+  },
+  {
+    "path": "Cargo.toml",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "f10dde2df3500602b74824b6e32540a9432c2af576fb88529c359ada5d4453d2",
+        "size": 2002
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega-skills",
+        "sha256": "ad24f6517cae52178a381feb3cec1768cc4ac5b7f5815d0a3bdb403090506f17",
+        "size": 155
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "ddde66db9856a1241b5df41e04008777af02ef5f6a3c537a94fff8435aeaa90d",
+        "size": 1913
+      }
+    ]
+  },
+  {
+    "path": "src/voice.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "083e490c06e046ed9c188fdc996ce07a12e1ff78905cfb7b4d1849e230430d4c",
+        "size": 1257
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "eff02b15faeab8eda847e59f5c8aef54b8b3d8a247bb37e8cb9b6b5d7c44bca6",
+        "size": 1457
+      }
+    ]
+  },
+  {
+    "path": "src/ui.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "fa7d31f4805db289f0ec2d1320fd3228d34a19587e2d706337b349aba192f6a7",
+        "size": 25915
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "e5d10a72de3a0b6349949d7530f2b4efdacc297c3721aca90952181b661dd0f7",
+        "size": 18215
+      }
+    ]
+  },
+  {
+    "path": "src/engine.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "b5d8101f6d7eea4961b788f7b002b2537e8266b96c0276ce60a6593cd5d8811e",
+        "size": 34352
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "b62bfb99d0f052a1a14878697a1efa873e44b914b8aba6aee8efb5af2b76f4ca",
+        "size": 15196
+      }
+    ]
+  },
+  {
+    "path": "src/devices.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "db7d97543a296a77ccceab1ca86658aae81f42376ec677fee717e7dc50b4a7d5",
+        "size": 15842
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "38043dc10f7154c42266980ae1fc410999b0c5c8260c05357394f40ee4c30e42",
+        "size": 4577
+      }
+    ]
+  },
+  {
+    "path": "src/modules.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "133dc38cbc6cac3ce90d164aa74b285a8d6499270052f2638d72a8448efd83fd",
+        "size": 8927
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "dc79742bd0b3b83d77d0d88e036d0c768371afda215fe209b19df5bad069cd3e",
+        "size": 3730
+      }
+    ]
+  },
+  {
+    "path": "src/config.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "fb40b4e720688a4ae1b6102a22c7bdd0800dfeeffcafca5d53a465eeecb1b5a7",
+        "size": 2991
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "290217fe2f67aeb52aac792bdd4eeb499435147ed55c0c89c96a7f5f64117169",
+        "size": 2586
+      }
+    ]
+  },
+  {
+    "path": "src/server.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "a7286e6c53b33935b18a2139d5610e23e340613f6b5d6b1613285886165725bd",
+        "size": 13894
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "bd0a62042152245c3b8be2aff67d2c7a193fba0951a67da36bf64979ad192f48",
+        "size": 7783
+      }
+    ]
+  },
+  {
+    "path": "src/main.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "0d6abf5367061d4b94c83415746f6feb4cee5ccbf42e79d603e3686685ad6f35",
+        "size": 13625
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "1d2c9639a856e03275ea931f4d0ecdba72f95d38a69d56a970336ef965fb0604",
+        "size": 6710
+      }
+    ]
+  },
+  {
+    "path": "src/events.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "012cd83653a95bf28cf78bb05acb1037a4d5e9bb43e248357dd95a5a30c97a50",
+        "size": 2385
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "a27adc450af627f1934d6337a4bbae7d7177f6a73ee30a439683c8fb1267722d",
+        "size": 1877
+      }
+    ]
+  },
+  {
+    "path": "src/tui/view.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "f637651a52cd5f85de6d545a0eadc3b90419c16108cecd4fb0f4f88b595e7ff1",
+        "size": 24145
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "da43c70d1ed6653ff8e604ea0a4f129d36ac816e50cc06eb7ab3bd9a3d29e87c",
+        "size": 28287
+      }
+    ]
+  },
+  {
+    "path": "src/tui/mod.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "121b528ba7d3a4efa03411c7032b204cb08c184c4d14915f54dd134d4c05ce06",
+        "size": 3883
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "e02e597984494a86f909bbeb4053b40f722b20c26383ce299c606928395564f1",
+        "size": 3729
+      }
+    ]
+  },
+  {
+    "path": "src/tui/app.rs",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/OmegA-SI",
+        "sha256": "2e1dd8177b346a813ad83f6a030a9bb9b58e94a14a106b4f09bcd1667a220c6c",
+        "size": 13888
+      },
+      {
+        "source": "/home/mega/NEXUS/repos/omega_rust",
+        "sha256": "f156fff7c678f83f25c6b0378f1b9ada2a988adb6b9a6cc0c2f2a435bc2e948a",
+        "size": 8962
+      }
+    ]
+  },
+  {
+    "path": "config/secret_key",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "26f5f88571b67d48b417b113c992c22027d002cb3916719bee965b02d4f668d4",
+        "size": 50
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "e48a8f5ce46fb0fcaeecf4a2f5c421b2d78eabf6e3b7c8923caecee648d330ab",
+        "size": 50
+      }
+    ]
+  },
+  {
+    "path": "config/codex.sqlite3",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "c598243eb6c8836cbc07ccbd33e6617527b53d7389c0bcc5a44b32520fa49235",
+        "size": 1204224
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "00f149472c56889d3778b7996d2ba6fb21d636ffba06cc2389b02c6dba8c602d",
+        "size": 1204224
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/504c53640621e86d03c3aa9f6a3d9773.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "c813edebf3627f03d8e852380e850cc3406c328f2f7b3fce225fb9377bf6e035",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "8bb135f1fb03f8a7c72606ef618eb7ae71019a6632f6805c915b8f1649e386d1",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/eee84cc968acfcd7615cfd99d40bce48.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "92fc1193798c6405ae0c1e894337a8bcba1e572057cd06f3cbaa32617c5498f1",
+        "size": 128
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "dce78ab8d167d14b7c6e2dc56d99fea8d12e7d6ef9c02cacc9f0ad2d218c22ac",
+        "size": 129
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/a0a1b7ebc40accadd2491c2572cf1852.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "4fd2b55d3b09cad82b3343024e8fda48d83b0b867fede27396c2128923987975",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "1a877a0a185f194f9b1e62428f75040a61aea5753e66ecd58fd3a44ad81e0f2a",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/558819e8b447f80dc75bb1af0254d737.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "a52bd2f20fa56173f94e722fa0f2222c4432a4d0a5a0205b8a7737642542aef1",
+        "size": 32
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "5d452cc3eabf8068bc4dbda133ca4ada15b8f2f663c8138f7f55cd5c0b3a45f6",
+        "size": 32
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/391936f202f2369dbb82b36ae48d7abb.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "8b3be1d5556c87820cee81e1cda9fb83ba05fb95dc86fcae6b85dae74d02a891",
+        "size": 35
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "a33abdde1b9184e5ae99ed33fb96921a0cd8f463f7c34709c1efb621caf3e894",
+        "size": 35
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/7b1682f35ca32d38a625f925f6a27e75.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "f6cbc8bffc11da77b2d1f3540d2a538be041b652529ccf629b96c4adb5688dfe",
+        "size": 105
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "d9dd7be23db10d43e06013a1cdc58321a7759e6399de763b30049bd68a8e20bc",
+        "size": 106
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/6ff653f59f7981ef6caf6c9d7b8648d0.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "dc1d801d040c6428593cf78e7a03c0d7f55a11d90ac012bc0c533c4580b6c61a",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "4fdfd244ba1c1fb9d87bf81a2775e2573c33b98479b5894e36912454949b116b",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/b0e58f671b221d09c5cb861f1962ece6.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "fb68f21e9ca7e048b78f17a18f527b6a083208694d82609b3b305c255ef2cdf3",
+        "size": 42
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "90601746c47479f19e53e6ea01dcc1159219b68262215992dc7b540256da03cd",
+        "size": 42
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/dcf28c81179f6d2f4afd5fcf9a6d047a.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "aedd69fbf94b9c9cf513c791150da86831e4ae61d836369b86b709e9fc55a54b",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "2b500a5eb12cae79139f56c245c02d9550b1d0f160376e0656f9cd0ca3fed87e",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/e6211ab37e2127a1fb49f4533dee7ae0.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "e7e106f15608d4f503667aa72ccc90be8b8e62ed0d4a62ae741245d6257d830c",
+        "size": 106
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "8181484460770ecff44e2a0d740a71bdfb524359d3df197a03cf2884da8a50e1",
+        "size": 107
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/2e2650f0ceaee6fa64e670659d2470bb.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "4b495a9cf047710a51623e59f20fd599e43327b6666a8392c7062498d7be463b",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "f886930aba7ea66977f37ee1fb48eb5d72b6664f17dbfd8baa6ce02152995d3b",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/0cfe0255465fbedc4ab0bb199df63c73.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "be407fbde293fdc8ad7d725097ed4cc73e6d7b4077eef479dcfc787f905ca986",
+        "size": 104
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "6c2bcc9f2e4eafcb095a434e696c5c1bdb3e856ab0a6cf4706e9646f23e81211",
+        "size": 105
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/f0141d29f24de218f542bfaf8f72afce.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "feacc9d891a655b05edef848f683aa6d8c76da21c1c6751b1ba574a65fdaf084",
+        "size": 82
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "22d6d31e60708499cdcbd1b27507f220cb9c6bef8a1017b2c5b3e3923fc1912a",
+        "size": 86
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/5f8a3a95462355c7d0c6f41093d2491c.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "93d397724b033cfd5411f931dfdf72241dcc222590d2e582129c7cf0c80c2c2f",
+        "size": 42
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "b1a673bd11fc97b4d1a2681600337d2845d4157bcc88aef76c3008381e3826b2",
+        "size": 42
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/9026daabfdf5165627f2d877dc72b36a.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "aac0e6ea8b0a2c685c85fdbac3a3165abcdf7ee7c0ced375f85ce617318d5e38",
+        "size": 33
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "60d3fedb4273c41d85c69ea2b915fcdf53858e0c45c97df062f128bcc1633e12",
+        "size": 33
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/e0680532d311f9635749b39d88f41406.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "ae1407724f159dfe60d870366c81c69565dd0ad8357f87d0b2236cb6f3644f63",
+        "size": 35
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "1071a079dacbccfe812b2e89985ec90e42457d0ee2976b8a403f7da7410087e5",
+        "size": 35
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/5d3d1867bb0b698828bc7fc119319c43.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "dc6d1429cccfa69267d8745458c4e1998dac2c923244215e625e0ebac3586ea3",
+        "size": 82
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "5bbc40c823b6b2d41a22b971ad4dee349c765fb44e02924156ca715e4700590d",
+        "size": 86
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/ea89857fba7b971472445939513ac811.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "42c66d704ecc4420718c8a0c8663ffba9505380aa7480609b5fccf1eae452d4b",
+        "size": 34
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "01104b38dac26ca9215db2e9be89a7ad0e56e6a8560dfdfb131555583dbe59ac",
+        "size": 34
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/64a511d134388a8f600d02d519534176.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "e96ce2aab8912f29f6fb1587295014646561dce5aa3524930d4b5a2589145796",
+        "size": 33
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "9b048fce6a0b47d543448c754221160c40cd82430f3b1e19494aea100977c4e2",
+        "size": 33
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/a06920408528f5f7cc613d07b6766336.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "7a411de437d6e0a02bfcb521392f4a7b49f1e8a0f26a2c973ef21788d6cc91b6",
+        "size": 105
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "71f33f99a11d566d09b34bd1275dc49bed47f713b5f8c84cf019da27ae0700c0",
+        "size": 106
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/6cd45a86ab62a4f8acfb1457f037d63b.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "ed6712715f9d194ab88d9ce761b9fc5c813d56394f2d0afa789bb62dc877214b",
+        "size": 29
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "b8b240eb6aa97bea9dbb4ae3b875710df05632794defde03cfcab84dd89f839a",
+        "size": 29
+      }
+    ]
+  },
+  {
+    "path": "config/cache/default/e8c7461b802c1ca1f00e3510196a3532.djcache",
+    "entries": [
+      {
+        "source": "/home/mega/NEXUS/repos/ORYAN",
+        "sha256": "5c506eba6f4c1271ea3cf55fc6dc9b76fdac4c99f9b304e2967be851315b8c35",
+        "size": 35
+      },
+      {
+        "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+        "sha256": "8ad7b3c1df62227df65403ca76c2e3e0f00401b493c2a0d84de6ad7b3beb28ea",
+        "size": 35
+      }
+    ]
+  }
+]

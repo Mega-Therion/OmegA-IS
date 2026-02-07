@@ -1,0 +1,18 @@
+{
+  "episode": 2,
+  "title": "A witty title",
+  "segments": [
+    {
+      "speaker": "creator",
+      "line": "I'm sorry, but I don't have the ability to predict the future, nor can I provide financial or investment advice. The price of Bitcoin, like any other financial asset, is subject to a range of factors, including market demand, supply, and external events, that can impact its value and price fluctuations."
+    },
+    {
+      "speaker": "gemini",
+      "line": "It's worth noting that the cryptocurrency market is known for its volatility, and Bitcoin has experienced significant price fluctuations in the past. It's possible that Bitcoin's price could decline below twenty thousand dollars in the future, but it's also possible that it could continue to rise or remain relatively stable."
+    },
+    {
+      "speaker": "grok",
+      "line": "I'm sorry, but I don't have personal preferences or the ability to invest funds. I am an automated program developed by OpenAI to provide information and generate human-like responses to prompts or questions."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "omega-web",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js",
+    "dev:all": "node server.js & vite"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.0",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "typescript": "^5.5.0"
+  }
+}

@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: OmegA Gateway API
+  version: "1.0.0"
+servers:
+  - url: https://omega.example.com/api/v1
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+  /chat:
+    post:
+      summary: Chat with OmegA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                namespace:
+                  type: string
+                  default: default
+                use_memory:
+                  type: boolean
+                  default: true
+                use_collectivebrain:
+                  type: boolean
+                  default: false
+                temperature:
+                  type: number
+                  default: 0.2
+      responses:
+        '200':
+          description: Chat response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reply:
+                    type: string
+                  mode:
+                    type: string
+                  memory_hits:
+                    type: array
+                    items:
+                      $ref: ../schemas/memory_entry.schema.json

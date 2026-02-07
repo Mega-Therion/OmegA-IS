@@ -1,0 +1,4 @@
+# ΩmegA Capability Configuration
+allow_network = true      # Allow Ollama API calls
+allow_filesystem = true   # Allow access to all your directories
+max_parallel_agents = 3   # Number of agents

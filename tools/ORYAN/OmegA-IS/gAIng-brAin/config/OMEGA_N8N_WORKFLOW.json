@@ -1,0 +1,230 @@
+Ã={
+    "name": "OMEGA - Master Synapse Controller",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "ingress",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "id": "webhook-trigger",
+            "name": "Webhook (OMEGA Bridge)",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                100,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "rules": {
+                    "values": [
+                        {
+                            "conditions": {
+                                "options": {
+                                    "caseSensitive": true,
+                                    "leftValue": "",
+                                    "typeValidation": "strict"
+                                },
+                                "conditions": [
+                                    {
+                                        "id": "type-check",
+                                        "leftValue": "={{ $json.body.type }}",
+                                        "rightValue": "TASK",
+                                        "operator": {
+                                            "type": "string",
+                                            "operation": "equals"
+                                        }
+                                    }
+                                ],
+                                "combinator": "and"
+                            },
+                            "renameOutput": true,
+                            "outputKey": "Task Routing"
+                        },
+                        {
+                            "conditions": {
+                                "options": {
+                                    "caseSensitive": true,
+                                    "leftValue": "",
+                                    "typeValidation": "strict"
+                                },
+                                "conditions": [
+                                    {
+                                        "id": "status-check",
+                                        "leftValue": "={{ $json.body.type }}",
+                                        "rightValue": "STATUS_REPORT",
+                                        "operator": {
+                                            "type": "string",
+                                            "operation": "equals"
+                                        }
+                                    }
+                                ],
+                                "combinator": "and"
+                            },
+                            "renameOutput": true,
+                            "outputKey": "Status Report"
+                        }
+                    ]
+                }
+            },
+            "id": "switch-router",
+            "name": "Router (Task vs Status)",
+            "type": "n8n-nodes-base.switch",
+            "typeVersion": 1,
+            "position": [
+                320,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "model": "gpt-4o",
+                "options": {
+                    "systemMessage": "You are OMEGA-INTEL. Analyze the incoming task and break it down into atomic sub-steps for the OMEGA Collective.\n\nInput Task: {{ $json.body.payload }}\n\nOutput Format: JSON list of steps."
+                }
+            },
+            "id": "llm-planner",
+            "name": "LLM Planner (OpenAI)",
+            "type": "@n8n/n8n-nodes-langchain.openAiChatModel",
+            "typeVersion": 1,
+            "position": [
+                93,
+                180
+            ],
+            "credentials": {
+                "openAiApi": {
+                    "id": "2",
+                    "name": "OpenAI Creds"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "content": "üìù **New Task Received**\n\n**Payload:** {{ $json.body.payload }}\n**Priority:** {{ $json.body.priority || 'Normal' }}\n\n*Processing via Neural Planner...*"
+            },
+            "id": "telegram-notify",
+            "name": "Notify Telegram (Safa)",
+            "type": "n8n-nodes-base.telegram",
+            "typeVersion": 1,
+            "position": [
+                560,
+                420
+            ],
+            "credentials": {
+                "telegramApi": {
+                    "id": "1",
+                    "name": "Telegram Creds"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "append",
+                "databaseId": {
+                    "__rl": true,
+                    "value": "YOUR_NOTION_DB_ID",
+                    "mode": "list",
+                    "cachedResultName": "OMEGA Tasks"
+                },
+                "properties": {
+                    "Name": {
+                        "title": "={{ $json.body.payload }}"
+                    },
+                    "Status": {
+                        "select": "Pending"
+                    }
+                }
+            },
+            "id": "notion-sync",
+            "name": "Sync to Notion",
+            "type": "n8n-nodes-base.notion",
+            "typeVersion": 2,
+            "position": [
+                780,
+                180
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"status\": \"processed\",\n  \"trace_id\": \"{{ $execution.id }}\",\n  \"routed_to\": \"{{ $json.output }}\"\n}",
+                "options": {}
+            },
+            "id": "webhook-response",
+            "name": "Ack Response",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1000,
+                300
+            ]
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Webhook (OMEGA Bridge)": {
+            "main": [
+                [
+                    {
+                        "node": "Router (Task vs Status)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Router (Task vs Status)": {
+            "main": [
+                [
+                    {
+                        "node": "LLM Planner (OpenAI)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Notify Telegram (Safa)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "LLM Planner (OpenAI)": {
+            "main": [
+                [
+                    {
+                        "node": "Sync to Notion",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Sync to Notion": {
+            "main": [
+                [
+                    {
+                        "node": "Ack Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Notify Telegram (Safa)": {
+            "main": [
+                [
+                    {
+                        "node": "Ack Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}Ã=*cascade082Rfile:///c:/Users/mega_/Downloads/OMEGA_REALITY_KIT_UPDATED/OMEGA_N8N_WORKFLOW.json

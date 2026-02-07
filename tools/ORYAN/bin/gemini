@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+unset GEMINI_API_KEY
+exec /home/mega/.nvm/versions/node/v22.22.0/bin/gemini "$@"

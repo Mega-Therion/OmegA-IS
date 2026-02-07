@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="50%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer circle -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="url(#brainGradient)" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Brain shape -->
+  <g filter="url(#glow)">
+    <path 
+      d="M50 15 C35 15 25 25 25 40 C20 45 18 55 22 65 C26 75 35 82 50 85 C65 82 74 75 78 65 C82 55 80 45 75 40 C75 25 65 15 50 15 Z" 
+      stroke="url(#brainGradient)" 
+      stroke-width="3" 
+      fill="none"
+    />
+    
+    <!-- Brain folds -->
+    <path d="M40 30 C40 30 45 40 50 40 C55 40 60 30 60 30" stroke="url(#brainGradient)" stroke-width="2" fill="none"/>
+    <path d="M35 45 C35 45 42 52 50 52 C58 52 65 45 65 45" stroke="url(#brainGradient)" stroke-width="2" fill="none"/>
+    <path d="M32 60 C32 60 40 68 50 68 C60 68 68 60 68 60" stroke="url(#brainGradient)" stroke-width="2" fill="none"/>
+    
+    <!-- Neural nodes -->
+    <circle cx="35" cy="38" r="3" fill="url(#brainGradient)"/>
+    <circle cx="65" cy="38" r="3" fill="url(#brainGradient)"/>
+    <circle cx="30" cy="55" r="2.5" fill="url(#brainGradient)"/>
+    <circle cx="70" cy="55" r="2.5" fill="url(#brainGradient)"/>
+    <circle cx="50" cy="75" r="3" fill="url(#brainGradient)"/>
+    
+    <!-- Connection lines -->
+    <path d="M35 38 L30 55" stroke="url(#brainGradient)" stroke-width="1" opacity="0.5"/>
+    <path d="M65 38 L70 55" stroke="url(#brainGradient)" stroke-width="1" opacity="0.5"/>
+    <path d="M30 55 L50 75" stroke="url(#brainGradient)" stroke-width="1" opacity="0.5"/>
+    <path d="M70 55 L50 75" stroke="url(#brainGradient)" stroke-width="1" opacity="0.5"/>
+  </g>
+</svg>

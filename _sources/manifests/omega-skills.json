@@ -1,0 +1,22 @@
+{
+  "source": "/home/mega/NEXUS/repos/omega-skills",
+  "timestamp": "2026-02-06T23:38:36-0600",
+  "file_count": 3,
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "size": 2654,
+      "sha256": "30f13bc106a823e2a959692db5560b36e86fc4435ac90fd91be13acc6f0a2fa7"
+    },
+    {
+      "path": "Cargo.toml",
+      "size": 155,
+      "sha256": "ad24f6517cae52178a381feb3cec1768cc4ac5b7f5815d0a3bdb403090506f17"
+    },
+    {
+      "path": "src/lib.rs",
+      "size": 2156,
+      "sha256": "777844243e4858562e39762dbe07830a0c6dda41a3151f2657f868b989fcc3ef"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CouncilEvent",
+  "type": "object",
+  "required": ["header", "event_type", "payload"],
+  "properties": {
+    "header": { "$ref": "./resonance_header.schema.json" },
+    "event_type": {
+      "type": "string",
+      "enum": ["council.open", "council.submit", "council.synthesis", "council.ruling", "council.close"]
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific data",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

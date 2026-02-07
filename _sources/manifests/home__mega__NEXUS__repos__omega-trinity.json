@@ -1,0 +1,267 @@
+{
+  "source": "/home/mega/NEXUS/repos/omega-trinity",
+  "timestamp": "2026-02-06T23:40:14-0600",
+  "file_count": 52,
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 26,
+      "sha256": "078ee2f85ce0765e69f86ec70837020f1503272adb6d9e253cca619736760dec"
+    },
+    {
+      "path": "README.md",
+      "size": 721,
+      "sha256": "bfce64af5cb5e3da697198012107501f1dd2aa8bc35e82d8bb5f5e32c042a97a"
+    },
+    {
+      "path": "docs/wiring-map.md",
+      "size": 59,
+      "sha256": "18258408bf2de9a1e0981d03e16dcae8a0a5e867a24a1028aa0d9559bd2eaeed"
+    },
+    {
+      "path": "docs/event-schema.md",
+      "size": 1370,
+      "sha256": "ae2e6a8196b485801041c0a9f61cbf1232ab2dffe7a87d3f5a78bd93845392f0"
+    },
+    {
+      "path": "docs/runbooks/local-dev.md",
+      "size": 55,
+      "sha256": "c02c3ba69e9ff18811d5486fb44fe1238a662e7aaec82acc5789607955a1023d"
+    },
+    {
+      "path": "docs/runbooks/deploy.md",
+      "size": 34,
+      "sha256": "18f5307b43d8204888c606ad9f49b4f1b63f41bc1d41e7e99dd14bfce0f77693"
+    },
+    {
+      "path": "docs/runbooks/incident.md",
+      "size": 47,
+      "sha256": "b99169a9f72ea273268f1c608231ce5fbec8451444180b2d97d700415bf30d14"
+    },
+    {
+      "path": "infra/vercel/README.md",
+      "size": 42,
+      "sha256": "98c25b125cac9e2457fcda4cbc1fe7aa994b388fc21d6dea96731ebae4bb8a0a"
+    },
+    {
+      "path": "infra/secrets/REQUIRED_ENVS.md",
+      "size": 33,
+      "sha256": "303107bf3386f32803196a2d6bd5ab7080189d92f71c24a307a8b5749499bb2e"
+    },
+    {
+      "path": "infra/tailscale/README.md",
+      "size": 51,
+      "sha256": "cae4f979f04843d6013530a59a0bf5d0db78afb627374c2b213c679fdc171859"
+    },
+    {
+      "path": "apps/web/server.js",
+      "size": 6951,
+      "sha256": "a9d44c4d48666b41a4fd1aedb3366879ab0d0a0670a16b439e79027ef6d6bcaa"
+    },
+    {
+      "path": "apps/web/package.json",
+      "size": 455,
+      "sha256": "cc72e0d15298e3b2b8d5ecf52365102b71da9174f312cdbd7b2b1d0b8e347b0e"
+    },
+    {
+      "path": "apps/web/vite.config.js",
+      "size": 196,
+      "sha256": "ce5613d59dc8f8d4f5bbf747c5f6aef97122801d25fc227de86a21b7a856a3b2"
+    },
+    {
+      "path": "apps/web/vercel.json",
+      "size": 123,
+      "sha256": "3c00d813fac756703919696435bfe5d588cf562b8de0e1242087c82fb7cd787b"
+    },
+    {
+      "path": "apps/web/package-lock.json",
+      "size": 81444,
+      "sha256": "df56c8fef301d071919707b022f2f2377158e2ef2bad22431878548a2cb6dd63"
+    },
+    {
+      "path": "apps/web/index.html",
+      "size": 294,
+      "sha256": "eb8c33d4876532858f283947a456ac8de52845bc1e8806e90903420b498d8c5a"
+    },
+    {
+      "path": "apps/web/README.md",
+      "size": 94,
+      "sha256": "965abf676132c27f3180b6350f6c43ac7b33b38e758cd53f65f0b73fd3452da2"
+    },
+    {
+      "path": "apps/web/src/main.ts",
+      "size": 137,
+      "sha256": "8b783ae13ca2ac3c195bbd0c299ef4b1d1be437e4dbbb9fc73f71327b13ae401"
+    },
+    {
+      "path": "apps/web/src/style.css",
+      "size": 55,
+      "sha256": "5cce20e00c23d8daf6d437143f2d46a66a21dad22ca0231e67359915e52bd290"
+    },
+    {
+      "path": "apps/web/src/App.ts",
+      "size": 194,
+      "sha256": "d3bfacffd179dd2ae590c7a0a111b40f03fa5ecc565d9c2b01c4e6c304bff876"
+    },
+    {
+      "path": "apps/web/src/api/keyLoader.js",
+      "size": 1009,
+      "sha256": "cd0d96c3315176a5c32d10465992538a6c86d4be5243edf7d3f7a7273f2e94ee"
+    },
+    {
+      "path": "apps/web/src/api/status.ts",
+      "size": 236,
+      "sha256": "7c72ff00fba5389f645ef0e0e8a707149a573db2d9fd9d901dc8be5112a68517"
+    },
+    {
+      "path": "apps/web/src/api/runs.ts",
+      "size": 254,
+      "sha256": "8778120fd175241ae9c90ed899ed05f03b1ae1c8637bca3f5d89b6dc7db74715"
+    },
+    {
+      "path": "apps/web/src/api/intent.ts",
+      "size": 302,
+      "sha256": "6cdf01c2f77a66b691a7364b353d76734245c961bcd9b6ed095a71de2c9db18c"
+    },
+    {
+      "path": "apps/web/src/api/README.md",
+      "size": 282,
+      "sha256": "f35d4ca38fcd53b9fe1fcc7e219e96d3b0eaa662a40851bc78171d01843933c4"
+    },
+    {
+      "path": "workflows/zapier/zaps.md",
+      "size": 125,
+      "sha256": "9d58558d65adbd52b21bd2acb80d9dd56f201e1c61266026eb4781c6aff4803e"
+    },
+    {
+      "path": "workflows/zapier/README.md",
+      "size": 54,
+      "sha256": "8675ae3edce77bfc59691f2d986454d8b1e2c6d0e1f5dd9926cec4e90ec939f8"
+    },
+    {
+      "path": "workflows/n8n/README.md",
+      "size": 184,
+      "sha256": "85ce98790076eedc84c3c28f3737a1e4d8fc155a2be83e483cac1da40c7d56da"
+    },
+    {
+      "path": "workflows/n8n/workflows/03_intent_intake_fanout.json",
+      "size": 1115,
+      "sha256": "c4a33cb55698a222058673c8206f63fbc4d0521f3b0a1afcfad008de01b86c8e"
+    },
+    {
+      "path": "workflows/n8n/workflows/04_daily_health_audit.json",
+      "size": 1495,
+      "sha256": "70624a430fc1e97adc27a33204d5e6b0223e444b4ac6afd0c1345a30b5a2de15"
+    },
+    {
+      "path": "workflows/n8n/workflows/01_repo_deploy_notify.json",
+      "size": 3164,
+      "sha256": "1abc533adc64ce397d004ecb1cd207589830529526c71b21b8579c8d8bdec40a"
+    },
+    {
+      "path": "workflows/n8n/workflows/05_env_secrets_audit.json",
+      "size": 1691,
+      "sha256": "e8ef07dfffe7ae7f1907f5c8c7025ac0be8c0568ad00d473f55e9062a1e51a05"
+    },
+    {
+      "path": "workflows/n8n/workflows/02_deploy_fail_diagnose.json",
+      "size": 1820,
+      "sha256": "c7d2bdedaee35987eeb7eb26fd1c09f413decd8f88b2d5de3372b2378d7c8431"
+    },
+    {
+      "path": "core/mcp-host/host.py",
+      "size": 69,
+      "sha256": "b4585cb3b632dc3f96008b3e14a605d036ec6133f58f2bf25168f92cfb0640d7"
+    },
+    {
+      "path": "core/mcp-host/config/servers.json",
+      "size": 20,
+      "sha256": "1e7d18f6bd615c7093e3e930e8051f0584131f9ed49a710e151f14ef90d64409"
+    },
+    {
+      "path": "core/gateway/pyproject.toml",
+      "size": 116,
+      "sha256": "46c5ed403b041b439c2cc09e69bccaa445f539771d7a6d411e2471a16bcea4ab"
+    },
+    {
+      "path": "core/gateway/omega_gateway/models.py",
+      "size": 318,
+      "sha256": "aaf0d519b2974f3e8e08718171175ce53f2fa5b992004ccab795c8fb2bb265f3"
+    },
+    {
+      "path": "core/gateway/omega_gateway/app.py",
+      "size": 5113,
+      "sha256": "a9602fe8c3f9f6b54c5fd9c0d64d8269c2700fae17e43cad0bb2b35f3e0734ad"
+    },
+    {
+      "path": "core/gateway/omega_gateway/queue.py",
+      "size": 1403,
+      "sha256": "18a6e717b00436ffd10427bd5ec2bc742f3cc38ff95cf4b6805dfc5cc923ea7b"
+    },
+    {
+      "path": "core/gateway/omega_gateway/normalize/generic.py",
+      "size": 498,
+      "sha256": "dfb922a9627eff67217c55de90febbc6d741b7237cf9fc908221272bc7ad65db"
+    },
+    {
+      "path": "core/gateway/omega_gateway/normalize/vercel.py",
+      "size": 591,
+      "sha256": "a7d2f7e1a0baa5ca1c17014a01da171d75943b5d30f7df8568730cf3e5df88c5"
+    },
+    {
+      "path": "core/gateway/omega_gateway/normalize/github.py",
+      "size": 766,
+      "sha256": "24adedb331e8fae89ee5295be57f7802e8037a90fcd5b101e72dacd6ad048615"
+    },
+    {
+      "path": "core/gateway/omega_gateway/verify/vercel.py",
+      "size": 302,
+      "sha256": "55a58d203b186a702b9c7f59160c160d9379c5596630329e511a7c149d681b78"
+    },
+    {
+      "path": "core/gateway/omega_gateway/verify/github.py",
+      "size": 437,
+      "sha256": "43dc83ea85e20623ff4a06b6bfa99c53bad56391af1058c68ccab73a60f0314f"
+    },
+    {
+      "path": "core/gateway/omega_gateway/verify/generic_hmac.py",
+      "size": 282,
+      "sha256": "21dbd329fd47a308ac4c9af2ca47506591b84538d6255d85dd1058011a3fcfe1"
+    },
+    {
+      "path": "core/orchestrator/pyproject.toml",
+      "size": 101,
+      "sha256": "621b97c88dbadd5e99988716b397c48ea6c3fae915fedf80dd071df4b2db2041"
+    },
+    {
+      "path": "core/orchestrator/omega_core/policies.py",
+      "size": 103,
+      "sha256": "2a6e3f0cd69d2773e6e436db7052b16d6d0bc90afeb53ba6839ec47dabcf7a10"
+    },
+    {
+      "path": "core/orchestrator/omega_core/router.py",
+      "size": 122,
+      "sha256": "2635a1a855cc533fdf05e500f722eb128f6f2e18de9614869606a6e8ea693dae"
+    },
+    {
+      "path": "core/orchestrator/omega_core/run_store.py",
+      "size": 38,
+      "sha256": "cd0d9c66c406c174d69ccda12f7f37e9dece11f3738d55050b49217a15e4cf93"
+    },
+    {
+      "path": "core/orchestrator/omega_core/planner.py",
+      "size": 93,
+      "sha256": "b71a66462e5d3d7e20b31e8064e196e11c61a86c7556802f6647034385ad77af"
+    },
+    {
+      "path": "core/orchestrator/omega_core/__init__.py",
+      "size": 31,
+      "sha256": "bf1d9202ffb60ce2f4765565aae2dfcbbee8cf6756c0e4cf497c7cd616939be5"
+    },
+    {
+      "path": "core/memory/artifacts/omega_web.sqlite",
+      "size": 28672,
+      "sha256": "01954f7849dfab592185076b4d48769003bb9a53bb5f8fa9424b6aa4fce05595"
+    }
+  ]
+}

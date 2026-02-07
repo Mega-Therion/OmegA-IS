@@ -1,0 +1,141 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "gAIng-Brain"
+    }
+  ],
+  "settings": {
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/package-lock.json": true,
+      "**/local.db": true,
+      "**/vector_store.db": true,
+      "**/logs/shell-history*.md": true
+    },
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/logs/**": true
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell"
+      },
+      "Claude": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "cd C:\\Users\\mega_\\gAIng-Brain; Write-Host 'Claude Ready' -ForegroundColor Cyan; claude"],
+        "icon": "hubot",
+        "color": "terminal.ansiCyan"
+      },
+      "Gemini": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "cd C:\\Users\\mega_\\gAIng-Brain; Write-Host 'Gemini Ready' -ForegroundColor Blue; gemini"],
+        "icon": "sparkle",
+        "color": "terminal.ansiBlue"
+      },
+      "Codex": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "cd C:\\Users\\mega_\\gAIng-Brain; Write-Host 'Codex Ready' -ForegroundColor Green; codex"],
+        "icon": "code",
+        "color": "terminal.ansiGreen"
+      },
+      "Grok": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "cd C:\\Users\\mega_\\gAIng-Brain; Write-Host 'Grok Ready' -ForegroundColor Red; grok"],
+        "icon": "zap",
+        "color": "terminal.ansiRed"
+      },
+      "Server": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "cd C:\\Users\\mega_\\gAIng-Brain; npm start"],
+        "icon": "server",
+        "color": "terminal.ansiYellow"
+      }
+    },
+    "workbench.colorCustomizations": {
+      "titleBar.activeBackground": "#1a1a2e",
+      "titleBar.activeForeground": "#00d9ff",
+      "activityBar.background": "#0d0d1a",
+      "sideBar.background": "#12121f"
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Unlock Peak Mode",
+        "type": "shell",
+        "command": "powershell",
+        "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/Unlock-Claude.ps1"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Start Server",
+        "type": "npm",
+        "script": "start",
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "Start Ngrok",
+        "type": "shell",
+        "command": "ngrok",
+        "args": ["http", "8080"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "Run Tests",
+        "type": "npm",
+        "script": "test",
+        "group": "test"
+      },
+      {
+        "label": "Health Check",
+        "type": "npm",
+        "script": "health:db",
+        "group": "test"
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-typescript-next",
+      "eamodio.gitlens",
+      "github.copilot",
+      "yzhang.markdown-all-in-one"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": []
+  }
+}

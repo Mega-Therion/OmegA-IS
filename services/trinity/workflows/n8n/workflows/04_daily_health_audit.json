@@ -1,0 +1,15 @@
+{
+  "name": "WF-04 Daily health audit",
+  "nodes": [
+    {"id": "cron", "name": "Daily 03:00", "type": "n8n-nodes-base.cron", "typeVersion": 1, "position": [200, 300], "parameters": {"cronExpression": "0 3 * * *"}},
+    {"id": "check_vercel", "name": "List Vercel Deploys", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4, "position": [420, 300], "parameters": {"url": "https://api.vercel.com/v6/deployments", "method": "GET", "authentication": "headerAuth"}, "credentials": {"httpHeaderAuth": {"name": "vercel_prod_deploy"}}},
+    {"id": "check_github", "name": "List Failing Workflows", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4, "position": [640, 300], "parameters": {"url": "https://api.github.com/repos/OWNER/REPO/actions/runs?status=failure", "method": "GET", "authentication": "headerAuth"}, "credentials": {"httpHeaderAuth": {"name": "github_prod_deploy"}}},
+    {"id": "report", "name": "Write Morning Report", "type": "n8n-nodes-base.writeBinaryFile", "typeVersion": 1, "position": [860, 300], "parameters": {"filePath": "/home/mega/NEXUS/repos/omega-trinity/core/memory/artifacts/reports/morning_{{$now}}.md"}}
+  ],
+  "connections": {
+    "Daily 03:00": {"main": [[{"node": "List Vercel Deploys", "type": "main", "index": 0}]]},
+    "List Vercel Deploys": {"main": [[{"node": "List Failing Workflows", "type": "main", "index": 0}]]},
+    "List Failing Workflows": {"main": [[{"node": "Write Morning Report", "type": "main", "index": 0}]]}
+  },
+  "active": false
+}

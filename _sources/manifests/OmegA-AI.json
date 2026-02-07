@@ -1,0 +1,1392 @@
+{
+  "source": "/home/mega/NEXUS/repos/OmegA-AI",
+  "timestamp": "2026-02-06T23:38:35-0600",
+  "file_count": 277,
+  "files": [
+    {
+      "path": "omegax-setup.js",
+      "size": 1126,
+      "sha256": "9803538c839ec1aa7cb830b357af3579b749c63cf5b8c627ae2eb2df7e63a390"
+    },
+    {
+      "path": "gemini.bat",
+      "size": 131,
+      "sha256": "2c3a8493bfdf8b4ae4e99fed9239999ecf05bec5d83d1b28eddc57b173732bfc"
+    },
+    {
+      "path": "gAIng-Brain.code-workspace",
+      "size": 3882,
+      "sha256": "d7047f05c8f5054a2d317644303786d58b77ef8f8587db9418e5c40cec467fd4"
+    },
+    {
+      "path": "DAWN.ps1",
+      "size": 2949,
+      "sha256": "3154d2ad63fed993ac76f0a2299963a5974ba304e4aaba9de2c77263c26a068f"
+    },
+    {
+      "path": "EIDOLON.md",
+      "size": 2825,
+      "sha256": "d2dc6ed9fdc5ab51670e8e26593bfff529e196b37d0e8573e3f398a83b722f72"
+    },
+    {
+      "path": "sync.bat",
+      "size": 162,
+      "sha256": "9ee04879c795b6ddc4ff00372928e25e5d4fa697eb4ee2c35cad74604c024a3f"
+    },
+    {
+      "path": "screenshot.png",
+      "size": 1160502,
+      "sha256": "1637137839f1245be2f397f0455c6ad24581f57098d2f6863d71af189991ad07"
+    },
+    {
+      "path": "Unleash-Vision.ps1",
+      "size": 1980,
+      "sha256": "fc74b779df29631acc24476f122bf8bbe54e5b099390f725ca797323612538a5"
+    },
+    {
+      "path": "CLAUDE.md",
+      "size": 21134,
+      "sha256": "0442779f079f8dfe5ce03a7500ced24ecbb7cad5ae444d1175bd345b6fa8b70f"
+    },
+    {
+      "path": "docker-compose.yml",
+      "size": 4565,
+      "sha256": "1bb180f81fe05a300654af6ae83b06208617344c8266bfdc67506d31ed047428"
+    },
+    {
+      "path": "DAWN.bat",
+      "size": 525,
+      "sha256": "5844bc3b49c44dba9e96509eb875527c3bde041703f8ffb12eeb84be42d01e84"
+    },
+    {
+      "path": "MCP-TROUBLESHOOTING.md",
+      "size": 4465,
+      "sha256": "d92898063548a59cffd8d5a1846b8d358ecf0ad91ada22bfc5d0cc4756b38e4a"
+    },
+    {
+      "path": "peak.bat",
+      "size": 447,
+      "sha256": "556afc5556fdc8dff0cc4893ccff493873775677b7be171a1406e5439318f806"
+    },
+    {
+      "path": "ecosystem.config.js",
+      "size": 2565,
+      "sha256": "025fcbcb3b58ceb4b00c700456601227f6efe03b80979ba86f40cb28d57bb3fe"
+    },
+    {
+      "path": "UNLEASH.ps1",
+      "size": 6050,
+      "sha256": "fcfa0d831dca33cb26ac6c7648bbbd534a28ed2be5961fdb0e0eeb6f32f9ecd2"
+    },
+    {
+      "path": "index.js",
+      "size": 3235,
+      "sha256": "ec06246f4734c235e80bc4249f92ab63bc1615df4dbee3d351e68f356b9646da"
+    },
+    {
+      "path": "COMMUNICATION.md",
+      "size": 5818,
+      "sha256": "4e979b8a866db5ef908708b7edd749c7abfcecd8835535f63a6fcbb37a696ec5"
+    },
+    {
+      "path": "grok.bat",
+      "size": 179,
+      "sha256": "01b123954b13f5f31ac9588059d1c721f3640d3567b559b946b05b1dc0adda8b"
+    },
+    {
+      "path": "SYNC_WAR_ROOM.ps1",
+      "size": 749,
+      "sha256": "19edae1547e066d8f97c96d3f24d3d6fa6cfb4c7f0f733fbc0bb4ba0abb1680b"
+    },
+    {
+      "path": "PLAN_GOD_MODE.md",
+      "size": 4312,
+      "sha256": "c192089dc708e28b90ed53e398a9cc29d3b564a711778137fdf96fa044b7316e"
+    },
+    {
+      "path": "PROJECT_OMEGA_SUMMARY.md",
+      "size": 9682,
+      "sha256": "6a5fc55ce4b1e07f777f5b32da57a2967fb6ff5a32fc32d7f1a93cf580beb12e"
+    },
+    {
+      "path": "WAKE.bat",
+      "size": 736,
+      "sha256": "495e922f975b8df4f16cbc2efdfa49b82465c2b528eeb28105c3e0f756bb8aba"
+    },
+    {
+      "path": "CONTEXT.md",
+      "size": 2947,
+      "sha256": "a92f036ddc5acde0034c31be25f3c4cab3d2e35f7f7bf2d7a3257dfb316974b7"
+    },
+    {
+      "path": "package.json",
+      "size": 2519,
+      "sha256": "0b0b378b1dfa2888cc61971b05f3320edc463a65f538f27cdd570ce07c32e311"
+    },
+    {
+      "path": "Setup-GrokIntegration.ps1",
+      "size": 10720,
+      "sha256": "997e4acddd6d4c2cff07d3c0c8648bdcc56f425b5b36327891be5be0f3eaecfd"
+    },
+    {
+      "path": "GEMINI.md",
+      "size": 2874,
+      "sha256": "63c2d8aa9eb47b0c94a01259d2722002fa502674cc68173cc42913c1ab36e4ed"
+    },
+    {
+      "path": "PROJECT_VIBRANIUM.md",
+      "size": 4734,
+      "sha256": "baa284e2190074ea29265ef206bd6bc9dea20fc16b23fb4d262e21da5e137ebb"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 4005,
+      "sha256": "4d3b392b7802c9e7fcda596fff21043729c24613e145616b2a4588b5bc78281e"
+    },
+    {
+      "path": "up.bat",
+      "size": 131,
+      "sha256": "df64aa039ff68c5da6ccd3fee934d49021fb7d43c736016843a76345f087cb52"
+    },
+    {
+      "path": "AGENTS_old.md",
+      "size": 198332,
+      "sha256": "0035833bfe25d40772f0cb5addba9d02472fc86523de36b29205cebab172a62a"
+    },
+    {
+      "path": "omega-stack.bat",
+      "size": 673,
+      "sha256": "2eed5d6ffc347f531c9ec10368c8b8647e3434e6fe6253d108542bd6cc3d76a9"
+    },
+    {
+      "path": "ISSUES_TO_CREATE.md",
+      "size": 1900,
+      "sha256": "aa8da34c5d491b82a4486e48ed6d8c9841f9f59b8f705f17e60eb992f69d8705"
+    },
+    {
+      "path": "Dockerfile",
+      "size": 2220,
+      "sha256": "f042c9ce3b8fe894f69bc9ed32fbbc736d067ee74fd84e45226569832f20ad14"
+    },
+    {
+      "path": "package-lock.json",
+      "size": 152657,
+      "sha256": "c256256387344969328469994a36a0657ef3d1a8ca0324bb01519ef1d3fc935b"
+    },
+    {
+      "path": "log.md",
+      "size": 10712,
+      "sha256": "b5d8979fcb3a15463d9b7afb6ea434982d64313e848a9441c7ed0fdc765b5a05"
+    },
+    {
+      "path": "RYSE-SOLO.ps1",
+      "size": 940,
+      "sha256": "5e65cfa6904d05eb255bacbcdafeda1130737a7b347dce076830f2ba07a9bdc1"
+    },
+    {
+      "path": "ryse.bat",
+      "size": 183,
+      "sha256": "ab3d6aaa0404f03b1147f239ce75b32fea632ca43f37b6592da68e725ceb4533"
+    },
+    {
+      "path": "claude.bat",
+      "size": 194,
+      "sha256": "1292dc17d64d4b8196dfd181399e08e6f81fb6f1d62d00f613a79a887c0a3011"
+    },
+    {
+      "path": "GROK_SETUP_README.md",
+      "size": 9107,
+      "sha256": "052310d48e77f5a5579fc929d6d82179ded614d2ebefd7abd7618fb7904938f5"
+    },
+    {
+      "path": "PROJECT_OMEGA_README.md",
+      "size": 13260,
+      "sha256": "2eb0308b970a7fe374b8a26e424277319b4f3bce66e8479fa421b8065916e04b"
+    },
+    {
+      "path": "Wake-Vision.bat",
+      "size": 154,
+      "sha256": "578f0f4c0abac94d6d45f5c51f20efc61e367dc2190fc2efddc6b1f67df75aaf"
+    },
+    {
+      "path": "codex.md",
+      "size": 3802,
+      "sha256": "535e01f1ff16d3fa7dd09704c1a6a2d39167cee53cbe7fc596f7e81bace52afb"
+    },
+    {
+      "path": "JARVIS.md",
+      "size": 6079,
+      "sha256": "1d52773437f3573bb618bc0d30d9abcd3fc44b5acf90faa53bfac7f61b80fb92"
+    },
+    {
+      "path": "vector_store.db",
+      "size": 24576,
+      "sha256": "9f13136d24db544436fd2abbfd0fd16912fe32821037c939fbecc69e336a67a1"
+    },
+    {
+      "path": "codex.bat",
+      "size": 191,
+      "sha256": "6783ceba86f7e8f2c87742877240176a5eedcc79be8caccadad53d7c1e032d89"
+    },
+    {
+      "path": "INSTRUCTIONS_FOR_COMET.md",
+      "size": 2553,
+      "sha256": "dbbb7a4b933820adbcd75ae76c28f8d9545db65792bb6090e8f92ec6dfc010b2"
+    },
+    {
+      "path": "README.md",
+      "size": 6825,
+      "sha256": "a3ef30190d789fc64541d808dc71b38e44efa6b0ed7f19c0caa9086b4e153640"
+    },
+    {
+      "path": "QUICKSTART_OMEGA.md",
+      "size": 3534,
+      "sha256": "7a8a3edaf09941c0cd8ae0f876b9e0ef76f5f117c8c1d269565fe1d6a884c511"
+    },
+    {
+      "path": "crew.bat",
+      "size": 353,
+      "sha256": "4e5bcdb18624f34db64f5480c6d6998e910997626c690729b34e8404cdc7a852"
+    },
+    {
+      "path": "notes/codex-gemini-feed.md",
+      "size": 331447,
+      "sha256": "b133016c225e5fddb17e4b68a3fba56a2fbd40c026526b1d6d079ebe0c8ed9e7"
+    },
+    {
+      "path": "notes/codex-gemini.md",
+      "size": 2066,
+      "sha256": "0c6e066c9eff7b94c60e80985da8c9e428c9422aeaebed48a859931119355bd0"
+    },
+    {
+      "path": "mcp/servers.json",
+      "size": 398,
+      "sha256": "d6c2149a7e3d4ab5b0e5dc4870b74ca7906cb7a0390fc98bff0eafe6b28c8ae0"
+    },
+    {
+      "path": "my-brain/brain.js",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cli/package.json",
+      "size": 604,
+      "sha256": "d4b70c1c6a22301d8a607c1a24e040116778601a39e081f9bd0317bfabec1974"
+    },
+    {
+      "path": "cli/omega.js",
+      "size": 9361,
+      "sha256": "e50bbd04d519984322d54fb6ed75558432cf1fee0b04b8ca43c5cd457797a61d"
+    },
+    {
+      "path": "cli/README.md",
+      "size": 1373,
+      "sha256": "9c1c7db6710b7d623de97a2cd0a0fb6f3be051f82cdbf9f42bbf4c15806d840b"
+    },
+    {
+      "path": "archive/log-archive-20260108-031908.md",
+      "size": 76,
+      "sha256": "5751a942dfb897bd34236be34655aec4add6fbf8833456de17784ea971e59cac"
+    },
+    {
+      "path": "archive/supabase-export-latest.json",
+      "size": 4523,
+      "sha256": "8aa50e505899694985f4c7358e89f391257bc0ea83028f9e8b6c48889ef5c781"
+    },
+    {
+      "path": "archive/supabase-export-20260104-152729.json",
+      "size": 4523,
+      "sha256": "8aa50e505899694985f4c7358e89f391257bc0ea83028f9e8b6c48889ef5c781"
+    },
+    {
+      "path": "archive/supabase-export-20260103-144711.json",
+      "size": 4523,
+      "sha256": "4f51ba81bf1b04cd61fb60cfd7ddc07b64bb0dae43a618cf011d0228a8c23f73"
+    },
+    {
+      "path": "archive/supabase-export-20260103-160052.json",
+      "size": 4523,
+      "sha256": "19f408341354a4a9267afb29c9b7110ff964353da836d854581b8e4b5a281c9a"
+    },
+    {
+      "path": "archive/supabase-export-20260103-195832.json",
+      "size": 4523,
+      "sha256": "7cac12125b6a5219a9bbbdc3db4e606afdd1a59ceb91cd1917c27408c8b00556"
+    },
+    {
+      "path": "archive/supabase-export-20260103-183128.json",
+      "size": 4523,
+      "sha256": "8347e922e296b4d16e38d040518fd5f9fca7fa4caf237566e82fa6c4fec4f6dd"
+    },
+    {
+      "path": "archive/log-archive-20260108-031708.md",
+      "size": 8249730,
+      "sha256": "fda30bc6ce702ff9194f81d400f70691353b0bd889770ec2cb6ed01c35a58cfa"
+    },
+    {
+      "path": "docs/jarvis-blueprint.html",
+      "size": 30472,
+      "sha256": "5a2e8d1b29f0173d200fb638bc8552c7d5ed1a08fed8cee308e6785a694ce847"
+    },
+    {
+      "path": "docs/OPERATING_MANUAL.md",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/COPILOT_PLAYBOOK.md",
+      "size": 8819,
+      "sha256": "01b9ed0a128176b3dee711b9eaba450e1815dbe2867010ae707952daf1570fb7"
+    },
+    {
+      "path": "docs/safa-ios-shortcut.md",
+      "size": 3865,
+      "sha256": "2ec04dc096d8fca7bc08a457abd645d66298c067b8e3171beda3508258cbf5ee"
+    },
+    {
+      "path": "docs/OPTIMIZATION_ITERATION_01.md",
+      "size": 1864,
+      "sha256": "4f15ce6e233b3dfd06c8b5f1546a7947399cc329097635956f0dd2cc7276a1b7"
+    },
+    {
+      "path": "docs/A2A_INTEGRATION_PLAN.md",
+      "size": 4063,
+      "sha256": "e2536d54b62f7d6c08d6bb9ff5dcf7949250c74a1eefc4bfec2bbcdf7fff6dd0"
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "size": 4631,
+      "sha256": "cc818c12c074bf32d9e75f3ef1acda8ebd6d82fcf6aae7299a29dd2a64698646"
+    },
+    {
+      "path": "docs/PODCAST_SYSTEM.md",
+      "size": 13742,
+      "sha256": "ad9566ca114450422e0a77372ae7eb25044bf7b73d5a5137a9f11ff0bdf991cb"
+    },
+    {
+      "path": "docs/Unleash-SystemPower.txt",
+      "size": 3212,
+      "sha256": "f41d0ef8b2c04d577a4a726d91f05303b8678aecd79661f198c8692551f55870"
+    },
+    {
+      "path": "docs/IMPROVEMENTS.md",
+      "size": 3884,
+      "sha256": "b72060bee60923e310f67bc117f166daf2dc4383105022f4653d3d89e2fc5a1f"
+    },
+    {
+      "path": "docs/OMEGA_SYSTEM_SPEC.md",
+      "size": 2271,
+      "sha256": "ad713ea03ad7db9a1cd8c8c802023968294bf2ceddc7386cd7ce4ddfa693bce4"
+    },
+    {
+      "path": "docs/OMEGA_PLATFORM.md",
+      "size": 5968,
+      "sha256": "653169a0cdfd7505acbda858520cc13d47e9f099cfc31ecf39000b9267f30039"
+    },
+    {
+      "path": "docs/GAING_WAR_ROOM.md",
+      "size": 2425,
+      "sha256": "b219d4ffded532b3e08509e125201eb91fabe230624b6d580929fd0d4a3a4f00"
+    },
+    {
+      "path": "docs/CANON.md",
+      "size": 9682,
+      "sha256": "84024800dd91f40697dab20fa2596fffb48bbaf55fecce65437fe8d5ec460402"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "size": 1319,
+      "sha256": "cc8ab54dd68d6e0d64861383cd321d1c5cde020ee3c3c19bafd8c93c2f7f6e0e"
+    },
+    {
+      "path": "docs/WORKERS/researcher.md",
+      "size": 492,
+      "sha256": "d921cc7746704730578524ee711ca0473a352bd687661edc36d53bb7705b11c3"
+    },
+    {
+      "path": "docs/WORKERS/planner.md",
+      "size": 861,
+      "sha256": "76ccc9c7c3962a66d719644bf6db2fae224698fcc6ade792f19f7f2ec1d74c2c"
+    },
+    {
+      "path": "docs/WORKERS/critic.md",
+      "size": 509,
+      "sha256": "9989e70e9bfe360372bf828a1a0af4935fe1fab2e531c191e6b5bea3257cb5d5"
+    },
+    {
+      "path": "docs/WORKERS/builder.md",
+      "size": 730,
+      "sha256": "99595ad49432bf548525039d26befd90bc56b8df810e550bed4f6c560a169e29"
+    },
+    {
+      "path": "docs/WORKERS/synthesizer.md",
+      "size": 462,
+      "sha256": "d79fed1aab44c730c2ead251e117d17b2d1eeae2d0b953e03b925ecd388de0e9"
+    },
+    {
+      "path": "docs/eidolon-dropzone/Eidolon_Architecture_v2_Final.md",
+      "size": 7902,
+      "sha256": "e4678f84559c02e1fe20c169c9dec0760fc85f186d0ca69e47cd0bd9ac77ff18"
+    },
+    {
+      "path": "docs/eidolon-dropzone/EIDOLON CROWN.md",
+      "size": 3681,
+      "sha256": "706b37b69daef21540219ce7e0357542cf811b2dfec36069f96f416233f7f456"
+    },
+    {
+      "path": "docs/eidolon-dropzone/Eidolon_Safety_Protocol_v1_Final_Optimized 2.md",
+      "size": 2207,
+      "sha256": "3bc7351a4b4c392b8c3b51705d85e3d45fb6e3485efa69a7a09517d2b5336fe9"
+    },
+    {
+      "path": "docs/eidolon-dropzone/SAFA_Governance_Risk_Mitigation.md",
+      "size": 19194,
+      "sha256": "ec0059197ca789a6f09ef7d14df0f2a18258cd2a7f5d79c0b43e590f15f3d35a"
+    },
+    {
+      "path": "docs/MCP/EXAMPLES.md",
+      "size": 5026,
+      "sha256": "7e451e657f4566a970f9bd265814ba56f99aa822d8577118bde1c2b072ef1ba0"
+    },
+    {
+      "path": "docs/MCP/README.md",
+      "size": 8512,
+      "sha256": "1bdb6172db63b84e7e666f42605ee4b1ad337dae0a78e88bbd1c04f4ec9c467f"
+    },
+    {
+      "path": "src/safa-telegram-bot.js",
+      "size": 14961,
+      "sha256": "5f8c5890da2a9594140b9886ab9115c384e2c77f4bfb7b83a9b0c48c052046cd"
+    },
+    {
+      "path": "src/agent-worker.js",
+      "size": 7715,
+      "sha256": "7db04d5d45ad83e7f6802420911a1a1f17d0133a2f50141338bb214950ce671d"
+    },
+    {
+      "path": "src/app.js",
+      "size": 3884,
+      "sha256": "8d1700ffbc57da666f91e7ddb70fc770aeeac7a8811c9ab8211091f7075704dd"
+    },
+    {
+      "path": "src/orchestrator.js",
+      "size": 8517,
+      "sha256": "45fd8501bc42d145dc864ea3b41fab876f97304c49bc96ddab07d5a44d2b19a2"
+    },
+    {
+      "path": "src/services/consciousnessKernel.js",
+      "size": 4886,
+      "sha256": "ef623fe9b26777766b457a57346af8e905bf27b7b78d1d881d8e8ab25a263e8a"
+    },
+    {
+      "path": "src/services/realtime-vision.js",
+      "size": 3473,
+      "sha256": "77c05b2360328e4787154d4eb67a7aad4f8bfabc2268c1ca26f9a328d554c6bd"
+    },
+    {
+      "path": "src/services/voice.js",
+      "size": 997,
+      "sha256": "f00c8573324d63fb1470d78360b35c4481deb068dd1e4ca32419acad43510033"
+    },
+    {
+      "path": "src/services/ears.js",
+      "size": 1377,
+      "sha256": "d521dbdb171880f545c2e8c86cc058d25f06baa8c2e532834712b1c13b5e6056"
+    },
+    {
+      "path": "src/services/blackboard.js",
+      "size": 4211,
+      "sha256": "6e5ffab94bda26af99af0b055018474f292f24f01690990ade359708e49a0111"
+    },
+    {
+      "path": "src/services/llm.js",
+      "size": 2332,
+      "sha256": "325e8512bf6a018325cb71fa19a2a589dc9a4666b629313c40f4582344f019a8"
+    },
+    {
+      "path": "src/services/eyes.js",
+      "size": 2318,
+      "sha256": "83c5063113c041189e6095a07e51b0018f370b7d03c75547ef5485269b50faa5"
+    },
+    {
+      "path": "src/services/mem0.js",
+      "size": 1518,
+      "sha256": "1881247f83cdfc5d8026cc70004e51af5144f003592e531b9fc276c2e30bf12a"
+    },
+    {
+      "path": "src/services/self-healing.js",
+      "size": 10465,
+      "sha256": "0ef18fc3128c10c95a39a60c8431e43343a7a3affef1beec3bc3e44d797185c0"
+    },
+    {
+      "path": "src/services/grok-voice.js",
+      "size": 10873,
+      "sha256": "f62e64f9e26f88cfc5eb26229ad9af0bcbbdf3f07638e9bf517d16df9262cbf1"
+    },
+    {
+      "path": "src/services/websocket.js",
+      "size": 1841,
+      "sha256": "f8c54d91770fe80aba8987de59c7f7e63782acff2f70e1727ee4d14728e82ba2"
+    },
+    {
+      "path": "src/services/a2a.js",
+      "size": 4375,
+      "sha256": "c1bf8ca99e0407793b6cda3266ab019b94211a91ba2c8d1982de041c40c57ae1"
+    },
+    {
+      "path": "src/services/streaming.js",
+      "size": 5314,
+      "sha256": "7e10b4721d9df3102a41a0c93db65640a07f15206939576ae5003e74fb5fd252"
+    },
+    {
+      "path": "src/services/vault.js",
+      "size": 8076,
+      "sha256": "6659f0acbde03f38dce82b22486c34e639163c4b10da7d87103b82a4dd5c2028"
+    },
+    {
+      "path": "src/services/queue.js",
+      "size": 3268,
+      "sha256": "eeec9e52766d615dd22334a48a08fc1386838bb5672c5cb0cce266951707f507"
+    },
+    {
+      "path": "src/services/observability.js",
+      "size": 8828,
+      "sha256": "ba253272de00010d222e71e415ccba9d01917bbb7878d12c072e2c01b1160c12"
+    },
+    {
+      "path": "src/services/plugins.js",
+      "size": 10554,
+      "sha256": "2915f1ed7ed129efc1671bfba624f6add9c3c95d8d4aab84e723be58bc89bfae"
+    },
+    {
+      "path": "src/services/supabase.js",
+      "size": 483,
+      "sha256": "d4c9b5356bffc9449807d715d8befc721864bf6899846d7bfdc578a16ee167e2"
+    },
+    {
+      "path": "src/services/orchestrator.js",
+      "size": 12805,
+      "sha256": "a9c4f166446ff4fed87c35c059176efe48a1dbb230c26000cf28b622aa6c47d3"
+    },
+    {
+      "path": "src/routes/voice.js",
+      "size": 665,
+      "sha256": "6fc6983bee8d8e504f6c1a3d3b7ce82d19451d47f8b992614e1d1f056dda681d"
+    },
+    {
+      "path": "src/routes/ears.js",
+      "size": 1145,
+      "sha256": "bda99ffc19b44a1829a48df160f9b862b5ec69987db780883fd1fd72f4d2dd20"
+    },
+    {
+      "path": "src/routes/system.js",
+      "size": 7610,
+      "sha256": "28bedbd05954505073e4cbd4509c9f22a20b22bbd417419e8393f6a03e14f7c5"
+    },
+    {
+      "path": "src/routes/ws.js",
+      "size": 843,
+      "sha256": "098aa4ff5b8de8c3039a5f7296ba89624a79afc0e74d24be9e69ed8c4e2d448a"
+    },
+    {
+      "path": "src/routes/llm.js",
+      "size": 1199,
+      "sha256": "f59750473548624f561b869b1bbac4999664f9cd7626321cf3b9f2d1dcc52560"
+    },
+    {
+      "path": "src/routes/memories.js",
+      "size": 6025,
+      "sha256": "468302f2544d37dde50f6f4c33e19cbf33f1f8e43676b4492397fa3346162c1e"
+    },
+    {
+      "path": "src/routes/eyes.js",
+      "size": 706,
+      "sha256": "8f2d4973361f949d9a7a80d2053ef369de6cb0263fee32f49231f66f6a402bbe"
+    },
+    {
+      "path": "src/routes/mem0.js",
+      "size": 1485,
+      "sha256": "d22c0deca533bf7434eb51fbfa39268792bac52bfcec30cb0faa8fcfb11fbd79"
+    },
+    {
+      "path": "src/routes/vault-queue.js",
+      "size": 6842,
+      "sha256": "49a4edbdd18c6ab6e71f8fca873dfd2e36265fdf2b96eb81abf8ea2e9d47749b"
+    },
+    {
+      "path": "src/routes/tasks.js",
+      "size": 4106,
+      "sha256": "4b5141fad4e7b560934f78acebf56d0fb66010e18bc033aaa50256b1a3034392"
+    },
+    {
+      "path": "src/routes/messages.js",
+      "size": 7262,
+      "sha256": "a619e29433e41a791c0fa9504dfd71927aae5e4066e62e9c535299fb3bb8d7f1"
+    },
+    {
+      "path": "src/routes/agents.js",
+      "size": 1306,
+      "sha256": "a68b51d16d4071d0327ef7fdd177cb2d033070f760ec58cf39efce51c19e32d1"
+    },
+    {
+      "path": "src/routes/grok-voice.js",
+      "size": 5089,
+      "sha256": "cba85f3871807cdd98600183f2a4957628b34fc0e158f10fb00e562fb8567d91"
+    },
+    {
+      "path": "src/routes/mission.js",
+      "size": 439,
+      "sha256": "41cc87e5c007b579b52c80bc7c34797fc5c7393a2945be4fb1b3d4d0f3c68d25"
+    },
+    {
+      "path": "src/routes/kernel.js",
+      "size": 871,
+      "sha256": "f6f1b3a4340e06729ea8af4023223d3bf9218128003f9b1ca69e154071462603"
+    },
+    {
+      "path": "src/routes/safa.js",
+      "size": 1826,
+      "sha256": "596d46a5b7e4e80f66bf5bfb88b501cc072d1b821e7758317251008f9cfce40e"
+    },
+    {
+      "path": "src/routes/members.js",
+      "size": 3235,
+      "sha256": "f03f1884af5afb80cee8433c66c5b788badaa7ca3b5c4f85057d236acbfd4113"
+    },
+    {
+      "path": "src/routes/podcast.js",
+      "size": 7789,
+      "sha256": "e2ccc35c352ed5c91d14a46ecf8cd7f389d9b42cff788c61c47b389f04bfad40"
+    },
+    {
+      "path": "src/routes/analytics.js",
+      "size": 7997,
+      "sha256": "0742404ece36c68bf39775c898973012c3697e78145390685071b314ece438dc"
+    },
+    {
+      "path": "src/routes/realtime.js",
+      "size": 2805,
+      "sha256": "e43816718d84460c6fddf3e1eb5326d4872f78e546208a32dcb6cd8155da7142"
+    },
+    {
+      "path": "src/utils/helpers.js",
+      "size": 2118,
+      "sha256": "8fab1565af1568d51b0648f39a560a47f4e66112f6b9645bfb5434965815e8ae"
+    },
+    {
+      "path": "src/middleware/auth.js",
+      "size": 883,
+      "sha256": "bd19761254efe3a81245adb3f6453c163bed7ba1663279bba1318bdc1d28c93b"
+    },
+    {
+      "path": "src/config/env.js",
+      "size": 1666,
+      "sha256": "913f1a22ab89dbecc40554d54bd4cb36a6fd757d0a09342fa83bda8c6a53bed4"
+    },
+    {
+      "path": "src/workers/researcher.js",
+      "size": 4196,
+      "sha256": "2185c4094c53ac8c2caa6a0897bc88553261a2ec20a50ea9495b1835f7104063"
+    },
+    {
+      "path": "src/workers/index.js",
+      "size": 295,
+      "sha256": "d44bee60ce7945aaca5ae3173f7d2d004c87bffd4a40f2d5158c2a719048f5a7"
+    },
+    {
+      "path": "src/workers/planner.js",
+      "size": 1758,
+      "sha256": "e4e8b91203312d63ea323a685277794475d3f211f59cea36233b39bfcdcb9be1"
+    },
+    {
+      "path": "src/workers/critic.js",
+      "size": 1726,
+      "sha256": "40244005d90e6c746b7fae2adf0ace1f9283eb0aeff1a41c58aa37dd2b742d60"
+    },
+    {
+      "path": "src/workers/builder.js",
+      "size": 3314,
+      "sha256": "10a8756ffc596f6ac4bca43833cfe4b86602b6ba9bfefee73393d580c97a9626"
+    },
+    {
+      "path": "src/workers/synthesizer.js",
+      "size": 3447,
+      "sha256": "dfade7d7e15289d04c2fc2eafff6ae1e05537c19e19acd92191755597b192acf"
+    },
+    {
+      "path": "src/core/worker.js",
+      "size": 643,
+      "sha256": "e8ddba4bd96db11f848506620d3b9c2eb12f046a6796fc10b763f6efd651b9a5"
+    },
+    {
+      "path": "src/core/mission.js",
+      "size": 2597,
+      "sha256": "5088b3bb798058aece2f472890d954c1ed7e20ee119ac8af286556bf7027d71d"
+    },
+    {
+      "path": "src/core/brain.js",
+      "size": 4637,
+      "sha256": "58624a6dcf4d6e0c9984ea117c73d4f98e9f61a21c3d342bca317a4291183477"
+    },
+    {
+      "path": "frontend/postcss.config.js",
+      "size": 80,
+      "sha256": "190c877db466995bf1482f4a16abd06e04a89ede3119341e2a86ff96e1737b27"
+    },
+    {
+      "path": "frontend/package.json",
+      "size": 934,
+      "sha256": "9b768d9b6ebd82c388759907fd580bf4881ae1de587d82c46a9aad7bb96d6878"
+    },
+    {
+      "path": "frontend/tailwind.config.js",
+      "size": 717,
+      "sha256": "82b0678b19210cec25ea7609be3062fbb3927b30baa8a0c14243ec782b282258"
+    },
+    {
+      "path": "frontend/vite.config.js",
+      "size": 1598,
+      "sha256": "e9cf0e5cd6bd7171939b4674a74436612f9d9e46982e18ea382395046e54731e"
+    },
+    {
+      "path": "frontend/index.html",
+      "size": 8606,
+      "sha256": "a9c6a273641cf4e3ac7aca1e44664f743fd9df96dfb067859f94285d8eb20d67"
+    },
+    {
+      "path": "frontend/README.md",
+      "size": 1760,
+      "sha256": "c4de98f5ca19bcb19883cba8297fce38c36b34ef4dde373b3f925d1acf60f936"
+    },
+    {
+      "path": "frontend/src/index.css",
+      "size": 725,
+      "sha256": "eb7aa7b890d3996e2aa677df7a679dd6ab25e949f46bcdeb759ca290a4e67737"
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "size": 235,
+      "sha256": "acb24feb3540b5ee687f5a65bdbb81fe3644aa19da89256bc24b18d8ee010410"
+    },
+    {
+      "path": "frontend/src/App.jsx",
+      "size": 15970,
+      "sha256": "93fa5b6dc111f4bc9c519e61b0e16c4bf49bdd881c9b8106030922a5c223d81b"
+    },
+    {
+      "path": "frontend/src/components/VoiceInterface.jsx",
+      "size": 2840,
+      "sha256": "b7a380237658c34b14e7a5f8d94cbe56093140876eaef4db6b1667f5cfa7b709"
+    },
+    {
+      "path": "frontend/src/components/HealthMonitor.jsx",
+      "size": 10323,
+      "sha256": "c74b68316e5d87511192ea18bacd319334088c3c13790badeb94795d066b8956"
+    },
+    {
+      "path": "frontend/src/components/MissionBoard.jsx",
+      "size": 8030,
+      "sha256": "ad57d4ab6cc74d093a1ad3b1952ba6d0876ebfbcb7a65b88b05315cadda80914"
+    },
+    {
+      "path": "frontend/src/components/Analytics.jsx",
+      "size": 11581,
+      "sha256": "e87ac2cdb166e7287878feffe82146aaf6d2aebb50c2f481adb20107b11e5883"
+    },
+    {
+      "path": "frontend/src/components/NeuroLink.jsx",
+      "size": 4953,
+      "sha256": "b1237306547f1303c5119a3f3e71190febfb01c633a2829f7158aad8631faa04"
+    },
+    {
+      "path": "frontend/src/components/AgentChat.jsx",
+      "size": 9393,
+      "sha256": "8edba5c949aae1141920cb14d2fe5d58fbc94aafb608b3f919edc9b75988f1d9"
+    },
+    {
+      "path": "frontend/public/manifest.json",
+      "size": 2204,
+      "sha256": "fdc3291135d3eb6daeba6117473ff1e6f57a516ad80289567df0ce02e193722e"
+    },
+    {
+      "path": "frontend/public/brain-icon.svg",
+      "size": 2118,
+      "sha256": "5e967dfae344dd490cb9bc42d67e8b49c26dcf8b0a31af33153170353ceab7ae"
+    },
+    {
+      "path": "data/local.db",
+      "size": 65536,
+      "sha256": "58a659d5e717b2c0f5ce7617d150dc7384906dac4676d47e259f5d2b9faaad96"
+    },
+    {
+      "path": "data/stream.json",
+      "size": 189,
+      "sha256": "9c5819b1a9355f6aeec60d44872335741496bea3d3513ec61ed49ded2bc3e801"
+    },
+    {
+      "path": "data/missions/a0770c87-2212-4117-87a5-54c91a705084.json",
+      "size": 517,
+      "sha256": "2679835bd1603129e60e5be43c74d016313613f862cb5b13985aefed32b2bc6f"
+    },
+    {
+      "path": "plugins/example-plugin/index.js",
+      "size": 3031,
+      "sha256": "60610392f6c9d043e9aad01514d1e1cb23307168efd7da38ac6f9e18f7dfdccc"
+    },
+    {
+      "path": "plugins/example-plugin/manifest.json",
+      "size": 397,
+      "sha256": "ea1f35593c7146fee2a7df21684cbe373b6ede2f4698c367963acb3491325032"
+    },
+    {
+      "path": "mobile/package.json",
+      "size": 1479,
+      "sha256": "7bd19e863653383b4e776ca4d4083227a41e3759d06d3912b53e078c0290267f"
+    },
+    {
+      "path": "mobile/vite.config.js",
+      "size": 408,
+      "sha256": "3c0c9272c8b429761f34969d2f9379daf1d8ff75d5eea7754a19a896aad152cd"
+    },
+    {
+      "path": "mobile/index.html",
+      "size": 2703,
+      "sha256": "36dcbef78ff1ee1de876bad7babff43db442e4b6237cf9512d67f3883d412896"
+    },
+    {
+      "path": "mobile/capacitor.config.json",
+      "size": 814,
+      "sha256": "701384bdc988ebf47368c30c4c5f1ecf002eae3c9cce4b3117284eb612c1a2f9"
+    },
+    {
+      "path": "mobile/src/index.css",
+      "size": 42,
+      "sha256": "74e1acfd42f7117140290f60a7b16bdcd12874b9d6d9532d0d8e3e3dd9f5eb37"
+    },
+    {
+      "path": "mobile/src/main.jsx",
+      "size": 1549,
+      "sha256": "f9d99d556cc64a1839e567ea2cd98d13ad676badece78055c9cf4c1dddf71efb"
+    },
+    {
+      "path": "mobile/src/App.css",
+      "size": 4673,
+      "sha256": "0157c423e6942d6fa94795f7633bce3bdd4d7b334a2d2f6c212738ce9cce85d6"
+    },
+    {
+      "path": "mobile/src/App.jsx",
+      "size": 5394,
+      "sha256": "e2c17d967be42dd3d6a1d18c58ccf2a37242aeb1a7ee13ea37588df11dd1be54"
+    },
+    {
+      "path": "mobile/public/manifest.json",
+      "size": 1632,
+      "sha256": "8f8b31f55691db38509dcf231b10b8aacbbded604249189371d24bb208150a7c"
+    },
+    {
+      "path": "scripts/start-ngrok.ps1",
+      "size": 2147,
+      "sha256": "3641129acabfc733d31ee80ee6c62e07d4ea6175e75be7b3320cc26d1d7e5495"
+    },
+    {
+      "path": "scripts/smoke-test.js",
+      "size": 1571,
+      "sha256": "b597d29cc4542f42103fcfa6463edd289fe871f18691a0f126cc2e29deca7874"
+    },
+    {
+      "path": "scripts/sync-archive.ps1",
+      "size": 208,
+      "sha256": "a38efcf1b2bff95a8c6a9200ef04f7973fa8eb62d46bb710eb2d90afbf69b6aa"
+    },
+    {
+      "path": "scripts/unregister-startup-tasks.ps1",
+      "size": 241,
+      "sha256": "bdd377c68a51acf99e68929e15e766a06bd186ee1dd3326b91404af2201f0e18"
+    },
+    {
+      "path": "scripts/start-infrastructure.ps1",
+      "size": 2156,
+      "sha256": "320a431df532a7be3a2f6e936c4452c4aaa4a7793d27ae7d1f95826dd832d80b"
+    },
+    {
+      "path": "scripts/start-codex.ps1",
+      "size": 1531,
+      "sha256": "17bf0a868448fbbe247e8ab9d505bb370c864f0bffe314c70344533b8bd7bec8"
+    },
+    {
+      "path": "scripts/setup-mcp.js",
+      "size": 3546,
+      "sha256": "ea096a48df35f854218cd5455524f7255744f40281e755a43130fe627cd54c7f"
+    },
+    {
+      "path": "scripts/Validate-MCP.ps1",
+      "size": 4190,
+      "sha256": "bcfdef792d79ad1b54b8e60b57b2d1d79e82c5e7809de8482fac3f8fd63cc72d"
+    },
+    {
+      "path": "scripts/forge.ps1",
+      "size": 4465,
+      "sha256": "65ba1bbfa017404f48ea0fde20d702c0146270d0c9a6b9ad2816238ebb9c0026"
+    },
+    {
+      "path": "scripts/start-claude.ps1",
+      "size": 1695,
+      "sha256": "5f8ba07e90e0b9ecb0d7116f17f3c9d55f5595f940e0dc300efabc52938eb818"
+    },
+    {
+      "path": "scripts/setup-autostart.ps1",
+      "size": 3602,
+      "sha256": "4a0baa97ed1418bb2641eb7b0e91c069bccd11564a3820de4b0681812a71a11a"
+    },
+    {
+      "path": "scripts/Start-OMEGAStack.ps1",
+      "size": 5428,
+      "sha256": "4223d6a625f422be097913cb6fceafe7fe9abc4bc553354751ceb3c2c51be93b"
+    },
+    {
+      "path": "scripts/start-omega.ps1",
+      "size": 2186,
+      "sha256": "b1e9a9a7c1f2c325ebb90596226de949e1fa5fe2c5b8f22e5b664f581818d5b8"
+    },
+    {
+      "path": "scripts/start-crew.ps1",
+      "size": 3228,
+      "sha256": "b76fac2a691e954f17096dfd7671233cf32e86b49f1f2fc2392581bfd22a56aa"
+    },
+    {
+      "path": "scripts/Unleash-SystemPower.ps1",
+      "size": 3229,
+      "sha256": "30dac9ddd898a51113b3ca74ec5a68beb411fa5e568391ab72192058a8c4aecb"
+    },
+    {
+      "path": "scripts/rotate-logs.js",
+      "size": 3172,
+      "sha256": "d773929e64b5cd9b838a27260f5fbbb11e2e440167de7d739e234644c63536c0"
+    },
+    {
+      "path": "scripts/take-screenshot.ps1",
+      "size": 525,
+      "sha256": "b163a02cdfec2c87e9fe14d939fc7c868367568af7de1814db1c743aa22c8a94"
+    },
+    {
+      "path": "scripts/watchdog.ps1",
+      "size": 1577,
+      "sha256": "4816056cadb66feeb3bbe2b2f71c06b7045372278da9bbad17a76980b82647c5"
+    },
+    {
+      "path": "scripts/agents-codex-run.ps1",
+      "size": 2244,
+      "sha256": "ef6e284acabb44d035c7dfd03a3aeefa99342271b0a749ac23119237dcba6a3e"
+    },
+    {
+      "path": "scripts/setup-frontend.sh",
+      "size": 1619,
+      "sha256": "244074241abbe866713cc81c6e49ca0a01b3d03dc9d0a3798f0dc1e13e2831f0"
+    },
+    {
+      "path": "scripts/stop-mcp.ps1",
+      "size": 3058,
+      "sha256": "0ebbedba8799d5fdca62a7cf09b1e23a33c1d49b21f8ad4c9dcac27c9ad3a700"
+    },
+    {
+      "path": "scripts/start-gemini.ps1",
+      "size": 1514,
+      "sha256": "5c6ebafe1fc1345f9f17eae58f99734a4b2b56dfdc11ad771afbab23171b4024"
+    },
+    {
+      "path": "scripts/init-local-db.js",
+      "size": 2932,
+      "sha256": "c4aec0283294f4fde6ed42cde20354c29a494aaebf26a141a83e869ef9760f3a"
+    },
+    {
+      "path": "scripts/update_env_safe.js",
+      "size": 672,
+      "sha256": "20f69c1225aa84a05d2862c8a2263efb106449c829b4f0a026a75886fc202888"
+    },
+    {
+      "path": "scripts/Wake-The-Crew.ps1",
+      "size": 2216,
+      "sha256": "b88d92b02216cf319659f442c78c35a02fb1a70a09a506fef59c993d7ba87e66"
+    },
+    {
+      "path": "scripts/startup-orchestrator.ps1",
+      "size": 2399,
+      "sha256": "d559c0af9c71b1d74bd4c778f9d1429abfd44a517966a464946dd19375891405"
+    },
+    {
+      "path": "scripts/Wake-Gemini-Solo.ps1",
+      "size": 2284,
+      "sha256": "de3f33c4edac165d1c52d1f6559cd4b9221a5abcabeb317a73295e74283af2e5"
+    },
+    {
+      "path": "scripts/sync-two-way.js",
+      "size": 10604,
+      "sha256": "8672bfd840303db282acddaff141174603c35a8b3f1083f14e85714db7492497"
+    },
+    {
+      "path": "scripts/Broadcast-ToCrew.ps1",
+      "size": 2063,
+      "sha256": "1de192bd45abd9d16c341b0da375482e8a5d3a195f1c0230dda65523514410a8"
+    },
+    {
+      "path": "scripts/restart-mcp.ps1",
+      "size": 1431,
+      "sha256": "3087da3e84b20fefaaa0d788df0aaed96f671474c2e522f556d71a09511b1602"
+    },
+    {
+      "path": "scripts/start-brain.ps1",
+      "size": 400,
+      "sha256": "31a041ceccd658a4694d32ecf680e93eac897e6b34b21c77fb8464d22a51558e"
+    },
+    {
+      "path": "scripts/integrity-check.ps1",
+      "size": 2625,
+      "sha256": "2d7d62a8694e90dd5b5fa4c7405b9cd15d776264f4db786131ee4a4bf1ce14a7"
+    },
+    {
+      "path": "scripts/health-check.js",
+      "size": 949,
+      "sha256": "360ae40b0d81f3b3371a5b95f7ffc64d01233cdfdd6b20ef458dedbfbe6adfeb"
+    },
+    {
+      "path": "scripts/start-mcp.ps1",
+      "size": 4845,
+      "sha256": "3354de85446b4fca946c886e7abf27e84a4a02f140368e0e6d71599bdd4c7bfa"
+    },
+    {
+      "path": "scripts/start-omega.sh",
+      "size": 1504,
+      "sha256": "b3352d329e14283106f1905446637c216e9db3933726b084b8a5ffd909d08577"
+    },
+    {
+      "path": "scripts/agents-log.ps1",
+      "size": 2740,
+      "sha256": "a2d3dd46bd9d9ab1287991cc39fb1096d5aa7dd5c7d719b2f08b8fa85d7dc87a"
+    },
+    {
+      "path": "scripts/register-startup-tasks.ps1",
+      "size": 3303,
+      "sha256": "62134d804c8879c1f0a0e7e10bd2fec7205e298fe7b38077823931b39e66884a"
+    },
+    {
+      "path": "scripts/export-supabase.js",
+      "size": 2711,
+      "sha256": "cdb4575ae5e8bb829e2737f2689eca20b0ac44ad5a269ae6129143a751a73c75"
+    },
+    {
+      "path": "scripts/setup-frontend.ps1",
+      "size": 433,
+      "sha256": "cc83f63abbdd8298f42e78679e373403db8e43928ba3895fb4c31edcba4a6ba7"
+    },
+    {
+      "path": "scripts/sync-two-way.ps1",
+      "size": 126,
+      "sha256": "6af06386d729847ddd425b6cebd3919cd9452b24166597781c1078ca9f20ffde"
+    },
+    {
+      "path": "scripts/notes-poll.ps1",
+      "size": 1728,
+      "sha256": "4b6989901ae1d88d6a97768318aac410429d4ed6784c100d5875a2b7fc4ca5b2"
+    },
+    {
+      "path": "scripts/Unlock-PeakMode.ps1",
+      "size": 3371,
+      "sha256": "e1e768ddc95908f59f44dfd877399467f2a77a4e741bfc9a529cff23c52df89b"
+    },
+    {
+      "path": "scripts/keys.ps1",
+      "size": 903,
+      "sha256": "501592a55e24169b941c026ca02544b7c41e08243a64b4e18fd691a38cc2c72f"
+    },
+    {
+      "path": "scripts/Unlock-Claude.ps1",
+      "size": 4861,
+      "sha256": "83e4605cc92bbb76d1d8ae2f383560f3ef941c4400a89c2367ced0bfec016eb2"
+    },
+    {
+      "path": "scripts/archive-log.ps1",
+      "size": 924,
+      "sha256": "c0d13ce0dddd52be70ffcbbf6d9c580f88fc3ddf179d4d0bea5450432f59053f"
+    },
+    {
+      "path": "scripts/seed-members.js",
+      "size": 4109,
+      "sha256": "2633eee20f57b3b265a93e87eb1fc0a0a8760f6b041ed6356a54d4145c1409e6"
+    },
+    {
+      "path": "scripts/start-grok.ps1",
+      "size": 1527,
+      "sha256": "39130043d4fa423766875583ec5c1093c93e7f3002b36dbd11487bbc3b0dbfd5"
+    },
+    {
+      "path": "scripts/setup-mcp.ps1",
+      "size": 87,
+      "sha256": "6900e1d8696847882a5a038bd0831f1e91a9794f79b8607ee71a232001c974e3"
+    },
+    {
+      "path": "scripts/agents-gemini-run.ps1",
+      "size": 2327,
+      "sha256": "e76fa116b27dbc4b04cfe4cd20997fbf679d3e96d43302cdd80ef2f449ade0f5"
+    },
+    {
+      "path": "scripts/lib/mcp-client.ps1",
+      "size": 6059,
+      "sha256": "993b69a6af85f5a297411339391090419a64b5e7b9d7c21ccac6a2bb3f8877a1"
+    },
+    {
+      "path": "alexa-skill/package.json",
+      "size": 449,
+      "sha256": "58180d02383fc2f0884b3ee698e9b3e7dd676b700e436c848778a93483eb2ead"
+    },
+    {
+      "path": "alexa-skill/README.md",
+      "size": 3461,
+      "sha256": "305b82fecb79805c6af199a14565508b548a4c7c29815a15849e7f1327ff6f54"
+    },
+    {
+      "path": "alexa-skill/lambda/index.js",
+      "size": 9617,
+      "sha256": "6b271c93e1245ada7fa132ab2ac9767239986595fc2da791b93a7a3f1ca6e882"
+    },
+    {
+      "path": "alexa-skill/model/en-US.json",
+      "size": 3125,
+      "sha256": "f6730c03a73465c4e30c34f9f6b1cd83155ff19131fd0e11b4a5a022d71cb2e1"
+    },
+    {
+      "path": "desktop/preload.js",
+      "size": 2025,
+      "sha256": "ed13774fbe2a01b954a3a45cb3af062cf1c68d9926db35a81c06e9c0d8dd8b19"
+    },
+    {
+      "path": "desktop/package.json",
+      "size": 1477,
+      "sha256": "b4c09cb2662daee464b161b7675976f02086483b6b56c08d0c51bef138797a26"
+    },
+    {
+      "path": "desktop/main.js",
+      "size": 6560,
+      "sha256": "c3ced14b61f1b18d988f2f45bcdfc7276b06a876309bccdd86acf618ed8daf15"
+    },
+    {
+      "path": "desktop/renderer/index.html",
+      "size": 10818,
+      "sha256": "0241b44cfead927be6962f15cb6bfde08d34af88d275a2101e7492727e7fb1ad"
+    },
+    {
+      "path": "desktop/assets/tray-icon.png",
+      "size": 510242,
+      "sha256": "a90e8c67a06ccb565299eba073fdab0b4d33b540ac1599a3e362fc1232cefa5c"
+    },
+    {
+      "path": "desktop/assets/icon.png",
+      "size": 510242,
+      "sha256": "a90e8c67a06ccb565299eba073fdab0b4d33b540ac1599a3e362fc1232cefa5c"
+    },
+    {
+      "path": "public/safa.html",
+      "size": 14902,
+      "sha256": "2efa073f6887a22fdc4f781a62536d174bb2ab8a04752b3d80c0f39449a8dd83"
+    },
+    {
+      "path": "public/grok-voice.html",
+      "size": 14254,
+      "sha256": "a5185c3c42c85dd03fbdd79358a2bcb23eaaaa454f0b67627ce41a1d5f85fafa"
+    },
+    {
+      "path": "public/manifest.json",
+      "size": 579,
+      "sha256": "e9e2bcb6434c7950f6361c0c46a411e48cf44447c4d05e92ebb2178c415c1eff"
+    },
+    {
+      "path": "public/sw.js",
+      "size": 7439,
+      "sha256": "046c8b5e3ba055e4e9b388c678827b1f29f77424896f14b9da31a86747cb77fd"
+    },
+    {
+      "path": "public/index.html",
+      "size": 23409,
+      "sha256": "2d48a1068b559d6fa87958a57400f92daf93ec328aa0ab538749e1b77bfcd5d6"
+    },
+    {
+      "path": "public/vision-pwa/manifest.json",
+      "size": 2204,
+      "sha256": "fdc3291135d3eb6daeba6117473ff1e6f57a516ad80289567df0ce02e193722e"
+    },
+    {
+      "path": "public/vision-pwa/index.html",
+      "size": 9173,
+      "sha256": "7922aeee9880d9909a1688a2083aade520037cff6cd965ead3ec7e13ce88d9ef"
+    },
+    {
+      "path": "public/vision-pwa/brain-icon.svg",
+      "size": 2118,
+      "sha256": "5e967dfae344dd490cb9bc42d67e8b49c26dcf8b0a31af33153170353ceab7ae"
+    },
+    {
+      "path": "public/vision-pwa/js/index-DQbtRCA-.js",
+      "size": 37533,
+      "sha256": "4256e4264310e99a614a19d84f701914530c0df7fbce1deabd16227cbcb39e47"
+    },
+    {
+      "path": "public/vision-pwa/assets/index-DwFARmJG.css",
+      "size": 22491,
+      "sha256": "940642025025a46fcc89ae0e1d85b1252a28205b445d0667319fc08e76dc8c51"
+    },
+    {
+      "path": "public/vision-pwa/chunks/vendor-CVDnmApk.js",
+      "size": 140985,
+      "sha256": "8b3c6c7687f1ca58e1f88ca697a26c4624f6047934f7e73db40d5cc9ce3aaba0"
+    },
+    {
+      "path": "public/vision-pwa/chunks/charts-CjwJp2Tt.js",
+      "size": 410838,
+      "sha256": "5dbcccd5321e08806d9640c33952d158e51d65cade0f33bdd4a8ec880652fd21"
+    },
+    {
+      "path": "public/vision-pwa/chunks/three-CdEe9X0j.js",
+      "size": 898263,
+      "sha256": "af859485f117164d3e421de265818c11da4f49895c85d19eeeb45ed49d2b9ac2"
+    },
+    {
+      "path": "public/vision-pwa/chunks/icons-QJCldGZ0.js",
+      "size": 10094,
+      "sha256": "0991b3eccb82854c223bac8c8b484a8552305b91e0cd0e3f021cba47d426846e"
+    },
+    {
+      "path": "public/captures/capture_1767619252159.png",
+      "size": 247993,
+      "sha256": "822dee92d9770a6162561caa120aea086ffcbe8f268071f86b612d18c785741e"
+    },
+    {
+      "path": "supabase/memories.sql",
+      "size": 581,
+      "sha256": "d5748364f42a3e9c3aaf0b893f8865251ddbb08a67877919aaf70a1ca49863c8"
+    },
+    {
+      "path": "supabase/memory_sources.sql",
+      "size": 577,
+      "sha256": "b87d4df67d359dd81c56a4c9dc6efacbfc07f85c78614798cd38c0a6f36e7e9a"
+    },
+    {
+      "path": "supabase/members.sql",
+      "size": 683,
+      "sha256": "86c94948cb9c2ba93271d29723ec21bf72e48aa17a961c7e8c929ecab2262ac2"
+    },
+    {
+      "path": "supabase/messages.sql",
+      "size": 2150,
+      "sha256": "4634531b7904c23eb2501b5f5b2de736a240e7b9d6c40975b53b8847b52152c4"
+    },
+    {
+      "path": "supabase/task_queue.sql",
+      "size": 6364,
+      "sha256": "b4c574355a51bcf44327001a15405e76cbe675db61e6c49505d0375bb850cc3c"
+    },
+    {
+      "path": "supabase/updated_at.sql",
+      "size": 1721,
+      "sha256": "fe0d8da6f1b8c0d53682c88e10dd7bb4ec857ff903c55e1c853d158787c30234"
+    },
+    {
+      "path": "supabase/memory_revisions.sql",
+      "size": 511,
+      "sha256": "88d5fe49e1d4782d7f8b0bb767084ec2c58bfb3a1c8a4421472df027ad2e0220"
+    },
+    {
+      "path": "supabase/memory_votes.sql",
+      "size": 504,
+      "sha256": "06bee90de206047695c940503ec51b497e09f1699b26f7160ead487fc707ae83"
+    },
+    {
+      "path": "supabase/rls.sql",
+      "size": 1485,
+      "sha256": "2b30b493979956ec5ef33084883c0552f28cd38ff81b473595dcd74e572520e0"
+    },
+    {
+      "path": "supabase/migrations/20260103_task_queue.sql",
+      "size": 6364,
+      "sha256": "b4c574355a51bcf44327001a15405e76cbe675db61e6c49505d0375bb850cc3c"
+    },
+    {
+      "path": "omega-os/Dockerfile",
+      "size": 1203,
+      "sha256": "6a5067c4e04d942c8c9d1ee242bbdd246fa272e7a34ecf997a613f49419f55f7"
+    },
+    {
+      "path": "omega-os/build.sh",
+      "size": 14674,
+      "sha256": "f4b56cbb4c75886b5692f43c734c4f147505d6ec0a4206f416ce3c6e6fad9421"
+    },
+    {
+      "path": "omega-os/README.md",
+      "size": 4144,
+      "sha256": "02bc5b996b083e129549b65ec221946014aafc8fb7d1900ca0825dd435c00c5f"
+    },
+    {
+      "path": "omega-os/scripts/first-boot.sh",
+      "size": 5966,
+      "sha256": "d790b8a35f065850bc2db992cfb7ff61a1af33cfb774ff1853d65a932ce5e7d2"
+    },
+    {
+      "path": "omega-os/scripts/backup.sh",
+      "size": 2662,
+      "sha256": "36f96e3270baa0bf1706f10835bcaa0327b732948d6bfc0cc1aebf15efc487c7"
+    },
+    {
+      "path": "omega-os/scripts/start-omega.sh",
+      "size": 3347,
+      "sha256": "356675ea1a05b6692879b91748f02ca8d35e8771f39a8c6f24fa1ba03c98521b"
+    },
+    {
+      "path": "omega-os/config/packages.list",
+      "size": 756,
+      "sha256": "d56e5bb7b216a3bb76d90eb8140b0b89cc618e4da23a8ba82f069f1a81ac5400"
+    },
+    {
+      "path": "tools/scan-bidi.mjs",
+      "size": 1735,
+      "sha256": "3b84e5fbf325d3ac47fde2732b50995e4ba37ea0d47ec8c88eaeb216ba332084"
+    },
+    {
+      "path": "tools/omega-doctor.mjs",
+      "size": 4928,
+      "sha256": "effa90da8841ccad35ab9919007b94308d1fcae3170b0079b0674f18d0f4a89e"
+    },
+    {
+      "path": "config/chain-template.json",
+      "size": 226,
+      "sha256": "e669960d6c69ed36c5fdd0c7a93a2b0a7baeaeb6a900699ef4f795ffd79b604b"
+    },
+    {
+      "path": "events/events-20260107.jsonl",
+      "size": 240802,
+      "sha256": "67bc48556b0dbea0d97c073341295b1a3f8dd8367f7a7a470a2436f6cded6bca"
+    },
+    {
+      "path": "podcast/scripts/voice-synthesizer.js",
+      "size": 9546,
+      "sha256": "9734a1430076dd5cf9dbc94c462d131a97590010ca16459e8a3396b5b203dd52"
+    },
+    {
+      "path": "podcast/scripts/generate-script.js",
+      "size": 12153,
+      "sha256": "84c0ce1978eddfebd6ccf8063af201f7914fdb173ac03924f065b3fb0d18bee0"
+    },
+    {
+      "path": "podcast/scripts/episode-producer.js",
+      "size": 11159,
+      "sha256": "f0e6ea4c87afd8384cebba786a74f08a7667b700d96cedde128d3c4679996828"
+    },
+    {
+      "path": "podcast/podcast/episodes/2026-01-09/script.json",
+      "size": 7145,
+      "sha256": "36d28e3f7b000885956a017e51f21f57b5d0eaa73e78713ab60e2a3d9534c907"
+    },
+    {
+      "path": "podcast/episodes/2026-01-09/script.json",
+      "size": 7145,
+      "sha256": "2a5b673770584a400d2c06a9055bb688459c92f4c82be6cadfcba56924960b76"
+    }
+  ]
+}

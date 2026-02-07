@@ -1,0 +1,17 @@
+{
+  "name": "WF-02 Deploy failed → Auto-diagnose",
+  "nodes": [
+    {"id": "webhook", "name": "Vercel Deployment Webhook", "type": "n8n-nodes-base.webhook", "typeVersion": 1, "position": [200, 300], "parameters": {"path": "hook/vercel/deployment", "httpMethod": "POST", "responseMode": "onReceived"}},
+    {"id": "normalize", "name": "Normalize → OmegaEvent", "type": "n8n-nodes-base.function", "typeVersion": 2, "position": [420, 300], "parameters": {"functionCode": "// TODO: normalize\nreturn items;"}},
+    {"id": "fetch_logs", "name": "Fetch Build Logs", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4, "position": [640, 300], "parameters": {"url": "https://api.vercel.com/v2/deployments/{{$json.id}}/events", "method": "GET", "authentication": "headerAuth"}, "credentials": {"httpHeaderAuth": {"name": "vercel_prod_deploy"}}},
+    {"id": "classify", "name": "Classify Error", "type": "n8n-nodes-base.function", "typeVersion": 2, "position": [860, 300], "parameters": {"functionCode": "// TODO: classify error\nreturn items;"}},
+    {"id": "issue", "name": "Open GitHub Issue", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4, "position": [1080, 300], "parameters": {"url": "https://api.github.com/repos/OWNER/REPO/issues", "method": "POST", "authentication": "headerAuth"}, "credentials": {"httpHeaderAuth": {"name": "github_prod_deploy"}}}
+  ],
+  "connections": {
+    "Vercel Deployment Webhook": {"main": [[{"node": "Normalize → OmegaEvent", "type": "main", "index": 0}]]},
+    "Normalize → OmegaEvent": {"main": [[{"node": "Fetch Build Logs", "type": "main", "index": 0}]]},
+    "Fetch Build Logs": {"main": [[{"node": "Classify Error", "type": "main", "index": 0}]]},
+    "Classify Error": {"main": [[{"node": "Open GitHub Issue", "type": "main", "index": 0}]]}
+  },
+  "active": false
+}

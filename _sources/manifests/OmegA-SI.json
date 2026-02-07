@@ -1,0 +1,777 @@
+{
+  "source": "/home/mega/NEXUS/repos/OmegA-SI",
+  "timestamp": "2026-02-06T23:38:36-0600",
+  "file_count": 154,
+  "files": [
+    {
+      "path": "capabilities.toml",
+      "size": 195,
+      "sha256": "8aca9db54e1846a21744ba94aaab9e00f772deaf9f2a55e6928f413e27c276b1"
+    },
+    {
+      "path": "Cargo.lock",
+      "size": 126561,
+      "sha256": "8f4b76a38320d938930fc1ca2bd5bef2eee06b7ea2b6182135b8cf07c6e94133"
+    },
+    {
+      "path": "OMEGA_MASTER_TIMELINE_COMPLETE_v5_ET_LINKED_v2.txt",
+      "size": 956286,
+      "sha256": "4ad68bd8658f6553ee238469a7163c6319bcc2b2afe6936e2e341215116b5538"
+    },
+    {
+      "path": "UX-MASSIVELY-IMPROVED.txt",
+      "size": 6889,
+      "sha256": "9a14e68b08ac5acc628264df2e8a3675af73e58b65c8bad7f762aee21314ea58"
+    },
+    {
+      "path": "VERIFICATION-COMPLETE.txt",
+      "size": 2463,
+      "sha256": "baa73f5ac5407007262bea352f4e73d0bf85cf7202b6534aab6530f8dc1c8b23"
+    },
+    {
+      "path": "IDENTITY-AND-MEMORY-FIXED.txt",
+      "size": 2230,
+      "sha256": "a5ba5713d0fc42bbfc44f82ab5cdf3bd57f9b27f80995ccb32d81979a0411184"
+    },
+    {
+      "path": "test_streaming.sh",
+      "size": 2076,
+      "sha256": "3d4f869f1e7c44f8077386052872822bb583b69baec1dc727c7796a4b6f0616e"
+    },
+    {
+      "path": "CHAT-MODE-ENABLED.txt",
+      "size": 3367,
+      "sha256": "23144f0e830fc67584c414f9d74e3942fa56bdf5d906b762056a6783d40b8865"
+    },
+    {
+      "path": "QUICK_SETUP.md",
+      "size": 3302,
+      "sha256": "4d8c475d6f803262be1472dfea8ce49317b3adcab6e1080beb4bfd4c7e087304"
+    },
+    {
+      "path": "phylactery_sync.py",
+      "size": 8198,
+      "sha256": "b1c6fcdff95416d2b2ed08ab7cbb8e0fc110f865c06d6121b589f57ceb21b454"
+    },
+    {
+      "path": "OMEGA_MASTER_TIMELINE_COMPLETE_v3_ET.txt",
+      "size": 271240,
+      "sha256": "12fe4386bcb27d17e5866ad5aaf978a36da33e6360511657399df40acbcd15e4"
+    },
+    {
+      "path": "GAING_STRATEGIC_REPORT.md",
+      "size": 9372,
+      "sha256": "c1f0e25e665713822a406f8b7a772a3b2fb1db67eb845214551a20533655def6"
+    },
+    {
+      "path": "autostart-omega.sh",
+      "size": 1412,
+      "sha256": "ee566a45eadb0fd1863b02a8c74a14d505cc291bfbaee841041dd381b5665792"
+    },
+    {
+      "path": "IDENTITY.md",
+      "size": 1032,
+      "sha256": "9dc5a056bfb198eb5bf7f14e58884828ac3cd392744246d5f022f7403f2efd20"
+    },
+    {
+      "path": "upload_chat_to_supabase.py",
+      "size": 3177,
+      "sha256": "316154d0394030abf7daad12944febbbb821a2e589354d8f1451737195aac315"
+    },
+    {
+      "path": "TUI-FIXED.txt",
+      "size": 2942,
+      "sha256": "4b9ec1bfb6ed4fe2b1ce0b040462284ee362e9c0f57aad6c0caee4166aa1e2d9"
+    },
+    {
+      "path": "Architectural Overview.pdf",
+      "size": 29061,
+      "sha256": "ff35393283374594c78f1d48a660111a01d956195f00c6c1b55d27cec554ff87"
+    },
+    {
+      "path": "jobs.toml",
+      "size": 1630,
+      "sha256": "df5543a149a8620d312f21bc6e2e7b76f8725ee13e8ea07ca9e33864e47d7e63"
+    },
+    {
+      "path": "PHYLACTERY_MASTER_TIMELINE.txt",
+      "size": 2684500,
+      "sha256": "114e5b1c64e540858dd72785beef941c4ff07f750d489400cf62fd68626eb4be"
+    },
+    {
+      "path": "PHYLACTERY_MASTER_TIMELINE.json",
+      "size": 19169411,
+      "sha256": "f91ecba12fd4c57eee4fccf655f3cdc79d7e2c485e3611d773b57562efcd8b66"
+    },
+    {
+      "path": "START-HERE.txt",
+      "size": 2481,
+      "sha256": "7e5d6bafad4db4b33da5a1a70747413bc13023984ca9e1975f538b720db2e92e"
+    },
+    {
+      "path": "omega-anywhere.sh",
+      "size": 389,
+      "sha256": "4f4332854424812858832bf6667c574f5fe31e93a6baadf54e0a3cbd918946e3"
+    },
+    {
+      "path": "STRATEGIC_PLAN.md",
+      "size": 12013,
+      "sha256": "c41aefa2aaa794c0e25dc2f3faf76276ea12f62ae568433ef953185149501857"
+    },
+    {
+      "path": "BUGFIX.md",
+      "size": 5117,
+      "sha256": "698719f79d13787650d7fe5fec9bdc59c5cd4248239edbd464c161e3e50e6684"
+    },
+    {
+      "path": "hello.txt",
+      "size": 3416,
+      "sha256": "79802370d8a8ba5bf2cac149f5452295c771f1b259e5db51c814689a41ca2d9d"
+    },
+    {
+      "path": "WHATS_NEW.md",
+      "size": 2529,
+      "sha256": "aa635b07894334245b10da5d843e8eb2e602a27db2f0cbaad3e81239d37f18cf"
+    },
+    {
+      "path": "test_rollcall.sh",
+      "size": 1112,
+      "sha256": "0c383e12c494a5b58e8126fdb517057a84429cbb6711cbdb7576e00bde26bfbf"
+    },
+    {
+      "path": "IDENTITY-CORRECT-NOW.txt",
+      "size": 1226,
+      "sha256": "43b897a1f4f77b3584e6d923c5ec33a68bb07da340e8f92f302318d70138489a"
+    },
+    {
+      "path": "README_STRATEGIC_SESSION.md",
+      "size": 6565,
+      "sha256": "aa448cd09d6d936053e2cf832c8fca82e25f7dddd7727ce1464e5e64a2599c12"
+    },
+    {
+      "path": "IMPLEMENTATION_SUMMARY.md",
+      "size": 5431,
+      "sha256": "d940f48a28b676314a6418aa6fb2bf42890dc10d5ef185eaf5460318132eb735"
+    },
+    {
+      "path": "AUTO-SETUP-CLICK-ME.sh",
+      "size": 6386,
+      "sha256": "e109f280c11721d9e748f8f9c79ec6bb96bf0de826d9a2660e18ece05fbf31ba"
+    },
+    {
+      "path": "FINALLY-FIXED.txt",
+      "size": 1964,
+      "sha256": "f63ef2903042e482ad164916ca7df1f336813584e71c5c1a1417c17fdaab263e"
+    },
+    {
+      "path": "Cargo.toml",
+      "size": 2002,
+      "sha256": "f10dde2df3500602b74824b6e32540a9432c2af576fb88529c359ada5d4453d2"
+    },
+    {
+      "path": "THEME.md",
+      "size": 6219,
+      "sha256": "4505f6914ae532ef5447afe8191e0af646cab672a05dd75751cc76d9cea38f9d"
+    },
+    {
+      "path": "OMEGA_MASTER_TIMELINE_COMPLETE_v5_ET_INFERRED.txt",
+      "size": 272614,
+      "sha256": "9e2743885d1a7fe8a8b0b9726453b119754c8aa62b3459d95bef2e01e65bd3d7"
+    },
+    {
+      "path": "start-omega.sh",
+      "size": 711,
+      "sha256": "d9549e843c629e1fea6a675a1a334f0d4516511bd7f3685e4cd865f868879b10"
+    },
+    {
+      "path": "setup-autostart.sh",
+      "size": 3450,
+      "sha256": "797049de77e98d6b97d02f8440d08cb6d84c66f489ba72cca209d88e22c2d7d3"
+    },
+    {
+      "path": "DEBUG-TEST.txt",
+      "size": 1955,
+      "sha256": "6d7482ff16d9583924fae3ef1d878801007437d0efdc5cc2c04b502b63048ca0"
+    },
+    {
+      "path": "STREAMING_DEMO.md",
+      "size": 8693,
+      "sha256": "83eeedcf1cd41e7d5717a57837f726245d70e885b88ba82a23b60b4468114bf8"
+    },
+    {
+      "path": "supabase_chat_search.py",
+      "size": 4843,
+      "sha256": "0e54098f8ec94aae5006b5e63512182017663f0a632a4d5a6dbe716880a6fc14"
+    },
+    {
+      "path": "run_strategic_session.sh",
+      "size": 4870,
+      "sha256": "686f667fba71b7c508e28b67e8b36a6b30541663522a94438d9b7cd3fe7b9416"
+    },
+    {
+      "path": "auto_upload_supabase.py",
+      "size": 3082,
+      "sha256": "4d9f5f33fb071f82ee04afb75c16d1837ca49248720cbdc4b0e10c9074791934"
+    },
+    {
+      "path": "demo_ui.sh",
+      "size": 1662,
+      "sha256": "fa89c10ffb7c91daeb1f975892c1b070a4bf4fa5576c0df5497b7f80cefcc935"
+    },
+    {
+      "path": "n8n_workflows_export.json",
+      "size": 77452,
+      "sha256": "d63dba06cf363e99861789dc056cc7eca8833f0dd178782a97490493ba765c5f"
+    },
+    {
+      "path": "OMEGA_TIMELINE_CROSSLINKS_v5.json",
+      "size": 900847,
+      "sha256": "c7e6314b91a0f42c4cec372b845c6cd76e62f5c97ce11e205559296afd9e17f2"
+    },
+    {
+      "path": "VISUAL_GUIDE.md",
+      "size": 13712,
+      "sha256": "3e90a5048081942965347cabf77c3f561b7d44e6ea3a7789f6506676f35962e5"
+    },
+    {
+      "path": "FIXED-ALL-ISSUES.txt",
+      "size": 3723,
+      "sha256": "b9b29bf84948c83ac195619057503cd78c2d5f65d00f6e85bb5df122113b672f"
+    },
+    {
+      "path": "README.md",
+      "size": 1681,
+      "sha256": "31fe442b56ea0d120a8e24e229e6c9412f2626f454bccdbfc2e6ff3d960788a9"
+    },
+    {
+      "path": "THE-REAL-PROBLEM.txt",
+      "size": 2092,
+      "sha256": "0e88bc5b1c969f3e2045214c8dc53412b02dae282fb7e774a3527fa3c2c9aa50"
+    },
+    {
+      "path": "set-model.sh",
+      "size": 908,
+      "sha256": "401c12345246a7f26b8289dda3e1520031a1560b4bf12e52af27ef8925b80ff4"
+    },
+    {
+      "path": "install.sh",
+      "size": 1006,
+      "sha256": "9fc015af08e0b86302b2ea0ec7db0dfe2a582ce09f4400eaad7b7abe28d6c004"
+    },
+    {
+      "path": "test_omega.sh",
+      "size": 351,
+      "sha256": "d19027a6fd4c2ee40a592be7c9b2bb62f9bb6158731654ab255148b710a8ffc7"
+    },
+    {
+      "path": "OMEGA_MASTER_TIMELINE.txt",
+      "size": 19527,
+      "sha256": "6d0bb1828a53b2f31b6310b808cffdee854f3a0739d9ebcd017f8bb0e887c413"
+    },
+    {
+      "path": "OMEGA_DEEPSEEK_TIMELINE.txt",
+      "size": 1084,
+      "sha256": "5888ff312fa30a7d5da0c62ab4f783891d47b2d243ff437f5d711857d0aa6fea"
+    },
+    {
+      "path": "src/cloud.rs",
+      "size": 1688,
+      "sha256": "d6126507f6b85753fabd4b249c73b91dee130351344d10bb5c906333a56b2694"
+    },
+    {
+      "path": "src/voice.rs",
+      "size": 1257,
+      "sha256": "083e490c06e046ed9c188fdc996ce07a12e1ff78905cfb7b4d1849e230430d4c"
+    },
+    {
+      "path": "src/ui.rs",
+      "size": 25915,
+      "sha256": "fa7d31f4805db289f0ec2d1320fd3228d34a19587e2d706337b349aba192f6a7"
+    },
+    {
+      "path": "src/ear.rs",
+      "size": 3465,
+      "sha256": "20e24f0caaddb61d186e153950653e556d01ce06e4e6eeb480ef2bab2fcf413b"
+    },
+    {
+      "path": "src/evol.rs",
+      "size": 2849,
+      "sha256": "cda171fc7784e1feab01a68fd979a20d0329dbb846bb4d24d14e64203a7047c1"
+    },
+    {
+      "path": "src/jobs.rs",
+      "size": 780,
+      "sha256": "f564cba4a293453695c18f9f9fd3dcf177c651c15ba08f84726a1f53b7673c0d"
+    },
+    {
+      "path": "src/engine.rs",
+      "size": 34352,
+      "sha256": "b5d8101f6d7eea4961b788f7b002b2537e8266b96c0276ce60a6593cd5d8811e"
+    },
+    {
+      "path": "src/dna.rs",
+      "size": 5115,
+      "sha256": "ec5a0dc9f19c1a4b7573aeca8ecb820a663dbc7e330001541dafdcdc72f986d4"
+    },
+    {
+      "path": "src/devices.rs",
+      "size": 15842,
+      "sha256": "db7d97543a296a77ccceab1ca86658aae81f42376ec677fee717e7dc50b4a7d5"
+    },
+    {
+      "path": "src/modules.rs",
+      "size": 8927,
+      "sha256": "133dc38cbc6cac3ce90d164aa74b285a8d6499270052f2638d72a8448efd83fd"
+    },
+    {
+      "path": "src/revenue.rs",
+      "size": 2623,
+      "sha256": "2365a9fa0808331906aeab68b5b018c5e8c06097d95e97ea7ebedba194186604"
+    },
+    {
+      "path": "src/config.rs",
+      "size": 2991,
+      "sha256": "fb40b4e720688a4ae1b6102a22c7bdd0800dfeeffcafca5d53a465eeecb1b5a7"
+    },
+    {
+      "path": "src/server.rs",
+      "size": 13894,
+      "sha256": "a7286e6c53b33935b18a2139d5610e23e340613f6b5d6b1613285886165725bd"
+    },
+    {
+      "path": "src/main.rs",
+      "size": 13625,
+      "sha256": "0d6abf5367061d4b94c83415746f6feb4cee5ccbf42e79d603e3686685ad6f35"
+    },
+    {
+      "path": "src/events.rs",
+      "size": 2385,
+      "sha256": "012cd83653a95bf28cf78bb05acb1037a4d5e9bb43e248357dd95a5a30c97a50"
+    },
+    {
+      "path": "src/tui/view.rs",
+      "size": 24145,
+      "sha256": "f637651a52cd5f85de6d545a0eadc3b90419c16108cecd4fb0f4f88b595e7ff1"
+    },
+    {
+      "path": "src/tui/mod.rs",
+      "size": 3883,
+      "sha256": "121b528ba7d3a4efa03411c7032b204cb08c184c4d14915f54dd134d4c05ce06"
+    },
+    {
+      "path": "src/tui/app.rs",
+      "size": 13888,
+      "sha256": "2e1dd8177b346a813ad83f6a030a9bb9b58e94a14a106b4f09bcd1667a220c6c"
+    },
+    {
+      "path": "history/VOL_1/MASTER_INDEX_VOL_1.md",
+      "size": 2728,
+      "sha256": "8a061f0add0a849068bbd6b80f58487e74f0c95cf449ab85a578ba6d7d96909e"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q1_2025.txt",
+      "size": 66911,
+      "sha256": "10bac9d9aba07ab089fa6c5d93017d4e573866bbd5cf5327b58751ecb1217dd8"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q1_2024.txt",
+      "size": 394109,
+      "sha256": "8793d28bf4b28083e8f3e3438db47a851e793f95f4b6e3e6bac22c095eb8298e"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q2_2023.txt",
+      "size": 532555,
+      "sha256": "1b816cffabe31538fd5a702d2a669474edf3c1bd2ccfe649792c4210a5d14ba4"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q2_2024.txt",
+      "size": 89863,
+      "sha256": "82330e1b7242f236f97d9de9e9602594521f88a8db6d373653ca990ceb7cbc83"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q3_2025.txt",
+      "size": 25074,
+      "sha256": "2abb3bc8ded79e9a0c0dafecdab6d932619bc3c4d6bb2732dfb2de50ffcf2458"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q3_2023.txt",
+      "size": 631690,
+      "sha256": "1b58515186cde3e6202e7bed3d6f6dc73990b24f7895aff7d3f79bececcf38d0"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q4_2025.txt",
+      "size": 7039198,
+      "sha256": "10cfeb75602040803d48acaa7f244b072c4a7a80a4299fbca958d8979b0e7ce7"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q2_2025.txt",
+      "size": 73237,
+      "sha256": "950445c5860211905240e189e985db6e1e613337510461479a9157290aef0e7d"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q3_2024.txt",
+      "size": 778723,
+      "sha256": "24d5d863b27855858cf23c5fad5705edbff092e04391ef2863c87cfde9089c39"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q4_2023.txt",
+      "size": 852155,
+      "sha256": "e0398f90f37cf486e2685e2b579decd945bd4a3d6ee3add0603f163f8eca18f7"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q1_2026.txt",
+      "size": 6571345,
+      "sha256": "7bcb0ddd30d54d7aae2450ed05880caf9d829008f3c6a540b3c39b61aff7d512"
+    },
+    {
+      "path": "history/VOL_1/Source_Logs/omega_chronicles_q4_2024.txt",
+      "size": 136074,
+      "sha256": "230f188f1351aabcab5b54b5eabdce3724340eca190ddf50c4618eeb599f7a14"
+    },
+    {
+      "path": "history/VOL_1/Transcripts/TRANSCRIPTS_BATCH_2.md",
+      "size": 3626,
+      "sha256": "3800f4d0eaeb7c695b5539bb0c465612c6bf0c2edbf332db586a72724595cb66"
+    },
+    {
+      "path": "history/VOL_1/Transcripts/TRANSCRIPTS_BATCH_4.md",
+      "size": 3526,
+      "sha256": "c7869bac6f4e58ce876f20edb14e5c484a84262dd35e0300623dc9b8e0248db3"
+    },
+    {
+      "path": "history/VOL_1/Transcripts/TRANSCRIPTS_BATCH_3.md",
+      "size": 3575,
+      "sha256": "e7f7904e695fb61f313289b757176a8d9ef3791cffa47059a01865af99e4a190"
+    },
+    {
+      "path": "history/VOL_1/Transcripts/TRANSCRIPTS_BATCH_1.md",
+      "size": 4239,
+      "sha256": "0f7dd5e0f7f51803015e2ce9043f26e9f06252ac652d7c23cd65992dbd672c9d"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_11.md",
+      "size": 3989,
+      "sha256": "2e22c4244996831061e9ab20c80c9e1d36e9d71f8a97c9236986695069744b01"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_7.md",
+      "size": 4054,
+      "sha256": "87e6e170a7a1456c2a81c1fe85dad8500c86c915913a19ebd4ad8afc260d1ba8"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_4.md",
+      "size": 3866,
+      "sha256": "61d242c4983015e84fb19b927ea116917dd2ee33578f1d27638ebce2d1ea781f"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_5.md",
+      "size": 3989,
+      "sha256": "7946099f0fc480ad159e8317a63e0c1172ff059ef9c763cbaf0a519ce7a38c48"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_2.md",
+      "size": 3972,
+      "sha256": "6f38b90f31cc82a3bba6da13c8f6668c3968ed599dbcc1fd29f17945e730599d"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_6.md",
+      "size": 4281,
+      "sha256": "dddd68ed0a1096ac568e1c8636ce301316fafcecd3f5b886baf53a38b62e8456"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_3.md",
+      "size": 4072,
+      "sha256": "c8a5202a0e3c72cc0f9858efc60ae42de91dfad59782589e755373e4be74cd45"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_10.md",
+      "size": 4237,
+      "sha256": "6817dae62d3dbd402599ccde7b9015009c13577fb6d160cb178a65b882ecf29d"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_1.md",
+      "size": 3820,
+      "sha256": "939630d8e0742c3e821c015e53a8e333a1ca396f6ad99a355104959f38928e09"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_8.md",
+      "size": 4001,
+      "sha256": "64e71d52965b0aadcd075eb53f45965114c81039af532acc1850925ce6eb24cf"
+    },
+    {
+      "path": "history/VOL_1/Summaries/OMEGA_CHRONICLES_EPISODE_9.md",
+      "size": 4278,
+      "sha256": "8ccb69a36d7f901927df1828a62a2e872cc255e9100fbda625ac592f8eb0cc7e"
+    },
+    {
+      "path": "models/ggml-tiny.en.bin",
+      "size": 77704715,
+      "sha256": null
+    },
+    {
+      "path": "HANDOVER/DEEPSEEK_CHALLENGE_CORE.md",
+      "size": 1004,
+      "sha256": "c453645f92635caa120cb799ea64e74a93ed97d82fedc7e579730707b90ad0ae"
+    },
+    {
+      "path": "HANDOVER/OMEGA_CONTEXT_HANDOVER.md",
+      "size": 3001,
+      "sha256": "e7e67be3c5c65f658f23885ae7cb9751b2734b80b650f9bcd46a7360da175624"
+    },
+    {
+      "path": "HANDOVER/OMEGA_HISTORY_MASTER_INDEX.md",
+      "size": 1512,
+      "sha256": "546d63928898e5def0fc0a4913d8bc68f261b2a81edfe6a2b81a750f0b4b13dc"
+    },
+    {
+      "path": "HANDOVER/OMEGA_MASTER_TIMELINE.txt",
+      "size": 19527,
+      "sha256": "6d0bb1828a53b2f31b6310b808cffdee854f3a0739d9ebcd017f8bb0e887c413"
+    },
+    {
+      "path": "HANDOVER/OMEGA_DEEPSEEK_TIMELINE.txt",
+      "size": 1084,
+      "sha256": "5888ff312fa30a7d5da0c62ab4f783891d47b2d243ff437f5d711857d0aa6fea"
+    },
+    {
+      "path": "scripts/history_extraction/neural_sweep_v2.py",
+      "size": 2669,
+      "sha256": "fe0f58e4faa9adf4b9d8ace3cd1aad04cafbe5eb60364bc70c0a0225a7c0e3ae"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q2_2025.py",
+      "size": 1317,
+      "sha256": "9392e6888d6568ef8df377426e8dd6b8cf96bdd803364bf32e54839d3df10fd8"
+    },
+    {
+      "path": "scripts/history_extraction/analyze_phylactery.py",
+      "size": 1409,
+      "sha256": "95026f3d9f002a271b456f726ed0335ce634c53907f7c4d457e74c326f14d9d8"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q4_2024.py",
+      "size": 1319,
+      "sha256": "0aaaa392ebc2a9047966020980b60c23a7b37f785988d9503d335582b2123bda"
+    },
+    {
+      "path": "scripts/history_extraction/search_deepseek_phrase.py",
+      "size": 1564,
+      "sha256": "bf1f291b383e0aad804e0777109fdb47f85e485702e04cc58dd40bd7943a1f25"
+    },
+    {
+      "path": "scripts/history_extraction/find_deepseek_challenge.py",
+      "size": 3083,
+      "sha256": "824275cff805e5743eefb2c57e68c26c0896050da4e66cec0d689cfc1dd7cc06"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q4_2025.py",
+      "size": 1319,
+      "sha256": "c1ce5645d5604e3a44937667b6573db0f5cb64212e45fe012dedef7b7c5ffa02"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q3_2023.py",
+      "size": 1321,
+      "sha256": "f3763a24c9db9f7832eb5f9d11263e58d4b518adf4fce99788d0a621ac71e9ec"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q3_2025.py",
+      "size": 1317,
+      "sha256": "a7a7b7006a05171f34d4ff7ed960a1cdb7cdade362381207837bf6e17a9f68cc"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q2_2024.py",
+      "size": 1317,
+      "sha256": "3e2b2dad449606a079168011272921d085e76ade9fc0be74828c7c26c749846f"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q1_2024.py",
+      "size": 1317,
+      "sha256": "436da9e569ff23813e0a53440b863f3bd696d14890b5225a80d25178b5303ae7"
+    },
+    {
+      "path": "scripts/history_extraction/upload_chat_to_supabase.py",
+      "size": 3177,
+      "sha256": "316154d0394030abf7daad12944febbbb821a2e589354d8f1451737195aac315"
+    },
+    {
+      "path": "scripts/history_extraction/extract_timeline.py",
+      "size": 1739,
+      "sha256": "b9b6c59d787aea20c65cd0161bc8113a673755a43f78a322ccb6d8a58ff25a0d"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q1_2026.py",
+      "size": 1317,
+      "sha256": "c70b965311b48e4ddb0ca1b2a0a9345cbdd1fd15786039bbe135735d7a1812bb"
+    },
+    {
+      "path": "scripts/history_extraction/deep_purify.py",
+      "size": 3090,
+      "sha256": "3d0607593b8ea5e5887458029c72a36e419d2369a11b7d7f12df08732b8043cb"
+    },
+    {
+      "path": "scripts/history_extraction/search_raw_deepseek_json.py",
+      "size": 1736,
+      "sha256": "8998cbf3e4fa48bc2b97925baba7b19e58ab808682f42ed4ea8b1eb561ba7b03"
+    },
+    {
+      "path": "scripts/history_extraction/initialize_vector_matrix.py",
+      "size": 3360,
+      "sha256": "432afcb932fa61d6c18d437b885844ecfe887f0d8faf5cc2c330752ed8585d97"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q4_2023.py",
+      "size": 1319,
+      "sha256": "175cfbbac0110003e4922cf37310c5f456723ae6893214640e02145cb20157c7"
+    },
+    {
+      "path": "scripts/history_extraction/check_2024_content.py",
+      "size": 1406,
+      "sha256": "7fd0c8d6fdcb4046cc1343a556d534dc80e106e8be5902ff7345e3e74cfdcf26"
+    },
+    {
+      "path": "scripts/history_extraction/purify_and_reindex.py",
+      "size": 4058,
+      "sha256": "08e5b5465bc5ee226a83c1d086981213244cdae887b8ac74dc78d857535031d1"
+    },
+    {
+      "path": "scripts/history_extraction/pretty_print_deepseek_conv.py",
+      "size": 971,
+      "sha256": "1c6a4ee2f9c089f25dd5087a47199b7d50f3e779b58e24056403ae558d7aa670"
+    },
+    {
+      "path": "scripts/history_extraction/search_chat_history.py",
+      "size": 2529,
+      "sha256": "f854fc90e2791fb20666460432321376e51d70dd160a8e8a5f6b797fe3306f3d"
+    },
+    {
+      "path": "scripts/history_extraction/extract_deepseek_challenge_convo.py",
+      "size": 3209,
+      "sha256": "8b651699c09d36ae93c2ce03147236b265b2ce8cf82a7c891179ad191e236ba8"
+    },
+    {
+      "path": "scripts/history_extraction/omega_memory_core_v2.py",
+      "size": 4294,
+      "sha256": "215fd07c53ddb0fe74c73ba67868a4ed32e4d738711caf213112ee48b5b2c56c"
+    },
+    {
+      "path": "scripts/history_extraction/extract_claude_timeline.py",
+      "size": 1557,
+      "sha256": "f2329f2f5842660cc8b83fa927930e7bc76603772ae593d99f29a12b0e48116a"
+    },
+    {
+      "path": "scripts/history_extraction/extract_all_deepseek_assistant_messages_parsed.py",
+      "size": 3477,
+      "sha256": "1bdb0fcfa9db19e9e325f83cef60cd2c9b61495f80fcc128eac931d710ddc1b6"
+    },
+    {
+      "path": "scripts/history_extraction/extract_one_mentions.py",
+      "size": 3618,
+      "sha256": "d2d11eb5b0e6388d411e723ac9ca150643625e3f95901c8f4b84bfd81e62d489"
+    },
+    {
+      "path": "scripts/history_extraction/extract_all_deepseek_assistant_messages.py",
+      "size": 2296,
+      "sha256": "2308a059b5ac3d463420d9c3f489bd63647009c98db7028edf2f06b5c6901ea0"
+    },
+    {
+      "path": "scripts/history_extraction/omega_live_sync.py",
+      "size": 2432,
+      "sha256": "e2afe05925ea185947d7974fef208f7188aef5f878210a501c846717a493ccac"
+    },
+    {
+      "path": "scripts/history_extraction/supabase_chat_search.py",
+      "size": 4843,
+      "sha256": "0e54098f8ec94aae5006b5e63512182017663f0a632a4d5a6dbe716880a6fc14"
+    },
+    {
+      "path": "scripts/history_extraction/chunk_and_embed.py",
+      "size": 3780,
+      "sha256": "3977fec02f88943c051721ebe0cbeeab7343e01367d5f68655e6492080457487"
+    },
+    {
+      "path": "scripts/history_extraction/initialize_vector_matrix_local.py",
+      "size": 3516,
+      "sha256": "dff92d94d0c5e500d3fdd5e7c4a40b5356aeca2bc91bc07235743047841d8e45"
+    },
+    {
+      "path": "scripts/history_extraction/extract_deepseek_timeline.py",
+      "size": 2297,
+      "sha256": "1c6bd9385a99328a17e7c78c270ccc03f1d8a823e73584e20aa6424b1d519014"
+    },
+    {
+      "path": "scripts/history_extraction/auto_upload_supabase.py",
+      "size": 3082,
+      "sha256": "4d9f5f33fb071f82ee04afb75c16d1837ca49248720cbdc4b0e10c9074791934"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q3_2024.py",
+      "size": 1317,
+      "sha256": "8820841cf52137dc9e154eb0079b264d30b4c485ace9d8ad28ff22dd068e9d37"
+    },
+    {
+      "path": "scripts/history_extraction/master_resync.py",
+      "size": 2431,
+      "sha256": "533f20444f40b0f575e4eff646d4158d4b6d9a61202e44a3066726e69cef51b3"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q1_2025.py",
+      "size": 1317,
+      "sha256": "240ebd0e00621fe273b42448a98803dc343a742bc8114793eee576d189f2dafc"
+    },
+    {
+      "path": "scripts/history_extraction/extract_q2_2023.py",
+      "size": 1321,
+      "sha256": "4f7b5cb2d7a51592d86d20cd122b967b9de602500f9273283c1ab7afb1a7ac27"
+    },
+    {
+      "path": "scripts/history_extraction/setup_omega.py",
+      "size": 6686,
+      "sha256": "08776ec47129c29d940ec6a83c1db2ba9facdd62f0b3590800eafbef9a481526"
+    },
+    {
+      "path": "scripts/history_extraction/extract_data.py",
+      "size": 8760,
+      "sha256": "71e5ed11702cb01e8e7c1b65a85c53cc54ca35460a0e72abf09142b4db050f4a"
+    },
+    {
+      "path": "scripts/history_extraction/get_phylactery_range.py",
+      "size": 1056,
+      "sha256": "77b9f5f43172258afe3b34b8c01d953b0579d931d225940909e886a95ae7a8e6"
+    },
+    {
+      "path": "skills/thermal_guard.wasm",
+      "size": 47265,
+      "sha256": "628155e30fdce765cf2004ba0caf84328ed06ba3d02b9d59b8caf1c85a249a48"
+    },
+    {
+      "path": "skills/gateway_filter.rs",
+      "size": 948,
+      "sha256": "3ac1947290dc4b1bf3b7958378df70271bcdbc71a45994afb205c8b16a31ea41"
+    },
+    {
+      "path": "skills/gateway_filter.wasm",
+      "size": 1471962,
+      "sha256": "c17572be6ce308359069153aa69ccbbb31fe0d177d90f7114ef93fa635a65b52"
+    },
+    {
+      "path": "skills/power_dist.rs",
+      "size": 847,
+      "sha256": "18fcf17d1490d34d7f40a0ba69f7080f71517142acc669169610dd5214d6c225"
+    },
+    {
+      "path": "Documents/DEEPSEEK_CHALLENGE_CORE.md",
+      "size": 1004,
+      "sha256": "c453645f92635caa120cb799ea64e74a93ed97d82fedc7e579730707b90ad0ae"
+    },
+    {
+      "path": "Documents/OMEGA_CONTEXT_HANDOVER.md",
+      "size": 3001,
+      "sha256": "e7e67be3c5c65f658f23885ae7cb9751b2734b80b650f9bcd46a7360da175624"
+    },
+    {
+      "path": "Documents/OMEGA_HISTORY_MASTER_INDEX.md",
+      "size": 1512,
+      "sha256": "546d63928898e5def0fc0a4913d8bc68f261b2a81edfe6a2b81a750f0b4b13dc"
+    }
+  ]
+}

@@ -1,0 +1,2952 @@
+{
+  "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+  "timestamp": "2026-02-06T23:38:51-0600",
+  "file_count": 589,
+  "files": [
+    {
+      "path": "PHASE2_PROGRESS_JAN25.md",
+      "size": 11662,
+      "sha256": "5fb7d4917147894da8a7c869b1355de6d810cc58db5912fe4d717365851959c8"
+    },
+    {
+      "path": "OMEGA_ULTIMA_ARCHITECTURE.md",
+      "size": 14437,
+      "sha256": "86130356b3456c1927ed71c6190181c257f0b05634e5a4a53e38ecd96fe989b1"
+    },
+    {
+      "path": "omega_orchestrator.py",
+      "size": 30755,
+      "sha256": "24d73de0fd3ac0e32a727075bf7161ff4ecca9e3655f2877da4bc8447684c9e2"
+    },
+    {
+      "path": "IMPLEMENTATION_SUMMARY_JAN25.md",
+      "size": 13423,
+      "sha256": "e229197948620f56496b7cc95021028c5cf8c06d0106f2eecdd64b89e425a77e"
+    },
+    {
+      "path": "CAPABILITY_GAP_ANALYSIS.md",
+      "size": 18154,
+      "sha256": "c8cdd11fbe2b7c93f4bb218a38515dd6d69941ea14de7c334a33c8a3900d6a3a"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/consensus_engine.py",
+      "size": 9590,
+      "sha256": "4b209f492ba8342cac7cb452439a0ff2c028cb447e6c57ab023512672955601a"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/docker-compose.yml",
+      "size": 2247,
+      "sha256": "433df2503ca8f1137ed3689d50b73d89b5ddf5835a44d5a2623784a4be5932af"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/worker_pool.py",
+      "size": 4664,
+      "sha256": "294eee7484734432d4284114941490a47106b12f6fc904b01ace8236c7bfd7cf"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/deployment.py",
+      "size": 3124,
+      "sha256": "6d280e3ade0ae835535de721e95adaf6fc65cd76f1b4525832be5367d860b517"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/requirements.txt",
+      "size": 984,
+      "sha256": "0bbbe950e16b815521216a67b92d3ea346cfa241dbd2807136ea59f0e862a84d"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/memory_layer.py",
+      "size": 7450,
+      "sha256": "fc1c49b70ff096da06815e5a3e473d495fcb0eff0b4c54933584858505e7686b"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/Dockerfile",
+      "size": 1142,
+      "sha256": "3991b855ed037ff8dee33e5858a7fcdd188ff11d65d43a191f54b7aa985141aa"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/orchestrator.py",
+      "size": 4364,
+      "sha256": "8d65f607991e93a06377e2044bf451451d774b45d37bbfcdfd723ec0560d4eed"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/LICENSE",
+      "size": 1073,
+      "sha256": "ab974d9fee1962fb9e06067c82fe54a62f774e57b6cf4dfd3c9b66ee8a470fa5"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/setup.py",
+      "size": 1987,
+      "sha256": "853452573add2f91742f931d53ea8555b1de6ba3de35686bb21a8241c014812d"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/main.py",
+      "size": 6008,
+      "sha256": "d0e44922422252010aa15c185869a4850b575bd44a1f9e35f478dc892ceb82d4"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/llm_client.py",
+      "size": 7647,
+      "sha256": "be81127353f5366bc29603c927e7c1a9aed9ae84e513f0686bc7f9c8b4b89cba"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/README.md",
+      "size": 9544,
+      "sha256": "439e9c533fdffd29bcbe3b53b856bb39f88821c985200222e399ae26a2c9d703"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/api.py",
+      "size": 10983,
+      "sha256": "5777d6a84091a52d83dd2e82eb4b2e38eb4ee870d51b22e69bf9776ad74d5587"
+    },
+    {
+      "path": "repos/-COLLECTIVE-/tests/test_brain.py",
+      "size": 7638,
+      "sha256": "ca9803474a1db462dfc0a573e3ea5062984b1d8c14792da91d783e15391e4b1a"
+    },
+    {
+      "path": "repos/gAIng-brAin/omegax-setup.js",
+      "size": 1126,
+      "sha256": "9803538c839ec1aa7cb830b357af3579b749c63cf5b8c627ae2eb2df7e63a390"
+    },
+    {
+      "path": "repos/gAIng-brAin/gemini.bat",
+      "size": 131,
+      "sha256": "2c3a8493bfdf8b4ae4e99fed9239999ecf05bec5d83d1b28eddc57b173732bfc"
+    },
+    {
+      "path": "repos/gAIng-brAin/gAIng-Brain.code-workspace",
+      "size": 3882,
+      "sha256": "d7047f05c8f5054a2d317644303786d58b77ef8f8587db9418e5c40cec467fd4"
+    },
+    {
+      "path": "repos/gAIng-brAin/DAWN.ps1",
+      "size": 2949,
+      "sha256": "3154d2ad63fed993ac76f0a2299963a5974ba304e4aaba9de2c77263c26a068f"
+    },
+    {
+      "path": "repos/gAIng-brAin/EIDOLON.md",
+      "size": 2825,
+      "sha256": "d2dc6ed9fdc5ab51670e8e26593bfff529e196b37d0e8573e3f398a83b722f72"
+    },
+    {
+      "path": "repos/gAIng-brAin/sync.bat",
+      "size": 162,
+      "sha256": "9ee04879c795b6ddc4ff00372928e25e5d4fa697eb4ee2c35cad74604c024a3f"
+    },
+    {
+      "path": "repos/gAIng-brAin/screenshot.png",
+      "size": 1160502,
+      "sha256": "1637137839f1245be2f397f0455c6ad24581f57098d2f6863d71af189991ad07"
+    },
+    {
+      "path": "repos/gAIng-brAin/Unleash-Vision.ps1",
+      "size": 1980,
+      "sha256": "fc74b779df29631acc24476f122bf8bbe54e5b099390f725ca797323612538a5"
+    },
+    {
+      "path": "repos/gAIng-brAin/CLAUDE.md",
+      "size": 21134,
+      "sha256": "0442779f079f8dfe5ce03a7500ced24ecbb7cad5ae444d1175bd345b6fa8b70f"
+    },
+    {
+      "path": "repos/gAIng-brAin/docker-compose.yml",
+      "size": 4565,
+      "sha256": "1bb180f81fe05a300654af6ae83b06208617344c8266bfdc67506d31ed047428"
+    },
+    {
+      "path": "repos/gAIng-brAin/DAWN.bat",
+      "size": 525,
+      "sha256": "5844bc3b49c44dba9e96509eb875527c3bde041703f8ffb12eeb84be42d01e84"
+    },
+    {
+      "path": "repos/gAIng-brAin/MCP-TROUBLESHOOTING.md",
+      "size": 4465,
+      "sha256": "d92898063548a59cffd8d5a1846b8d358ecf0ad91ada22bfc5d0cc4756b38e4a"
+    },
+    {
+      "path": "repos/gAIng-brAin/peak.bat",
+      "size": 447,
+      "sha256": "556afc5556fdc8dff0cc4893ccff493873775677b7be171a1406e5439318f806"
+    },
+    {
+      "path": "repos/gAIng-brAin/ecosystem.config.js",
+      "size": 2565,
+      "sha256": "025fcbcb3b58ceb4b00c700456601227f6efe03b80979ba86f40cb28d57bb3fe"
+    },
+    {
+      "path": "repos/gAIng-brAin/UNLEASH.ps1",
+      "size": 6050,
+      "sha256": "fcfa0d831dca33cb26ac6c7648bbbd534a28ed2be5961fdb0e0eeb6f32f9ecd2"
+    },
+    {
+      "path": "repos/gAIng-brAin/index.js",
+      "size": 3235,
+      "sha256": "ec06246f4734c235e80bc4249f92ab63bc1615df4dbee3d351e68f356b9646da"
+    },
+    {
+      "path": "repos/gAIng-brAin/COMMUNICATION.md",
+      "size": 5818,
+      "sha256": "4e979b8a866db5ef908708b7edd749c7abfcecd8835535f63a6fcbb37a696ec5"
+    },
+    {
+      "path": "repos/gAIng-brAin/grok.bat",
+      "size": 179,
+      "sha256": "01b123954b13f5f31ac9588059d1c721f3640d3567b559b946b05b1dc0adda8b"
+    },
+    {
+      "path": "repos/gAIng-brAin/SYNC_WAR_ROOM.ps1",
+      "size": 749,
+      "sha256": "19edae1547e066d8f97c96d3f24d3d6fa6cfb4c7f0f733fbc0bb4ba0abb1680b"
+    },
+    {
+      "path": "repos/gAIng-brAin/PLAN_GOD_MODE.md",
+      "size": 4312,
+      "sha256": "c192089dc708e28b90ed53e398a9cc29d3b564a711778137fdf96fa044b7316e"
+    },
+    {
+      "path": "repos/gAIng-brAin/PROJECT_OMEGA_SUMMARY.md",
+      "size": 9682,
+      "sha256": "6a5fc55ce4b1e07f777f5b32da57a2967fb6ff5a32fc32d7f1a93cf580beb12e"
+    },
+    {
+      "path": "repos/gAIng-brAin/WAKE.bat",
+      "size": 736,
+      "sha256": "495e922f975b8df4f16cbc2efdfa49b82465c2b528eeb28105c3e0f756bb8aba"
+    },
+    {
+      "path": "repos/gAIng-brAin/CONTEXT.md",
+      "size": 2947,
+      "sha256": "a92f036ddc5acde0034c31be25f3c4cab3d2e35f7f7bf2d7a3257dfb316974b7"
+    },
+    {
+      "path": "repos/gAIng-brAin/package.json",
+      "size": 2519,
+      "sha256": "0b0b378b1dfa2888cc61971b05f3320edc463a65f538f27cdd570ce07c32e311"
+    },
+    {
+      "path": "repos/gAIng-brAin/Setup-GrokIntegration.ps1",
+      "size": 10720,
+      "sha256": "997e4acddd6d4c2cff07d3c0c8648bdcc56f425b5b36327891be5be0f3eaecfd"
+    },
+    {
+      "path": "repos/gAIng-brAin/GEMINI.md",
+      "size": 2874,
+      "sha256": "63c2d8aa9eb47b0c94a01259d2722002fa502674cc68173cc42913c1ab36e4ed"
+    },
+    {
+      "path": "repos/gAIng-brAin/PROJECT_VIBRANIUM.md",
+      "size": 4734,
+      "sha256": "baa284e2190074ea29265ef206bd6bc9dea20fc16b23fb4d262e21da5e137ebb"
+    },
+    {
+      "path": "repos/gAIng-brAin/CONTRIBUTING.md",
+      "size": 4005,
+      "sha256": "4d3b392b7802c9e7fcda596fff21043729c24613e145616b2a4588b5bc78281e"
+    },
+    {
+      "path": "repos/gAIng-brAin/up.bat",
+      "size": 131,
+      "sha256": "df64aa039ff68c5da6ccd3fee934d49021fb7d43c736016843a76345f087cb52"
+    },
+    {
+      "path": "repos/gAIng-brAin/AGENTS_old.md",
+      "size": 198332,
+      "sha256": "0035833bfe25d40772f0cb5addba9d02472fc86523de36b29205cebab172a62a"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-stack.bat",
+      "size": 673,
+      "sha256": "2eed5d6ffc347f531c9ec10368c8b8647e3434e6fe6253d108542bd6cc3d76a9"
+    },
+    {
+      "path": "repos/gAIng-brAin/ISSUES_TO_CREATE.md",
+      "size": 1900,
+      "sha256": "aa8da34c5d491b82a4486e48ed6d8c9841f9f59b8f705f17e60eb992f69d8705"
+    },
+    {
+      "path": "repos/gAIng-brAin/Dockerfile",
+      "size": 2220,
+      "sha256": "f042c9ce3b8fe894f69bc9ed32fbbc736d067ee74fd84e45226569832f20ad14"
+    },
+    {
+      "path": "repos/gAIng-brAin/package-lock.json",
+      "size": 152657,
+      "sha256": "c256256387344969328469994a36a0657ef3d1a8ca0324bb01519ef1d3fc935b"
+    },
+    {
+      "path": "repos/gAIng-brAin/log.md",
+      "size": 10712,
+      "sha256": "b5d8979fcb3a15463d9b7afb6ea434982d64313e848a9441c7ed0fdc765b5a05"
+    },
+    {
+      "path": "repos/gAIng-brAin/RYSE-SOLO.ps1",
+      "size": 940,
+      "sha256": "5e65cfa6904d05eb255bacbcdafeda1130737a7b347dce076830f2ba07a9bdc1"
+    },
+    {
+      "path": "repos/gAIng-brAin/ryse.bat",
+      "size": 183,
+      "sha256": "ab3d6aaa0404f03b1147f239ce75b32fea632ca43f37b6592da68e725ceb4533"
+    },
+    {
+      "path": "repos/gAIng-brAin/claude.bat",
+      "size": 194,
+      "sha256": "1292dc17d64d4b8196dfd181399e08e6f81fb6f1d62d00f613a79a887c0a3011"
+    },
+    {
+      "path": "repos/gAIng-brAin/GROK_SETUP_README.md",
+      "size": 9107,
+      "sha256": "052310d48e77f5a5579fc929d6d82179ded614d2ebefd7abd7618fb7904938f5"
+    },
+    {
+      "path": "repos/gAIng-brAin/PROJECT_OMEGA_README.md",
+      "size": 13260,
+      "sha256": "2eb0308b970a7fe374b8a26e424277319b4f3bce66e8479fa421b8065916e04b"
+    },
+    {
+      "path": "repos/gAIng-brAin/Wake-Vision.bat",
+      "size": 154,
+      "sha256": "578f0f4c0abac94d6d45f5c51f20efc61e367dc2190fc2efddc6b1f67df75aaf"
+    },
+    {
+      "path": "repos/gAIng-brAin/codex.md",
+      "size": 3802,
+      "sha256": "535e01f1ff16d3fa7dd09704c1a6a2d39167cee53cbe7fc596f7e81bace52afb"
+    },
+    {
+      "path": "repos/gAIng-brAin/JARVIS.md",
+      "size": 6079,
+      "sha256": "1d52773437f3573bb618bc0d30d9abcd3fc44b5acf90faa53bfac7f61b80fb92"
+    },
+    {
+      "path": "repos/gAIng-brAin/vector_store.db",
+      "size": 24576,
+      "sha256": "9f13136d24db544436fd2abbfd0fd16912fe32821037c939fbecc69e336a67a1"
+    },
+    {
+      "path": "repos/gAIng-brAin/codex.bat",
+      "size": 191,
+      "sha256": "6783ceba86f7e8f2c87742877240176a5eedcc79be8caccadad53d7c1e032d89"
+    },
+    {
+      "path": "repos/gAIng-brAin/INSTRUCTIONS_FOR_COMET.md",
+      "size": 2553,
+      "sha256": "dbbb7a4b933820adbcd75ae76c28f8d9545db65792bb6090e8f92ec6dfc010b2"
+    },
+    {
+      "path": "repos/gAIng-brAin/README.md",
+      "size": 6825,
+      "sha256": "a3ef30190d789fc64541d808dc71b38e44efa6b0ed7f19c0caa9086b4e153640"
+    },
+    {
+      "path": "repos/gAIng-brAin/QUICKSTART_OMEGA.md",
+      "size": 3534,
+      "sha256": "7a8a3edaf09941c0cd8ae0f876b9e0ef76f5f117c8c1d269565fe1d6a884c511"
+    },
+    {
+      "path": "repos/gAIng-brAin/crew.bat",
+      "size": 353,
+      "sha256": "4e5bcdb18624f34db64f5480c6d6998e910997626c690729b34e8404cdc7a852"
+    },
+    {
+      "path": "repos/gAIng-brAin/notes/codex-gemini-feed.md",
+      "size": 331447,
+      "sha256": "b133016c225e5fddb17e4b68a3fba56a2fbd40c026526b1d6d079ebe0c8ed9e7"
+    },
+    {
+      "path": "repos/gAIng-brAin/notes/codex-gemini.md",
+      "size": 2066,
+      "sha256": "0c6e066c9eff7b94c60e80985da8c9e428c9422aeaebed48a859931119355bd0"
+    },
+    {
+      "path": "repos/gAIng-brAin/mcp/servers.json",
+      "size": 398,
+      "sha256": "d6c2149a7e3d4ab5b0e5dc4870b74ca7906cb7a0390fc98bff0eafe6b28c8ae0"
+    },
+    {
+      "path": "repos/gAIng-brAin/my-brain/brain.js",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/gAIng-brAin/cli/package.json",
+      "size": 604,
+      "sha256": "d4b70c1c6a22301d8a607c1a24e040116778601a39e081f9bd0317bfabec1974"
+    },
+    {
+      "path": "repos/gAIng-brAin/cli/omega.js",
+      "size": 9361,
+      "sha256": "e50bbd04d519984322d54fb6ed75558432cf1fee0b04b8ca43c5cd457797a61d"
+    },
+    {
+      "path": "repos/gAIng-brAin/cli/README.md",
+      "size": 1373,
+      "sha256": "9c1c7db6710b7d623de97a2cd0a0fb6f3be051f82cdbf9f42bbf4c15806d840b"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/log-archive-20260108-031908.md",
+      "size": 76,
+      "sha256": "5751a942dfb897bd34236be34655aec4add6fbf8833456de17784ea971e59cac"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-latest.json",
+      "size": 4523,
+      "sha256": "8aa50e505899694985f4c7358e89f391257bc0ea83028f9e8b6c48889ef5c781"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-20260104-152729.json",
+      "size": 4523,
+      "sha256": "8aa50e505899694985f4c7358e89f391257bc0ea83028f9e8b6c48889ef5c781"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-20260103-144711.json",
+      "size": 4523,
+      "sha256": "4f51ba81bf1b04cd61fb60cfd7ddc07b64bb0dae43a618cf011d0228a8c23f73"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-20260103-160052.json",
+      "size": 4523,
+      "sha256": "19f408341354a4a9267afb29c9b7110ff964353da836d854581b8e4b5a281c9a"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-20260103-195832.json",
+      "size": 4523,
+      "sha256": "7cac12125b6a5219a9bbbdc3db4e606afdd1a59ceb91cd1917c27408c8b00556"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/supabase-export-20260103-183128.json",
+      "size": 4523,
+      "sha256": "8347e922e296b4d16e38d040518fd5f9fca7fa4caf237566e82fa6c4fec4f6dd"
+    },
+    {
+      "path": "repos/gAIng-brAin/archive/log-archive-20260108-031708.md",
+      "size": 8249730,
+      "sha256": "fda30bc6ce702ff9194f81d400f70691353b0bd889770ec2cb6ed01c35a58cfa"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/jarvis-blueprint.html",
+      "size": 30472,
+      "sha256": "5a2e8d1b29f0173d200fb638bc8552c7d5ed1a08fed8cee308e6785a694ce847"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/OPERATING_MANUAL.md",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/COPILOT_PLAYBOOK.md",
+      "size": 8819,
+      "sha256": "01b9ed0a128176b3dee711b9eaba450e1815dbe2867010ae707952daf1570fb7"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/safa-ios-shortcut.md",
+      "size": 3865,
+      "sha256": "2ec04dc096d8fca7bc08a457abd645d66298c067b8e3171beda3508258cbf5ee"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/OPTIMIZATION_ITERATION_01.md",
+      "size": 1864,
+      "sha256": "4f15ce6e233b3dfd06c8b5f1546a7947399cc329097635956f0dd2cc7276a1b7"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/A2A_INTEGRATION_PLAN.md",
+      "size": 4063,
+      "sha256": "e2536d54b62f7d6c08d6bb9ff5dcf7949250c74a1eefc4bfec2bbcdf7fff6dd0"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/DEPLOYMENT.md",
+      "size": 4631,
+      "sha256": "cc818c12c074bf32d9e75f3ef1acda8ebd6d82fcf6aae7299a29dd2a64698646"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/PODCAST_SYSTEM.md",
+      "size": 13742,
+      "sha256": "ad9566ca114450422e0a77372ae7eb25044bf7b73d5a5137a9f11ff0bdf991cb"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/Unleash-SystemPower.txt",
+      "size": 3212,
+      "sha256": "f41d0ef8b2c04d577a4a726d91f05303b8678aecd79661f198c8692551f55870"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/IMPROVEMENTS.md",
+      "size": 3884,
+      "sha256": "b72060bee60923e310f67bc117f166daf2dc4383105022f4653d3d89e2fc5a1f"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/OMEGA_SYSTEM_SPEC.md",
+      "size": 2271,
+      "sha256": "ad713ea03ad7db9a1cd8c8c802023968294bf2ceddc7386cd7ce4ddfa693bce4"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/OMEGA_PLATFORM.md",
+      "size": 5968,
+      "sha256": "653169a0cdfd7505acbda858520cc13d47e9f099cfc31ecf39000b9267f30039"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/GAING_WAR_ROOM.md",
+      "size": 2425,
+      "sha256": "b219d4ffded532b3e08509e125201eb91fabe230624b6d580929fd0d4a3a4f00"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/CANON.md",
+      "size": 9682,
+      "sha256": "84024800dd91f40697dab20fa2596fffb48bbaf55fecce65437fe8d5ec460402"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/DECISIONS.md",
+      "size": 1319,
+      "sha256": "cc8ab54dd68d6e0d64861383cd321d1c5cde020ee3c3c19bafd8c93c2f7f6e0e"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/WORKERS/researcher.md",
+      "size": 492,
+      "sha256": "d921cc7746704730578524ee711ca0473a352bd687661edc36d53bb7705b11c3"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/WORKERS/planner.md",
+      "size": 861,
+      "sha256": "76ccc9c7c3962a66d719644bf6db2fae224698fcc6ade792f19f7f2ec1d74c2c"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/WORKERS/critic.md",
+      "size": 509,
+      "sha256": "9989e70e9bfe360372bf828a1a0af4935fe1fab2e531c191e6b5bea3257cb5d5"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/WORKERS/builder.md",
+      "size": 730,
+      "sha256": "99595ad49432bf548525039d26befd90bc56b8df810e550bed4f6c560a169e29"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/WORKERS/synthesizer.md",
+      "size": 462,
+      "sha256": "d79fed1aab44c730c2ead251e117d17b2d1eeae2d0b953e03b925ecd388de0e9"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/eidolon-dropzone/Eidolon_Architecture_v2_Final.md",
+      "size": 7902,
+      "sha256": "e4678f84559c02e1fe20c169c9dec0760fc85f186d0ca69e47cd0bd9ac77ff18"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/eidolon-dropzone/EIDOLON CROWN.md",
+      "size": 3681,
+      "sha256": "706b37b69daef21540219ce7e0357542cf811b2dfec36069f96f416233f7f456"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/eidolon-dropzone/Eidolon_Safety_Protocol_v1_Final_Optimized 2.md",
+      "size": 2207,
+      "sha256": "3bc7351a4b4c392b8c3b51705d85e3d45fb6e3485efa69a7a09517d2b5336fe9"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/eidolon-dropzone/SAFA_Governance_Risk_Mitigation.md",
+      "size": 19194,
+      "sha256": "ec0059197ca789a6f09ef7d14df0f2a18258cd2a7f5d79c0b43e590f15f3d35a"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/MCP/EXAMPLES.md",
+      "size": 5026,
+      "sha256": "7e451e657f4566a970f9bd265814ba56f99aa822d8577118bde1c2b072ef1ba0"
+    },
+    {
+      "path": "repos/gAIng-brAin/docs/MCP/README.md",
+      "size": 8512,
+      "sha256": "1bdb6172db63b84e7e666f42605ee4b1ad337dae0a78e88bbd1c04f4ec9c467f"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/safa-telegram-bot.js",
+      "size": 14961,
+      "sha256": "5f8c5890da2a9594140b9886ab9115c384e2c77f4bfb7b83a9b0c48c052046cd"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/agent-worker.js",
+      "size": 7715,
+      "sha256": "7db04d5d45ad83e7f6802420911a1a1f17d0133a2f50141338bb214950ce671d"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/app.js",
+      "size": 3884,
+      "sha256": "8d1700ffbc57da666f91e7ddb70fc770aeeac7a8811c9ab8211091f7075704dd"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/orchestrator.js",
+      "size": 8517,
+      "sha256": "45fd8501bc42d145dc864ea3b41fab876f97304c49bc96ddab07d5a44d2b19a2"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/consciousnessKernel.js",
+      "size": 4886,
+      "sha256": "ef623fe9b26777766b457a57346af8e905bf27b7b78d1d881d8e8ab25a263e8a"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/realtime-vision.js",
+      "size": 3473,
+      "sha256": "77c05b2360328e4787154d4eb67a7aad4f8bfabc2268c1ca26f9a328d554c6bd"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/voice.js",
+      "size": 997,
+      "sha256": "f00c8573324d63fb1470d78360b35c4481deb068dd1e4ca32419acad43510033"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/ears.js",
+      "size": 1377,
+      "sha256": "d521dbdb171880f545c2e8c86cc058d25f06baa8c2e532834712b1c13b5e6056"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/blackboard.js",
+      "size": 4211,
+      "sha256": "6e5ffab94bda26af99af0b055018474f292f24f01690990ade359708e49a0111"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/llm.js",
+      "size": 2332,
+      "sha256": "325e8512bf6a018325cb71fa19a2a589dc9a4666b629313c40f4582344f019a8"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/eyes.js",
+      "size": 2318,
+      "sha256": "83c5063113c041189e6095a07e51b0018f370b7d03c75547ef5485269b50faa5"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/mem0.js",
+      "size": 1518,
+      "sha256": "1881247f83cdfc5d8026cc70004e51af5144f003592e531b9fc276c2e30bf12a"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/self-healing.js",
+      "size": 10465,
+      "sha256": "0ef18fc3128c10c95a39a60c8431e43343a7a3affef1beec3bc3e44d797185c0"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/grok-voice.js",
+      "size": 10873,
+      "sha256": "f62e64f9e26f88cfc5eb26229ad9af0bcbbdf3f07638e9bf517d16df9262cbf1"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/websocket.js",
+      "size": 1841,
+      "sha256": "f8c54d91770fe80aba8987de59c7f7e63782acff2f70e1727ee4d14728e82ba2"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/a2a.js",
+      "size": 4375,
+      "sha256": "c1bf8ca99e0407793b6cda3266ab019b94211a91ba2c8d1982de041c40c57ae1"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/streaming.js",
+      "size": 5314,
+      "sha256": "7e10b4721d9df3102a41a0c93db65640a07f15206939576ae5003e74fb5fd252"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/vault.js",
+      "size": 8076,
+      "sha256": "6659f0acbde03f38dce82b22486c34e639163c4b10da7d87103b82a4dd5c2028"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/queue.js",
+      "size": 3268,
+      "sha256": "eeec9e52766d615dd22334a48a08fc1386838bb5672c5cb0cce266951707f507"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/observability.js",
+      "size": 8828,
+      "sha256": "ba253272de00010d222e71e415ccba9d01917bbb7878d12c072e2c01b1160c12"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/plugins.js",
+      "size": 10554,
+      "sha256": "2915f1ed7ed129efc1671bfba624f6add9c3c95d8d4aab84e723be58bc89bfae"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/supabase.js",
+      "size": 483,
+      "sha256": "d4c9b5356bffc9449807d715d8befc721864bf6899846d7bfdc578a16ee167e2"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/services/orchestrator.js",
+      "size": 12805,
+      "sha256": "a9c4f166446ff4fed87c35c059176efe48a1dbb230c26000cf28b622aa6c47d3"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/voice.js",
+      "size": 665,
+      "sha256": "6fc6983bee8d8e504f6c1a3d3b7ce82d19451d47f8b992614e1d1f056dda681d"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/ears.js",
+      "size": 1145,
+      "sha256": "bda99ffc19b44a1829a48df160f9b862b5ec69987db780883fd1fd72f4d2dd20"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/system.js",
+      "size": 7610,
+      "sha256": "28bedbd05954505073e4cbd4509c9f22a20b22bbd417419e8393f6a03e14f7c5"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/ws.js",
+      "size": 843,
+      "sha256": "098aa4ff5b8de8c3039a5f7296ba89624a79afc0e74d24be9e69ed8c4e2d448a"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/llm.js",
+      "size": 1199,
+      "sha256": "f59750473548624f561b869b1bbac4999664f9cd7626321cf3b9f2d1dcc52560"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/memories.js",
+      "size": 6025,
+      "sha256": "468302f2544d37dde50f6f4c33e19cbf33f1f8e43676b4492397fa3346162c1e"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/eyes.js",
+      "size": 706,
+      "sha256": "8f2d4973361f949d9a7a80d2053ef369de6cb0263fee32f49231f66f6a402bbe"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/mem0.js",
+      "size": 1485,
+      "sha256": "d22c0deca533bf7434eb51fbfa39268792bac52bfcec30cb0faa8fcfb11fbd79"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/vault-queue.js",
+      "size": 6842,
+      "sha256": "49a4edbdd18c6ab6e71f8fca873dfd2e36265fdf2b96eb81abf8ea2e9d47749b"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/tasks.js",
+      "size": 4106,
+      "sha256": "4b5141fad4e7b560934f78acebf56d0fb66010e18bc033aaa50256b1a3034392"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/messages.js",
+      "size": 7262,
+      "sha256": "a619e29433e41a791c0fa9504dfd71927aae5e4066e62e9c535299fb3bb8d7f1"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/agents.js",
+      "size": 1306,
+      "sha256": "a68b51d16d4071d0327ef7fdd177cb2d033070f760ec58cf39efce51c19e32d1"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/grok-voice.js",
+      "size": 5089,
+      "sha256": "cba85f3871807cdd98600183f2a4957628b34fc0e158f10fb00e562fb8567d91"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/mission.js",
+      "size": 439,
+      "sha256": "41cc87e5c007b579b52c80bc7c34797fc5c7393a2945be4fb1b3d4d0f3c68d25"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/kernel.js",
+      "size": 871,
+      "sha256": "f6f1b3a4340e06729ea8af4023223d3bf9218128003f9b1ca69e154071462603"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/safa.js",
+      "size": 1826,
+      "sha256": "596d46a5b7e4e80f66bf5bfb88b501cc072d1b821e7758317251008f9cfce40e"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/members.js",
+      "size": 3235,
+      "sha256": "f03f1884af5afb80cee8433c66c5b788badaa7ca3b5c4f85057d236acbfd4113"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/podcast.js",
+      "size": 7789,
+      "sha256": "e2ccc35c352ed5c91d14a46ecf8cd7f389d9b42cff788c61c47b389f04bfad40"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/analytics.js",
+      "size": 7997,
+      "sha256": "0742404ece36c68bf39775c898973012c3697e78145390685071b314ece438dc"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/routes/realtime.js",
+      "size": 2805,
+      "sha256": "e43816718d84460c6fddf3e1eb5326d4872f78e546208a32dcb6cd8155da7142"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/utils/helpers.js",
+      "size": 2118,
+      "sha256": "8fab1565af1568d51b0648f39a560a47f4e66112f6b9645bfb5434965815e8ae"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/middleware/auth.js",
+      "size": 883,
+      "sha256": "bd19761254efe3a81245adb3f6453c163bed7ba1663279bba1318bdc1d28c93b"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/config/env.js",
+      "size": 1666,
+      "sha256": "913f1a22ab89dbecc40554d54bd4cb36a6fd757d0a09342fa83bda8c6a53bed4"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/researcher.js",
+      "size": 4196,
+      "sha256": "2185c4094c53ac8c2caa6a0897bc88553261a2ec20a50ea9495b1835f7104063"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/index.js",
+      "size": 295,
+      "sha256": "d44bee60ce7945aaca5ae3173f7d2d004c87bffd4a40f2d5158c2a719048f5a7"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/planner.js",
+      "size": 1758,
+      "sha256": "e4e8b91203312d63ea323a685277794475d3f211f59cea36233b39bfcdcb9be1"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/critic.js",
+      "size": 1726,
+      "sha256": "40244005d90e6c746b7fae2adf0ace1f9283eb0aeff1a41c58aa37dd2b742d60"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/builder.js",
+      "size": 3314,
+      "sha256": "10a8756ffc596f6ac4bca43833cfe4b86602b6ba9bfefee73393d580c97a9626"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/workers/synthesizer.js",
+      "size": 3447,
+      "sha256": "dfade7d7e15289d04c2fc2eafff6ae1e05537c19e19acd92191755597b192acf"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/core/worker.js",
+      "size": 643,
+      "sha256": "e8ddba4bd96db11f848506620d3b9c2eb12f046a6796fc10b763f6efd651b9a5"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/core/mission.js",
+      "size": 2597,
+      "sha256": "5088b3bb798058aece2f472890d954c1ed7e20ee119ac8af286556bf7027d71d"
+    },
+    {
+      "path": "repos/gAIng-brAin/src/core/brain.js",
+      "size": 4637,
+      "sha256": "58624a6dcf4d6e0c9984ea117c73d4f98e9f61a21c3d342bca317a4291183477"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/postcss.config.js",
+      "size": 80,
+      "sha256": "190c877db466995bf1482f4a16abd06e04a89ede3119341e2a86ff96e1737b27"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/package.json",
+      "size": 934,
+      "sha256": "9b768d9b6ebd82c388759907fd580bf4881ae1de587d82c46a9aad7bb96d6878"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/tailwind.config.js",
+      "size": 717,
+      "sha256": "82b0678b19210cec25ea7609be3062fbb3927b30baa8a0c14243ec782b282258"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/vite.config.js",
+      "size": 1598,
+      "sha256": "e9cf0e5cd6bd7171939b4674a74436612f9d9e46982e18ea382395046e54731e"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/index.html",
+      "size": 8606,
+      "sha256": "a9c6a273641cf4e3ac7aca1e44664f743fd9df96dfb067859f94285d8eb20d67"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/README.md",
+      "size": 1760,
+      "sha256": "c4de98f5ca19bcb19883cba8297fce38c36b34ef4dde373b3f925d1acf60f936"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/index.css",
+      "size": 725,
+      "sha256": "eb7aa7b890d3996e2aa677df7a679dd6ab25e949f46bcdeb759ca290a4e67737"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/main.jsx",
+      "size": 235,
+      "sha256": "acb24feb3540b5ee687f5a65bdbb81fe3644aa19da89256bc24b18d8ee010410"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/App.jsx",
+      "size": 15970,
+      "sha256": "93fa5b6dc111f4bc9c519e61b0e16c4bf49bdd881c9b8106030922a5c223d81b"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/VoiceInterface.jsx",
+      "size": 2840,
+      "sha256": "b7a380237658c34b14e7a5f8d94cbe56093140876eaef4db6b1667f5cfa7b709"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/HealthMonitor.jsx",
+      "size": 10323,
+      "sha256": "c74b68316e5d87511192ea18bacd319334088c3c13790badeb94795d066b8956"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/MissionBoard.jsx",
+      "size": 8030,
+      "sha256": "ad57d4ab6cc74d093a1ad3b1952ba6d0876ebfbcb7a65b88b05315cadda80914"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/Analytics.jsx",
+      "size": 11581,
+      "sha256": "e87ac2cdb166e7287878feffe82146aaf6d2aebb50c2f481adb20107b11e5883"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/NeuroLink.jsx",
+      "size": 4953,
+      "sha256": "b1237306547f1303c5119a3f3e71190febfb01c633a2829f7158aad8631faa04"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/src/components/AgentChat.jsx",
+      "size": 9393,
+      "sha256": "8edba5c949aae1141920cb14d2fe5d58fbc94aafb608b3f919edc9b75988f1d9"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/public/manifest.json",
+      "size": 2204,
+      "sha256": "fdc3291135d3eb6daeba6117473ff1e6f57a516ad80289567df0ce02e193722e"
+    },
+    {
+      "path": "repos/gAIng-brAin/frontend/public/brain-icon.svg",
+      "size": 2118,
+      "sha256": "5e967dfae344dd490cb9bc42d67e8b49c26dcf8b0a31af33153170353ceab7ae"
+    },
+    {
+      "path": "repos/gAIng-brAin/data/local.db",
+      "size": 65536,
+      "sha256": "58a659d5e717b2c0f5ce7617d150dc7384906dac4676d47e259f5d2b9faaad96"
+    },
+    {
+      "path": "repos/gAIng-brAin/data/stream.json",
+      "size": 189,
+      "sha256": "9c5819b1a9355f6aeec60d44872335741496bea3d3513ec61ed49ded2bc3e801"
+    },
+    {
+      "path": "repos/gAIng-brAin/data/missions/a0770c87-2212-4117-87a5-54c91a705084.json",
+      "size": 517,
+      "sha256": "2679835bd1603129e60e5be43c74d016313613f862cb5b13985aefed32b2bc6f"
+    },
+    {
+      "path": "repos/gAIng-brAin/plugins/example-plugin/index.js",
+      "size": 3031,
+      "sha256": "60610392f6c9d043e9aad01514d1e1cb23307168efd7da38ac6f9e18f7dfdccc"
+    },
+    {
+      "path": "repos/gAIng-brAin/plugins/example-plugin/manifest.json",
+      "size": 397,
+      "sha256": "ea1f35593c7146fee2a7df21684cbe373b6ede2f4698c367963acb3491325032"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/package.json",
+      "size": 1479,
+      "sha256": "7bd19e863653383b4e776ca4d4083227a41e3759d06d3912b53e078c0290267f"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/vite.config.js",
+      "size": 408,
+      "sha256": "3c0c9272c8b429761f34969d2f9379daf1d8ff75d5eea7754a19a896aad152cd"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/index.html",
+      "size": 2703,
+      "sha256": "36dcbef78ff1ee1de876bad7babff43db442e4b6237cf9512d67f3883d412896"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/capacitor.config.json",
+      "size": 814,
+      "sha256": "701384bdc988ebf47368c30c4c5f1ecf002eae3c9cce4b3117284eb612c1a2f9"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/src/index.css",
+      "size": 42,
+      "sha256": "74e1acfd42f7117140290f60a7b16bdcd12874b9d6d9532d0d8e3e3dd9f5eb37"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/src/main.jsx",
+      "size": 1549,
+      "sha256": "f9d99d556cc64a1839e567ea2cd98d13ad676badece78055c9cf4c1dddf71efb"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/src/App.css",
+      "size": 4673,
+      "sha256": "0157c423e6942d6fa94795f7633bce3bdd4d7b334a2d2f6c212738ce9cce85d6"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/src/App.jsx",
+      "size": 5394,
+      "sha256": "e2c17d967be42dd3d6a1d18c58ccf2a37242aeb1a7ee13ea37588df11dd1be54"
+    },
+    {
+      "path": "repos/gAIng-brAin/mobile/public/manifest.json",
+      "size": 1632,
+      "sha256": "8f8b31f55691db38509dcf231b10b8aacbbded604249189371d24bb208150a7c"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-ngrok.ps1",
+      "size": 2147,
+      "sha256": "3641129acabfc733d31ee80ee6c62e07d4ea6175e75be7b3320cc26d1d7e5495"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/smoke-test.js",
+      "size": 1571,
+      "sha256": "b597d29cc4542f42103fcfa6463edd289fe871f18691a0f126cc2e29deca7874"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/sync-archive.ps1",
+      "size": 208,
+      "sha256": "a38efcf1b2bff95a8c6a9200ef04f7973fa8eb62d46bb710eb2d90afbf69b6aa"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/unregister-startup-tasks.ps1",
+      "size": 241,
+      "sha256": "bdd377c68a51acf99e68929e15e766a06bd186ee1dd3326b91404af2201f0e18"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-infrastructure.ps1",
+      "size": 2156,
+      "sha256": "320a431df532a7be3a2f6e936c4452c4aaa4a7793d27ae7d1f95826dd832d80b"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-codex.ps1",
+      "size": 1531,
+      "sha256": "17bf0a868448fbbe247e8ab9d505bb370c864f0bffe314c70344533b8bd7bec8"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/setup-mcp.js",
+      "size": 3546,
+      "sha256": "ea096a48df35f854218cd5455524f7255744f40281e755a43130fe627cd54c7f"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Validate-MCP.ps1",
+      "size": 4190,
+      "sha256": "bcfdef792d79ad1b54b8e60b57b2d1d79e82c5e7809de8482fac3f8fd63cc72d"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/forge.ps1",
+      "size": 4465,
+      "sha256": "65ba1bbfa017404f48ea0fde20d702c0146270d0c9a6b9ad2816238ebb9c0026"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-claude.ps1",
+      "size": 1695,
+      "sha256": "5f8ba07e90e0b9ecb0d7116f17f3c9d55f5595f940e0dc300efabc52938eb818"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/setup-autostart.ps1",
+      "size": 3602,
+      "sha256": "4a0baa97ed1418bb2641eb7b0e91c069bccd11564a3820de4b0681812a71a11a"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Start-OMEGAStack.ps1",
+      "size": 5428,
+      "sha256": "4223d6a625f422be097913cb6fceafe7fe9abc4bc553354751ceb3c2c51be93b"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-omega.ps1",
+      "size": 2186,
+      "sha256": "b1e9a9a7c1f2c325ebb90596226de949e1fa5fe2c5b8f22e5b664f581818d5b8"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-crew.ps1",
+      "size": 3228,
+      "sha256": "b76fac2a691e954f17096dfd7671233cf32e86b49f1f2fc2392581bfd22a56aa"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Unleash-SystemPower.ps1",
+      "size": 3229,
+      "sha256": "30dac9ddd898a51113b3ca74ec5a68beb411fa5e568391ab72192058a8c4aecb"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/rotate-logs.js",
+      "size": 3172,
+      "sha256": "d773929e64b5cd9b838a27260f5fbbb11e2e440167de7d739e234644c63536c0"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/take-screenshot.ps1",
+      "size": 525,
+      "sha256": "b163a02cdfec2c87e9fe14d939fc7c868367568af7de1814db1c743aa22c8a94"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/watchdog.ps1",
+      "size": 1577,
+      "sha256": "4816056cadb66feeb3bbe2b2f71c06b7045372278da9bbad17a76980b82647c5"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/agents-codex-run.ps1",
+      "size": 2244,
+      "sha256": "ef6e284acabb44d035c7dfd03a3aeefa99342271b0a749ac23119237dcba6a3e"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/setup-frontend.sh",
+      "size": 1619,
+      "sha256": "244074241abbe866713cc81c6e49ca0a01b3d03dc9d0a3798f0dc1e13e2831f0"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/stop-mcp.ps1",
+      "size": 3058,
+      "sha256": "0ebbedba8799d5fdca62a7cf09b1e23a33c1d49b21f8ad4c9dcac27c9ad3a700"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-gemini.ps1",
+      "size": 1514,
+      "sha256": "5c6ebafe1fc1345f9f17eae58f99734a4b2b56dfdc11ad771afbab23171b4024"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/init-local-db.js",
+      "size": 2932,
+      "sha256": "c4aec0283294f4fde6ed42cde20354c29a494aaebf26a141a83e869ef9760f3a"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/update_env_safe.js",
+      "size": 672,
+      "sha256": "20f69c1225aa84a05d2862c8a2263efb106449c829b4f0a026a75886fc202888"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Wake-The-Crew.ps1",
+      "size": 2216,
+      "sha256": "b88d92b02216cf319659f442c78c35a02fb1a70a09a506fef59c993d7ba87e66"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/startup-orchestrator.ps1",
+      "size": 2399,
+      "sha256": "d559c0af9c71b1d74bd4c778f9d1429abfd44a517966a464946dd19375891405"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Wake-Gemini-Solo.ps1",
+      "size": 2284,
+      "sha256": "de3f33c4edac165d1c52d1f6559cd4b9221a5abcabeb317a73295e74283af2e5"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/sync-two-way.js",
+      "size": 10604,
+      "sha256": "8672bfd840303db282acddaff141174603c35a8b3f1083f14e85714db7492497"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Broadcast-ToCrew.ps1",
+      "size": 2063,
+      "sha256": "1de192bd45abd9d16c341b0da375482e8a5d3a195f1c0230dda65523514410a8"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/restart-mcp.ps1",
+      "size": 1431,
+      "sha256": "3087da3e84b20fefaaa0d788df0aaed96f671474c2e522f556d71a09511b1602"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-brain.ps1",
+      "size": 400,
+      "sha256": "31a041ceccd658a4694d32ecf680e93eac897e6b34b21c77fb8464d22a51558e"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/integrity-check.ps1",
+      "size": 2625,
+      "sha256": "2d7d62a8694e90dd5b5fa4c7405b9cd15d776264f4db786131ee4a4bf1ce14a7"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/health-check.js",
+      "size": 949,
+      "sha256": "360ae40b0d81f3b3371a5b95f7ffc64d01233cdfdd6b20ef458dedbfbe6adfeb"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-mcp.ps1",
+      "size": 4845,
+      "sha256": "3354de85446b4fca946c886e7abf27e84a4a02f140368e0e6d71599bdd4c7bfa"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-omega.sh",
+      "size": 1504,
+      "sha256": "b3352d329e14283106f1905446637c216e9db3933726b084b8a5ffd909d08577"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/agents-log.ps1",
+      "size": 2740,
+      "sha256": "a2d3dd46bd9d9ab1287991cc39fb1096d5aa7dd5c7d719b2f08b8fa85d7dc87a"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/register-startup-tasks.ps1",
+      "size": 3303,
+      "sha256": "62134d804c8879c1f0a0e7e10bd2fec7205e298fe7b38077823931b39e66884a"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/export-supabase.js",
+      "size": 2711,
+      "sha256": "cdb4575ae5e8bb829e2737f2689eca20b0ac44ad5a269ae6129143a751a73c75"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/setup-frontend.ps1",
+      "size": 433,
+      "sha256": "cc83f63abbdd8298f42e78679e373403db8e43928ba3895fb4c31edcba4a6ba7"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/sync-two-way.ps1",
+      "size": 126,
+      "sha256": "6af06386d729847ddd425b6cebd3919cd9452b24166597781c1078ca9f20ffde"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/notes-poll.ps1",
+      "size": 1728,
+      "sha256": "4b6989901ae1d88d6a97768318aac410429d4ed6784c100d5875a2b7fc4ca5b2"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Unlock-PeakMode.ps1",
+      "size": 3371,
+      "sha256": "e1e768ddc95908f59f44dfd877399467f2a77a4e741bfc9a529cff23c52df89b"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/keys.ps1",
+      "size": 903,
+      "sha256": "501592a55e24169b941c026ca02544b7c41e08243a64b4e18fd691a38cc2c72f"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/Unlock-Claude.ps1",
+      "size": 4861,
+      "sha256": "83e4605cc92bbb76d1d8ae2f383560f3ef941c4400a89c2367ced0bfec016eb2"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/archive-log.ps1",
+      "size": 924,
+      "sha256": "c0d13ce0dddd52be70ffcbbf6d9c580f88fc3ddf179d4d0bea5450432f59053f"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/seed-members.js",
+      "size": 4109,
+      "sha256": "2633eee20f57b3b265a93e87eb1fc0a0a8760f6b041ed6356a54d4145c1409e6"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/start-grok.ps1",
+      "size": 1527,
+      "sha256": "39130043d4fa423766875583ec5c1093c93e7f3002b36dbd11487bbc3b0dbfd5"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/setup-mcp.ps1",
+      "size": 87,
+      "sha256": "6900e1d8696847882a5a038bd0831f1e91a9794f79b8607ee71a232001c974e3"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/agents-gemini-run.ps1",
+      "size": 2327,
+      "sha256": "e76fa116b27dbc4b04cfe4cd20997fbf679d3e96d43302cdd80ef2f449ade0f5"
+    },
+    {
+      "path": "repos/gAIng-brAin/scripts/lib/mcp-client.ps1",
+      "size": 6059,
+      "sha256": "993b69a6af85f5a297411339391090419a64b5e7b9d7c21ccac6a2bb3f8877a1"
+    },
+    {
+      "path": "repos/gAIng-brAin/alexa-skill/package.json",
+      "size": 449,
+      "sha256": "58180d02383fc2f0884b3ee698e9b3e7dd676b700e436c848778a93483eb2ead"
+    },
+    {
+      "path": "repos/gAIng-brAin/alexa-skill/README.md",
+      "size": 3461,
+      "sha256": "305b82fecb79805c6af199a14565508b548a4c7c29815a15849e7f1327ff6f54"
+    },
+    {
+      "path": "repos/gAIng-brAin/alexa-skill/lambda/index.js",
+      "size": 9617,
+      "sha256": "6b271c93e1245ada7fa132ab2ac9767239986595fc2da791b93a7a3f1ca6e882"
+    },
+    {
+      "path": "repos/gAIng-brAin/alexa-skill/model/en-US.json",
+      "size": 3125,
+      "sha256": "f6730c03a73465c4e30c34f9f6b1cd83155ff19131fd0e11b4a5a022d71cb2e1"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/preload.js",
+      "size": 2025,
+      "sha256": "ed13774fbe2a01b954a3a45cb3af062cf1c68d9926db35a81c06e9c0d8dd8b19"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/package.json",
+      "size": 1477,
+      "sha256": "b4c09cb2662daee464b161b7675976f02086483b6b56c08d0c51bef138797a26"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/main.js",
+      "size": 6560,
+      "sha256": "c3ced14b61f1b18d988f2f45bcdfc7276b06a876309bccdd86acf618ed8daf15"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/renderer/index.html",
+      "size": 10818,
+      "sha256": "0241b44cfead927be6962f15cb6bfde08d34af88d275a2101e7492727e7fb1ad"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/assets/tray-icon.png",
+      "size": 510242,
+      "sha256": "a90e8c67a06ccb565299eba073fdab0b4d33b540ac1599a3e362fc1232cefa5c"
+    },
+    {
+      "path": "repos/gAIng-brAin/desktop/assets/icon.png",
+      "size": 510242,
+      "sha256": "a90e8c67a06ccb565299eba073fdab0b4d33b540ac1599a3e362fc1232cefa5c"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/safa.html",
+      "size": 14902,
+      "sha256": "2efa073f6887a22fdc4f781a62536d174bb2ab8a04752b3d80c0f39449a8dd83"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/grok-voice.html",
+      "size": 14254,
+      "sha256": "a5185c3c42c85dd03fbdd79358a2bcb23eaaaa454f0b67627ce41a1d5f85fafa"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/manifest.json",
+      "size": 579,
+      "sha256": "e9e2bcb6434c7950f6361c0c46a411e48cf44447c4d05e92ebb2178c415c1eff"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/sw.js",
+      "size": 7439,
+      "sha256": "046c8b5e3ba055e4e9b388c678827b1f29f77424896f14b9da31a86747cb77fd"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/index.html",
+      "size": 23409,
+      "sha256": "2d48a1068b559d6fa87958a57400f92daf93ec328aa0ab538749e1b77bfcd5d6"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/manifest.json",
+      "size": 2204,
+      "sha256": "fdc3291135d3eb6daeba6117473ff1e6f57a516ad80289567df0ce02e193722e"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/index.html",
+      "size": 9173,
+      "sha256": "7922aeee9880d9909a1688a2083aade520037cff6cd965ead3ec7e13ce88d9ef"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/brain-icon.svg",
+      "size": 2118,
+      "sha256": "5e967dfae344dd490cb9bc42d67e8b49c26dcf8b0a31af33153170353ceab7ae"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/js/index-DQbtRCA-.js",
+      "size": 37533,
+      "sha256": "4256e4264310e99a614a19d84f701914530c0df7fbce1deabd16227cbcb39e47"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/assets/index-DwFARmJG.css",
+      "size": 22491,
+      "sha256": "940642025025a46fcc89ae0e1d85b1252a28205b445d0667319fc08e76dc8c51"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/chunks/vendor-CVDnmApk.js",
+      "size": 140985,
+      "sha256": "8b3c6c7687f1ca58e1f88ca697a26c4624f6047934f7e73db40d5cc9ce3aaba0"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/chunks/charts-CjwJp2Tt.js",
+      "size": 410838,
+      "sha256": "5dbcccd5321e08806d9640c33952d158e51d65cade0f33bdd4a8ec880652fd21"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/chunks/three-CdEe9X0j.js",
+      "size": 898263,
+      "sha256": "af859485f117164d3e421de265818c11da4f49895c85d19eeeb45ed49d2b9ac2"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/vision-pwa/chunks/icons-QJCldGZ0.js",
+      "size": 10094,
+      "sha256": "0991b3eccb82854c223bac8c8b484a8552305b91e0cd0e3f021cba47d426846e"
+    },
+    {
+      "path": "repos/gAIng-brAin/public/captures/capture_1767619252159.png",
+      "size": 247993,
+      "sha256": "822dee92d9770a6162561caa120aea086ffcbe8f268071f86b612d18c785741e"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/memories.sql",
+      "size": 581,
+      "sha256": "d5748364f42a3e9c3aaf0b893f8865251ddbb08a67877919aaf70a1ca49863c8"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/memory_sources.sql",
+      "size": 577,
+      "sha256": "b87d4df67d359dd81c56a4c9dc6efacbfc07f85c78614798cd38c0a6f36e7e9a"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/members.sql",
+      "size": 683,
+      "sha256": "86c94948cb9c2ba93271d29723ec21bf72e48aa17a961c7e8c929ecab2262ac2"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/messages.sql",
+      "size": 2150,
+      "sha256": "4634531b7904c23eb2501b5f5b2de736a240e7b9d6c40975b53b8847b52152c4"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/task_queue.sql",
+      "size": 6364,
+      "sha256": "b4c574355a51bcf44327001a15405e76cbe675db61e6c49505d0375bb850cc3c"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/updated_at.sql",
+      "size": 1721,
+      "sha256": "fe0d8da6f1b8c0d53682c88e10dd7bb4ec857ff903c55e1c853d158787c30234"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/memory_revisions.sql",
+      "size": 511,
+      "sha256": "88d5fe49e1d4782d7f8b0bb767084ec2c58bfb3a1c8a4421472df027ad2e0220"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/memory_votes.sql",
+      "size": 504,
+      "sha256": "06bee90de206047695c940503ec51b497e09f1699b26f7160ead487fc707ae83"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/rls.sql",
+      "size": 1485,
+      "sha256": "2b30b493979956ec5ef33084883c0552f28cd38ff81b473595dcd74e572520e0"
+    },
+    {
+      "path": "repos/gAIng-brAin/supabase/migrations/20260103_task_queue.sql",
+      "size": 6364,
+      "sha256": "b4c574355a51bcf44327001a15405e76cbe675db61e6c49505d0375bb850cc3c"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/Dockerfile",
+      "size": 1203,
+      "sha256": "6a5067c4e04d942c8c9d1ee242bbdd246fa272e7a34ecf997a613f49419f55f7"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/build.sh",
+      "size": 14674,
+      "sha256": "f4b56cbb4c75886b5692f43c734c4f147505d6ec0a4206f416ce3c6e6fad9421"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/README.md",
+      "size": 4144,
+      "sha256": "02bc5b996b083e129549b65ec221946014aafc8fb7d1900ca0825dd435c00c5f"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/scripts/first-boot.sh",
+      "size": 5966,
+      "sha256": "d790b8a35f065850bc2db992cfb7ff61a1af33cfb774ff1853d65a932ce5e7d2"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/scripts/backup.sh",
+      "size": 2662,
+      "sha256": "36f96e3270baa0bf1706f10835bcaa0327b732948d6bfc0cc1aebf15efc487c7"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/scripts/start-omega.sh",
+      "size": 3347,
+      "sha256": "356675ea1a05b6692879b91748f02ca8d35e8771f39a8c6f24fa1ba03c98521b"
+    },
+    {
+      "path": "repos/gAIng-brAin/omega-os/config/packages.list",
+      "size": 756,
+      "sha256": "d56e5bb7b216a3bb76d90eb8140b0b89cc618e4da23a8ba82f069f1a81ac5400"
+    },
+    {
+      "path": "repos/gAIng-brAin/tools/scan-bidi.mjs",
+      "size": 1735,
+      "sha256": "3b84e5fbf325d3ac47fde2732b50995e4ba37ea0d47ec8c88eaeb216ba332084"
+    },
+    {
+      "path": "repos/gAIng-brAin/tools/omega-doctor.mjs",
+      "size": 4928,
+      "sha256": "effa90da8841ccad35ab9919007b94308d1fcae3170b0079b0674f18d0f4a89e"
+    },
+    {
+      "path": "repos/gAIng-brAin/config/chain-template.json",
+      "size": 226,
+      "sha256": "e669960d6c69ed36c5fdd0c7a93a2b0a7baeaeb6a900699ef4f795ffd79b604b"
+    },
+    {
+      "path": "repos/gAIng-brAin/events/events-20260107.jsonl",
+      "size": 240802,
+      "sha256": "67bc48556b0dbea0d97c073341295b1a3f8dd8367f7a7a470a2436f6cded6bca"
+    },
+    {
+      "path": "repos/gAIng-brAin/podcast/scripts/voice-synthesizer.js",
+      "size": 9546,
+      "sha256": "9734a1430076dd5cf9dbc94c462d131a97590010ca16459e8a3396b5b203dd52"
+    },
+    {
+      "path": "repos/gAIng-brAin/podcast/scripts/generate-script.js",
+      "size": 12153,
+      "sha256": "84c0ce1978eddfebd6ccf8063af201f7914fdb173ac03924f065b3fb0d18bee0"
+    },
+    {
+      "path": "repos/gAIng-brAin/podcast/scripts/episode-producer.js",
+      "size": 11159,
+      "sha256": "f0e6ea4c87afd8384cebba786a74f08a7667b700d96cedde128d3c4679996828"
+    },
+    {
+      "path": "repos/gAIng-brAin/podcast/podcast/episodes/2026-01-09/script.json",
+      "size": 7145,
+      "sha256": "36d28e3f7b000885956a017e51f21f57b5d0eaa73e78713ab60e2a3d9534c907"
+    },
+    {
+      "path": "repos/gAIng-brAin/podcast/episodes/2026-01-09/script.json",
+      "size": 7145,
+      "sha256": "2a5b673770584a400d2c06a9055bb688459c92f4c82be6cadfcba56924960b76"
+    },
+    {
+      "path": "repos/OpenManus/sandbox_main.py",
+      "size": 1109,
+      "sha256": "49172c81afc70a30d1b1b726c8ca5cb9265704ab84e724490ef6502a0866b65c"
+    },
+    {
+      "path": "repos/OpenManus/requirements.txt",
+      "size": 610,
+      "sha256": "5b869cf45c6ab752ae35bd6400009b8aab7762e84cf21d8a89869165a69b3496"
+    },
+    {
+      "path": "repos/OpenManus/run_flow.py",
+      "size": 1576,
+      "sha256": "e1a7cb4c03c61c614412e29d56eed414905ab617254f24ad3746fa6d70b750db"
+    },
+    {
+      "path": "repos/OpenManus/run_mcp_server.py",
+      "size": 342,
+      "sha256": "26bb28175ecf54e66b4fdb773052863b7ac9264f7c8fe4d2d860a2500ee1aa11"
+    },
+    {
+      "path": "repos/OpenManus/CODE_OF_CONDUCT.md",
+      "size": 7495,
+      "sha256": "403117e61b51ca626630bbe7d8dcd0da91ba915ac5a69a79efbbaef4f556e0d9"
+    },
+    {
+      "path": "repos/OpenManus/README_ko.md",
+      "size": 8662,
+      "sha256": "cf13aff3940403a3fc5f93f918b8b32fd1fa2004ec030dd409c3548a21601785"
+    },
+    {
+      "path": "repos/OpenManus/Dockerfile",
+      "size": 305,
+      "sha256": "fb11518b01955a1e3e90cde1a188dae1568bc9c0bd7a861aa44d790505bb8ffc"
+    },
+    {
+      "path": "repos/OpenManus/README_ja.md",
+      "size": 9136,
+      "sha256": "3237cba0a18c3bc96a331b0d7aa087f1cf3b4a90e869fbf0316ee1e18c4e83d5"
+    },
+    {
+      "path": "repos/OpenManus/LICENSE",
+      "size": 1071,
+      "sha256": "79e3e521bf15d45421cdb731ed66ea66ff56c429e02a18a20e9f8958a3d1efcc"
+    },
+    {
+      "path": "repos/OpenManus/README_zh.md",
+      "size": 7942,
+      "sha256": "e0bd633ad8d078249f8accd54aac4581092988245230a220a1a9570b776bab35"
+    },
+    {
+      "path": "repos/OpenManus/setup.py",
+      "size": 1444,
+      "sha256": "e62cbef6977c16809d8aa5151c152a74e2fd941f2ef5605a1c43d462ae78d677"
+    },
+    {
+      "path": "repos/OpenManus/main.py",
+      "size": 1087,
+      "sha256": "0fc32dc40cac0148ecb5c0e78be46cbf64e681133e3cad5e8dadd1fafad69fdf"
+    },
+    {
+      "path": "repos/OpenManus/run_mcp.py",
+      "size": 3620,
+      "sha256": "8e4cd8a6dc65c0b9a076006a5f6a5fc7b4e3f7c86c7b40cbb4d3679fa5892333"
+    },
+    {
+      "path": "repos/OpenManus/README.md",
+      "size": 8242,
+      "sha256": "15eb3d19e58695e18dc72e2f8574c80896e29f77583b02d96b35edb9a7d9a74d"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/agent_executor.py",
+      "size": 2144,
+      "sha256": "f74db732fc9cfe22094bbad81af72792df9623099fac3f4affade9aed6877048"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/README_zh.md",
+      "size": 7527,
+      "sha256": "e777cae3f85c6c1d910025600df45a23e7a744209ac0773e48dddb23f27057be"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/agent.py",
+      "size": 1032,
+      "sha256": "d867b2db4c33a4f6e998fb3b167b68189875d2ccd261128ffd61738de3f95063"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/main.py",
+      "size": 4701,
+      "sha256": "e1be84bacaba3cea5788d2d172b438e65c4a8390217f119e4c510d83ede27b1a"
+    },
+    {
+      "path": "repos/OpenManus/protocol/a2a/app/README.md",
+      "size": 7542,
+      "sha256": "9c0178ffa098f93983ecedb55769d8fe8da7ca1ff8ce2b5cb729709eb8df079c"
+    },
+    {
+      "path": "repos/OpenManus/workspace/example.txt",
+      "size": 97,
+      "sha256": "0e56503cee10b5f70535abefd8ae32588e1e4699143c505443734fc292221a3d"
+    },
+    {
+      "path": "repos/OpenManus/tests/sandbox/test_sandbox.py",
+      "size": 4477,
+      "sha256": "89a678286b1fde130f0e3ace21976d505d3cb60005e13f4a3ff6ee8bf7a757c6"
+    },
+    {
+      "path": "repos/OpenManus/tests/sandbox/test_client.py",
+      "size": 3494,
+      "sha256": "dc08efce7978ac9ee26dfd2ef95699ad8d8b4781af30372778e6f7237931d05e"
+    },
+    {
+      "path": "repos/OpenManus/tests/sandbox/test_docker_terminal.py",
+      "size": 3344,
+      "sha256": "b839eeb3c54442b22b6a1c7e575c9296b9b26585e868182fb1ac9e0c697f74c9"
+    },
+    {
+      "path": "repos/OpenManus/tests/sandbox/test_sandbox_manager.py",
+      "size": 4001,
+      "sha256": "703130beed130ca24fcad18560091ac74db433e5c1ca86611dc2e7a6403a3060"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/readme.md",
+      "size": 869,
+      "sha256": "2f7b0222da8eb81abd591e307d77aed75a35667c350f9c7abed8bd42fede8dcf"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/pictures/japan-travel-plan-2.png",
+      "size": 36336,
+      "sha256": "3efd1cd184b9cae41f8a4927069cf20c878d3b6b90e2f58e526abedf9ed1aa91"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/pictures/japan-travel-plan-1.png",
+      "size": 168010,
+      "sha256": "029dcdd015d5fef7311d5e6bc6ebdcc57fd9736829ea1ab6d471123faa3c5a26"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/japan-travel-plan/japan_travel_guide_instructions.txt",
+      "size": 1871,
+      "sha256": "d7e73eac1dc4cdd3010734d8ebacc877eab363d76e65458de3d35089307de6cb"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/japan-travel-plan/japan_travel_handbook.html",
+      "size": 5951,
+      "sha256": "3ac07a17a522eb75ab8fe9adfba054b294f77511d5fbfc27ea47aaf123b80dd4"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/japan-travel-plan/japan_travel_handbook_print.html",
+      "size": 5863,
+      "sha256": "88beaaf0cc2016003780e594e95397c0ef1692853594344dcc0bde41d780335d"
+    },
+    {
+      "path": "repos/OpenManus/examples/use_case/japan-travel-plan/japan_travel_handbook_mobile.html",
+      "size": 8218,
+      "sha256": "b38b92d3180d165bc34d195ca2626d3cdc9e6a6cedfcc89a550af11ca5a03e80"
+    },
+    {
+      "path": "repos/OpenManus/examples/benchmarks/__init__.py",
+      "size": 70,
+      "sha256": "28a438ff758e902a8f2b55b9c739fa912f2180e1f689311c1ffa8309569baeb9"
+    },
+    {
+      "path": "repos/OpenManus/assets/community_group.png",
+      "size": 177676,
+      "sha256": "9cfb1e004196d860178eff864f27100e49df4509432b746e39294a984eedcb15"
+    },
+    {
+      "path": "repos/OpenManus/assets/logo.jpg",
+      "size": 65677,
+      "sha256": "dc01e3c0fd0d9458e44811d8f3608ad7f901f053b27bfe37d2b59e2f03d5e5aa"
+    },
+    {
+      "path": "repos/OpenManus/app/bedrock.py",
+      "size": 13106,
+      "sha256": "93800f91c68bbd644f6aecc9942b547ff383c84d4c24f91e5d37a68a7dede5e7"
+    },
+    {
+      "path": "repos/OpenManus/app/llm.py",
+      "size": 29656,
+      "sha256": "c9fd72396fccd8e27d3e205527dabef0e29a2643b05c93cd2b459da864c27052"
+    },
+    {
+      "path": "repos/OpenManus/app/logger.py",
+      "size": 1074,
+      "sha256": "94367153205fa2cea2512cda9a0bd0b56f3499a50361faa86fdee59cedd2c11b"
+    },
+    {
+      "path": "repos/OpenManus/app/schema.py",
+      "size": 5689,
+      "sha256": "d0e508d54d237d6ee307cf0aaaf523aa8d3c3a4bf7daffe3d336e292c5fdfb91"
+    },
+    {
+      "path": "repos/OpenManus/app/config.py",
+      "size": 13021,
+      "sha256": "c6a4e0fb26cb0a32e501f8c7ae8c63ebf73a031c7d010fd3aeb4dbc9983d7e02"
+    },
+    {
+      "path": "repos/OpenManus/app/exceptions.py",
+      "size": 332,
+      "sha256": "4c6ce67a4698d9934be5a6b8ac618e7482ea394b24ddecbe66607b13bfcb7c0a"
+    },
+    {
+      "path": "repos/OpenManus/app/__init__.py",
+      "size": 270,
+      "sha256": "b13ed78fd27d0ee10ae8510d0ba9aa87b706082a3e087711b2b17300e34527d1"
+    },
+    {
+      "path": "repos/OpenManus/app/daytona/tool_base.py",
+      "size": 5017,
+      "sha256": "28f8120840c061f32509948a64b57889902123a9ef8149d41bfdb48cb4bc3b05"
+    },
+    {
+      "path": "repos/OpenManus/app/daytona/sandbox.py",
+      "size": 5138,
+      "sha256": "47f0541e29f7739d01ac07b47e34e9faffd30faa7ab33072265f130eae751913"
+    },
+    {
+      "path": "repos/OpenManus/app/daytona/README.md",
+      "size": 2257,
+      "sha256": "457b50aee7fd49262def2a5b84beb14f248fafa8c5fce3bdf75029e33864e9ab"
+    },
+    {
+      "path": "repos/OpenManus/app/mcp/server.py",
+      "size": 6682,
+      "sha256": "3b91cbd8476f3cc5951accca6c97157dd7bf3adbb04a4915cc09833e991ea4d6"
+    },
+    {
+      "path": "repos/OpenManus/app/mcp/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/OpenManus/app/flow/planning.py",
+      "size": 18261,
+      "sha256": "d5a81791dca87ae567334fedcd128e8d1639aad5c56a7c661470cdb9c7925c00"
+    },
+    {
+      "path": "repos/OpenManus/app/flow/flow_factory.py",
+      "size": 771,
+      "sha256": "4e71e2592f42f3984b09a0c661824369344fbdec3e20bffaa63cd7a05e48bc98"
+    },
+    {
+      "path": "repos/OpenManus/app/flow/base.py",
+      "size": 1820,
+      "sha256": "8d3f7ec50fbb35a1a00132a262e6c997a8dcd7d9c4605bf6de434a892856dc5e"
+    },
+    {
+      "path": "repos/OpenManus/app/flow/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/client.py",
+      "size": 5647,
+      "sha256": "ba78f42cc827129b07ac6a3c9b503c949825d2fcb3287215db8cc127a5663082"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/__init__.py",
+      "size": 685,
+      "sha256": "6c7190684c837c4f5aead0a0c9a6d2d1c4915da683cb62760a0214643bdbf034"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/core/terminal.py",
+      "size": 10943,
+      "sha256": "d8b25b03b4d2831526fc4ee79ebd323a1a8b2a2cdc90be2a6cb79e742bac5fca"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/core/sandbox.py",
+      "size": 15839,
+      "sha256": "424720fa19f43c68a3e3365b3ac7d4c45b05163ceee07a5f478e1d59b2e8f8b3"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/core/exceptions.py",
+      "size": 471,
+      "sha256": "0031dfea98fa26706d0c8d17ee14ab46a12ad8a404f7108ab288ea97aaca5071"
+    },
+    {
+      "path": "repos/OpenManus/app/sandbox/core/manager.py",
+      "size": 10581,
+      "sha256": "9f590d7fc263ee1ee5d33f3b935d1d4747db8f63a15fa73e112591c0db542973"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/manus.py",
+      "size": 6263,
+      "sha256": "0850593cb2871ed3aca776d263373471d9fbaf045977e671cc7f061b1a9afc3a"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/toolcall.py",
+      "size": 9840,
+      "sha256": "620b970ad6115e487279434d6eb86af9f904db71b6f27f7d36f509a6caabe2ca"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/data_analysis.py",
+      "size": 1376,
+      "sha256": "8c0657b1e7f4a9f3797036f8e0a35bf90ac3f4314c4275ab85599fa1ac9f039b"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/swe.py",
+      "size": 771,
+      "sha256": "be1a1dd1cc7b5825d43c7be60b4ce73065c4f84dfa921d54bddff2d088229575"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/browser.py",
+      "size": 5254,
+      "sha256": "c8d4a91a8f6175cc38bfc8b061e0a75df3d3fce934e4a2085d4fe41a90311cf6"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/base.py",
+      "size": 7026,
+      "sha256": "d47eb88a4ed0487b2c2933e9a7bbaa6159ea395c81a263ff0410f179d7340aa8"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/mcp.py",
+      "size": 7150,
+      "sha256": "b8a8247ef879f54b9a3705e1e475c633c5b242f5e79560daddf400536641a232"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/__init__.py",
+      "size": 358,
+      "sha256": "ffb890a2d67f576ddd12be870e943a3591f08c2aa10933224eb11eabc7c85ca2"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/react.py",
+      "size": 1012,
+      "sha256": "f5d52e7519d89eeffafc75eb880621bc7cdc9ed958aea3fd4895aace3c7a3883"
+    },
+    {
+      "path": "repos/OpenManus/app/agent/sandbox_agent.py",
+      "size": 8777,
+      "sha256": "b979f15e6e73ceb67c378c8b9d52a78f4b37607bad08be0b380d19c42dae300c"
+    },
+    {
+      "path": "repos/OpenManus/app/utils/files_utils.py",
+      "size": 1993,
+      "sha256": "f8d1d8d73cb818bb68116a348fe4c6b6d66ae200f103953a966ab9ad5efaf699"
+    },
+    {
+      "path": "repos/OpenManus/app/utils/logger.py",
+      "size": 942,
+      "sha256": "40f7eff1c4b0317000bdc09012994365827effddfa8b771b754d8e0c62d992e4"
+    },
+    {
+      "path": "repos/OpenManus/app/utils/__init__.py",
+      "size": 50,
+      "sha256": "402e857cbbf687ae7483b23df11c7bbfdfffe2c8b087d0940a08ac20520b335b"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/manus.py",
+      "size": 821,
+      "sha256": "3e1ed4e27d999b6e0f3455ecd491310cc4085bcd94d694d0907727ba3507eb09"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/toolcall.py",
+      "size": 162,
+      "sha256": "79bbf92bdc19a7b85988a38ca477f355adb8c130a51b1c8173e4b61f88f5c20d"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/visualization.py",
+      "size": 668,
+      "sha256": "85164cad3bb10be743036ba595e0f9841cf8b381c0f2a99288c8581b0431ddce"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/swe.py",
+      "size": 1591,
+      "sha256": "8021f779b299446f3835f9955699e0776196cc8dd266fa321eb18c743b356cd8"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/planning.py",
+      "size": 1199,
+      "sha256": "222deab0423936dd1592170cd18d890d1330274156396f2baa8cea16a9c6c700"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/browser.py",
+      "size": 5454,
+      "sha256": "6caf9606ede1ece3458cb8f4c4989d968d4e22f38e2c8b8c7e0d422b9c50443b"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/mcp.py",
+      "size": 2168,
+      "sha256": "68c1347b17f3ac962ab6eddcd889c9da4afad739d3001e7bfe6965ddc87d3841"
+    },
+    {
+      "path": "repos/OpenManus/app/prompt/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/file_operators.py",
+      "size": 5618,
+      "sha256": "9ba54d97e990117d9913cc2d71d831db90d9e0957d805d8a814dcf29846f096f"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/bash.py",
+      "size": 5754,
+      "sha256": "d4f1596bdca60433c496d1e4f5cdc1bd17a28da1b890afd7ae0b09991ea26e4e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/python_execute.py",
+      "size": 2497,
+      "sha256": "c6bf31db1c1226b1a63c764046e255cfab7a16944a60b4e2ab7db0387d623861"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/planning.py",
+      "size": 13623,
+      "sha256": "69d76dd1ef705f2fb68da9f1287eff4f09ba30e9176084c5e8c186ae8fa4d79c"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/ask_human.py",
+      "size": 572,
+      "sha256": "28173bf6712fc9e14fa12ccd00981bf4d3088a6447fa54075de230ff327b7cec"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/terminate.py",
+      "size": 833,
+      "sha256": "7ff7ce9218f8b144975e4ccba1cea1778445adf23b735b0652c13849b5dcfd27"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/crawl4ai.py",
+      "size": 10594,
+      "sha256": "b90c529621a6ba812fbb3c7c71095e2865aa101c6e42551e182612ca276db3af"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/base.py",
+      "size": 5752,
+      "sha256": "e2957fee59daba4d1bf86560f81b029274e619554f17442f8ded80906fa49c4e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/mcp.py",
+      "size": 7542,
+      "sha256": "a333e37ef42c9cba20eb43fa464b4e73e259d803b8686aa9c81937b55ab16008"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/tool_collection.py",
+      "size": 2241,
+      "sha256": "704b7ff76d7b78925b32b5f1e240e4d5c208478b042c1ce3e7ba38a250717cc1"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/__init__.py",
+      "size": 676,
+      "sha256": "23f8fd970d4501a7b8e9905383110fd7531b30d999e8b90e95cd0c195f3f22aa"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/create_chat_completion.py",
+      "size": 5621,
+      "sha256": "03ac2b449bfd96bf250adaa81ef6a3195ca7947620dc3f9f66adcb7191f27690"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/browser_use_tool.py",
+      "size": 24691,
+      "sha256": "442d698867c1e4726ef2708766140fb27df907d1b12c9738c2733d1948fb3f50"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/str_replace_editor.py",
+      "size": 17148,
+      "sha256": "acb02f4ee695ccef2e1fed0932c02966799e029cba29bb2a955ae6b26a975807"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/web_search.py",
+      "size": 14837,
+      "sha256": "55c9cd4e276320427ede4d10b9ff24372f7bacae081352fd287205f828aa060b"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/computer_use_tool.py",
+      "size": 17807,
+      "sha256": "a6b45165ec24e77091e5c4a67230b9e04539c1d736c498b620989bbb3dadbc2a"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/chart_prepare.py",
+      "size": 1803,
+      "sha256": "9d40b23072f2e4eab2b2e862dece29f2c232ef03e55d7dd817e2019454e8bfbd"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/data_visualization.py",
+      "size": 9555,
+      "sha256": "4f4716ccf3d020e764841d2b120e1199a431436a077d26085573d2066d245729"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/python_execute.py",
+      "size": 1800,
+      "sha256": "0c023995757f46857f894047455cab3b2bba80395aa1c04f5261f28145db582a"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/package.json",
+      "size": 477,
+      "sha256": "dbda1713d05bf677913d19347a14f33e1ad0e94632efb1c7961302e671482153"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/tsconfig.json",
+      "size": 12379,
+      "sha256": "9750820bb979aa92f65dfe7e977b1f533945840e90f25c8a22c085f85207f5d1"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/README_ko.md",
+      "size": 4171,
+      "sha256": "2050dc5f15ba42fd460e98d3b2f6e2be97ad7b24078578dfcc22976b5f672025"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/package-lock.json",
+      "size": 299621,
+      "sha256": "e0f36c1e15a79d1832d69ca8c27370d7bfc3a6ce8f6fb5628b1de21acd38a9d8"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/README_ja.md",
+      "size": 3706,
+      "sha256": "79577ca1d2931952f05336006b8ad844b4ff61b009fa9bfb826996832581809f"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/README_zh.md",
+      "size": 4029,
+      "sha256": "975f70cfbb74f4f3a124c29bf66410f7fbc20d8f4b16ce70253745f39239f9f7"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/__init__.py",
+      "size": 311,
+      "sha256": "27717f6bb5139fa9193522a7183cbaaab09b1b9796f14ea3ec6bd670f3d60efc"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/README.md",
+      "size": 4503,
+      "sha256": "592d3b8dd3892239dba5f2f52ad644c16981d7fc51913d55a36439f60d05f06e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/src/chartVisualize.ts",
+      "size": 9898,
+      "sha256": "5561eedf480ca227d974e746e1ebbe6c97fa3225bede3f0601e4935f054eec7e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/test/chart_demo.py",
+      "size": 4418,
+      "sha256": "98cecd486eac30eba266130d14dfe39c7638c4cce0cf7b6e9a55f00b8cf1d1f9"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/chart_visualization/test/report_demo.py",
+      "size": 718,
+      "sha256": "979ad9e8a8e574af0ed869265c8eb778591336e4d5830888ab81d08e696c218d"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/sandbox/sb_vision_tool.py",
+      "size": 7630,
+      "sha256": "0685884f515485f7e07c8eef36843c36eee32e95ffc334b246b2ea53b0864cb4"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/sandbox/sb_shell_tool.py",
+      "size": 16388,
+      "sha256": "8f2c36334f798fe2b4ae103fa7ffc81e62ae651a0ff7d7df6caec2b80180b14e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/sandbox/sb_files_tool.py",
+      "size": 14832,
+      "sha256": "8798a7dde3cf2711c75f2cd58808762b15ae770ac1d34b6b342fefe6e9d66d36"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/sandbox/sb_browser_tool.py",
+      "size": 19583,
+      "sha256": "df875fe804ffa1fc1caa9b6c019bc6ef067569122ac009ba942616b92d4c90e7"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/bing_search.py",
+      "size": 5313,
+      "sha256": "ec7cdd9e7832ca0d310df5d22214286882e141b3b703087b5b5cee8e1fc537f1"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/base.py",
+      "size": 1305,
+      "sha256": "3baaef999fb10a325b198b633d3772d4c79c80acc886ad0dcfe328a0a371c787"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/__init__.py",
+      "size": 439,
+      "sha256": "489fffb71a37436433da94cfdbec81dc8c0aa229c3c5f005beee45ea1cb450b1"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/baidu_search.py",
+      "size": 1921,
+      "sha256": "05da7b66fcc29affc239b8ff14a73f3a9a1689f6adc12c540e591b204d2b2f0f"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/duckduckgo_search.py",
+      "size": 1987,
+      "sha256": "710e5446a0d688c3682ab9a2755dcc68d62d50d44ac6a4ba805bcb500aa5330e"
+    },
+    {
+      "path": "repos/OpenManus/app/tool/search/google_search.py",
+      "size": 987,
+      "sha256": "731b0054f53dd1fa3372851c8e00a9c58da3faf73968048121e7efaaeca81a52"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-jiekouai.toml",
+      "size": 1077,
+      "sha256": "ed93a46be0769a6babb22fc7a956c1929b3a4bb2a15b4472d469e37794a5ddd8"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-azure.toml",
+      "size": 1202,
+      "sha256": "232b056e050fff1281f88cacb1b204fb21deac4acbdc070b79d5177559b1c7d0"
+    },
+    {
+      "path": "repos/OpenManus/config/mcp.example.json",
+      "size": 123,
+      "sha256": "9bf8b10924f3b85bf254def3cc2715753da6d8899fbbf7ba6451138226892894"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-google.toml",
+      "size": 1119,
+      "sha256": "51682673b66cc7cc9ae9dfc65ef18e47b6f4a37165eb3b7a104cb98312040fa7"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-ppio.toml",
+      "size": 1073,
+      "sha256": "b450e8bc490809595fb79411b7c593f5b84ed348ea45a2298f5c21de9c59449f"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-ollama.toml",
+      "size": 1081,
+      "sha256": "ee846ad3e06852adb1742b9514061d8041189a2c2b6f399a7579cc26dcb590d8"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example.toml",
+      "size": 4426,
+      "sha256": "779b65d334ec41f15e2fc2e6f09122ef08be590d73337675becef945bf0b83de"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-daytona.toml",
+      "size": 4589,
+      "sha256": "8121f2062599920d548ad1949717ea7258e9bb0c61c20f31a6511ad0758ae32f"
+    },
+    {
+      "path": "repos/OpenManus/config/config.example-model-anthropic.toml",
+      "size": 833,
+      "sha256": "c484b0b3e7d13d91c895e7744374971f702932c6d7efeea467e01f92ea3fe987"
+    },
+    {
+      "path": "repos/omegai-command-center/tsconfig.app.json",
+      "size": 652,
+      "sha256": "3d44641a0151484d5adb5c764a4766a8e31076d2fd557dbe8c6e1c87863058f7"
+    },
+    {
+      "path": "repos/omegai-command-center/VOICE_AUTH_IMPLEMENTATION.md",
+      "size": 10564,
+      "sha256": "9c3757c3c9626f0762b334794d2bba76c5fda52de01debb5a03f1ca0460756d8"
+    },
+    {
+      "path": "repos/omegai-command-center/postcss.config.js",
+      "size": 81,
+      "sha256": "e32657baf631d7c5f4dc67b4b2ee0ec8e7d5b3c41860e09cddce7c0377cd80bc"
+    },
+    {
+      "path": "repos/omegai-command-center/tsconfig.node.json",
+      "size": 481,
+      "sha256": "a96b9ba5e40d95b92adf56431fdf9cbe25b5c2557621f0666615bff6889dfc50"
+    },
+    {
+      "path": "repos/omegai-command-center/INTEGRATION_INSTRUCTIONS.md",
+      "size": 6480,
+      "sha256": "52ecf22a66cf3f620274e0ece0b3ef4c8fc25f765069d755250f05f8c38490d2"
+    },
+    {
+      "path": "repos/omegai-command-center/package.json",
+      "size": 2781,
+      "sha256": "c82a519c6018133054b95c819dccbe6e7db612b8d27b5a2ee34745054914d577"
+    },
+    {
+      "path": "repos/omegai-command-center/tsconfig.json",
+      "size": 369,
+      "sha256": "3a667cdf83b8335029de6380d1dc190d298d976df6c16259d562786ef13e3f07"
+    },
+    {
+      "path": "repos/omegai-command-center/vite.config.ts",
+      "size": 454,
+      "sha256": "14170e70fba21d0ea3bf4c905ec6f3c8979e80f992cd41b960a4f1c66a695ee4"
+    },
+    {
+      "path": "repos/omegai-command-center/QUICK_REFERENCE.md",
+      "size": 6136,
+      "sha256": "3ed85b873a382f423e95f71496d5c93b000ebbe460b06544a4328182ee8bed0e"
+    },
+    {
+      "path": "repos/omegai-command-center/package-lock.json",
+      "size": 245738,
+      "sha256": "a226cc8de80f8dc4769868a40bcb8704f55e8213a1c790ba4026c87f1e81a20f"
+    },
+    {
+      "path": "repos/omegai-command-center/IMPLEMENTATION_COMPLETE.md",
+      "size": 16156,
+      "sha256": "e5f13fddfc8a4070e6c5e9ef34ceb05f24c6dc4b67b81a94ba9fa500ad8bf319"
+    },
+    {
+      "path": "repos/omegai-command-center/index.html",
+      "size": 1208,
+      "sha256": "a879fdccd9004df8897be054ff2956826bb584b43c575f0ec0a0916078e695c8"
+    },
+    {
+      "path": "repos/omegai-command-center/eslint.config.js",
+      "size": 765,
+      "sha256": "c55264234fef783629810643d995cd522c3adaeb60e7157906310607292015a3"
+    },
+    {
+      "path": "repos/omegai-command-center/tailwind.config.ts",
+      "size": 4070,
+      "sha256": "d3dbc626e0df904c06a19b266672c1a4472fb23cf6fd3133151e4c70384f8aa3"
+    },
+    {
+      "path": "repos/omegai-command-center/bun.lockb",
+      "size": 198722,
+      "sha256": "57954bd8ba6493ea7d74faa1381295829ff33ed882e78e1a7bf9166fa2530203"
+    },
+    {
+      "path": "repos/omegai-command-center/components.json",
+      "size": 414,
+      "sha256": "9820835141c54e5b5dfbb68b3c3790db73c9ebfb967884ae3fccd058d698a1a6"
+    },
+    {
+      "path": "repos/omegai-command-center/VOICE_AUTH_SUMMARY.md",
+      "size": 14097,
+      "sha256": "2a3ce352fb6f13db6ffa2f439dd21011c121600f2edd2f0ca5b4db00c541c49b"
+    },
+    {
+      "path": "repos/omegai-command-center/README.md",
+      "size": 2421,
+      "sha256": "bc06b699eaf7f857af08489a4d612becb391683bc0e568300848cae3fb4186f0"
+    },
+    {
+      "path": "repos/omegai-command-center/src/App.tsx",
+      "size": 871,
+      "sha256": "4e69ef9f71a824d0a6b0965300a4738f34e54a39d58433104162a61b6d072d49"
+    },
+    {
+      "path": "repos/omegai-command-center/src/index.css",
+      "size": 5178,
+      "sha256": "9185d9b8e3e6e7af7c5579a73fbda2103e0f8c03437047c39990ecf50fb7f9dc"
+    },
+    {
+      "path": "repos/omegai-command-center/src/vite-env.d.ts",
+      "size": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "repos/omegai-command-center/src/main.tsx",
+      "size": 161,
+      "sha256": "c633525e3d3cf96bf7ccbb096074f6af64fc02f82b2339a4abb357ebc34441fd"
+    },
+    {
+      "path": "repos/omegai-command-center/src/App.css",
+      "size": 606,
+      "sha256": "a0715e0a09edbd0fbde65816a75e0fa0fc8b314c5260c0768c19bf3aac22621a"
+    },
+    {
+      "path": "repos/omegai-command-center/src/stores/app-store.ts",
+      "size": 17236,
+      "sha256": "24cd64d6c3d490f76af5ce3938e16cba031f8c1ef39572761f2a491cfafca505"
+    },
+    {
+      "path": "repos/omegai-command-center/src/stores/voiceAuth.ts",
+      "size": 3846,
+      "sha256": "6ae61f201a98b24de99b2f6f78d16eb5de56f7935f79e27919b75f4b97e83c23"
+    },
+    {
+      "path": "repos/omegai-command-center/src/pages/Index.tsx",
+      "size": 2300,
+      "sha256": "ee9f16281cf7f4685300a086c6186b25a4835379917c0dcf4589efbdf1cf90de"
+    },
+    {
+      "path": "repos/omegai-command-center/src/pages/NotFound.tsx",
+      "size": 727,
+      "sha256": "a36a58816a781780bd3ffd098d916c5cf45c0908a618b897f489889c3d7fe80f"
+    },
+    {
+      "path": "repos/omegai-command-center/src/integrations/voiceGuard.ts",
+      "size": 2578,
+      "sha256": "718992ee521c9e10f9a1f334141b39569ed634c2939b84445cde5b5e4143761f"
+    },
+    {
+      "path": "repos/omegai-command-center/src/integrations/supabase/types.ts",
+      "size": 5033,
+      "sha256": "cbe3d95edc6d62de52fce56aab60191c1aa91639a8caad5d2346ddff3e22b38a"
+    },
+    {
+      "path": "repos/omegai-command-center/src/integrations/supabase/client.ts",
+      "size": 590,
+      "sha256": "b0ca77b4eaebb21dda36ab152d6b6b7f4718031a5bbec12d101ddb88967efd83"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/brain-api.ts",
+      "size": 2834,
+      "sha256": "2c6b02006023409522e221944b89eff1eb0aa00d94c81d1a664a5584f0bb0a9a"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/vector-search.ts",
+      "size": 4273,
+      "sha256": "1b30725d7c0b3dc74f9a3e773a9a641a38f23660184139145c0511942b50b5d3"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/types.ts",
+      "size": 2207,
+      "sha256": "1dff7b34eecc3b1e244622bad8b60c5c9d39d4f1529be27652bd8071277da6d4"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/seed-data.ts",
+      "size": 6642,
+      "sha256": "acae5c2d97cf3c82b8dcee56c4a2e75582355b3df66376849f0ea310a5087eeb"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/orchestrator-config.ts",
+      "size": 1796,
+      "sha256": "0061563f4b704fb22556a275ff02b651165e05c19f50be6ff298685fa91a945e"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/db.ts",
+      "size": 6454,
+      "sha256": "7fb9b5cca3b08b4f74ade588fcb3f311eeb6a202842781da127319743fc0b982"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/utils.ts",
+      "size": 169,
+      "sha256": "d1f1e0d62cb8d8d1e04c26e14de842d8a151f75812d81b046c65b5d1fe8e4b27"
+    },
+    {
+      "path": "repos/omegai-command-center/src/lib/ai-stream.ts",
+      "size": 2869,
+      "sha256": "c8f0654de2457f9f77f32185d4123cf55b19bd6c8bab7dfc6f4ededd5a62a720"
+    },
+    {
+      "path": "repos/omegai-command-center/src/hooks/use-mobile.tsx",
+      "size": 576,
+      "sha256": "21eff740f9e5c965c7f0782925a7e8f67ddfcdf0f58b6613550f99c3e1c454e9"
+    },
+    {
+      "path": "repos/omegai-command-center/src/hooks/use-toast.ts",
+      "size": 3935,
+      "sha256": "0602ac84d95719f2a27075ce60333db73128e09c0b07365dce7f9c77441c9d7c"
+    },
+    {
+      "path": "repos/omegai-command-center/src/hooks/useVoiceCapture.ts",
+      "size": 5516,
+      "sha256": "0d583fb76667b387e2fc685991bacd58ff4567b72e0a1dddfb6562f77ef33bcf"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/NavLink.tsx",
+      "size": 751,
+      "sha256": "c09f73102288d8a89e5e7b728715ba0697783c43b687e20dedce3536aa7049df"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/CommandPalette.tsx",
+      "size": 5307,
+      "sha256": "e37b359c0f3a5763d7a91c9ab508d6bf46cbcd8250517e840d076ebdd72f1bd2"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/VoiceAuth.tsx",
+      "size": 10072,
+      "sha256": "8632605066aa3fb35f9f591de65acabba3809a05609ea1020e103a7b55ae1003"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/chat/MessageBubble.tsx",
+      "size": 4474,
+      "sha256": "8d300f306f0a9740b42e43aec150cdced0752d71959b82dfb2de704df391a984"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/chat/ConversationList.tsx",
+      "size": 4658,
+      "sha256": "8f492d931e1b3239f26154ad4a8e4257ae67c77b53930f96cff465e76a88f179"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/chat/ChatView.tsx",
+      "size": 12720,
+      "sha256": "694a5f08bb82397469dd4fb570b3134a6debff1bec72d02fe5144767bc1be94c"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/chat/AgentSelector.tsx",
+      "size": 2989,
+      "sha256": "6cee2a7442661797c16c1a6d74982655eb1d888cfbdb82bcd68849a3a5fc38aa"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/chat/VoiceChatInput.tsx",
+      "size": 8085,
+      "sha256": "4b06817daff27301d3cdd603222b17e80041e88b2cb5fa3d02c3eafd7be22715"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/protocols/ProtocolsView.tsx",
+      "size": 7821,
+      "sha256": "d0df8ad6be69b7541118dc95f3fce72440f12a8785583f06d230d2685a365967"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/switch.tsx",
+      "size": 1147,
+      "sha256": "99cda942c2d215d8f25dd33ae06ed1278bcf912b262ed0e907b04f35881ac507"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/pagination.tsx",
+      "size": 2683,
+      "sha256": "ac9da1e191c3485524c1e8d8cdbe0b9fa4ea2729c9554f796e2516485c839260"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/skeleton.tsx",
+      "size": 234,
+      "sha256": "a229c310b9cbcb01ddd5e580865a6f14a19061aff7f6a97ef82a40b6a83583a4"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/calendar.tsx",
+      "size": 2563,
+      "sha256": "845a0b0fdec33d8d49ab8ed05dd29a12c10b5bbcf60f24d0b9fc0a731ab18621"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/sheet.tsx",
+      "size": 4197,
+      "sha256": "e7d726b34d0f3214f597a844c7f2c4fc869933f7433eddb74e7fd2eb92500be3"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/textarea.tsx",
+      "size": 751,
+      "sha256": "2f5b24d28dc5c41817ca69653a396adcb2fe495200f8184777d086a62fc70461"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/checkbox.tsx",
+      "size": 1053,
+      "sha256": "178f8177bedb1704b4dd3e748f4826848981c8af43178c04e1a276a7f017cf1f"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/form.tsx",
+      "size": 4014,
+      "sha256": "7f6f3b157f0c08880937ae41d5e61647703c7163c3d8444656de711fb0576faf"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/alert.tsx",
+      "size": 1546,
+      "sha256": "6352c232d36b2aeb20cce9692fecd98a472c8bb0b8c3f8a45446c433382e2da7"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/badge.tsx",
+      "size": 1089,
+      "sha256": "b851d9ba385c4d60de471c5f43da38067298bbcc3470807e992acb224041c75c"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/select.tsx",
+      "size": 5575,
+      "sha256": "a2b62120a033b36c8d6c4a1693aa9231645fa69251740e15eacec24c1eea4d82"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/navigation-menu.tsx",
+      "size": 5030,
+      "sha256": "92736fbbe66e31d1b981d10436f9048c76f4b91d8b89e93b679ef2eb54204770"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/breadcrumb.tsx",
+      "size": 2687,
+      "sha256": "e5589a54c1ed42101bb24cd67bbc72469fbfbe6b694c46e006424375ad77183e"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/toast.tsx",
+      "size": 4798,
+      "sha256": "8f4db67ae4633904c3cccee6629a1061472bb23f5368e5b7e72a306cc494f9d3"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/toggle-group.tsx",
+      "size": 1714,
+      "sha256": "a3ea231230c8fff22ff6e0b457e71addf961fe1f80deaba0c80d17e649d34bf3"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/avatar.tsx",
+      "size": 1365,
+      "sha256": "4a8bc00e5514912c54d414e207266fa100906aec2754d590adcc8ccc46d4c5c9"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/table.tsx",
+      "size": 2694,
+      "sha256": "fab18d9eeb84781f534330ff4b2c2cbe3a93f9bdf5c449debff2f682a83a4876"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/progress.tsx",
+      "size": 765,
+      "sha256": "bdc4847f05de3aea1276966e0df9b4a293297f0ca7d7b430a1cb16cf5626728f"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/label.tsx",
+      "size": 696,
+      "sha256": "d5dc9497cbb28a5401b864bd44a15f010c302584fbe8e07e015dbe443f103753"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/chart.tsx",
+      "size": 9987,
+      "sha256": "a759d32aa240fa6e929f204b04252e45d6ae458558eebd37dccf4ae9e05ab5e2"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/input-otp.tsx",
+      "size": 2166,
+      "sha256": "a301658db5430d30108004cf05cb9469457a882f93dc057097f777ade4ca5423"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/use-toast.ts",
+      "size": 82,
+      "sha256": "d48c4c490e5101aa42ceed9b8ca49642d66152ba11daf7ee6c29bee0f5172c37"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/tooltip.tsx",
+      "size": 1155,
+      "sha256": "bd9361649477cf9496f4b48415a2eafb9ae1ebca81af58a29b61b1516adc88c1"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/toaster.tsx",
+      "size": 730,
+      "sha256": "600d661340ddc3ee7b5f9088684e1b3072cf60c9275b2f84bf4860dc29fe0fba"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/context-menu.tsx",
+      "size": 7191,
+      "sha256": "2d294c5e421c41b817f1644f2d54bfdde628cffae2682e69ca504ae754739ad6"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/alert-dialog.tsx",
+      "size": 4313,
+      "sha256": "c8b01137c7552e63c9ccf2c38ef92e5417bd6616b6980d56d3015db027465283"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/dropdown-menu.tsx",
+      "size": 7260,
+      "sha256": "b1ede0a4144b64853dc7ba62d184c09df479482eada86f936ce5b3d0b67a9a19"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/tabs.tsx",
+      "size": 1897,
+      "sha256": "b313d08a8c85e586a282b615cf30ce0b6ec1eca3ea92149b731f14b4082f4d71"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/separator.tsx",
+      "size": 698,
+      "sha256": "6c271e740c3d7b54947bb727383e5355788f0176b7b683c3bb970cad9883dded"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/sidebar.tsx",
+      "size": 22837,
+      "sha256": "5754b54ecb6151d7a138426a44a1057a4937ac5a173dfbd1f596a6c9d75b851b"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/command.tsx",
+      "size": 4821,
+      "sha256": "2b640fee593528d494ca19b2888db68a396a96950ea0bb6f1b50536e26e26019"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/scroll-area.tsx",
+      "size": 1608,
+      "sha256": "998181a10164aa6e508210064ba61b2f772a92958d7bb2141867007f0ebd9783"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/card.tsx",
+      "size": 1785,
+      "sha256": "bdfb74248321c52e89c2129d9d8088a56a3e33dd7850a7c9b0563a7b5ac937a0"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/button.tsx",
+      "size": 1840,
+      "sha256": "99e5091c618896c9a46eba931d23814039709f9a1d150c4ac99217c1bba044fd"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/accordion.tsx",
+      "size": 1976,
+      "sha256": "9587b5ca80cf0aa68bc2a4e6baacebbe07eab14e1c66c6b6420033aeca9219d1"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/collapsible.tsx",
+      "size": 320,
+      "sha256": "fbe07841b794e0d7d08e87ddaaafadf1dc0c63ecc8389cd2c5b4a0a3f5500df1"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/input.tsx",
+      "size": 799,
+      "sha256": "aacef8933fe99ab553e12a82c874a23c97e2b5602eb6f00018454fa0a8d4f7f2"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/popover.tsx",
+      "size": 1239,
+      "sha256": "ee5f78ece57c9e8eb5f9b4186e2bb9ebe46b69b52f03f1edd9a601883bc64772"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/menubar.tsx",
+      "size": 7863,
+      "sha256": "9a44756ba91e4c486b30574910b72f58c136c7a9281ccf0c13bf366962c7cdaf"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/resizable.tsx",
+      "size": 1696,
+      "sha256": "a31af34c14c7c86612d1c2e51c90da59e0edae37dab5210bc1dd2c91dc2f3edd"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/carousel.tsx",
+      "size": 6249,
+      "sha256": "561cab7fcb619deed3532d027cbf18ef8e3ebae9def4206b0d36bd22b8474c3a"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/hover-card.tsx",
+      "size": 1193,
+      "sha256": "8d606e166ef5f9bc4fc3efb1f6ce2f4bb376177a2c6fef16f67f87ad2d13d005"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/toggle.tsx",
+      "size": 1416,
+      "sha256": "fb0f786bce638fd414f220e31ad3c902f5c6e25eee9c95ac955cacd50638d6ff"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/radio-group.tsx",
+      "size": 1447,
+      "sha256": "995ec983735b204597f11ae5dd22ba0175dfc633da2ddecf222847bbca387adb"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/dialog.tsx",
+      "size": 3761,
+      "sha256": "8e755711b3fd5e8d7339baea7627da546293fe2df1a88775729c2857e0de4b57"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/sonner.tsx",
+      "size": 877,
+      "sha256": "720fa5658777a469a3096e2fbb59b8f3453c744aab53a35d9ad47c873177b4ca"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/drawer.tsx",
+      "size": 2941,
+      "sha256": "3739cdfc80503412db604efb3ac0149db5f7cd5fec18508839d18dec195720e1"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/slider.tsx",
+      "size": 1065,
+      "sha256": "b81a683197551322cd8f13653bc955ad4c3bca6fe62376d33acb2bcd04361d02"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/ui/aspect-ratio.tsx",
+      "size": 143,
+      "sha256": "d72c73d629e37995a0a71647d851d68d6fdcd7ec120797f36ab83a8ee89f2cab"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/memory/MemoryView.tsx",
+      "size": 12115,
+      "sha256": "f7e6e6ad6133c6eff673d8e44df42ff804d55f23ab5ad3e315e5df083a2e1509"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/consent/ConsentView.tsx",
+      "size": 5311,
+      "sha256": "4e66493a2e518dcbe61ccdd68992014a5b49920fd49622607358a03a65a71be8"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/layout/AppSidebar.tsx",
+      "size": 8908,
+      "sha256": "959f7e7450ebf5212aa6f2d43a805a395b6597a615c9731bb2426b2bcb2b5fca"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/tasks/TasksView.tsx",
+      "size": 9751,
+      "sha256": "4bdd1382e537f68f64b4a714c1ba6841dccb4e62b8137986645176f342825b62"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/crew/CrewView.tsx",
+      "size": 10623,
+      "sha256": "2b10710deef90c4f553ef2dc98ce454e53d398158fd3cf0828c4a6405bd38f33"
+    },
+    {
+      "path": "repos/omegai-command-center/src/components/settings/SettingsView.tsx",
+      "size": 20567,
+      "sha256": "35650b5e88a4c6df88ec33c43d63438e505e7ab3fc199e0bbc3e3d7e0146f2bb"
+    },
+    {
+      "path": "repos/omegai-command-center/public/robots.txt",
+      "size": 160,
+      "sha256": "a3d27b3ca5ce32341fa9f96f01169b521b1657c05d1860c45d1e53a6258e9e8b"
+    },
+    {
+      "path": "repos/omegai-command-center/public/favicon.ico",
+      "size": 20373,
+      "sha256": "dd821076a9b03adc2173c93956226aea3d92482d7578fc4339c5d3a2e9c24586"
+    },
+    {
+      "path": "repos/omegai-command-center/public/placeholder.svg",
+      "size": 3253,
+      "sha256": "64badf7aabda0b9630b87020ffb6095cb858ccbcf66b355c2aa08b1063954d3b"
+    },
+    {
+      "path": "repos/omegai-command-center/supabase/config.toml",
+      "size": 168,
+      "sha256": "617422be3647b631ae695b914340f52adef94ccfc743ccc118c678b679906c6e"
+    },
+    {
+      "path": "repos/omegai-command-center/supabase/functions/ai-embeddings/index.ts",
+      "size": 3254,
+      "sha256": "b234ec4eeb87bf0a25959e69d4c93c33d7c6602b4f3d5014cc2eed4c14132c1d"
+    },
+    {
+      "path": "repos/omegai-command-center/supabase/functions/ai-utilities/index.ts",
+      "size": 3280,
+      "sha256": "953e7c1ec0ac73dbe74cecef3af3282546e8c0474301007f29bd894e896161b0"
+    },
+    {
+      "path": "repos/omegai-command-center/supabase/functions/crew-chat/index.ts",
+      "size": 3300,
+      "sha256": "eb1f40440fc03aa356d4377bd448c998e8c1f34cde2122d743bfba9f0f514a6c"
+    },
+    {
+      "path": "repos/Jarvis/next.config.js",
+      "size": 2023,
+      "sha256": "6fe2fb2c5042f3c2cdd523737787874192816286a4f05762df62d9b125913d9b"
+    },
+    {
+      "path": "repos/Jarvis/postcss.config.js",
+      "size": 80,
+      "sha256": "b9357981319940ed660b848c7a15ea479915885b7cbe60d6951b5d5cef5b509d"
+    },
+    {
+      "path": "repos/Jarvis/package.json",
+      "size": 706,
+      "sha256": "3ddf4e2c9cff17a8213baa45d36003d6511388c51fffa360a3e7f6f476355d03"
+    },
+    {
+      "path": "repos/Jarvis/tsconfig.json",
+      "size": 688,
+      "sha256": "147b39c9c92e2ac9296716e31a01886bb148be3789c4f07b6aacf073d60c0887"
+    },
+    {
+      "path": "repos/Jarvis/Dockerfile",
+      "size": 1433,
+      "sha256": "b272f2d63e91831b2f2f2415b399c43cb39c3d143b4408c1055851f6e570d29e"
+    },
+    {
+      "path": "repos/Jarvis/package-lock.json",
+      "size": 59058,
+      "sha256": "052c7db19456937a208f04e9b985e2e46f372715454dcd7dfecf9720682bf8e4"
+    },
+    {
+      "path": "repos/Jarvis/tailwind.config.ts",
+      "size": 610,
+      "sha256": "3623bf7fa7d7e1e2958ad31da191d96ca8d07a1f08b911eb44118c9d166a7871"
+    },
+    {
+      "path": "repos/Jarvis/next-env.d.ts",
+      "size": 201,
+      "sha256": "9269d492817e359123ac64c8205e5d05dab63d71a3a7a229e68b5d9a0e8150bf"
+    },
+    {
+      "path": "repos/Jarvis/README.md",
+      "size": 4696,
+      "sha256": "067ce18546d82f87d4db74e7859a901971b8b33ff80c18c572fabef71f60535f"
+    },
+    {
+      "path": "repos/Jarvis/docs/omega-trinity-deployment.md",
+      "size": 14404,
+      "sha256": "297902da6f7e7667f7d48a2c8469f046673c5ccf8f2b08ff3731ef450a108469"
+    },
+    {
+      "path": "repos/Jarvis/src/types/speech-recognition.d.ts",
+      "size": 1030,
+      "sha256": "20ffc54f4f656f19f06094e231924228a06725b20f0cbf9df07d4c93cfbeda6e"
+    },
+    {
+      "path": "repos/Jarvis/src/data/knowledge.ts",
+      "size": 1673,
+      "sha256": "a5b376d2f56fb0316762fed1fc94dd778bc57e3e80748938217664a18408534e"
+    },
+    {
+      "path": "repos/Jarvis/src/utils/rag.ts",
+      "size": 2073,
+      "sha256": "feb1ba76a59065991b65c1a12a074f1249549f02996d5044830d333665dfe0e4"
+    },
+    {
+      "path": "repos/Jarvis/src/lib/omegaClient.ts",
+      "size": 2296,
+      "sha256": "c95d2db7be0d5c29d0efbbd02cdba23d049189614be7aa63f9ed88ed77e84966"
+    },
+    {
+      "path": "repos/Jarvis/src/lib/omegaCommand.ts",
+      "size": 2313,
+      "sha256": "99d4134ae87fd96021dc0af3fa5a812cd52c033cfca4f6753b71753730391e2b"
+    },
+    {
+      "path": "repos/Jarvis/src/app/page.tsx",
+      "size": 17119,
+      "sha256": "442ad7f999a7afdf3d7871fd3eeffad8c8d4114e25a3fe765cc73c70c9b1ba47"
+    },
+    {
+      "path": "repos/Jarvis/src/app/globals.css",
+      "size": 278,
+      "sha256": "0d798a2243b02ab46e91f5447e3b7e960660942c4b2b50fb80ed2daba394cae7"
+    },
+    {
+      "path": "repos/Jarvis/src/app/layout.tsx",
+      "size": 2706,
+      "sha256": "792acc459cb75dc9b143b958b93f7c90e32a8cf4682eb70d60c4a13592b38ccc"
+    },
+    {
+      "path": "repos/Jarvis/src/app/api/chat/route.ts",
+      "size": 3810,
+      "sha256": "9dabee585201c4e3594f22dd0e5fa63db39b56948dcea445b0414a338160db1c"
+    },
+    {
+      "path": "repos/Jarvis/src/app/api/health/route.ts",
+      "size": 199,
+      "sha256": "51ab2dd3a0f3addc304dda59a3a68ec0593124a975190b4341d0e835177976b3"
+    },
+    {
+      "path": "repos/Jarvis/src/app/api/omega/route.ts",
+      "size": 2021,
+      "sha256": "b7733fec9e726d22c7061ab8fb6f87949937feef96181062907b5eb517366110"
+    },
+    {
+      "path": "repos/Jarvis/src/app/api/omega/memory/route.ts",
+      "size": 2529,
+      "sha256": "fd3cc2f9adf34c13341bc25031da60e679322bf03f345ce033fa991d2a764af7"
+    },
+    {
+      "path": "repos/Jarvis/src/store/useNeuroStore.ts",
+      "size": 1882,
+      "sha256": "219e28fd0ad30bb06336a2b258d1974ddd94969153222bf463e6695dca9561e6"
+    },
+    {
+      "path": "repos/Jarvis/vendor/critters/index.js",
+      "size": 152,
+      "sha256": "a43a26e3bea1bc15c681218c4cc5b4d77a3f7063b1761d8db740bd1914b57742"
+    },
+    {
+      "path": "repos/Jarvis/vendor/critters/package.json",
+      "size": 89,
+      "sha256": "cd5cbea84d4157ce38f7e1e322d68518aabbefb385df466496fc7009d486237e"
+    },
+    {
+      "path": "repos/Jarvis/public/manifest.json",
+      "size": 1883,
+      "sha256": "2d8762f2f8a689caffd00d9b50d207c9ff812dff4f76749cc39ea5687d15c109"
+    },
+    {
+      "path": "config/secret_key",
+      "size": 50,
+      "sha256": "e48a8f5ce46fb0fcaeecf4a2f5c421b2d78eabf6e3b7c8923caecee648d330ab"
+    },
+    {
+      "path": "config/hypercorn.toml",
+      "size": 305,
+      "sha256": "574bd9553481ce85a6dc95d4e70ff835880b947c1b31b0f12741f6a4cd89ea33"
+    },
+    {
+      "path": "config/codex.sqlite3",
+      "size": 1204224,
+      "sha256": "00f149472c56889d3778b7996d2ba6fb21d636ffba06cc2389b02c6dba8c602d"
+    },
+    {
+      "path": "config/cache/default/504c53640621e86d03c3aa9f6a3d9773.djcache",
+      "size": 29,
+      "sha256": "8bb135f1fb03f8a7c72606ef618eb7ae71019a6632f6805c915b8f1649e386d1"
+    },
+    {
+      "path": "config/cache/default/eee84cc968acfcd7615cfd99d40bce48.djcache",
+      "size": 129,
+      "sha256": "dce78ab8d167d14b7c6e2dc56d99fea8d12e7d6ef9c02cacc9f0ad2d218c22ac"
+    },
+    {
+      "path": "config/cache/default/a0a1b7ebc40accadd2491c2572cf1852.djcache",
+      "size": 29,
+      "sha256": "1a877a0a185f194f9b1e62428f75040a61aea5753e66ecd58fd3a44ad81e0f2a"
+    },
+    {
+      "path": "config/cache/default/558819e8b447f80dc75bb1af0254d737.djcache",
+      "size": 32,
+      "sha256": "5d452cc3eabf8068bc4dbda133ca4ada15b8f2f663c8138f7f55cd5c0b3a45f6"
+    },
+    {
+      "path": "config/cache/default/391936f202f2369dbb82b36ae48d7abb.djcache",
+      "size": 35,
+      "sha256": "a33abdde1b9184e5ae99ed33fb96921a0cd8f463f7c34709c1efb621caf3e894"
+    },
+    {
+      "path": "config/cache/default/7b1682f35ca32d38a625f925f6a27e75.djcache",
+      "size": 106,
+      "sha256": "d9dd7be23db10d43e06013a1cdc58321a7759e6399de763b30049bd68a8e20bc"
+    },
+    {
+      "path": "config/cache/default/6ff653f59f7981ef6caf6c9d7b8648d0.djcache",
+      "size": 29,
+      "sha256": "4fdfd244ba1c1fb9d87bf81a2775e2573c33b98479b5894e36912454949b116b"
+    },
+    {
+      "path": "config/cache/default/b0e58f671b221d09c5cb861f1962ece6.djcache",
+      "size": 42,
+      "sha256": "90601746c47479f19e53e6ea01dcc1159219b68262215992dc7b540256da03cd"
+    },
+    {
+      "path": "config/cache/default/7a2f7be57f4fb129ab006fc99da2f406.djcache",
+      "size": 138,
+      "sha256": "56277bc963ef406496e57be0ad525731be5aa1af524d70a6b0109159d29416ea"
+    },
+    {
+      "path": "config/cache/default/dcf28c81179f6d2f4afd5fcf9a6d047a.djcache",
+      "size": 29,
+      "sha256": "2b500a5eb12cae79139f56c245c02d9550b1d0f160376e0656f9cd0ca3fed87e"
+    },
+    {
+      "path": "config/cache/default/e6211ab37e2127a1fb49f4533dee7ae0.djcache",
+      "size": 107,
+      "sha256": "8181484460770ecff44e2a0d740a71bdfb524359d3df197a03cf2884da8a50e1"
+    },
+    {
+      "path": "config/cache/default/2e2650f0ceaee6fa64e670659d2470bb.djcache",
+      "size": 29,
+      "sha256": "f886930aba7ea66977f37ee1fb48eb5d72b6664f17dbfd8baa6ce02152995d3b"
+    },
+    {
+      "path": "config/cache/default/0cfe0255465fbedc4ab0bb199df63c73.djcache",
+      "size": 105,
+      "sha256": "6c2bcc9f2e4eafcb095a434e696c5c1bdb3e856ab0a6cf4706e9646f23e81211"
+    },
+    {
+      "path": "config/cache/default/f0141d29f24de218f542bfaf8f72afce.djcache",
+      "size": 86,
+      "sha256": "22d6d31e60708499cdcbd1b27507f220cb9c6bef8a1017b2c5b3e3923fc1912a"
+    },
+    {
+      "path": "config/cache/default/5f8a3a95462355c7d0c6f41093d2491c.djcache",
+      "size": 42,
+      "sha256": "b1a673bd11fc97b4d1a2681600337d2845d4157bcc88aef76c3008381e3826b2"
+    },
+    {
+      "path": "config/cache/default/9026daabfdf5165627f2d877dc72b36a.djcache",
+      "size": 33,
+      "sha256": "60d3fedb4273c41d85c69ea2b915fcdf53858e0c45c97df062f128bcc1633e12"
+    },
+    {
+      "path": "config/cache/default/e0680532d311f9635749b39d88f41406.djcache",
+      "size": 35,
+      "sha256": "1071a079dacbccfe812b2e89985ec90e42457d0ee2976b8a403f7da7410087e5"
+    },
+    {
+      "path": "config/cache/default/5d3d1867bb0b698828bc7fc119319c43.djcache",
+      "size": 86,
+      "sha256": "5bbc40c823b6b2d41a22b971ad4dee349c765fb44e02924156ca715e4700590d"
+    },
+    {
+      "path": "config/cache/default/ea89857fba7b971472445939513ac811.djcache",
+      "size": 34,
+      "sha256": "01104b38dac26ca9215db2e9be89a7ad0e56e6a8560dfdfb131555583dbe59ac"
+    },
+    {
+      "path": "config/cache/default/64a511d134388a8f600d02d519534176.djcache",
+      "size": 33,
+      "sha256": "9b048fce6a0b47d543448c754221160c40cd82430f3b1e19494aea100977c4e2"
+    },
+    {
+      "path": "config/cache/default/a06920408528f5f7cc613d07b6766336.djcache",
+      "size": 106,
+      "sha256": "71f33f99a11d566d09b34bd1275dc49bed47f713b5f8c84cf019da27ae0700c0"
+    },
+    {
+      "path": "config/cache/default/6cd45a86ab62a4f8acfb1457f037d63b.djcache",
+      "size": 29,
+      "sha256": "b8b240eb6aa97bea9dbb4ae3b875710df05632794defde03cfcab84dd89f839a"
+    },
+    {
+      "path": "config/cache/default/e8c7461b802c1ca1f00e3510196a3532.djcache",
+      "size": 35,
+      "sha256": "8ad7b3c1df62227df65403ca76c2e3e0f00401b493c2a0d84de6ad7b3beb28ea"
+    }
+  ]
+}

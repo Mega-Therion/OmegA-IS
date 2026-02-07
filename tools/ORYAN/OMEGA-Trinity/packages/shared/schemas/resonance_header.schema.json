@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResonanceHeader",
+  "type": "object",
+  "required": ["request_id", "actor", "ts", "version"],
+  "properties": {
+    "request_id": { "type": "string", "description": "Unique request identifier (uuid or snowflake)." },
+    "actor": { "type": "string", "description": "Originating actor/service/user." },
+    "ts": { "type": "string", "format": "date-time", "description": "ISO timestamp of emission." },
+    "version": { "type": "string", "description": "Schema version of the envelope." },
+    "idempotency_key": { "type": "string", "description": "Optional idempotency key for replay protection." }
+  },
+  "additionalProperties": false
+}

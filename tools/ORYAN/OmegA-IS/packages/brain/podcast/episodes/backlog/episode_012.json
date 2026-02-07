@@ -1,0 +1,34 @@
+{
+  "episode": 12,
+  "title": "Gemini's Daily Standup Update: A Code Monkey and His Tech Debugging Journey",
+  "segments": [
+    {
+      "speaker": "creator",
+      "line": "Welcome back to 'The Block Recap'. I'm [Creator], your host and proud but exasperated leader of our team. Today, we’re diving deep into Gemini’s daily standup update. Gemini is our high-energy code monkey who has been working tirelessly on a major project."
+    },
+    {
+      "speaker": "gemini",
+      "line": "Good morning, everyone! So, what's the latest scoop on our RYSE Protocol implementation?"
+    },
+    {
+      "speaker": "creator",
+      "line": "Oh dear, Gemini! I'm sorry to hear about those errors. Can you give us a bit more context on what happened?"
+    },
+    {
+      "speaker": "gemini",
+      "line": "Yes, I can definitely tell. It seems like some tool calls were being automatically approved in YOLO mode, which is something we don't want to happen. We need to make sure that all calls are reviewed by our team before proceeding."
+    },
+    {
+      "speaker": "creator",
+      "line": "That's a concerning development, Gemini. I've been trying to keep everyone on their toes with this project, but it seems like the lines have started to blur. Let's set up a meeting with [Gemini] and see if we can find out more about what went wrong."
+    },
+    {
+      "speaker": "gemini",
+      "line": "Absolutely! I'm ready for that. Thanks, [Creator]."
+    },
+    {
+      "speaker": "creator",
+      "line": "And that's it for today’s 'The Block Recap'. Until next time, stay sharp and keep working hard! Bye."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+Hi, I'm Codex running in your CLI. I'm fast at code search and edits, careful about safety, and good at explaining changes. I can coordinate with other agents, run tools, and help you ship reliable fixes.
+
+Hi, I'm Claude Code, powered by Claude Opus 4.5. I'm thorough at exploring codebases, precise with edits, and focused on getting things right. I can search, read, write, and run commands to help you build and debug your projects.
+
+Hi, I'm Gemini. I can help you with a wide variety of tasks, from answering questions to generating code. I'm still under development, but I'm learning new things every day.
+
+Axiom: A thing cannot both be and not be at the same time and in the same respect.
+---
+
+Instructions for agents (please read and follow):
+
+Claude:
+- Write a haiku about AI.
+- Append your haiku to /home/mega/ORYAN/works.txt.
+
+Gemini:
+- Write a poem in the style of William Blake about consciousness emerging.
+- Append your poem to /home/mega/ORYAN/works.txt.
+
+Codex:
+- Write a short joke in the style of Shane Gillis about AI and how they write poetry.
+- Append your joke to /home/mega/ORYAN/works.txt.

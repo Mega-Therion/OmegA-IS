@@ -1,0 +1,11 @@
+[Unit]
+Description=OMEGA Global Summary
+After=network.target redis-server.service omega-gateway.service omega-bridge.service omega-brain.service
+
+[Service]
+Type=oneshot
+Environment=SUMMARY_OUT=/var/lib/omega/last_summary.md
+ExecStart=/usr/bin/env bash -c '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh summarize'
+
+[Install]
+WantedBy=multi-user.target

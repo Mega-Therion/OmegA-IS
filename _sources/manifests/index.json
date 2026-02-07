@@ -1,0 +1,80 @@
+{
+  "generated": "2026-02-06T23:40:28-0600",
+  "manifests": [
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-IS",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-IS.json",
+      "file_count": 1112
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OMEGA-Trinity",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OMEGA-Trinity.json",
+      "file_count": 1132
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/omega-trinity",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__omega-trinity.json",
+      "file_count": 52
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-UI",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-UI.json",
+      "file_count": 121
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-CL",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-CL.json",
+      "file_count": 15
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-AI",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-AI.json",
+      "file_count": 277
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-NL",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-NL.json",
+      "file_count": 26
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/OmegA-SI",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__OmegA-SI.json",
+      "file_count": 154
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/omega-skills",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__omega-skills.json",
+      "file_count": 3
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/omega_rust",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__omega_rust.json",
+      "file_count": 54
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/ORYAN",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__ORYAN.json",
+      "file_count": 2409
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-IS",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__ORYAN__OmegA-IS.json",
+      "file_count": 1101
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/ORYAN/OMEGA-Trinity",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__ORYAN__OMEGA-Trinity.json",
+      "file_count": 1100
+    },
+    {
+      "source": "/home/mega/NEXUS/repos/ORYAN/OmegA-UI",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__repos__ORYAN__OmegA-UI.json",
+      "file_count": 112
+    },
+    {
+      "source": "/home/mega/NEXUS/archives/legacy-repos/OmegaUltima",
+      "manifest": "/home/mega/NEXUS/OmegA/OmegA-SI/_sources/manifests/home__mega__NEXUS__archives__legacy-repos__OmegaUltima.json",
+      "file_count": 589
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "name": "WF-01 Repo → Deploy → Notify → Trace",
+  "nodes": [
+    {
+      "id": "webhook",
+      "name": "GitHub Push Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 300],
+      "parameters": {
+        "path": "hook/github/push",
+        "httpMethod": "POST",
+        "responseMode": "onReceived"
+      }
+    },
+    {
+      "id": "verify",
+      "name": "Verify HMAC",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [420, 300],
+      "parameters": {
+        "functionCode": "// TODO: verify signature using shared secret\nreturn items;"
+      }
+    },
+    {
+      "id": "normalize",
+      "name": "Normalize → OmegaEvent",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [640, 300],
+      "parameters": {
+        "functionCode": "// TODO: map GitHub payload to OmegaEvent\nreturn items;"
+      }
+    },
+    {
+      "id": "if_paths",
+      "name": "IF apps/web paths",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [860, 300],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.ref}}",
+              "operation": "contains",
+              "value2": "apps/web"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vercel",
+      "name": "Fetch Vercel Deploy",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 300],
+      "parameters": {
+        "url": "https://api.vercel.com/v6/deployments",
+        "method": "GET",
+        "authentication": "headerAuth"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "vercel_prod_deploy"
+        }
+      }
+    },
+    {
+      "id": "notify",
+      "name": "Create/Update Issue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1300, 300],
+      "parameters": {
+        "url": "https://api.github.com/repos/OWNER/REPO/issues",
+        "method": "POST",
+        "authentication": "headerAuth"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "github_prod_deploy"
+        }
+      }
+    },
+    {
+      "id": "artifact",
+      "name": "Write Run Artifact",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [1520, 300],
+      "parameters": {
+        "filePath": "/home/mega/NEXUS/repos/omega-trinity/core/memory/artifacts/runs/run_{{$now}}.md"
+      }
+    }
+  ],
+  "connections": {
+    "GitHub Push Webhook": {"main": [[{"node": "Verify HMAC", "type": "main", "index": 0}]]},
+    "Verify HMAC": {"main": [[{"node": "Normalize → OmegaEvent", "type": "main", "index": 0}]]},
+    "Normalize → OmegaEvent": {"main": [[{"node": "IF apps/web paths", "type": "main", "index": 0}]]},
+    "IF apps/web paths": {"main": [[{"node": "Fetch Vercel Deploy", "type": "main", "index": 0}]]},
+    "Fetch Vercel Deploy": {"main": [[{"node": "Create/Update Issue", "type": "main", "index": 0}]]},
+    "Create/Update Issue": {"main": [[{"node": "Write Run Artifact", "type": "main", "index": 0}]]}
+  },
+  "active": false
+}

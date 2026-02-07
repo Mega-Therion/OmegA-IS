@@ -1,0 +1,19 @@
+{
+  "id": "example-plugin",
+  "name": "Example Plugin",
+  "version": "1.0.0",
+  "description": "A template plugin demonstrating the gAIng Brain plugin architecture",
+  "author": "gAIng Collective",
+  "main": "index.js",
+  "dependencies": [],
+  "hooks": [
+    "onMessage",
+    "onChat",
+    "beforeResponse",
+    "afterResponse"
+  ],
+  "config": {
+    "enabled": true,
+    "logLevel": "info"
+  }
+}

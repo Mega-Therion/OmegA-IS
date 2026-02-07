@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - alerts.yml
+
+scrape_configs:
+  - job_name: 'gateway'
+    static_configs:
+      - targets: ['omega-gateway:8787']
+  - job_name: 'brain'
+    static_configs:
+      - targets: ['gaing-brain:8080']
+  - job_name: 'jarvis'
+    static_configs:
+      - targets: ['jarvis-ui:3000']
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['omega-redis:6379']
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['omega-postgres:5432']
+  - job_name: 'milvus'
+    static_configs:
+      - targets: ['omega-milvus:9091']
+  - job_name: 'neo4j'
+    static_configs:
+      - targets: ['omega-neo4j:7474']

@@ -1,0 +1,5 @@
+{
+  "initiator_placeholder": "<<INITIATOR_KEY_PLACEHOLDER>>",
+  "response_placeholder": "<<RESPONSE_KEY_PLACEHOLDER>>",
+  "description": "Canonical chain template. Real keys and algorithm remain offline; placeholders only."
+}

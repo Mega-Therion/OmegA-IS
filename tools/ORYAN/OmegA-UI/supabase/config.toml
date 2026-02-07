@@ -1,0 +1,10 @@
+project_id = "bmykpbfqntyhtydzkwnt"
+
+[functions.crew-chat]
+verify_jwt = false
+
+[functions.ai-embeddings]
+verify_jwt = false
+
+[functions.ai-utilities]
+verify_jwt = false

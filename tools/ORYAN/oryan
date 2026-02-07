@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+import argparse
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Optional
+
+from lib import db
+from lib import env
+
+
+AGENT_COMMANDS = {
+    "codex": ["codex", "-p"],
+    "gemini": ["gemini", "-p"],
+    "claude": ["claude", "-p"],
+}
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _timestamp_dir() -> str:
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+def _print_task(task) -> None:
+    print(f"id: {task['id']}")
+    print(f"agent: {task['agent']}")
+    print(f"status: {task['status']}")
+    print(f"created_at: {task['created_at']}")
+    print(f"updated_at: {task['updated_at']}")
+    print(f"output_path: {task['output_path']}")
+    print(f"error_path: {task['error_path']}")
+    print("prompt:")
+    print(task["prompt"])
+
+
+def cmd_init(args) -> int:
+    conn = db.connect(args.db)
+    db.init_db(conn)
+    print("Initialized ORYAN database.")
+    return 0
+
+
+def cmd_task_create(args) -> int:
+    if not args.prompt.strip():
+        print("Prompt cannot be empty.")
+        return 1
+    if args.agent not in AGENT_COMMANDS:
+        print(f"Unknown agent: {args.agent}")
+        return 1
+
+    conn = db.connect(args.db)
+    now = _now_iso()
+    task_id = db.create_task(conn, args.agent, args.prompt, now)
+    print(f"Created task {task_id}")
+    return 0
+
+
+def cmd_task_create_run(args) -> int:
+    if not args.prompt.strip():
+        print("Prompt cannot be empty.")
+        return 1
+    if args.agent not in AGENT_COMMANDS:
+        print(f"Unknown agent: {args.agent}")
+        return 1
+
+    conn = db.connect(args.db)
+    now = _now_iso()
+    task_id = db.create_task(conn, args.agent, args.prompt, now)
+    print(f"Created task {task_id}")
+    return _run_task(conn, task_id, args.dry_run)
+
+
+def cmd_task_list(args) -> int:
+    conn = db.connect(args.db)
+    tasks = db.list_tasks(conn)
+    for task in tasks:
+        print(f"{task['id']}\t{task['status']}\t{task['agent']}\t{task['created_at']}")
+    return 0
+
+
+def cmd_task_show(args) -> int:
+    conn = db.connect(args.db)
+    task = db.get_task(conn, args.task_id)
+    if not task:
+        print(f"Task {args.task_id} not found.")
+        return 1
+    _print_task(task)
+    return 0
+
+
+def _build_output_paths(task_id: int, agent: str) -> tuple[Path, Path]:
+    base_dir = Path(__file__).resolve().parent
+    run_dir = base_dir / "omega_runs" / _timestamp_dir()
+    run_dir.mkdir(parents=True, exist_ok=True)
+    out_path = run_dir / f"{task_id}_{agent}.out"
+    err_path = run_dir / f"{task_id}_{agent}.err"
+    return out_path, err_path
+
+
+def _resolve_task(conn, task_id_or_latest: str, agent: Optional[str] = None):
+    if task_id_or_latest == "latest":
+        task = db.get_latest_task(conn, agent=agent)
+        if not task:
+            label = f" for agent {agent}" if agent else ""
+            print(f"No tasks found{label}.")
+        return task
+    try:
+        task_id = int(task_id_or_latest)
+    except ValueError:
+        print(f"Invalid task id: {task_id_or_latest}")
+        return None
+    task = db.get_task(conn, task_id)
+    if not task:
+        print(f"Task {task_id} not found.")
+    return task
+
+
+def _run_task(conn, task_id: int, dry_run: bool) -> int:
+    task = db.get_task(conn, task_id)
+    if not task:
+        print(f"Task {task_id} not found.")
+        return 1
+
+    if task["status"] != "pending":
+        print(f"Task {task_id} is not pending (status: {task['status']}).")
+        return 1
+
+    agent = task["agent"]
+    if agent not in AGENT_COMMANDS:
+        print(f"Unknown agent: {agent}")
+        return 1
+
+    command = AGENT_COMMANDS[agent] + [task["prompt"]]
+    out_path, err_path = _build_output_paths(task["id"], agent)
+
+    if dry_run:
+        print("Dry run: no execution performed.")
+        print("Command:")
+        print(" ".join(command))
+        print(f"stdout: {out_path}")
+        print(f"stderr: {err_path}")
+        return 0
+
+    now = _now_iso()
+    db.update_task_status(conn, task["id"], "running", now)
+
+    with out_path.open("w", encoding="utf-8") as out_f, err_path.open("w", encoding="utf-8") as err_f:
+        result = subprocess.run(command, stdout=out_f, stderr=err_f, text=True)
+
+    final_status = "done" if result.returncode == 0 else "failed"
+    db.set_task_result(conn, task["id"], str(out_path), str(err_path), final_status, _now_iso())
+
+    if result.returncode != 0:
+        print(f"Task {task['id']} failed. See {err_path}.")
+        return result.returncode or 1
+
+    print(f"Task {task['id']} completed. See {out_path}.")
+    return 0
+
+
+def cmd_run(args) -> int:
+    conn = db.connect(args.db)
+    task = _resolve_task(conn, args.task_id, agent=None)
+    if not task:
+        return 1
+    return _run_task(conn, task["id"], args.dry_run)
+
+
+def cmd_run_latest(args) -> int:
+    conn = db.connect(args.db)
+    task = _resolve_task(conn, "latest", agent=args.agent)
+    if not task:
+        return 1
+    return _run_task(conn, task["id"], args.dry_run)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="oryan")
+    parser.add_argument("--db", help="Path to ORYAN SQLite DB")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    init_parser = subparsers.add_parser("init", help="Initialize the database")
+    init_parser.set_defaults(func=cmd_init)
+
+    task_parser = subparsers.add_parser("task", help="Task operations")
+    task_sub = task_parser.add_subparsers(dest="task_command", required=True)
+
+    task_create = task_sub.add_parser("create", help="Create a task")
+    task_create.add_argument("--agent", required=True)
+    task_create.add_argument("--prompt", required=True)
+    task_create.set_defaults(func=cmd_task_create)
+
+    task_create_run = task_sub.add_parser("create-run", help="Create and immediately run a task")
+    task_create_run.add_argument("--agent", required=True)
+    task_create_run.add_argument("--prompt", required=True)
+    task_create_run.add_argument("--dry-run", action="store_true")
+    task_create_run.set_defaults(func=cmd_task_create_run)
+
+    task_list = task_sub.add_parser("list", help="List tasks")
+    task_list.set_defaults(func=cmd_task_list)
+
+    task_show = task_sub.add_parser("show", help="Show task details")
+    task_show.add_argument("task_id", type=int)
+    task_show.set_defaults(func=cmd_task_show)
+
+    run_parser = subparsers.add_parser("run", help="Run a task")
+    run_parser.add_argument("task_id", help="Task id or 'latest'")
+    run_parser.add_argument("--dry-run", action="store_true")
+    run_parser.set_defaults(func=cmd_run)
+
+    run_latest = subparsers.add_parser("run-latest", help="Run the newest task, optionally by agent")
+    run_latest.add_argument("--agent")
+    run_latest.add_argument("--dry-run", action="store_true")
+    run_latest.set_defaults(func=cmd_run_latest)
+
+    return parser
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    settings = env.validate_env()
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    if args.db is None and settings.oryan_db_path is not None:
+        args.db = str(settings.oryan_db_path)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

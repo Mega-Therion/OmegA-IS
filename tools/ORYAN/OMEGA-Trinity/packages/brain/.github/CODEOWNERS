@@ -1,0 +1,28 @@
+# CODEOWNERS
+# 
+# This file defines code ownership for the gAIng-brAin repository.
+# GitHub will automatically request reviews from code owners when PRs modify their files.
+# 
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+* @megas-DIO
+
+# Documentation
+/docs/ @megas-DIO
+/README.md @megas-DIO
+/CONTRIBUTING.md @megas-DIO
+
+# GitHub configuration
+/.github/ @megas-DIO
+
+# Database and schema
+/supabase/ @megas-DIO
+
+# Scripts
+/scripts/ @megas-DIO
+
+# Core application files
+/index.js @megas-DIO
+/package.json @megas-DIO
+/package-lock.json @megas-DIO

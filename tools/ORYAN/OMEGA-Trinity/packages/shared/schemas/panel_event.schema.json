@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PanelEvent",
+  "type": "object",
+  "required": ["header", "event_type", "payload"],
+  "properties": {
+    "header": { "$ref": "./resonance_header.schema.json" },
+    "event_type": {
+      "type": "string",
+      "enum": ["panel.open", "panel.submit", "panel.summary", "panel.close"]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

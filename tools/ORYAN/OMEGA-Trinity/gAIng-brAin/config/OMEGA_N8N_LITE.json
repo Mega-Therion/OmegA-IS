@@ -1,0 +1,80 @@
+»{
+    "name": "OMEGA - Light Synapse",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "ingress",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "id": "webhook-trigger",
+            "name": "Webhook In",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                100,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "chatId": "7562208577",
+                "text": "={{ $json.body.message }}",
+                "additionalFields": {}
+            },
+            "credentials": {
+                "telegramApi": {
+                    "id": "1",
+                    "name": "Telegram Creds"
+                }
+            },
+            "id": "telegram-notify",
+            "name": "Notify Telegram",
+            "type": "n8n-nodes-base.telegram",
+            "typeVersion": 1,
+            "position": [
+                300,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\"ok\": true}",
+                "options": {}
+            },
+            "id": "ack",
+            "name": "Ack",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                500,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook In": {
+            "main": [
+                [
+                    {
+                        "node": "Notify Telegram",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Notify Telegram": {
+            "main": [
+                [
+                    {
+                        "node": "Ack",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}z *cascade08z|*cascade08|} *cascade08}~*cascade08~ *cascade08Å*cascade08Å† *cascade08†™*cascade08™© *cascade08©⁄*cascade08⁄» *cascade082Nfile:///c:/Users/mega_/Downloads/OMEGA_REALITY_KIT_UPDATED/OMEGA_N8N_LITE.json

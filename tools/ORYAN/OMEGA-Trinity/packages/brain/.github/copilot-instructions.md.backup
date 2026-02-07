@@ -1,0 +1,52 @@
+# gAIng-Brain — Copilot / AI Agent Instructions
+
+Purpose: give an AI coding agent immediately actionable context about this repository so it can be productive without back-and-forth.
+
+- Quick start commands
+  - Install deps: `npm install` (see [package.json](package.json)).
+  - Run server: `npm start` (entry: [index.js](index.js) / [src/app.js](src/app.js#L1)).
+  - Run smoke tests: `npm test` (runs `scripts/smoke-test.js`).
+  - DB health: `npm run health:db` (runs `scripts/health-check.js`).
+
+- Big picture (why & how)
+  - This is a small Express API that exposes a shared "brain" backed by Supabase. Core responsibilities are: member management, memories CRUD/search, and LLM proxying.
+  - Routes are in `src/routes/*` and business logic lives in `src/services/*`. App wiring is in [src/app.js](src/app.js#L1).
+  - Persistent schema and RLS policies live in `supabase/*.sql` — apply those on project Supabase before running the server.
+
+- Key integration points and patterns
+  - Supabase: server expects `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. See `README.md` env list.
+  - LLM providers: `LLM_PROVIDER` selects `openai`, `azure`, or `grok`. See `src/services/llm.js` for `getLlmStatus()` and `callLlm()` behavior (notable: uses `fetch`, needs Node 18+ or polyfill).
+  - Auth: endpoints require Supabase Auth via `Authorization: Bearer <token>`; middleware is `src/middleware/auth.js` and routes call `requireAuth`.
+  - Mem0: external mem0 usage is optional; endpoints `/addMemory` and `/searchMemory` rely on `MEM0_API_KEY` and `src/routes/mem0.js` / `src/services/mem0.js`.
+
+- Project-specific workflows & conventions
+  - Windows-first automation: many helper scripts are PowerShell (`scripts/*.ps1`). Use PowerShell on Windows to run startup/orchestration tasks.
+  - The repo includes helper Node scripts (`scripts/*.js`) for seeding, init-local-db, health checks, and sync — run via `npm run <script>`.
+  - Ngrok is supported: `ENABLE_NGROK` env var or `npm run start:ngrok` / `npm run start:all` (see [package.json](package.json#L1)).
+  - Logging & agent coordination: central log at `log.md` and agent-local instruction files (e.g., `CLAUDE.md`, `AGENTS.md` referenced via `AGENTS_MD_PATH`) are used for run-time coordination.
+
+- Useful files to inspect for typical changes
+  - App wiring: [src/app.js](src/app.js#L1)
+  - LLM glue: [src/services/llm.js](src/services/llm.js#L1) and route [src/routes/llm.js](src/routes/llm.js#L1)
+  - Auth and request shaping: `src/middleware/auth.js`, `src/utils/helpers.js`
+  - Supabase schema: files in `supabase/` (apply these in the Supabase SQL editor)
+  - Automation & startup: `scripts/*.ps1` and `scripts/*.js` (see `start-*.ps1`, `seed-members.js`, `init-local-db.js`)
+
+- Small but important implementation notes
+  - Many endpoints are mounted at root for historical reasons (e.g., mem0 routes are mounted at `/` in `src/app.js`). Keep the existing mounts to preserve compatibility.
+  - `callLlm()` throws helpful error strings; follow `getLlmStatus()` to decide readiness before calling.
+  - `fetch` is used in services — ensure runtime provides `fetch` (Node 18+ or polyfill).
+
+- When changing DB or RLS
+  - Update `supabase/*.sql`. Prefer a single migration batch (see `INSTRUCTIONS_FOR_COMET.md` for precedent).
+  - After schema changes, run `npm run init:local-db` and `npm run sync:two-way` when testing locally.
+
+  - Do not change syscall-heavy PowerShell automation without confirming the user's platform and intent.
+  - Do not expose secrets into logs (these scripts expect env vars; do not print full keys).
+
+- Communication optimization (Tier 1-3)
+  - **Tier 1 (Structured Messages)**: POST `/messages` with sender/recipient/intent/data; GET `/messages` for unread. Schema in `supabase/messages.sql`.
+  - **Tier 2 (Real-Time WebSocket)**: Connect agents via `ws://localhost:8080/ws?agent=<name>`. Instant message delivery, <100ms latency.
+  - **Tier 3 (Priority Queue)**: `POST /tasks` with priority (1-10) and deadline. Redis-backed; use for deadline-driven workflows. See `src/services/queue.js` and `COMMUNICATION.md`.
+  - Legacy `log.md` still available for human-readable archive, but agents should use `/messages` and `/tasks` APIs.
+- Next steps and feedback

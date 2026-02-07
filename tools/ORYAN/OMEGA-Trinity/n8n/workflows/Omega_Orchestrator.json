@@ -1,0 +1,447 @@
+{
+  "name": "Omega Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-orchestrator",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "a449ce2f-7ac1-444b-a36c-8d10ce91c47a",
+      "name": "Omega Orchestrator Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "3a6c22e3-7d18-4a1f-874f-5aa5eebfe2f8"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "531cc791-fc9f-4a5c-a8ce-7d23cffee6f2",
+      "name": "Daily Orchestrator Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        160
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7ad482cc-7de9-4130-abb0-25a22f6cdf17",
+      "name": "Manual Orchestrator Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || $json.body?.source || 'orchestrator', event_type: $json.event_type || $json.body?.event_type || 'daily', timestamp: $now.toISO() } }}",
+              "type": "object"
+            },
+            {
+              "id": "id-2",
+              "name": "body",
+              "value": "={{ $json.body || $json.payload || $json }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "id": "5bc2b772-515d-4c30-889d-0ee6f9caa89a",
+      "name": "Normalize Event",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "daily",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "daily"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "feedback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "feedback"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "ingress",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ingress"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "clerk",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "clerk"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "jarvis",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "jarvis"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.omega_context.event_type }}",
+                    "rightValue": "news",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "news"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c7447a13-2cca-42e6-9764-17b7e51f9aa4",
+      "name": "Route by Event Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-peace-pipe' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "042da0fa-264f-4cd8-bbf8-3bf26a34b666",
+      "name": "Trigger Peace Pipe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        32
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-apprentice-feedback' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "4cc50ed8-15c3-4efc-bb12-dc4fa753f7af",
+      "name": "Trigger Apprentice Loop",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        128
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-ingress' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "33268e10-cb54-44f8-bdc5-ce838f8d17fe",
+      "name": "Trigger Neural Bridge",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        224
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-clerk-archive' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "dd071da6-e1ac-4396-bb4e-de8b98e3dbf4",
+      "name": "Trigger Clerk Archive",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        320
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-jarvis-collectivebrain' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "3de60443-b278-4a23-9293-c23914ccaa89",
+      "name": "Trigger Jarvis Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        416
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.N8N_BASE_URL || $env.N8N_WEBHOOK_BASE_URL || '').replace(/\\/$/, '') + '/webhook/omega-news-summary' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $json.body, omega_context: $json.omega_context } }}",
+        "options": {}
+      },
+      "id": "f157e08f-46f3-4f93-9de4-8ce39262aac2",
+      "name": "Trigger News Summary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        512
+      ],
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "Omega Orchestrator Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Orchestrator Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Orchestrator Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Event": {
+      "main": [
+        [
+          {
+            "node": "Route by Event Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Event Type": {
+      "main": [
+        [
+          {
+            "node": "Trigger Peace Pipe",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger Apprentice Loop",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger Neural Bridge",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger Clerk Archive",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger Jarvis Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Trigger News Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": null
+}

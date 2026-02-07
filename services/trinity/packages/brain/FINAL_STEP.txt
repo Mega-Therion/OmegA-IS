@@ -1,0 +1,28 @@
+========================================
+gAIng-brAin Supabase Setup - FINAL STEP
+========================================
+
+✅ DONE:
+   - Installed Supabase CLI
+   - Created storage bucket "gaing-files"
+   - Updated .env with your new project
+
+❌ NEED TO DO (ONE SIMPLE STEP):
+
+1. Click this link:
+   https://supabase.com/dashboard/project/sgvitxezqrjgjmduoool/sql/new
+
+2. Open this file on your computer:
+   C:\Users\mega_\gAIng-Brain\gAIng-brAin\supabase\files.sql
+
+3. Copy EVERYTHING from that file (Ctrl+A, Ctrl+C)
+
+4. Paste it into the SQL Editor in your browser
+
+5. Click the "RUN" button (or press Ctrl+Enter)
+
+6. When it says "Success" - come back here and type "done"
+
+========================================
+
+That's it! After you run the SQL, I'll sync all your files automatically.

@@ -1,0 +1,698 @@
+{
+  "servers": [
+    {
+      "name": "gaing-supabase",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp/supabase-server.js"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
+      }
+    },
+    {
+      "name": "filesystem",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    {
+      "name": "github",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    {
+      "name": "memory",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    {
+      "name": "git",
+      "transport": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."]
+    },
+    {
+      "name": "time",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"]
+    },
+    {
+      "name": "fetch",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+    {
+      "name": "sequential-thinking",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    {
+      "name": "tavily",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@tavily-ai/tavily-mcp"],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      }
+    },
+    {
+      "name": "brave-search",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@brave/search-mcp-server"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    {
+      "name": "postgres",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${DATABASE_URL}"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    },
+    {
+      "name": "sqlite",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "./data/local.db"]
+    },
+    {
+      "name": "slack",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zencoderai/slack-mcp-server"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      }
+    },
+    {
+      "name": "notion",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@makenotion/notion-mcp-server"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      }
+    },
+    {
+      "name": "linear",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
+      }
+    },
+    {
+      "name": "todoist",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@doist/todoist-ai"],
+      "env": {
+        "TODOIST_API_KEY": "${TODOIST_API_KEY}"
+      }
+    },
+    {
+      "name": "stripe",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@stripe/agent-toolkit"],
+      "env": {
+        "STRIPE_API_KEY": "${STRIPE_API_KEY}"
+      }
+    },
+    {
+      "name": "elevenlabs",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@elevenlabs/mcp-server"],
+      "env": {
+        "ELEVENLABS_API_KEY": "${ELEVENLABS_API_KEY}"
+      }
+    },
+    {
+      "name": "replicate",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@replicate/mcp-server"],
+      "env": {
+        "REPLICATE_API_TOKEN": "${REPLICATE_API_TOKEN}"
+      }
+    },
+    {
+      "name": "huggingface",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@huggingface/mcp-server"],
+      "env": {
+        "HUGGINGFACE_API_KEY": "${HUGGINGFACE_API_KEY}"
+      }
+    },
+    {
+      "name": "vercel",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-server"],
+      "env": {
+        "VERCEL_API_TOKEN": "${VERCEL_API_TOKEN}"
+      }
+    },
+    {
+      "name": "netlify",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@netlify/mcp-server"],
+      "env": {
+        "NETLIFY_API_TOKEN": "${NETLIFY_API_TOKEN}"
+      }
+    },
+    {
+      "name": "cloudflare",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "${CLOUDFLARE_API_TOKEN}"
+      }
+    },
+    {
+      "name": "docker",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@docker/mcp-server"]
+    },
+    {
+      "name": "kubernetes",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@kubernetes/mcp-server"],
+      "env": {
+        "KUBECONFIG": "${KUBECONFIG}"
+      }
+    },
+    {
+      "name": "terraform",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@hashicorp/terraform-mcp-server"]
+    },
+    {
+      "name": "pulumi",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@pulumi/mcp-server"],
+      "env": {
+        "PULUMI_ACCESS_TOKEN": "${PULUMI_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "datadog",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@datadog/mcp-server"],
+      "env": {
+        "DATADOG_API_KEY": "${DATADOG_API_KEY}",
+        "DATADOG_APP_KEY": "${DATADOG_APP_KEY}"
+      }
+    },
+    {
+      "name": "sentry",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${SENTRY_ORG}",
+        "SENTRY_PROJECT": "${SENTRY_PROJECT}"
+      }
+    },
+    {
+      "name": "grafana",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@grafana/mcp-grafana"],
+      "env": {
+        "GRAFANA_API_KEY": "${GRAFANA_API_KEY}",
+        "GRAFANA_URL": "${GRAFANA_URL}"
+      }
+    },
+    {
+      "name": "prometheus",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@prometheus/mcp-server"],
+      "env": {
+        "PROMETHEUS_URL": "${PROMETHEUS_URL}"
+      }
+    },
+    {
+      "name": "elasticsearch",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@elastic/mcp-server-elasticsearch"],
+      "env": {
+        "ELASTICSEARCH_URL": "${ELASTICSEARCH_URL}",
+        "ELASTICSEARCH_API_KEY": "${ELASTICSEARCH_API_KEY}"
+      }
+    },
+    {
+      "name": "pinecone",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@pinecone-io/pinecone-mcp"],
+      "env": {
+        "PINECONE_API_KEY": "${PINECONE_API_KEY}",
+        "PINECONE_ENVIRONMENT": "${PINECONE_ENVIRONMENT}"
+      }
+    },
+    {
+      "name": "qdrant",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@qdrant/mcp-server-qdrant"],
+      "env": {
+        "QDRANT_URL": "${QDRANT_URL}",
+        "QDRANT_API_KEY": "${QDRANT_API_KEY}"
+      }
+    },
+    {
+      "name": "chroma",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@chroma-core/chroma-mcp"],
+      "env": {
+        "CHROMA_URL": "${CHROMA_URL}"
+      }
+    },
+    {
+      "name": "milvus",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zilliztech/mcp-server-milvus"],
+      "env": {
+        "MILVUS_URL": "${MILVUS_URL}",
+        "MILVUS_TOKEN": "${MILVUS_TOKEN}"
+      }
+    },
+    {
+      "name": "neo4j",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@neo4j-contrib/mcp-neo4j"],
+      "env": {
+        "NEO4J_URI": "${NEO4J_URI}",
+        "NEO4J_USER": "${NEO4J_USER}",
+        "NEO4J_PASSWORD": "${NEO4J_PASSWORD}"
+      }
+    },
+    {
+      "name": "bigquery",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@google-cloud/bigquery-mcp-server"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}"
+      }
+    },
+    {
+      "name": "snowflake",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@snowflake-labs/mcp"],
+      "env": {
+        "SNOWFLAKE_ACCOUNT": "${SNOWFLAKE_ACCOUNT}",
+        "SNOWFLAKE_USER": "${SNOWFLAKE_USER}",
+        "SNOWFLAKE_PASSWORD": "${SNOWFLAKE_PASSWORD}",
+        "SNOWFLAKE_WAREHOUSE": "${SNOWFLAKE_WAREHOUSE}",
+        "SNOWFLAKE_DATABASE": "${SNOWFLAKE_DATABASE}"
+      }
+    },
+    {
+      "name": "databricks",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@databricks/mcp-server"],
+      "env": {
+        "DATABRICKS_HOST": "${DATABRICKS_HOST}",
+        "DATABRICKS_TOKEN": "${DATABRICKS_TOKEN}"
+      }
+    },
+    {
+      "name": "airtable",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@airtable/mcp-server"],
+      "env": {
+        "AIRTABLE_API_KEY": "${AIRTABLE_API_KEY}",
+        "AIRTABLE_BASE_ID": "${AIRTABLE_BASE_ID}"
+      }
+    },
+    {
+      "name": "hubspot",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@hubspot/mcp-server"],
+      "env": {
+        "HUBSPOT_API_KEY": "${HUBSPOT_API_KEY}"
+      }
+    },
+    {
+      "name": "salesforce",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@salesforce/mcp-server"],
+      "env": {
+        "SALESFORCE_USERNAME": "${SALESFORCE_USERNAME}",
+        "SALESFORCE_PASSWORD": "${SALESFORCE_PASSWORD}",
+        "SALESFORCE_SECURITY_TOKEN": "${SALESFORCE_SECURITY_TOKEN}"
+      }
+    },
+    {
+      "name": "zapier",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zapier/mcp-server"],
+      "env": {
+        "ZAPIER_API_KEY": "${ZAPIER_API_KEY}"
+      }
+    },
+    {
+      "name": "make",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@integromat/make-mcp-server"],
+      "env": {
+        "MAKE_API_KEY": "${MAKE_API_KEY}"
+      }
+    },
+    {
+      "name": "n8n",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@n8n/mcp-server"],
+      "env": {
+        "N8N_API_KEY": "${N8N_API_KEY}",
+        "N8N_URL": "${N8N_URL}"
+      }
+    },
+    {
+      "name": "twilio",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@twilio-labs/mcp"],
+      "env": {
+        "TWILIO_ACCOUNT_SID": "${TWILIO_ACCOUNT_SID}",
+        "TWILIO_AUTH_TOKEN": "${TWILIO_AUTH_TOKEN}"
+      }
+    },
+    {
+      "name": "sendgrid",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sendgrid/mcp-server"],
+      "env": {
+        "SENDGRID_API_KEY": "${SENDGRID_API_KEY}"
+      }
+    },
+    {
+      "name": "mailgun",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mailgun/mailgun-mcp-server"],
+      "env": {
+        "MAILGUN_API_KEY": "${MAILGUN_API_KEY}",
+        "MAILGUN_DOMAIN": "${MAILGUN_DOMAIN}"
+      }
+    },
+    {
+      "name": "resend",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@resend/mcp-server"],
+      "env": {
+        "RESEND_API_KEY": "${RESEND_API_KEY}"
+      }
+    },
+    {
+      "name": "posthog",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@posthog/mcp"],
+      "env": {
+        "POSTHOG_API_KEY": "${POSTHOG_API_KEY}",
+        "POSTHOG_HOST": "${POSTHOG_HOST}"
+      }
+    },
+    {
+      "name": "mixpanel",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mixpanel/mcp-server"],
+      "env": {
+        "MIXPANEL_API_SECRET": "${MIXPANEL_API_SECRET}",
+        "MIXPANEL_PROJECT_ID": "${MIXPANEL_PROJECT_ID}"
+      }
+    },
+    {
+      "name": "amplitude",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@amplitude/mcp-server"],
+      "env": {
+        "AMPLITUDE_API_KEY": "${AMPLITUDE_API_KEY}",
+        "AMPLITUDE_SECRET_KEY": "${AMPLITUDE_SECRET_KEY}"
+      }
+    },
+    {
+      "name": "jira",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@atlassian/jira-mcp-server"],
+      "env": {
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}",
+        "JIRA_DOMAIN": "${JIRA_DOMAIN}",
+        "JIRA_EMAIL": "${JIRA_EMAIL}"
+      }
+    },
+    {
+      "name": "confluence",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@atlassian/confluence-mcp-server"],
+      "env": {
+        "CONFLUENCE_API_TOKEN": "${CONFLUENCE_API_TOKEN}",
+        "CONFLUENCE_DOMAIN": "${CONFLUENCE_DOMAIN}",
+        "CONFLUENCE_EMAIL": "${CONFLUENCE_EMAIL}"
+      }
+    },
+    {
+      "name": "asana",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@asana/mcp-server"],
+      "env": {
+        "ASANA_ACCESS_TOKEN": "${ASANA_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "clickup",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@clickup/mcp-server"],
+      "env": {
+        "CLICKUP_API_KEY": "${CLICKUP_API_KEY}"
+      }
+    },
+    {
+      "name": "monday",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mondaycom/mcp"],
+      "env": {
+        "MONDAY_API_KEY": "${MONDAY_API_KEY}"
+      }
+    },
+    {
+      "name": "trello",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@trello/mcp-server"],
+      "env": {
+        "TRELLO_API_KEY": "${TRELLO_API_KEY}",
+        "TRELLO_API_TOKEN": "${TRELLO_API_TOKEN}"
+      }
+    },
+    {
+      "name": "figma",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@figma/mcp-server"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "${FIGMA_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "webflow",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@webflow/mcp-server"],
+      "env": {
+        "WEBFLOW_API_TOKEN": "${WEBFLOW_API_TOKEN}"
+      }
+    },
+    {
+      "name": "shopify",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@shopify/mcp-server"],
+      "env": {
+        "SHOPIFY_API_KEY": "${SHOPIFY_API_KEY}",
+        "SHOPIFY_API_SECRET": "${SHOPIFY_API_SECRET}",
+        "SHOPIFY_STORE_URL": "${SHOPIFY_STORE_URL}"
+      }
+    },
+    {
+      "name": "telegram",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@telegram/mcp-server"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}"
+      }
+    },
+    {
+      "name": "discord",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@discord/mcp-server"],
+      "env": {
+        "DISCORD_BOT_TOKEN": "${DISCORD_BOT_TOKEN}"
+      }
+    },
+    {
+      "name": "twitter",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@twitter/mcp-server"],
+      "env": {
+        "TWITTER_BEARER_TOKEN": "${TWITTER_BEARER_TOKEN}",
+        "TWITTER_API_KEY": "${TWITTER_API_KEY}",
+        "TWITTER_API_SECRET": "${TWITTER_API_SECRET}"
+      }
+    },
+    {
+      "name": "linkedin",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@linkedin/mcp-server"],
+      "env": {
+        "LINKEDIN_ACCESS_TOKEN": "${LINKEDIN_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "youtube",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@youtube/mcp-server"],
+      "env": {
+        "YOUTUBE_API_KEY": "${YOUTUBE_API_KEY}"
+      }
+    },
+    {
+      "name": "spotify",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@spotify/mcp-server"],
+      "env": {
+        "SPOTIFY_CLIENT_ID": "${SPOTIFY_CLIENT_ID}",
+        "SPOTIFY_CLIENT_SECRET": "${SPOTIFY_CLIENT_SECRET}"
+      }
+    },
+    {
+      "name": "wordpress",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@automattic/wordpress-mcp"],
+      "env": {
+        "WORDPRESS_URL": "${WORDPRESS_URL}",
+        "WORDPRESS_USERNAME": "${WORDPRESS_USERNAME}",
+        "WORDPRESS_PASSWORD": "${WORDPRESS_PASSWORD}"
+      }
+    },
+    {
+      "name": "redis",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@redis/mcp-redis"],
+      "env": {
+        "REDIS_URL": "${REDIS_URL}"
+      }
+    },
+    {
+      "name": "mongodb",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mongodb-js/mongodb-mcp-server"],
+      "env": {
+        "MONGODB_URI": "${MONGODB_URI}"
+      }
+    },
+    {
+      "name": "playwright",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@microsoft/playwright-mcp"]
+    },
+    {
+      "name": "puppeteer",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+    {
+      "name": "aws",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@awslabs/mcp"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_REGION": "${AWS_REGION}"
+      }
+    },
+    {
+      "name": "azure",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@microsoft/azure-mcp-server"],
+      "env": {
+        "AZURE_CLIENT_ID": "${AZURE_CLIENT_ID}",
+        "AZURE_CLIENT_SECRET": "${AZURE_CLIENT_SECRET}",
+        "AZURE_TENANT_ID": "${AZURE_TENANT_ID}"
+      }
+    },
+    {
+      "name": "google-cloud",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}"
+      }
+    }
+  ]
+}

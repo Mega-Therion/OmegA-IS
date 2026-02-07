@@ -1,0 +1,277 @@
+{
+  "source": "/home/mega/NEXUS/repos/omega_rust",
+  "timestamp": "2026-02-06T23:38:36-0600",
+  "file_count": 54,
+  "files": [
+    {
+      "path": "capabilities.toml",
+      "size": 195,
+      "sha256": "8aca9db54e1846a21744ba94aaab9e00f772deaf9f2a55e6928f413e27c276b1"
+    },
+    {
+      "path": "Cargo.lock",
+      "size": 104268,
+      "sha256": "eb0e61423e2304262a4d57b228eb3a6f672705cb10d93f16f81e231962cbcb35"
+    },
+    {
+      "path": "UX-MASSIVELY-IMPROVED.txt",
+      "size": 6889,
+      "sha256": "9a14e68b08ac5acc628264df2e8a3675af73e58b65c8bad7f762aee21314ea58"
+    },
+    {
+      "path": "VERIFICATION-COMPLETE.txt",
+      "size": 2463,
+      "sha256": "baa73f5ac5407007262bea352f4e73d0bf85cf7202b6534aab6530f8dc1c8b23"
+    },
+    {
+      "path": "IDENTITY-AND-MEMORY-FIXED.txt",
+      "size": 2230,
+      "sha256": "a5ba5713d0fc42bbfc44f82ab5cdf3bd57f9b27f80995ccb32d81979a0411184"
+    },
+    {
+      "path": "test_streaming.sh",
+      "size": 2076,
+      "sha256": "3d4f869f1e7c44f8077386052872822bb583b69baec1dc727c7796a4b6f0616e"
+    },
+    {
+      "path": "CHAT-MODE-ENABLED.txt",
+      "size": 3367,
+      "sha256": "23144f0e830fc67584c414f9d74e3942fa56bdf5d906b762056a6783d40b8865"
+    },
+    {
+      "path": "QUICK_SETUP.md",
+      "size": 3302,
+      "sha256": "4d8c475d6f803262be1472dfea8ce49317b3adcab6e1080beb4bfd4c7e087304"
+    },
+    {
+      "path": "GAING_STRATEGIC_REPORT.md",
+      "size": 9372,
+      "sha256": "c1f0e25e665713822a406f8b7a772a3b2fb1db67eb845214551a20533655def6"
+    },
+    {
+      "path": "autostart-omega.sh",
+      "size": 2173,
+      "sha256": "d9f9e03ac2eac2870bb3e7618745c488b1a0f4cb2d2a766e92f28b9bb2d0c693"
+    },
+    {
+      "path": "IDENTITY.md",
+      "size": 1032,
+      "sha256": "9dc5a056bfb198eb5bf7f14e58884828ac3cd392744246d5f022f7403f2efd20"
+    },
+    {
+      "path": "TUI-FIXED.txt",
+      "size": 2942,
+      "sha256": "4b9ec1bfb6ed4fe2b1ce0b040462284ee362e9c0f57aad6c0caee4166aa1e2d9"
+    },
+    {
+      "path": "START-HERE.txt",
+      "size": 2481,
+      "sha256": "7e5d6bafad4db4b33da5a1a70747413bc13023984ca9e1975f538b720db2e92e"
+    },
+    {
+      "path": "omega-anywhere.sh",
+      "size": 389,
+      "sha256": "4f4332854424812858832bf6667c574f5fe31e93a6baadf54e0a3cbd918946e3"
+    },
+    {
+      "path": "STRATEGIC_PLAN.md",
+      "size": 12013,
+      "sha256": "c41aefa2aaa794c0e25dc2f3faf76276ea12f62ae568433ef953185149501857"
+    },
+    {
+      "path": "BUGFIX.md",
+      "size": 5117,
+      "sha256": "698719f79d13787650d7fe5fec9bdc59c5cd4248239edbd464c161e3e50e6684"
+    },
+    {
+      "path": "hello.txt",
+      "size": 3416,
+      "sha256": "79802370d8a8ba5bf2cac149f5452295c771f1b259e5db51c814689a41ca2d9d"
+    },
+    {
+      "path": "WHATS_NEW.md",
+      "size": 7100,
+      "sha256": "47c1eefbadee3e9b168bac80ef4757eddc3abe94930f05272092e2312f70e52f"
+    },
+    {
+      "path": "test_rollcall.sh",
+      "size": 1112,
+      "sha256": "0c383e12c494a5b58e8126fdb517057a84429cbb6711cbdb7576e00bde26bfbf"
+    },
+    {
+      "path": "IDENTITY-CORRECT-NOW.txt",
+      "size": 1226,
+      "sha256": "43b897a1f4f77b3584e6d923c5ec33a68bb07da340e8f92f302318d70138489a"
+    },
+    {
+      "path": "README_STRATEGIC_SESSION.md",
+      "size": 6565,
+      "sha256": "aa448cd09d6d936053e2cf832c8fca82e25f7dddd7727ce1464e5e64a2599c12"
+    },
+    {
+      "path": "IMPLEMENTATION_SUMMARY.md",
+      "size": 5431,
+      "sha256": "d940f48a28b676314a6418aa6fb2bf42890dc10d5ef185eaf5460318132eb735"
+    },
+    {
+      "path": "AUTO-SETUP-CLICK-ME.sh",
+      "size": 6386,
+      "sha256": "e109f280c11721d9e748f8f9c79ec6bb96bf0de826d9a2660e18ece05fbf31ba"
+    },
+    {
+      "path": "FINALLY-FIXED.txt",
+      "size": 1964,
+      "sha256": "f63ef2903042e482ad164916ca7df1f336813584e71c5c1a1417c17fdaab263e"
+    },
+    {
+      "path": "launch-omega-cli.sh",
+      "size": 1040,
+      "sha256": "f6ddaa581e6b1fa529478bb791d8f64a76126f3ea52c417b7080315449a3234a"
+    },
+    {
+      "path": "Cargo.toml",
+      "size": 1913,
+      "sha256": "ddde66db9856a1241b5df41e04008777af02ef5f6a3c537a94fff8435aeaa90d"
+    },
+    {
+      "path": "THEME.md",
+      "size": 6219,
+      "sha256": "4505f6914ae532ef5447afe8191e0af646cab672a05dd75751cc76d9cea38f9d"
+    },
+    {
+      "path": "start-omega.sh",
+      "size": 711,
+      "sha256": "d9549e843c629e1fea6a675a1a334f0d4516511bd7f3685e4cd865f868879b10"
+    },
+    {
+      "path": "setup-autostart.sh",
+      "size": 3450,
+      "sha256": "797049de77e98d6b97d02f8440d08cb6d84c66f489ba72cca209d88e22c2d7d3"
+    },
+    {
+      "path": "DEBUG-TEST.txt",
+      "size": 1955,
+      "sha256": "6d7482ff16d9583924fae3ef1d878801007437d0efdc5cc2c04b502b63048ca0"
+    },
+    {
+      "path": "STREAMING_DEMO.md",
+      "size": 8693,
+      "sha256": "83eeedcf1cd41e7d5717a57837f726245d70e885b88ba82a23b60b4468114bf8"
+    },
+    {
+      "path": "run_strategic_session.sh",
+      "size": 4870,
+      "sha256": "686f667fba71b7c508e28b67e8b36a6b30541663522a94438d9b7cd3fe7b9416"
+    },
+    {
+      "path": "demo_ui.sh",
+      "size": 1662,
+      "sha256": "fa89c10ffb7c91daeb1f975892c1b070a4bf4fa5576c0df5497b7f80cefcc935"
+    },
+    {
+      "path": "VISUAL_GUIDE.md",
+      "size": 13712,
+      "sha256": "3e90a5048081942965347cabf77c3f561b7d44e6ea3a7789f6506676f35962e5"
+    },
+    {
+      "path": "FIXED-ALL-ISSUES.txt",
+      "size": 3723,
+      "sha256": "b9b29bf84948c83ac195619057503cd78c2d5f65d00f6e85bb5df122113b672f"
+    },
+    {
+      "path": "README.md",
+      "size": 1681,
+      "sha256": "31fe442b56ea0d120a8e24e229e6c9412f2626f454bccdbfc2e6ff3d960788a9"
+    },
+    {
+      "path": "THE-REAL-PROBLEM.txt",
+      "size": 2092,
+      "sha256": "0e88bc5b1c969f3e2045214c8dc53412b02dae282fb7e774a3527fa3c2c9aa50"
+    },
+    {
+      "path": "set-model.sh",
+      "size": 908,
+      "sha256": "401c12345246a7f26b8289dda3e1520031a1560b4bf12e52af27ef8925b80ff4"
+    },
+    {
+      "path": "install.sh",
+      "size": 1006,
+      "sha256": "9fc015af08e0b86302b2ea0ec7db0dfe2a582ce09f4400eaad7b7abe28d6c004"
+    },
+    {
+      "path": "test_omega.sh",
+      "size": 351,
+      "sha256": "d19027a6fd4c2ee40a592be7c9b2bb62f9bb6158731654ab255148b710a8ffc7"
+    },
+    {
+      "path": "src/voice.rs",
+      "size": 1457,
+      "sha256": "eff02b15faeab8eda847e59f5c8aef54b8b3d8a247bb37e8cb9b6b5d7c44bca6"
+    },
+    {
+      "path": "src/ui.rs",
+      "size": 18215,
+      "sha256": "e5d10a72de3a0b6349949d7530f2b4efdacc297c3721aca90952181b661dd0f7"
+    },
+    {
+      "path": "src/engine.rs",
+      "size": 15196,
+      "sha256": "b62bfb99d0f052a1a14878697a1efa873e44b914b8aba6aee8efb5af2b76f4ca"
+    },
+    {
+      "path": "src/devices.rs",
+      "size": 4577,
+      "sha256": "38043dc10f7154c42266980ae1fc410999b0c5c8260c05357394f40ee4c30e42"
+    },
+    {
+      "path": "src/modules.rs",
+      "size": 3730,
+      "sha256": "dc79742bd0b3b83d77d0d88e036d0c768371afda215fe209b19df5bad069cd3e"
+    },
+    {
+      "path": "src/config.rs",
+      "size": 2586,
+      "sha256": "290217fe2f67aeb52aac792bdd4eeb499435147ed55c0c89c96a7f5f64117169"
+    },
+    {
+      "path": "src/server.rs",
+      "size": 7783,
+      "sha256": "bd0a62042152245c3b8be2aff67d2c7a193fba0951a67da36bf64979ad192f48"
+    },
+    {
+      "path": "src/main.rs",
+      "size": 6710,
+      "sha256": "1d2c9639a856e03275ea931f4d0ecdba72f95d38a69d56a970336ef965fb0604"
+    },
+    {
+      "path": "src/events.rs",
+      "size": 1877,
+      "sha256": "a27adc450af627f1934d6337a4bbae7d7177f6a73ee30a439683c8fb1267722d"
+    },
+    {
+      "path": "src/tui/view.rs",
+      "size": 28287,
+      "sha256": "da43c70d1ed6653ff8e604ea0a4f129d36ac816e50cc06eb7ab3bd9a3d29e87c"
+    },
+    {
+      "path": "src/tui/mod.rs",
+      "size": 3729,
+      "sha256": "e02e597984494a86f909bbeb4053b40f722b20c26383ce299c606928395564f1"
+    },
+    {
+      "path": "src/tui/app.rs",
+      "size": 8962,
+      "sha256": "f156fff7c678f83f25c6b0378f1b9ada2a988adb6b9a6cc0c2f2a435bc2e948a"
+    },
+    {
+      "path": "scripts/sync-website.sh",
+      "size": 960,
+      "sha256": "9d7bbdb84b450768b01b3dd7291f049a8f929f60dc66ee40f6d2966e86153726"
+    },
+    {
+      "path": "scripts/omega-netmap.sh",
+      "size": 2992,
+      "sha256": "3c4ffb92845cb1c23165cae4a1406c3d0f1e700d91e90e292352c62250dfd397"
+    }
+  ]
+}

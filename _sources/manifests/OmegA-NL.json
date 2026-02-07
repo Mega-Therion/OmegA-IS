@@ -1,0 +1,137 @@
+{
+  "source": "/home/mega/NEXUS/repos/OmegA-NL",
+  "timestamp": "2026-02-06T23:38:35-0600",
+  "file_count": 26,
+  "files": [
+    {
+      "path": "next.config.js",
+      "size": 2023,
+      "sha256": "6fe2fb2c5042f3c2cdd523737787874192816286a4f05762df62d9b125913d9b"
+    },
+    {
+      "path": "postcss.config.js",
+      "size": 80,
+      "sha256": "b9357981319940ed660b848c7a15ea479915885b7cbe60d6951b5d5cef5b509d"
+    },
+    {
+      "path": "package.json",
+      "size": 706,
+      "sha256": "3ddf4e2c9cff17a8213baa45d36003d6511388c51fffa360a3e7f6f476355d03"
+    },
+    {
+      "path": "tsconfig.json",
+      "size": 688,
+      "sha256": "147b39c9c92e2ac9296716e31a01886bb148be3789c4f07b6aacf073d60c0887"
+    },
+    {
+      "path": "Dockerfile",
+      "size": 1433,
+      "sha256": "b272f2d63e91831b2f2f2415b399c43cb39c3d143b4408c1055851f6e570d29e"
+    },
+    {
+      "path": "package-lock.json",
+      "size": 59058,
+      "sha256": "052c7db19456937a208f04e9b985e2e46f372715454dcd7dfecf9720682bf8e4"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "size": 610,
+      "sha256": "3623bf7fa7d7e1e2958ad31da191d96ca8d07a1f08b911eb44118c9d166a7871"
+    },
+    {
+      "path": "next-env.d.ts",
+      "size": 201,
+      "sha256": "9269d492817e359123ac64c8205e5d05dab63d71a3a7a229e68b5d9a0e8150bf"
+    },
+    {
+      "path": "README.md",
+      "size": 4696,
+      "sha256": "067ce18546d82f87d4db74e7859a901971b8b33ff80c18c572fabef71f60535f"
+    },
+    {
+      "path": "docs/omega-trinity-deployment.md",
+      "size": 14404,
+      "sha256": "297902da6f7e7667f7d48a2c8469f046673c5ccf8f2b08ff3731ef450a108469"
+    },
+    {
+      "path": "src/types/speech-recognition.d.ts",
+      "size": 1030,
+      "sha256": "20ffc54f4f656f19f06094e231924228a06725b20f0cbf9df07d4c93cfbeda6e"
+    },
+    {
+      "path": "src/data/knowledge.ts",
+      "size": 1673,
+      "sha256": "a5b376d2f56fb0316762fed1fc94dd778bc57e3e80748938217664a18408534e"
+    },
+    {
+      "path": "src/utils/rag.ts",
+      "size": 2073,
+      "sha256": "feb1ba76a59065991b65c1a12a074f1249549f02996d5044830d333665dfe0e4"
+    },
+    {
+      "path": "src/lib/omegaClient.ts",
+      "size": 2296,
+      "sha256": "c95d2db7be0d5c29d0efbbd02cdba23d049189614be7aa63f9ed88ed77e84966"
+    },
+    {
+      "path": "src/lib/omegaCommand.ts",
+      "size": 2313,
+      "sha256": "99d4134ae87fd96021dc0af3fa5a812cd52c033cfca4f6753b71753730391e2b"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "size": 17119,
+      "sha256": "442ad7f999a7afdf3d7871fd3eeffad8c8d4114e25a3fe765cc73c70c9b1ba47"
+    },
+    {
+      "path": "src/app/globals.css",
+      "size": 278,
+      "sha256": "0d798a2243b02ab46e91f5447e3b7e960660942c4b2b50fb80ed2daba394cae7"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "size": 2706,
+      "sha256": "792acc459cb75dc9b143b958b93f7c90e32a8cf4682eb70d60c4a13592b38ccc"
+    },
+    {
+      "path": "src/app/api/chat/route.ts",
+      "size": 3810,
+      "sha256": "9dabee585201c4e3594f22dd0e5fa63db39b56948dcea445b0414a338160db1c"
+    },
+    {
+      "path": "src/app/api/health/route.ts",
+      "size": 199,
+      "sha256": "51ab2dd3a0f3addc304dda59a3a68ec0593124a975190b4341d0e835177976b3"
+    },
+    {
+      "path": "src/app/api/omega/route.ts",
+      "size": 2508,
+      "sha256": "5ec9c6f0455a7e828c91018fce419861615e7e0496e92ed9a8832ae18ecc66d8"
+    },
+    {
+      "path": "src/app/api/omega/memory/route.ts",
+      "size": 2529,
+      "sha256": "fd3cc2f9adf34c13341bc25031da60e679322bf03f345ce033fa991d2a764af7"
+    },
+    {
+      "path": "src/store/useNeuroStore.ts",
+      "size": 1882,
+      "sha256": "219e28fd0ad30bb06336a2b258d1974ddd94969153222bf463e6695dca9561e6"
+    },
+    {
+      "path": "vendor/critters/index.js",
+      "size": 152,
+      "sha256": "a43a26e3bea1bc15c681218c4cc5b4d77a3f7063b1761d8db740bd1914b57742"
+    },
+    {
+      "path": "vendor/critters/package.json",
+      "size": 89,
+      "sha256": "cd5cbea84d4157ce38f7e1e322d68518aabbefb385df466496fc7009d486237e"
+    },
+    {
+      "path": "public/manifest.json",
+      "size": 1883,
+      "sha256": "2d8762f2f8a689caffd00d9b50d207c9ff812dff4f76749cc39ea5687d15c109"
+    }
+  ]
+}

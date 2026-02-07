@@ -1,0 +1,145 @@
+{
+  "name": "Jarvis - CollectiveBrain Webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b0d5b1a6-f665-4050-8127-fa4f288ce4b7",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2f3b101b-322b-47a2-aeae-cbb06454ce08",
+      "name": "Webhook",
+      "webhookId": "b0d5b1a6-f665-4050-8127-fa4f288ce4b7"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-jarvis-collectivebrain",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -144
+      ],
+      "id": "4040a3dc-2893-4172-9e93-d18b48fb9f9e",
+      "name": "Omega Jarvis Webhook",
+      "webhookId": "f09172c9-7f4b-4368-9bc6-1824de7d5a83"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'jarvis', event_type: $json.event_type || 'jarvis_query', timestamp: $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        -96
+      ],
+      "id": "005e9ab3-d0b3-44d3-a58b-b0011512445a",
+      "name": "Omega Context"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * n8n Code Node (JavaScript)\n * Purpose: Turn webhook payload into an authenticated call to gAIng-brAin and return an Alexa-friendly response.\n *\n * Expected incoming body (example):\n * {\n *   \"query\": \"What did I say about the mission loop?\",\n *   \"userId\": \"ry\",\n *   \"sessionId\": \"alexa-session-123\",\n *   \"channel\": \"alexa\"\n * }\n */\n\n// 1) Read inbound payload\nconst item = $input.first();\nconst body = item.json?.body ?? item.json ?? {};\nconst query = (body.query || body.text || body.utterance || \"\").toString().trim();\n\nif (!query) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"I didn't catch that. Please say your question again.\",\n      response: \"I didn't catch that. Please say your question again.\",\n      error: \"Missing query\"\n    }\n  }];\n}\n\n// 2) Normalize metadata\nconst userId = (body.userId || body.user || \"unknown\").toString();\nconst sessionId = (body.sessionId || body.session || `sess-${Date.now()}`).toString();\nconst channel = (body.channel || \"alexa\").toString();\nconst locale = (body.locale || \"en-US\").toString();\n\n// 3) Configure target\n// Preferred: set these as n8n environment variables OR replace with n8n credentials usage patterns.\nconst baseUrl = (process.env.GAING_BRAIN_BASE_URL || \"\").replace(/\\/+$/, \"\");\nconst bearerToken = process.env.GAING_BRAIN_BEARER_TOKEN || \"\";  // Supabase JWT or service token\n\nif (!baseUrl || !bearerToken) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"The service is not configured yet. Please check the connection settings.\",\n      response: \"The service is not configured yet. Please check the connection settings.\",\n      error: \"Missing GAING_BRAIN_BASE_URL or GAING_BRAIN_BEARER_TOKEN\"\n    }\n  }];\n}\n\n// 4) Call gAIng-brAin\n// Note: this.helpers.httpRequest is supported in n8n Code node for outbound HTTP.\nlet result;\ntry {\n  result = await this.helpers.httpRequest({\n    method: \"POST\",\n    url: `${baseUrl}/llm/chat`,\n    headers: {\n      Authorization: `Bearer ${bearerToken}`,\n      \"Content-Type\": \"application/json\"\n    },\n    body: {\n      query,\n      userId,\n      sessionId,\n      channel,\n      locale,\n      // Optional flags for future mission loop alignment\n      mode: \"chat\",\n      memory: {\n        enabled: true,\n        writeBack: true\n      }\n    },\n    json: true,\n    timeout: 30000\n  });\n} catch (e) {\n  return [{\n    json: {\n      ok: false,\n      answer: \"I had trouble reaching the brain service. Please try again in a moment.\",\n      response: \"I had trouble reaching the brain service. Please try again in a moment.\",\n      error: e?.message || \"Request failed\"\n    }\n  }];\n}\n\n// 5) Shape output\nconst answer = (result && (result.answer || result.response || result.text)) || \n  \"I received a response, but it was not in the expected format.\";\n\nreturn [{\n  json: {\n    ok: true,\n    answer,\n    response: answer,\n    meta: {\n      userId,\n      sessionId,\n      channel,\n      locale,\n      // Keep the raw result for debugging (remove once stable)\n      raw: result\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "51842451-b0d2-4061-9e48-a0e3331b9671",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseKey": "=={ \"version\": \"1.0\", \"response\": { \"outputSpeech\": { \"type\": \"PlainText\", \"text\": $json.response }, \"shouldEndSession\": true } }"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        416,
+        0
+      ],
+      "id": "def8a42b-3800-4b10-acf7-f6a3a796ac25",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Jarvis Webhook": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Context": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 1,
+  "meta": null
+}

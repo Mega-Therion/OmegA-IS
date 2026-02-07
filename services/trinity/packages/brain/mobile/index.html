@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>OMEGA Brain</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    :root {
+      --safe-area-inset-top: env(safe-area-inset-top, 0px);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #13131a;
+      --bg-tertiary: #1c1c27;
+      --accent: #00d4ff;
+      --accent-secondary: #7c3aed;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+    }
+    
+    html, body {
+      height: 100%;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+    }
+    
+    #root {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--safe-area-inset-top);
+      padding-bottom: var(--safe-area-inset-bottom);
+    }
+    
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.3s;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loading-logo {
+      font-size: 64px;
+      margin-bottom: 16px;
+      animation: pulse 2s infinite;
+    }
+    
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .loading-dots::after {
+      content: '';
+      animation: dots 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    @keyframes dots {
+      0% { content: ''; }
+      33% { content: '.'; }
+      66% { content: '..'; }
+      100% { content: '...'; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="loading-screen" id="loading">
+      <div class="loading-logo">🧠</div>
+      <div class="loading-text">Connecting to OMEGA Brain<span class="loading-dots"></span></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

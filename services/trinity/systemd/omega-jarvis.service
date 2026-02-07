@@ -1,0 +1,23 @@
+[Unit]
+Description=OMEGA Jarvis UI (Vite)
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/mega/NEXUS/repos/OMEGA-Trinity/Jarvis
+EnvironmentFile=/home/mega/NEXUS/repos/OMEGA-Trinity/.env
+Environment=PORT=3001
+Environment=AGENT_NAME=jarvis
+Environment=AGENT_LOG=/var/log/omega/jarvis.log
+Environment=AGENT_CWD=/home/mega/NEXUS/repos/OMEGA-Trinity/Jarvis
+ExecStartPre=/usr/bin/env mkdir -p /var/log/omega
+ExecStart=/usr/bin/env npm run dev
+ExecStartPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh register ${AGENT_NAME} $MAINPID ${AGENT_CWD} ${AGENT_LOG}'
+ExecStopPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh stopped ${AGENT_NAME}'
+StandardOutput=append:${AGENT_LOG}
+StandardError=append:${AGENT_LOG}
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,596 @@
+{
+  "resolved": [
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/docker-compose.yml",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/docker-compose.yml"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/docker-compose.yml",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/docker-compose.yml"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/package.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/pnpm-lock.yaml",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/pnpm-lock.yaml"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/omega-trinity/README.md",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/omega-trinity/README.md"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/requirements.txt",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/requirements.txt"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gAIng-brAin/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gAIng-brAin/package.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/scripts/omega-doctor.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/scripts/omega-doctor.mjs"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/scripts/omega-start.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/scripts/omega-start.mjs"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/Jarvis/package-lock.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/Jarvis/package-lock.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/llm.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/llm.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/config.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/config.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/events.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/events.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/embeddings.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/embeddings.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/idempotency.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/idempotency.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/db.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/db.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/main.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/main.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/memory.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/memory.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/consciousness/state.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/consciousness/state.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gateway/app/consciousness/identity.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gateway/app/consciousness/identity.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gAIng-brAin/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gAIng-brAin/src/app.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/gAIng-brAin/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/gAIng-brAin/data/stream.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/index.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/index.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/package.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/package-lock.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/package-lock.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/log.md",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/log.md"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/bridge/requirements.txt",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/bridge/requirements.txt"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/bridge/config.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/bridge/config.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/bridge/llm_client.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/bridge/llm_client.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/bridge/api.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/bridge/api.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/mcp/servers.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/mcp/servers.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/app.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/database/revenue-ledger.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/database/revenue-ledger.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/data/stream.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/services/llm.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/services/llm.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/services/mcp-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/services/mcp-client.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/services/neural-pulsing.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/services/neural-pulsing.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/services/queue.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/services/queue.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/core/day-jobs.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/core/day-jobs.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/core/llm-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/core/llm-client.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/core/revenue-governor.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/core/revenue-governor.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/packages/brain/src/core/tasks/revenue/opportunity-scout.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/packages/brain/src/core/tasks/revenue/opportunity-scout.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/Jarvis/src/app/layout.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/Jarvis/src/app/layout.tsx"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OmegA-IS/Jarvis/src/store/useNeuroStore.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OmegA-IS/Jarvis/src/store/useNeuroStore.ts"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/requirements.txt",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/requirements.txt"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/package.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/scripts/omega-doctor.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/scripts/omega-doctor.mjs"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/scripts/omega-start.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/scripts/omega-start.mjs"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/Jarvis/package-lock.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/Jarvis/package-lock.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/llm.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/llm.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/config.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/config.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/events.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/events.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/embeddings.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/embeddings.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/idempotency.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/idempotency.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/db.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/db.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/main.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/main.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/memory.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/memory.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/consciousness/state.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/consciousness/state.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gateway/app/consciousness/identity.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gateway/app/consciousness/identity.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/src/app.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/gAIng-brAin/data/stream.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/index.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/index.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/package.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/log.md",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/log.md"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/bridge/requirements.txt",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/bridge/requirements.txt"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/bridge/config.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/bridge/config.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/bridge/llm_client.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/bridge/llm_client.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/bridge/api.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/bridge/api.py"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/mcp/README.md",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/mcp/README.md"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/mcp/servers.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/mcp/servers.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/app.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/database/revenue-ledger.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/database/revenue-ledger.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/data/stream.json"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/llm.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/llm.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/mcp-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/mcp-client.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/neural-pulsing.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/neural-pulsing.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/queue.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/services/queue.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/core/llm-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/packages/brain/src/core/llm-client.js"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/layout.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/layout.tsx"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/store/useNeuroStore.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/store/useNeuroStore.ts"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/api/omega/route.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/api/omega/route.ts"
+    },
+    {
+      "action": "added",
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/api/omega/memory/route.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/ORYAN-OMEGA-Trinity/Jarvis/src/app/api/omega/memory/route.ts"
+    }
+  ],
+  "skipped": [
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/vite.config.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/vite.config.ts",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/package-lock.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/package-lock.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/App.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/App.tsx",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/index.css",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/index.css",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/pages/Index.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/pages/Index.tsx",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/lib/types.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/lib/types.ts",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/integrations/supabase/types.ts",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/integrations/supabase/types.ts",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/components/layout/AppSidebar.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/components/layout/AppSidebar.tsx",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/OmegA-UI/src/components/settings/SettingsView.tsx",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/apps/OmegA-UI/src/components/settings/SettingsView.tsx",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gAIng-brAin/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gAIng-brAin/package.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/scripts/omega-doctor.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/scripts/omega-doctor.mjs",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/scripts/omega-start.mjs",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/scripts/omega-start.mjs",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/llm.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/llm.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/config.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/config.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/events.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/events.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/embeddings.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/embeddings.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/idempotency.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/idempotency.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/db.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/db.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/mcp.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/mcp.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/main.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/main.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/consciousness/state.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/consciousness/state.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gateway/app/consciousness/identity.py",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gateway/app/consciousness/identity.py",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gAIng-brAin/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gAIng-brAin/src/app.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/gAIng-brAin/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/gAIng-brAin/data/stream.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/index.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/index.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/package.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/package.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/package-lock.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/package-lock.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/log.md",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/log.md",
+      "reason": "skip pattern"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/app.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/app.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/database/revenue-ledger.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/database/revenue-ledger.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/data/stream.json",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/data/stream.json",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/services/llm.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/services/llm.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/services/mcp-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/services/mcp-client.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/services/neural-pulsing.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/services/neural-pulsing.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/services/queue.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/services/queue.js",
+      "reason": "base newer or same"
+    },
+    {
+      "candidate": "/home/mega/NEXUS/OmegA/OmegA-SI/_merge_candidates/trinity/OmegA-IS/packages/brain/src/core/llm-client.js",
+      "base": "/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/OmegA-IS/packages/brain/src/core/llm-client.js",
+      "reason": "base newer or same"
+    }
+  ]
+}

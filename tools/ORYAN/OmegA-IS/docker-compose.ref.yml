@@ -1,0 +1,69 @@
+îservices:
+  omega-db:
+    image: pgvector/pgvector:pg16
+    container_name: omega-db
+    environment:
+      POSTGRES_USER: omega
+      POSTGRES_PASSWORD: omega
+      POSTGRES_DB: omega
+    ports:
+      - "5432:5432"
+    volumes:
+      - omega_db_data:/var/lib/postgresql/data
+      - ./omega-gateway/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U omega -d omega"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  omega-redis:
+    image: redis:7-alpine
+    container_name: omega-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+
+  omega-gateway:
+    build:
+      context: ./omega-gateway
+    container_name: omega-gateway
+    depends_on:
+      omega-db:
+        condition: service_healthy
+    environment:
+      OMEGA_OPENAI_API_KEY: ${OMEGA_OPENAI_API_KEY}
+      OMEGA_OPENAI_BASE_URL: ${OMEGA_OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OMEGA_MODEL: ${OMEGA_MODEL:-gpt-4o-mini}
+      OMEGA_DB_URL: postgresql+psycopg://omega:omega@omega-db:5432/omega
+      OMEGA_REDIS_URL: redis://omega-redis:6379/0
+      OMEGA_API_BEARER_TOKEN: ${OMEGA_API_BEARER_TOKEN:-}
+      OMEGA_LOG_LEVEL: ${OMEGA_LOG_LEVEL:-INFO}
+    ports:
+      - "8787:8787"
+
+  # Optional: n8n for running governance workflows
+  # Uncomment to enable the workflow automation server
+  # omega-n8n:
+  #   image: n8nio/n8n:latest
+  #   container_name: omega-n8n
+  #   depends_on:
+  #     - omega-db
+  #     - omega-gateway
+  #   environment:
+  #     - N8N_BASIC_AUTH_ACTIVE=true
+  #     - N8N_BASIC_AUTH_USER=${N8N_USER:-omega}
+  #     - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD:-omega}
+  #     - WEBHOOK_URL=http://localhost:5678/
+  #     - GENERIC_TIMEZONE=America/Chicago
+  #     - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+  #     - INCOME_ENGINE_WEBHOOK_URL=http://omega-n8n:5678/webhook/income-engine
+  #   ports:
+  #     - "5678:5678"
+  #   volumes:
+  #     - omega_n8n_data:/home/node/.n8n
+
+volumes:
+  omega_db_data:
+  # omega_n8n_data:
+î*cascade082_file:///c:/Users/mega_/Downloads/OMEGA_REALITY_KIT_UPDATED/OMEGA_REALITY_KIT/docker-compose.yml

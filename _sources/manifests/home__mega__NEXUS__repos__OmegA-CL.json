@@ -1,0 +1,82 @@
+{
+  "source": "/home/mega/NEXUS/repos/OmegA-CL",
+  "timestamp": "2026-02-06T23:40:15-0600",
+  "file_count": 15,
+  "files": [
+    {
+      "path": "consensus_engine.py",
+      "size": 9590,
+      "sha256": "4b209f492ba8342cac7cb452439a0ff2c028cb447e6c57ab023512672955601a"
+    },
+    {
+      "path": "docker-compose.yml",
+      "size": 2247,
+      "sha256": "433df2503ca8f1137ed3689d50b73d89b5ddf5835a44d5a2623784a4be5932af"
+    },
+    {
+      "path": "worker_pool.py",
+      "size": 4664,
+      "sha256": "294eee7484734432d4284114941490a47106b12f6fc904b01ace8236c7bfd7cf"
+    },
+    {
+      "path": "deployment.py",
+      "size": 3124,
+      "sha256": "6d280e3ade0ae835535de721e95adaf6fc65cd76f1b4525832be5367d860b517"
+    },
+    {
+      "path": "requirements.txt",
+      "size": 984,
+      "sha256": "0bbbe950e16b815521216a67b92d3ea346cfa241dbd2807136ea59f0e862a84d"
+    },
+    {
+      "path": "memory_layer.py",
+      "size": 7450,
+      "sha256": "fc1c49b70ff096da06815e5a3e473d495fcb0eff0b4c54933584858505e7686b"
+    },
+    {
+      "path": "Dockerfile",
+      "size": 1142,
+      "sha256": "3991b855ed037ff8dee33e5858a7fcdd188ff11d65d43a191f54b7aa985141aa"
+    },
+    {
+      "path": "orchestrator.py",
+      "size": 4364,
+      "sha256": "8d65f607991e93a06377e2044bf451451d774b45d37bbfcdfd723ec0560d4eed"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1073,
+      "sha256": "ab974d9fee1962fb9e06067c82fe54a62f774e57b6cf4dfd3c9b66ee8a470fa5"
+    },
+    {
+      "path": "setup.py",
+      "size": 1987,
+      "sha256": "853452573add2f91742f931d53ea8555b1de6ba3de35686bb21a8241c014812d"
+    },
+    {
+      "path": "main.py",
+      "size": 6008,
+      "sha256": "d0e44922422252010aa15c185869a4850b575bd44a1f9e35f478dc892ceb82d4"
+    },
+    {
+      "path": "llm_client.py",
+      "size": 7647,
+      "sha256": "be81127353f5366bc29603c927e7c1a9aed9ae84e513f0686bc7f9c8b4b89cba"
+    },
+    {
+      "path": "README.md",
+      "size": 9544,
+      "sha256": "439e9c533fdffd29bcbe3b53b856bb39f88821c985200222e399ae26a2c9d703"
+    },
+    {
+      "path": "api.py",
+      "size": 10983,
+      "sha256": "5777d6a84091a52d83dd2e82eb4b2e38eb4ee870d51b22e69bf9776ad74d5587"
+    },
+    {
+      "path": "tests/test_brain.py",
+      "size": 7638,
+      "sha256": "ca9803474a1db462dfc0a573e3ea5062984b1d8c14792da91d783e15391e4b1a"
+    }
+  ]
+}

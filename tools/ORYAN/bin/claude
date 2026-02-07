@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+unset ANTHROPIC_API_KEY
+exec /home/mega/.local/bin/claude "$@"

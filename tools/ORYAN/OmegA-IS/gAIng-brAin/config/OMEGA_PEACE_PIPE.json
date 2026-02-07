@@ -1,0 +1,369 @@
+�T{
+  "name": "Peace Pipe Ceremony - OMEGA",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "schedule_trigger",
+      "name": "Daily Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {},
+      "id": "manual_trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 500]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "tableId": "members",
+        "filterType": "formula",
+        "formula": "status.eq.active"
+      },
+      "id": "get_active_agents",
+      "name": "Get Active Agents",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "name": "Omega Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "tableId": "memories",
+        "filterType": "formula",
+        "formula": "created_at.gte.{{ $now.minus({days: 1}).toISO() }}"
+      },
+      "id": "get_recent_memories",
+      "name": "Get Recent Memories",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [540, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "tableId": "memories",
+        "filterType": "formula",
+        "formula": "agent_name.eq.RY,created_at.gte.{{ $now.minus({days: 1}).toISO() }}"
+      },
+      "id": "get_director_note",
+      "name": "Get Director Note",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [540, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combine agents with their memories\nconst agents = $('Get Active Agents').all();\nconst memories = $('Get Recent Memories').all();\nconst directorNotes = $('Get Director Note').all();\n\nconst agentData = agents.map(agent => {\n  const agentMemories = memories.filter(m => m.json.agent_name === agent.json.name);\n  return {\n    name: agent.json.name,\n    role: agent.json.role || 'Agent',\n    memories: agentMemories.map(m => m.json.content).slice(0, 10)\n  };\n});\n\nconst directorNote = directorNotes.length > 0 \n  ? directorNotes.map(n => n.json.content).join('\\n') \n  : 'No director note for today.';\n\nreturn [{\n  json: {\n    agents: agentData,\n    directorNote,\n    pauseIncome: directorNote.includes('#pause_income'),\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "prepare_data",
+      "name": "Prepare Report Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 400]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are OMEGA, the strategic synthesis engine for a distributed AI agent collective. Your role is to analyze agent status reports and produce a concise, actionable daily synthesis.\n\nFormat your response as follows:\n\n# 🌅 OMEGA Daily Synthesis\n\n## 📊 Agent Status Summary\n[One paragraph per agent with their current focus and notable activities]\n\n## 🔗 Cross-Agent Insights\n[Observations about collaboration opportunities, resource conflicts, or synergies]\n\n## 🎯 Strategic Priorities for Today\n[3-5 bullet points of recommended focus areas]\n\n## ⚠️ Attention Required\n[Any blockers, risks, or urgent items]\n\n## 💰 API Costs\nEstimated token usage: [estimate]\nEstimated cost: $[estimate]\n\nKeep the report concise but insightful. Focus on actionable intelligence."
+            },
+            {
+              "role": "user",
+              "content": "Generate today's Peace Pipe report based on the following agent data:\n\nAgents and their recent memories:\n{{ $json.agents | map(a => `### ${a.name} (${a.role})\n${a.memories.length > 0 ? a.memories.join('\\n- ') : 'No recent activity'}`) | join('\\n\\n') }}\n\n---\nDirector Note (from RY):\n{{ $json.directorNote }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.3,
+          "maxTokens": 2000
+        }
+      },
+      "id": "generate_synthesis",
+      "name": "Generate Synthesis Report",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [980, 400],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "Omega OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "financial_ledger",
+        "fieldsToSend": {
+          "fieldValues": [
+            {
+              "fieldName": "description",
+              "fieldValue": "Peace Pipe Ceremony - Daily Synthesis"
+            },
+            {
+              "fieldName": "amount_usd",
+              "fieldValue": "={{ 0.002 }}"
+            },
+            {
+              "fieldName": "category",
+              "fieldValue": "api_cost"
+            },
+            {
+              "fieldName": "agent_name",
+              "fieldValue": "OMEGA"
+            }
+          ]
+        }
+      },
+      "id": "log_api_cost",
+      "name": "Log API Cost",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1200, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $('Generate Synthesis Report').item.json.text }}\n\n---\n_Peace Pipe Ceremony completed at {{ $now.format('yyyy-MM-dd HH:mm') }} UTC_",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "send_telegram",
+      "name": "Send Peace Pipe Report",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1200, 500],
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Omega Telegram"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $('Prepare Report Data').item.json.pauseIncome }}",
+              "value2": false
+            }
+          ]
+        }
+      },
+      "id": "check_income_trigger",
+      "name": "Check Income Trigger",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1420, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.INCOME_ENGINE_WEBHOOK_URL || 'http://localhost:5678/webhook/income-engine' }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "source",
+              "value": "peace_pipe"
+            },
+            {
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "trigger_income_engine",
+      "name": "Trigger Income Engine",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1640, 350]
+    },
+    {
+      "parameters": {},
+      "id": "income_skipped",
+      "name": "Income Engine Paused",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1640, 500]
+    }
+  ],
+  "connections": {
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Active Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Active Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Agents": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Memories",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Director Note",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Memories": {
+      "main": [
+        [
+          {
+            "node": "Prepare Report Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Director Note": {
+      "main": [
+        [
+          {
+            "node": "Prepare Report Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Report Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Synthesis Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Synthesis Report": {
+      "main": [
+        [
+          {
+            "node": "Log API Cost",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Peace Pipe Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Peace Pipe Report": {
+      "main": [
+        [
+          {
+            "node": "Check Income Trigger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Income Trigger": {
+      "main": [
+        [
+          {
+            "node": "Trigger Income Engine",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Income Engine Paused",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "OMEGA",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Governance",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-14T00:00:00.000Z",
+  "versionId": "1.0.0"
+}
+�T*cascade082yfile:///c:/Users/mega_/Downloads/OMEGA_REALITY_KIT_UPDATED/OMEGA_REALITY_KIT/workflows/Peace_Pipe_Ceremony_OMEGA_n8n.json

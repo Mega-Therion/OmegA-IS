@@ -1,0 +1,17 @@
+# Rust artifacts
+target/
+**/*.rs.bk
+
+# Sensitive Keys
+.omega_keys.env
+keys.env
+Documents/OMEGA-keys.txt
+
+# Local Config
+.omega_config.toml
+.omega_chat_history.txt
+.omega_vector_cache.db
+
+# OS Files
+.DS_Store
+Thumbs.db

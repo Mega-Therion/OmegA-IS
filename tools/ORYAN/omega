@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+"""
+OMEGA - Multi-Agent Orchestrator
+Connects Claude, Gemini, and Codex CLI agents for collaborative AI coding.
+
+Usage:
+    omega                     Start interactive chat mode
+    omega chat                Start interactive chat mode
+    omega chat -w <path>      Start in specific workspace
+    omega status              Show agent status (quick check)
+    omega --version           Show version
+    omega --help              Show help
+
+The gAIng Creed: Trust, but verify. Automate, but log. Move fast, but don't break things.
+"""
+import argparse
+import sys
+from pathlib import Path
+
+# Add lib to path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from lib.chat import main as chat_main, VERSION, Colors
+
+
+def print_quick_help():
+    """Print quick help for common usage."""
+    print(f"""
+{Colors.HEADER}{Colors.BOLD}OMEGA Multi-Agent Orchestrator v{VERSION}{Colors.RESET}
+{Colors.DIM}Connect Claude, Gemini, and Codex for collaborative coding{Colors.RESET}
+
+{Colors.BOLD}Quick Start:{Colors.RESET}
+  {Colors.PROMPT}omega{Colors.RESET}                    Start interactive mode
+  {Colors.PROMPT}omega chat{Colors.RESET}               Same as above
+  {Colors.PROMPT}omega chat -w ~/myproject{Colors.RESET} Start in specific directory
+
+{Colors.BOLD}In Chat Mode:{Colors.RESET}
+  Type messages to talk to the current agent
+  {Colors.PROMPT}/claude{Colors.RESET}, {Colors.PROMPT}/gemini{Colors.RESET}, {Colors.PROMPT}/codex{Colors.RESET}  Switch agents
+  {Colors.PROMPT}/forward{Colors.RESET} or {Colors.PROMPT}/f{Colors.RESET}           Forward last response to next agent
+  {Colors.PROMPT}/interactive{Colors.RESET} or {Colors.PROMPT}/i{Colors.RESET}       Attach to agent's CLI directly
+  {Colors.PROMPT}/status{Colors.RESET}                   See all agents' status
+  {Colors.PROMPT}/help{Colors.RESET}                     Full command list
+  {Colors.PROMPT}/exit{Colors.RESET}                     Quit
+
+{Colors.BOLD}Example Workflow:{Colors.RESET}
+  1. Ask Claude for a code suggestion
+  2. {Colors.PROMPT}/forward gemini{Colors.RESET} - Send Claude's response to Gemini for review
+  3. {Colors.PROMPT}/forward codex{Colors.RESET} - Send Gemini's feedback to Codex to implement
+
+{Colors.DIM}Part of the OMEGA Collective Intelligence Platform{Colors.RESET}
+""")
+
+
+def cmd_chat(args) -> int:
+    """Start interactive chat mode."""
+    workspace = args.workspace if args.workspace else None
+    return chat_main(workspace)
+
+
+def cmd_status(args) -> int:
+    """Quick status check."""
+    from lib.session import SessionManager
+    manager = SessionManager()
+
+    print(f"\n{Colors.HEADER}{Colors.BOLD}OMEGA Quick Status{Colors.RESET}")
+    print(f"{Colors.DIM}{'─' * 40}{Colors.RESET}")
+
+    # Check if each CLI is available
+    import shutil
+    for agent in ['claude', 'gemini', 'codex']:
+        available = shutil.which(agent) is not None
+        status = f"{Colors.SUCCESS}available{Colors.RESET}" if available else f"{Colors.ERROR}not found{Colors.RESET}"
+        color = Colors.SUCCESS if available else Colors.DIM
+        print(f"  {color}{agent.upper():8}{Colors.RESET} : {status}")
+
+    print(f"{Colors.DIM}{'─' * 40}{Colors.RESET}")
+    print(f"\n{Colors.INFO}Run 'omega' or 'omega chat' to start interactive mode.{Colors.RESET}\n")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="omega",
+        description="OMEGA Multi-Agent Orchestrator - Connect Claude, Gemini, and Codex",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  omega                     Start interactive chat (default)
+  omega chat -w ~/project   Chat in specific workspace
+  omega status              Check which agents are available
+
+The gAIng Creed: Trust, but verify. Automate, but log.
+        """
+    )
+    parser.add_argument(
+        "--version", "-v",
+        action="version",
+        version=f"OMEGA v{VERSION}"
+    )
+
+    subparsers = parser.add_subparsers(dest="command")
+
+    # Chat command (default)
+    chat_parser = subparsers.add_parser(
+        "chat",
+        help="Start interactive multi-agent chat mode"
+    )
+    chat_parser.add_argument(
+        "-w", "--workspace",
+        help="Working directory for agents",
+        default=None
+    )
+    chat_parser.set_defaults(func=cmd_chat)
+
+    # Status command
+    status_parser = subparsers.add_parser(
+        "status",
+        help="Check which agents are available"
+    )
+    status_parser.set_defaults(func=cmd_status)
+
+    return parser
+
+
+def main(argv=None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    # Default to chat if no command given
+    if not args.command:
+        # Create a namespace with chat defaults
+        args.workspace = None
+        args.func = cmd_chat
+
+    if not hasattr(args, 'func'):
+        print_quick_help()
+        return 0
+
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

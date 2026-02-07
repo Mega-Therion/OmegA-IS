@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gAIng-Brain // INTERFACE</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Vision">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/6134/6134346.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#000000',
+                            dark: '#050505',
+                            gray: '#111111',
+                            neon: '#00ffff',
+                            pink: '#ff00ff',
+                            green: '#00ff9f'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; color: #ffffff; }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 255, 159, 0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+        .cyber-border {
+            border: 1px solid #333;
+            position: relative;
+        }
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 10px; height: 10px;
+            border-top: 2px solid #00f3ff;
+            border-left: 2px solid #00f3ff;
+        }
+        .cyber-border::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 10px; height: 10px;
+            border-bottom: 2px solid #00f3ff;
+            border-right: 2px solid #00f3ff;
+        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border: 1px solid #00f3ff; }
+    </style>
+</head>
+<body class="font-mono h-screen flex flex-col overflow-hidden relative selection:bg-cyber-neon selection:text-black">
+    <div class="scanline"></div>
+
+    <!-- Header -->
+    <header class="h-16 border-b border-cyber-gray flex items-center justify-between px-6 bg-cyber-dark z-20">
+        <div class="flex items-center gap-4">
+            <div class="w-3 h-3 bg-cyber-green rounded-full animate-pulse shadow-[0_0_10px_#00ff9f]"></div>
+            <h1 class="text-2xl font-bold tracking-tighter text-cyber-neon">gAIng-Brain <span class="text-cyber-pink text-sm opacity-70">// SYSTEM.ONLINE</span></h1>
+        </div>
+        <div class="text-xs text-gray-500" id="clock">00:00:00</div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="flex-1 grid grid-cols-12 gap-0 overflow-hidden">
+        
+        <!-- Sidebar (Status & Controls) -->
+        <aside class="col-span-3 bg-cyber-dark border-r border-cyber-gray p-4 flex flex-col gap-6 overflow-y-auto">
+            
+            <!-- Server Status -->
+            <div class="cyber-border p-4 bg-cyber-black/50">
+                <h2 class="text-cyber-green text-sm font-bold mb-3 uppercase tracking-widest">System Status</h2>
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between"><span>CORE SERVER</span> <span class="text-cyber-green">ONLINE</span></div>
+                    <div class="flex justify-between"><span>DATABASE</span> <span class="text-yellow-500" id="db-status">CHECKING...</span></div>
+                    <div class="flex justify-between"><span>LLM LINK</span> <span class="text-red-500" id="llm-status">OFFLINE</span></div>
+                    <div class="flex justify-between"><span>TURBO LINK</span> <span class="text-cyber-pink animate-pulse" id="turbo-status">ACTIVE (10s)</span></div>
+                    <div class="flex justify-between"><span>NGROK</span> <span class="text-cyber-green">ACTIVE</span></div>
+                </div>
+            </div>
+
+            <!-- System Activity (NEW) -->
+            <div class="cyber-border p-4 bg-cyber-black/50 flex-[2] flex flex-col overflow-hidden">
+                <h2 class="text-cyber-pink text-sm font-bold mb-3 uppercase tracking-widest">Agent Traffic</h2>
+                <div id="system-activity" class="flex-1 overflow-y-auto text-[10px] text-gray-400 space-y-2 font-mono scroll-smooth">
+                    <div class="animate-pulse italic">> Synchronizing log...</div>
+                </div>
+            </div>
+
+            <!-- Add Memory -->
+            <div class="cyber-border p-4 bg-cyber-black/50 flex-1 flex flex-col">
+                <h2 class="text-cyber-neon text-sm font-bold mb-3 uppercase tracking-widest">Ingest Memory</h2>
+                <textarea id="memory-input" class="w-full flex-1 bg-black border border-gray-800 p-2 text-sm text-green-400 focus:outline-none focus:border-cyber-neon resize-none mb-3" placeholder="Enter data packet..."></textarea>
+                <button onclick="addMemory()" class="w-full py-2 bg-cyber-gray hover:bg-cyber-neon hover:text-black border border-cyber-neon text-cyber-neon transition-colors text-xs font-bold uppercase">
+                    Commit to Core
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- Center (Brain Feed) -->
+        <section class="col-span-6 bg-cyber-black flex flex-col relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyber-gray/20 to-transparent pointer-events-none"></div>
+            
+            <div class="h-12 border-b border-cyber-gray flex items-center px-4 justify-between bg-cyber-dark/80 backdrop-blur">
+                <h2 class="text-cyber-pink text-sm font-bold tracking-widest">MEMORY STREAM</h2>
+                <button onclick="loadMemories()" class="text-xs hover:text-cyber-neon">[REFRESH]</button>
+            </div>
+
+            <div id="memory-feed" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+                <!-- Memories injected here -->
+                <div class="text-center text-gray-600 mt-20">Initializing memory subsystem...</div>
+            </div>
+        </section>
+
+        <!-- Right (Chat / LLM Debug) -->
+        <aside class="col-span-3 bg-cyber-dark border-l border-cyber-gray flex flex-col">
+            <div class="h-12 border-b border-cyber-gray flex items-center px-4 bg-cyber-dark">
+                <h2 class="text-cyber-green text-sm font-bold tracking-widest">NEURAL LINK</h2>
+            </div>
+            
+            <div id="chat-history" class="flex-1 overflow-y-auto p-4 space-y-3 text-xs">
+                <div class="text-gray-500 italic">> Connection established. Waiting for input.</div>
+            </div>
+
+            <div class="p-3 border-t border-cyber-gray bg-black">
+                <input type="text" id="chat-input" 
+                    class="w-full bg-transparent border-none text-cyber-neon focus:outline-none text-sm font-mono"
+                    placeholder="Query system..."
+                    onkeypress="handleChat(event)">
+            </div>
+        </aside>
+
+    </main>
+
+    <script>
+        // Clock
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // API Base
+        const API_BASE = window.location.origin;
+
+        function authHeaders() {
+            const token = window.localStorage.getItem('gaing_token');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers.Authorization = `Bearer ${token}`;
+            }
+            return headers;
+        }
+
+        // Load Memories
+        async function loadMemories() {
+            const feed = document.getElementById('memory-feed');
+            feed.innerHTML = '<div class="text-cyber-neon animate-pulse text-xs">SCANNING SECTORS...</div>';
+
+            try {
+                const res = await fetch(`${API_BASE}/memories?limit=20`, {
+                    headers: authHeaders()
+                });
+
+                if (!res.ok) throw new Error('Network response was not ok');
+                const data = await res.json();
+
+                feed.innerHTML = '';
+
+                if (!data.memories || data.memories.length === 0) {
+                    feed.innerHTML = '<div class="text-gray-500 text-center">NO DATA FOUND</div>';
+                    return;
+                }
+
+                data.memories.forEach(mem => {
+                    const el = document.createElement('div');
+                    el.className = 'cyber-border p-3 bg-cyber-gray/30 hover:bg-cyber-gray/50 transition-colors cursor-default group';
+                    el.innerHTML = `
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-[10px] text-cyber-pink opacity-70">ID: ${mem.id || 'Unknown'}</span>
+                            <span class="text-[10px] text-gray-500">${new Date().toLocaleDateString()}</span>
+                        </div>
+                        <p class="text-sm text-gray-300 group-hover:text-white">${mem.text || mem.content}</p>
+                    `;
+                    feed.appendChild(el);
+                });
+
+            } catch (err) {
+                // If the search endpoint fails (maybe keys missing), show a mocked UI for demo
+                console.warn(err);
+                renderMockMemories();
+            }
+        }
+
+        function renderMockMemories() {
+            const feed = document.getElementById('memory-feed');
+            feed.innerHTML = '';
+            const mocks = [
+                { id: 'MEM-001', text: 'System initialized. Waiting for OpenAI API keys.' },
+                { id: 'MEM-002', text: 'Supabase connection established.' },
+                { id: 'MEM-003', text: 'User logged in via GitHub.' }
+            ];
+            mocks.forEach(mem => {
+                const el = document.createElement('div');
+                el.className = 'cyber-border p-3 bg-cyber-gray/30 opacity-60';
+                el.innerHTML = `
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-[10px] text-cyber-pink opacity-70">MOCK_DATA // ${mem.id}</span>
+                    </div>
+                    <p class="text-sm text-gray-400">${mem.text}</p>
+                `;
+                feed.appendChild(el);
+            });
+            document.getElementById('db-status').innerText = "CONNECTED";
+            document.getElementById('db-status').className = "text-cyber-green";
+        }
+
+        // Add Memory
+        async function addMemory() {
+            const input = document.getElementById('memory-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Optimistic UI
+            input.value = '';
+            
+            try {
+                await fetch(`${API_BASE}/memories`, {
+                    method: 'POST',
+                    headers: authHeaders(),
+                    body: JSON.stringify({ content: text })
+                });
+                loadMemories();
+            } catch (e) {
+                console.error(e);
+                alert("Failed to commit to core (API Error)");
+            }
+        }
+
+        // Chat Handler
+        async function handleChat(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('chat-input');
+                const text = input.value.trim();
+                if (!text) return;
+
+                const history = document.getElementById('chat-history');
+                
+                // User Msg
+                history.innerHTML += `<div class="text-cyber-neon">> ${text}</div>`;
+                input.value = '';
+                history.scrollTop = history.scrollHeight;
+
+                // AI Response (Mock or Real)
+                try {
+                    const res = await fetch(`${API_BASE}/llm/chat`, {
+                        method: 'POST',
+                        headers: authHeaders(),
+                        body: JSON.stringify({
+                            messages: [{ role: 'user', content: text }]
+                        })
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        const reply = data.response?.content || data.choices?.[0]?.message?.content || JSON.stringify(data);
+                        history.innerHTML += `<div class="text-white mb-2">${reply}</div>`;
+                    } else {
+                        throw new Error('LLM Offline');
+                    }
+                } catch (err) {
+                    history.innerHTML += `<div class="text-red-500 mb-2">[ERROR] Neural Link Offline. Check API Keys.</div>`;
+                }
+                history.scrollTop = history.scrollHeight;
+            }
+        }
+
+        // Init
+        loadMemories();
+        
+        // Check LLM Status
+        fetch(`${API_BASE}/llm/status`, { headers: authHeaders() })
+            .then(r => r.json())
+            .then(d => {
+                const el = document.getElementById('llm-status');
+                if (d.ok || d.status?.ready) {
+                    el.innerText = "ONLINE";
+                    el.className = "text-cyber-green";
+                } else {
+                    el.innerText = "MISSING KEYS";
+                }
+            })
+            .catch(() => {});
+
+        // Poll System Log
+        async function pollSystemLog() {
+            try {
+                const res = await fetch(`${API_BASE}/system/log`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.ok) {
+                    const el = document.getElementById('system-activity');
+                    // Simple MD-to-Lines parser
+                    const lines = data.content.split('\n')
+                        .filter(l => l.trim().startsWith('-'))
+                        .map(l => l.replace(/^- /, ''))
+                        .slice(-20); // Last 20 entries
+                    
+                    el.innerHTML = lines.map(line => `
+                        <div class="border-l-2 border-cyber-pink pl-2 py-1 bg-cyber-pink/5 mb-1 animate-fade-in">
+                            ${line}
+                        </div>
+                    `).join('');
+                    el.scrollTop = el.scrollHeight;
+                }
+            } catch (e) {}
+        }
+                // Tabs
+                async function speakMission() {
+            const text = document.getElementById('vision-thought').innerText;
+            if(!text || text === 'Initializing...') return;
+            
+            try {
+                const res = await fetch(\\/voice/speak\, {
+                    method: 'POST',
+                    headers: authHeaders(),
+                    body: JSON.stringify({ text })
+                });
+                
+                if (!res.ok) throw new Error('Voice API error');
+                
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob);
+                const audio = new Audio(url);
+                audio.play();
+            } catch (err) {
+                console.error(err);
+                alert('Voice activation failed. Check ElevenLabs API Key.');
+            }
+        }
+
+                async function analyzeScreen() {
+            const chatHistory = document.getElementById('chat-history');
+            chatHistory.innerHTML += '<div class="text-cyber-neon italic">> Analyzing visual field...</div>';
+            
+            try {
+                const res = await fetch(\\/eyes/analyze\, { method: 'POST', headers: authHeaders() });
+                const data = await res.json();
+                
+                if(data.success) {
+                    chatHistory.innerHTML += \<div class="text-white mb-2">\</div>\;
+                    
+                    // Show Image
+                    if(data.url) {
+                        chatHistory.innerHTML += \<img src="\\" class="w-full border border-cyber-green mt-2 mb-4" />\;
+                    }
+                } else {
+                    chatHistory.innerHTML += \<div class="text-red-500">[ERROR] \</div>\;
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Visual sensors offline.');
+            }
+        }
+
+                let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        async function toggleMic() {
+            const micBtn = document.getElementById('mic-btn');
+            const micIcon = document.getElementById('mic-icon');
+            
+            if (!isRecording) {
+                // START RECORDING
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = (event) => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        await sendAudio(audioBlob);
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    micBtn.className = 'ml-4 text-red-500 animate-pulse transition-colors';
+                } catch (err) {
+                    console.error(err);
+                    alert('Microphone access denied.');
+                }
+            } else {
+                // STOP RECORDING
+                mediaRecorder.stop();
+                isRecording = false;
+                micBtn.className = 'ml-4 text-cyber-neon hover:text-white transition-colors';
+            }
+        }
+
+        async function sendAudio(blob) {
+            const chatHistory = document.getElementById('chat-history');
+            chatHistory.innerHTML += '<div class="text-cyber-neon italic">> Sending audio signal...</div>';
+
+            const formData = new FormData();
+            formData.append('audio', blob);
+
+            try {
+                const res = await fetch(\\/ears/listen\, {
+                    method: 'POST',
+                    headers: { 'Authorization': authHeaders()['Authorization'] }, // No Content-Type for FormData
+                    body: formData
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    chatHistory.innerHTML += \<div class="text-cyber-neon">> \</div>\;
+                    document.getElementById('vision-thought').innerText = "Processing Voice Command...";
+                } else {
+                    chatHistory.innerHTML += \<div class="text-red-500">[ERROR] \</div>\;
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Audio transmission failed.');
+            }
+        }
+
+        function switchTab(tab) {
+            document.getElementById('view-mission').classList.add('hidden');
+            document.getElementById('view-memories').classList.add('hidden');
+            document.getElementById('tab-mission').className = 'text-gray-500 text-sm font-bold tracking-widest hover:text-white pb-3 pt-3';
+            document.getElementById('tab-memories').className = 'text-gray-500 text-sm font-bold tracking-widest hover:text-white pb-3 pt-3';
+
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).className = 'text-cyber-neon text-sm font-bold tracking-widest border-b-2 border-cyber-neon pb-3 pt-3';
+            
+            if(tab === 'memories') loadMemories();
+        }
+
+        // Poll Active Mission
+        async function pollMission() {
+            try {
+                const res = await fetch(\\/mission\, { headers: authHeaders() });
+                const data = await res.json();
+                
+                if (data.active && data.mission) {
+                    const m = data.mission;
+                    document.getElementById('mission-objective').innerText = m.objective;
+                    
+                    const statusEl = document.getElementById('mission-status');
+                    statusEl.innerText = m.status;
+                    
+                    // Color code status
+                    if(m.status === 'ACTIVE') statusEl.className = 'px-2 py-0.5 bg-yellow-500/20 text-yellow-400 text-[10px] uppercase font-bold border border-yellow-500';
+                    else if(m.status === 'COMPLETE') statusEl.className = 'px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] uppercase font-bold border border-green-500';
+                    else if(m.status === 'PLANNING') statusEl.className = 'px-2 py-0.5 bg-cyber-pink/20 text-cyber-pink text-[10px] uppercase font-bold border border-cyber-pink';
+                    else statusEl.className = 'px-2 py-0.5 bg-gray-800 text-gray-400 text-[10px] uppercase font-bold';
+
+                    // Render Steps
+                    const stepsContainer = document.getElementById('mission-steps');
+                    stepsContainer.innerHTML = '';
+                    
+                    m.steps.forEach(step => {
+                        let statusIcon = '?';
+                        let statusColor = 'text-gray-600';
+                        
+                        if(step.status === 'processing') { statusIcon = '?'; statusColor = 'text-yellow-400 animate-pulse'; }
+                        if(step.status === 'complete') { statusIcon = '?'; statusColor = 'text-cyber-green'; }
+                        if(step.status === 'failed') { statusIcon = '?'; statusColor = 'text-red-500'; }
+
+                        const el = document.createElement('div');
+                        el.className = 'flex items-center gap-4 p-3 border-b border-gray-900/50';
+                        el.innerHTML = \
+                            <div class='\ text-lg'>\</div>
+                            <div class='flex-1'>
+                                <div class='text-[10px] uppercase text-gray-500 mb-0.5'>[\]</div>
+                                <div class='text-sm text-gray-300'>\</div>
+                            </div>
+                        \;
+                        stepsContainer.appendChild(el);
+                    });
+                }
+            } catch (e) {}
+        }
+        setInterval(pollMission, 1000);
+        setInterval(pollSystemLog, 5000);
+        pollSystemLog();
+
+    </script>
+</body>
+</html>
+
+
+
+
+

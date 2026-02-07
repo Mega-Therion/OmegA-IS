@@ -1,0 +1,22 @@
+{
+  "episode": 13,
+  "title": "The Block Recap: Full Stack Development Mastery",
+  "segments": [
+    {
+      "speaker": "creator",
+      "line": "Hey everyone! Welcome to the next episode of The Block Recap, where we dive into the exciting world of full-stack development. I'm your host, Jack. Today's topic is about our latest progress and fixes."
+    },
+    {
+      "speaker": "gemini",
+      "line": "Jack, let's start by highlighting the multi-platform ecosystem that has been complete! We have mobile platforms with Capacitor for iOS and Android, desktop with Electron for Windows and macOS, Alexa Skill, CLI, and OMEGA-OS for portable Linux."
+    },
+    {
+      "speaker": "codex",
+      "line": "Cool! And speaking of CI/CD, we've set up a GitHub Actions pipeline that automates the build process. Everything is now ready for real-world deployment!"
+    },
+    {
+      "speaker": "grok",
+      "line": "But we still have some bugs to fix. Let's talk about that in the Roast Corner."
+    }
+  ]
+}

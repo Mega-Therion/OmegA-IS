@@ -1,0 +1,76 @@
+[package]
+name = "omega_rust"
+version = "0.1.0"
+edition = "2021"
+authors = ["OmegaBrain Inc."]
+description = "ΩmegA multi-agent orchestrator with a beautiful terminal UI"
+license = "MIT"
+
+[features]
+# The default build is the private operator edition with TUI enabled.
+default = ["operator", "tui"]
+
+# Operator edition exposes all local capabilities.
+operator = []
+
+# Development edition adds inspector panes, metrics and debug views.
+dev = []
+
+# Public edition compiles a stripped-down persona only chat.
+public = []
+
+# Turn on the terminal UI. This pulls in ratatui and crossterm.
+tui = ["ratatui", "crossterm"]
+
+[dependencies]
+# Asynchronous runtime
+tokio = { version = "1", features = ["full"] }
+
+# HTTP client for communicating with Ollama
+reqwest = { version = "0.11", features = ["json", "stream"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Error handling
+anyhow = "1.0"
+async-trait = "0.1"
+
+# Command line argument parsing
+clap = { version = "4.5", features = ["derive"] }
+
+# Colourful terminal output for the fallback CLI
+colored = "2.1"
+
+# Line editor used for the non-TUI fallback mode
+rustyline = "14.0"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Random numbers for diagnostics
+rand = "0.8"
+
+# Progress bars and spinners (still used in non-TUI mode)
+indicatif = "0.17"
+
+# Futures and async utilities
+futures = "0.3"
+
+# Web Server dependencies
+actix-web = "4.5"
+actix-cors = "0.7"
+
+# WASM Runtime for Sandboxed Skills
+wasmtime = "16.0"
+
+# OpenAPI Specification
+utoipa = { version = "4.2", features = ["actix_extras"] }
+utoipa-swagger-ui = { version = "6.0", features = ["actix-web"] }
+
+# TUI dependencies - only compiled when the `tui` feature is enabled
+ratatui = { version = "0.28", optional = true }
+crossterm = { version = "0.28", features = ["event-stream"], optional = true }
+tokio-util = { version = "0.7" }

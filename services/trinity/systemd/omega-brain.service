@@ -1,0 +1,32 @@
+[Unit]
+Description=OMEGA Brain (Node)
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/mega/NEXUS/repos/OMEGA-Trinity/packages/brain
+EnvironmentFile=/home/mega/NEXUS/repos/OMEGA-Trinity/.env
+Environment=HOST=127.0.0.1
+Environment=PORT=8080
+Environment=AGENT_NAME=brain
+Environment=AGENT_LOG=/var/log/omega/brain.log
+Environment=AGENT_CWD=/home/mega/NEXUS/repos/OMEGA-Trinity/packages/brain
+Environment=LLM_PROVIDER=openai
+Environment=OPENAI_BASE_URL=http://localhost:11434/v1
+Environment=OPENAI_API_KEY=ollama
+Environment=OPENAI_MODEL=llama3.1
+Environment=GAING_SHARED_TOKEN=local
+Environment=OMEGA_INTERNAL_TOKEN=local
+Environment=TELEGRAM_AUTOSTART=0
+ExecStartPre=/usr/bin/env mkdir -p /var/log/omega
+ExecStartPre=/usr/bin/env bash -lc 'touch ${AGENT_LOG} && chmod 644 ${AGENT_LOG}'
+ExecStart=/usr/bin/env npm start
+ExecStartPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh register ${AGENT_NAME} $MAINPID ${AGENT_CWD} ${AGENT_LOG}'
+ExecStopPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh stopped ${AGENT_NAME}'
+StandardOutput=append:/var/log/omega/brain.log
+StandardError=append:/var/log/omega/brain.log
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

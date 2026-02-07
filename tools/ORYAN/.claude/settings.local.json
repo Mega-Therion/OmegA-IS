@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./oryan run:*)",
+      "Bash(./oryan task:*)",
+      "Bash(codex exec:*)",
+      "Bash(gemini --prompt \"Read the file /home/mega/ORYAN/TELOS.md and execute the instructions contained within. Append your results to /home/mega/ORYAN/ERGON.md with a clear agent label.\")",
+      "Bash(gemini --help:*)",
+      "Bash(pkill -f \"gemini --prompt\")",
+      "Bash(gemini:*)",
+      "Bash(done)"
+    ]
+  }
+}

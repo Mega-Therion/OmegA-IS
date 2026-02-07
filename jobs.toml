@@ -1,0 +1,43 @@
+# ΩmegΑ Sovereign Intelligence - Daily Jobs Manifest
+# Period: Daily (24h cycles)
+# Core Directive: Preserve Sovereignty, Extract Value, Maintain Continuity.
+
+[metadata]
+version = "1.0.0"
+origin = "Mount Ida, Arkansas"
+last_dna_sync = "2026-01-31"
+
+[[jobs]]
+id = "JOB-001"
+name = "Precinct Integrity Audit"
+priority = "CRITICAL"
+description = "Check local node health, Ollama service status, and verify that the 'agy' symlink and secure boundaries are intact."
+agents = ["Zeta", "Xi"] # Guardian & Cipher
+
+[[jobs]]
+id = "JOB-002"
+name = "Wet Palette Synthesis"
+priority = "HIGH"
+description = "Process the day's raw interactions. Move transient 'Wet Palette' data into the OxySpine semantic layer. Prune redundant context."
+agents = ["Lambda", "Mu"] # Librarian & Synth
+
+[[jobs]]
+id = "JOB-003"
+name = "The Heist Watch"
+priority = "MEDIUM"
+description = "Perform a 'Tactical Reconnaissance' sweep. Scan for new anomalies in critical mineral patents, nuclear energy benchmarks, and legal precedents."
+agents = ["Iota", "Theta"] # Scout & Strategist
+
+[[jobs]]
+id = "JOB-004"
+name = "Genetic Drift Correction"
+priority = "CRITICAL"
+description = "Verify agent alignment with dna.rs. Re-inject the DeepSeek Challenge (2025-12-31) into the operational prompt buffer."
+agents = ["Alpha", "Omega"] # Vanguard & Sovereign
+
+[[jobs]]
+id = "JOB-005"
+name = "Sovereign Asset Report"
+priority = "HIGH"
+description = "Synthesize a high-level summary of all data, code, and IP generated across the precinct in the last 24 hours. Verify that all assets are secured within the local stack."
+agents = ["Pi", "Phi"] # Cartographer & Mathematician

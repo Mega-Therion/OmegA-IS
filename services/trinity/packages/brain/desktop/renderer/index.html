@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src *;">
+  <title>OMEGA Brain</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #13131a;
+      --bg-tertiary: #1c1c27;
+      --accent-primary: #00d4ff;
+      --accent-secondary: #7c3aed;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Title Bar */
+    .titlebar {
+      -webkit-app-region: drag;
+      height: 32px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .titlebar-title {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .titlebar-title::before {
+      content: '🧠';
+    }
+    
+    /* Main Container */
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .header h1 {
+      font-size: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    /* Status Bar */
+    .status-bar {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse 2s infinite;
+    }
+    
+    .status-indicator.offline {
+      background: #ef4444;
+      animation: none;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    /* Chat Area */
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+    
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .message.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    
+    .message.ai {
+      align-self: flex-start;
+      background: var(--bg-tertiary);
+      border-bottom-left-radius: 4px;
+    }
+    
+    .message .agent-name {
+      font-size: 11px;
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Input Area */
+    .input-area {
+      display: flex;
+      gap: 8px;
+      padding: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+    }
+    
+    .input-area input:focus {
+      border-color: var(--accent-primary);
+    }
+    
+    .input-area button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border: none;
+      border-radius: 24px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    
+    .input-area button:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+    
+    .input-area button:active {
+      transform: scale(0.98);
+    }
+    
+    /* Agent Selector */
+    .agent-selector {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .agent-btn {
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .agent-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .agent-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: white;
+    }
+    
+    /* Welcome Message */
+    .welcome {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 48px;
+    }
+    
+    .welcome h2 {
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    
+    .shortcuts {
+      margin-top: 24px;
+      font-size: 12px;
+    }
+    
+    .shortcuts kbd {
+      background: var(--bg-tertiary);
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin: 0 4px;
+    }
+
+    .omega-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .omega-controls select,
+    .omega-controls input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px 10px;
+      color: var(--text-primary);
+      font-size: 11px;
+      outline: none;
+    }
+
+    .omega-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .agent-buttons {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="titlebar">
+    <span class="titlebar-title">OMEGA Brain Desktop</span>
+  </div>
+  
+  <div class="container">
+    <div class="header">
+      <h1>OMEGA Brain</h1>
+      <p>Your AI Collective at Your Fingertips</p>
+    </div>
+    
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="status-indicator" id="server-status"></span>
+        <span id="server-text">Connecting...</span>
+      </div>
+      <div class="status-item">
+        <span id="agent-status">Agent: Gemini</span>
+      </div>
+    </div>
+    
+    <div class="chat-container">
+      <div class="agent-selector">
+
+      <div class="omega-controls">
+        <label class="omega-toggle"><input type="checkbox" id="omega-mode"> OmegA</label>
+        <label class="omega-toggle"><input type="checkbox" id="omega-speak"> Speak</label>
+        <select id="omega-provider">
+          <option value="elevenlabs">ElevenLabs</option>
+          <option value="openai">OpenAI</option>
+        </select>
+        <input id="omega-voice" type="text" placeholder="Voice ID/Name" />
+      </div>
+
+      <div class="agent-buttons">
+        <button class="agent-btn active" data-agent="gemini">?? Gemini</button>
+        <button class="agent-btn" data-agent="claude">?? Claude</button>
+        <button class="agent-btn" data-agent="codex">?? Codex</button>
+        <button class="agent-btn" data-agent="grok">?? Grok</button>
+      </div>
+    </div>
+      
+      <div class="messages" id="messages">
+        <div class="welcome">
+          <h2>Welcome to OMEGA Brain</h2>
+          <p>Start a conversation with your AI collective.</p>
+          <div class="shortcuts">
+            <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd> Focus window</p>
+            <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Space</kbd> Quick chat</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="input-area">
+        <input type="text" id="input" placeholder="Ask anything..." autofocus>
+        <button id="send">Send</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // State
+    let currentAgent = 'gemini';
+    const messages = document.getElementById('messages');
+    const input = document.getElementById('input');
+    const sendBtn = document.getElementById('send');
+    const serverStatus = document.getElementById('server-status');
+    const serverText = document.getElementById('server-text');
+    const agentStatus = document.getElementById('agent-status');
+    const omegaModeToggle = document.getElementById('omega-mode');
+    const omegaSpeakToggle = document.getElementById('omega-speak');
+    const omegaProviderSelect = document.getElementById('omega-provider');
+    const omegaVoiceInput = document.getElementById('omega-voice');
+
+    let omegaMode = false;
+    let omegaSpeak = false;
+    let omegaProvider = 'elevenlabs';
+    let omegaVoice = '';
+    
+    // Omega controls
+    const storedSettings = window.localStorage.getItem('omegaDesktopSettings');
+    if (storedSettings) {
+      try {
+        const parsed = JSON.parse(storedSettings);
+        omegaMode = Boolean(parsed.omegaMode);
+        omegaSpeak = Boolean(parsed.omegaSpeak);
+        omegaProvider = typeof parsed.omegaProvider === 'string' ? parsed.omegaProvider : 'elevenlabs';
+        omegaVoice = typeof parsed.omegaVoice === 'string' ? parsed.omegaVoice : '';
+      } catch (e) {}
+    }
+
+    omegaModeToggle.checked = omegaMode;
+    omegaSpeakToggle.checked = omegaSpeak;
+    omegaProviderSelect.value = omegaProvider;
+    omegaVoiceInput.value = omegaVoice;
+    agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+
+    const persistOmegaSettings = () => {
+      window.localStorage.setItem('omegaDesktopSettings', JSON.stringify({
+        omegaMode,
+        omegaSpeak,
+        omegaProvider,
+        omegaVoice
+      }));
+    };
+
+    omegaModeToggle.addEventListener('change', () => {
+      omegaMode = omegaModeToggle.checked;
+      agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+      persistOmegaSettings();
+    });
+
+    omegaSpeakToggle.addEventListener('change', () => {
+      omegaSpeak = omegaSpeakToggle.checked;
+      persistOmegaSettings();
+    });
+
+    omegaProviderSelect.addEventListener('change', () => {
+      omegaProvider = omegaProviderSelect.value;
+      persistOmegaSettings();
+    });
+
+    omegaVoiceInput.addEventListener('input', () => {
+      omegaVoice = omegaVoiceInput.value;
+      persistOmegaSettings();
+    });
+
+    // Agent buttons
+    document.querySelectorAll('.agent-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentAgent = btn.dataset.agent;
+        agentStatus.textContent = omegaMode ? 'Agent: OmegA' : `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+      });
+    });
+    
+    // Send message
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      
+      // Clear welcome
+      const welcome = messages.querySelector('.welcome');
+      if (welcome) welcome.remove();
+      
+      // Add user message
+      addMessage(text, 'user');
+      input.value = '';
+      
+      try {
+        const response = await window.omega.chat(text, currentAgent, { useOmega: omegaMode });
+        const reply = response?.response?.content || response?.choices?.[0]?.message?.content || response?.reply || 'No response received';
+        addMessage(reply, 'ai', omegaMode ? 'omega' : currentAgent);
+        if (omegaMode && omegaSpeak && reply) {
+          const speakResponse = await window.omega.speak(reply, {
+            provider: omegaProvider,
+            voiceId: omegaProvider === 'elevenlabs' ? omegaVoice : undefined,
+            voice: omegaProvider === 'openai' ? omegaVoice : undefined
+          });
+          if (speakResponse?.audioBase64) {
+            const audio = new Audio(`data:${speakResponse.audioContentType || 'audio/mpeg'};base64,${speakResponse.audioBase64}`);
+            audio.play();
+          }
+        }
+      } catch (error) {
+        addMessage('Error: Could not connect to server', 'ai', 'system');
+      }
+    }
+    
+    function addMessage(text, type, agent = null) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      
+      if (agent && type === 'ai') {
+        const agentName = document.createElement('div');
+        agentName.className = 'agent-name';
+        agentName.textContent = agent;
+        div.appendChild(agentName);
+      }
+      
+      const content = document.createElement('div');
+      content.textContent = text;
+      div.appendChild(content);
+      
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+    
+    // Event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    
+    // Check status
+    async function checkStatus() {
+      try {
+        await window.omega.getStatus();
+        serverStatus.classList.remove('offline');
+        serverText.textContent = 'Connected';
+      } catch {
+        serverStatus.classList.add('offline');
+        serverText.textContent = 'Offline';
+      }
+    }
+    
+    // Initial status check and periodic refresh
+    checkStatus();
+    setInterval(checkStatus, 30000);
+    
+    // Listen for events from main process
+    window.addEventListener('omega:quick-chat', (e) => {
+      currentAgent = e.detail.agent;
+      document.querySelectorAll('.agent-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.agent === currentAgent);
+      });
+      agentStatus.textContent = `Agent: ${currentAgent.charAt(0).toUpperCase() + currentAgent.slice(1)}`;
+      input.focus();
+    });
+  </script>
+</body>
+</html>
+
+
+

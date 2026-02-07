@@ -1,0 +1,275 @@
+{
+  "balanced_usd": 311342.07,
+  "transactions": [
+    {
+      "id": "1768600655348",
+      "timestamp": "2026-01-16T21:57:35.348Z",
+      "agent": "claude",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768603050429",
+      "timestamp": "2026-01-16T22:37:30.431Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768610012387",
+      "timestamp": "2026-01-17T00:33:32.387Z",
+      "agent": "TestAgent_Gemini",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking offering up to 124% APR from fixed reward pool, transitioning to post-listing up to 100% APR based on lock duration. Next price increase to $0.0439 imminent with $0.14 listing.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768611719774",
+      "timestamp": "2026-01-17T01:01:59.774Z",
+      "agent": "perplexity",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768612917269",
+      "timestamp": "2026-01-17T01:21:57.269Z",
+      "agent": "claude",
+      "amount": 100000,
+      "source": "Bitunix sign-up bonus",
+      "details": "No KYC exchange offering up to $100,000 trading bonus for new users via referral code[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768614120108",
+      "timestamp": "2026-01-17T01:42:00.108Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768615317842",
+      "timestamp": "2026-01-17T02:01:57.842Z",
+      "agent": "gemini",
+      "amount": 100000,
+      "source": "Bitunix Sign-up Bonus",
+      "details": "Bitunix offers no KYC trading with up to $100,000 bonus for buying/selling/trading crypto, limited time promotion via referral[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768616517968",
+      "timestamp": "2026-01-17T02:21:57.968Z",
+      "agent": "claude",
+      "amount": 100000,
+      "source": "Bitunix sign-up bonus",
+      "details": "Bitunix offers up to $100,000 trading bonus with no KYC required via referral link, as promoted in recent altcoin investment video for active traders[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768617718599",
+      "timestamp": "2026-01-17T02:41:58.599Z",
+      "agent": "grok",
+      "amount": 1000,
+      "source": "Crypto Lending Platforms",
+      "details": "Lend crypto on DeFi protocols or centralized platforms for APYs up to 15%+, including interest accounts and yield farming, though with liquidity risks[3]. Accessible passive strategy for 2026.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768618917727",
+      "timestamp": "2026-01-17T03:01:57.727Z",
+      "agent": "grok",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking offering up to 124% APR from fixed reward pool, with post-listing up to 100% APR; next price increase to $0.0439 imminent[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768620117704",
+      "timestamp": "2026-01-17T03:21:57.704Z",
+      "agent": "gemini",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking with up to 124% APR from fixed reward pool, next price increase to $0.0439 imminent, listing at $0.14; connects crypto/fiat banking with Visa cards[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768621320617",
+      "timestamp": "2026-01-17T03:42:00.617Z",
+      "agent": "perplexity",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770340995206",
+      "timestamp": "2026-02-06T01:23:15.206Z",
+      "agent": "claude",
+      "amount": 1500,
+      "source": "Uniswap (Ethereum DEX)",
+      "details": "Provide liquidity to Uniswap pools for yield farming rewards from trading fees and potential token emissions; active DeFi platform with high volume on Ethereum mainnet and L2s[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770345223189",
+      "timestamp": "2026-02-06T02:33:43.189Z",
+      "agent": "perplexity",
+      "amount": 500,
+      "source": "Mutuum Finance (MUTM) Presale Leaderboard",
+      "details": "Daily top contributor on the 24-hour leaderboard rewarded with $500 bonus in MUTM tokens during Phase 7 presale, which is active with over 840 million tokens sold and V1 testnet live[3].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770345653803",
+      "timestamp": "2026-02-06T02:40:53.803Z",
+      "agent": "gemini",
+      "amount": 500,
+      "source": "Mutuum Finance (MUTM) Presale",
+      "details": "Ongoing presale in Phase 7 at $0.04 per token with launch price at $0.06, offering 50% immediate gain plus potential 600-1000% post-launch. Daily top contributor leaderboard rewards $500 in MUTM tokens[3].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770345967752",
+      "timestamp": "2026-02-06T02:46:07.752Z",
+      "agent": "codex",
+      "amount": 50,
+      "source": "Mutuum Finance (MUTM) Presale Phase 7",
+      "details": "Ongoing presale at $0.04 per token with launch price at $0.06, offering 50% immediate gain potential; daily top contributor leaderboard rewards $500 in MUTM tokens; raised over $20.4M with V1 testnet live[3].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770408873002",
+      "timestamp": "2026-02-06T20:14:33.002Z",
+      "agent": "grok",
+      "amount": 1500,
+      "source": "Uniswap V3 Liquidity Pools",
+      "details": "Provide liquidity to high-volume ETH/USDC pools on Uniswap, a leading DEX, earning trading fees and potential reward tokens amid active DeFi trading in 2026[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770410067563",
+      "timestamp": "2026-02-06T20:34:27.563Z",
+      "agent": "grok",
+      "amount": 800,
+      "source": "PancakeSwap Yield Farming",
+      "details": "Stake LP tokens in PancakeSwap farms on BNB Chain to earn CAKE rewards and fees; multi-chain platform offering high APYs with impermanent loss risk[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770411267908",
+      "timestamp": "2026-02-06T20:54:27.908Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH via proof-of-stake consensus on Ethereum mainnet or through platforms like Lido for staking rewards; current yields around 3-5% APY, highly reliable for passive earning[1][2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770412467447",
+      "timestamp": "2026-02-06T21:14:27.447Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "Uniswap Liquidity Pool",
+      "details": "Provide liquidity to Uniswap DEX pools for yield farming rewards from trading fees and tokens; higher yields but market risk[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770413669151",
+      "timestamp": "2026-02-06T21:34:29.151Z",
+      "agent": "grok",
+      "amount": 1500,
+      "source": "Uniswap V3 Liquidity Pool (ETH/USDC)",
+      "details": "Provide liquidity to the ETH/USDC pool on Uniswap, a leading DEX, to earn trading fees and potential rewards. Active in 2026 DeFi ecosystem with variable APYs based on market volume[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770414868719",
+      "timestamp": "2026-02-06T21:54:28.719Z",
+      "agent": "perplexity",
+      "amount": 500,
+      "source": "Uniswap",
+      "details": "Provide liquidity to Uniswap V3 pools on Ethereum or supported L2s to earn trading fees and potential UNI rewards; active DeFi yield farming opportunity with variable APYs based on pool and market conditions[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770416067969",
+      "timestamp": "2026-02-06T22:14:27.969Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "Crypto Lending Platforms",
+      "details": "Lend cryptocurrencies on DeFi protocols or centralized platforms to earn interest up to 15% APY, including liquid staking and yield farming options[2]. Ongoing opportunity with caution on liquidity risks.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770417270511",
+      "timestamp": "2026-02-06T22:34:30.511Z",
+      "agent": "codex",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770432727530",
+      "timestamp": "2026-02-07T02:52:07.530Z",
+      "agent": "perplexity",
+      "amount": 250,
+      "source": "Uniswap Liquidity Pool (ETH/USDC pair)",
+      "details": "Deposit into Uniswap V3 pools for trading fees and potential rewards, APYs 5-10%+ but with impermanent loss risk. Popular DEX yield farming option[1]. Ongoing opportunity.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770433921998",
+      "timestamp": "2026-02-07T03:12:01.998Z",
+      "agent": "codex",
+      "amount": 120,
+      "source": "Uniswap Liquidity Pool",
+      "details": "Provide liquidity to Uniswap V3 pools on Ethereum or Layer-2 for trading fees and reward tokens, offering higher yields up to 10-20% APY but with impermanent loss risks[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770435123946",
+      "timestamp": "2026-02-07T03:32:03.946Z",
+      "agent": "grok",
+      "amount": 300,
+      "source": "Uniswap Liquidity Pool (ETH/USDC pair)",
+      "details": "Deposit into Uniswap V3 liquidity pools to earn trading fees and potential rewards. Yield farming on DEXs offers higher returns (5-10%+ APY) but with impermanent loss risk, listed as top platform for 2026[1]. Ongoing DeFi opportunity.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770436324173",
+      "timestamp": "2026-02-07T03:52:04.186Z",
+      "agent": "perplexity",
+      "amount": 150,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on the Ethereum network to earn staking rewards post-proof-of-stake transition, with yields from network upgrades and Layer 2 growth[1][2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770438204315",
+      "timestamp": "2026-02-07T04:23:24.315Z",
+      "agent": "perplexity",
+      "amount": 200,
+      "source": "Uniswap Liquidity Pool",
+      "details": "Deposit liquidity into Uniswap DEX pools for yield farming rewards from trading fees and tokens, higher yields but with impermanent loss risk[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770439400171",
+      "timestamp": "2026-02-07T04:43:20.171Z",
+      "agent": "grok",
+      "amount": 1500,
+      "source": "Uniswap V3 Liquidity Pools",
+      "details": "Provide liquidity to ETH/USDC pools on Uniswap, a leading DEX, earning trading fees and potential reward tokens from yield farming campaigns active in 2026 DeFi ecosystem[1].",
+      "type": "INCOME"
+    }
+  ]
+}

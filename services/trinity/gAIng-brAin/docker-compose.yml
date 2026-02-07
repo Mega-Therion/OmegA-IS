@@ -1,0 +1,164 @@
+version: '3.9'
+
+services:
+  # =============================================================================
+  # Core gAIng-Brain Server
+  # =============================================================================
+  brain:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gaing-brain
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GROK_API_KEY=${GROK_API_KEY}
+      - MEM0_API_KEY=${MEM0_API_KEY}
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - brain-data:/app/data
+      - brain-logs:/app/logs
+      - brain-uploads:/app/uploads
+    networks:
+      - brain-network
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # =============================================================================
+  # Redis (Session & Cache)
+  # =============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: gaing-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy volatile-lru
+    volumes:
+      - redis-data:/data
+    networks:
+      - brain-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =============================================================================
+  # JARVIS Frontend (Next.js)
+  # =============================================================================
+  jarvis:
+    build:
+      context: ./Jarvis
+      dockerfile: Dockerfile
+    container_name: gaing-jarvis
+    restart: unless-stopped
+    ports:
+      - "${JARVIS_PORT:-3001}:3000"
+    environment:
+      - NODE_ENV=production
+      - BACKEND_URL=http://brain:8080
+    networks:
+      - brain-network
+    depends_on:
+      - brain
+    profiles:
+      - full
+
+  # =============================================================================
+  # Nginx Reverse Proxy (Production)
+  # =============================================================================
+  nginx:
+    image: nginx:alpine
+    container_name: gaing-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/ssl:/etc/nginx/ssl:ro
+      - nginx-cache:/var/cache/nginx
+    networks:
+      - brain-network
+    depends_on:
+      - brain
+    profiles:
+      - production
+
+  # =============================================================================
+  # Monitoring (Prometheus + Grafana)
+  # =============================================================================
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: gaing-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - brain-network
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: gaing-grafana
+    restart: unless-stopped
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - brain-network
+    depends_on:
+      - prometheus
+    profiles:
+      - monitoring
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  brain-data:
+    driver: local
+  brain-logs:
+    driver: local
+  brain-uploads:
+    driver: local
+  redis-data:
+    driver: local
+  nginx-cache:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  brain-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

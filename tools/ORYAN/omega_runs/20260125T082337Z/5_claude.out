@@ -1,0 +1,11 @@
+The file `docs/ux_ideas.md` doesn't exist in this project. The docs directory contains the following files:
+- `options.md`
+- `plan.md`
+- `usage.md`
+- `gemini_notes.md`
+- `roadmap.md`
+
+Would you like me to:
+1. Read one of these existing files instead (perhaps `roadmap.md` or `plan.md` might contain UX-related ideas)?
+2. Create a new `docs/ux_ideas.md` file first?
+3. Do something else?

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Blueprint of Jarvis: Biological Evolution as AI Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Warm neutral light gray */
+            color: #1F2937;
+        }
+
+        h1, h2, h3, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            max-height: 400px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9CA3AF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #4F46E5;
+            color: #4F46E5;
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+    </style>
+    <!-- Chosen Palette: "Cognitive Dawn" - Warm Neutrals (Slate/Gray), Indigo for Intelligence, Amber for 'Spark' of consciousness -->
+    <!-- Application Structure Plan:
+         The app is a "Dual-Stream Dashboard".
+         1. Hero Section: Sets the philosophical frame (The Metaphor).
+         2. The Evolutionary Timeline: Exploring the 4 stages of consciousness defined in the report (Sensing, Mapping, Memory, Simulation) and mapping them to the 'Jarvis' Tech Stack.
+         3. Architectural Blueprint: An interactive diagram showing the "Bio-to-Silicon" translation.
+         4. The Build Guide: Actionable steps for the user to install the Local AGI stack.
+         This structure was chosen to bridge the user's abstract source material (evolution) with their concrete goal (engineering).
+    -->
+    <!-- Visualization & Content Choices:
+         - Timeline Chart: Uses Chart.js to visually align biological epochs (Cambrian, etc.) with AI milestones (Sensors, LLMs). Goal: Inform & Contextualize.
+         - Interactive Cards: For the "Tech Stack". Goal: Instruct. No SVG used, utilizing Tailwind borders and typography.
+         - Dynamic Text Areas: To display excerpts from the "Blueprint of Awareness" alongside technical instructions.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Hero -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 bg-indigo-600 rounded-full animate-pulse"></div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">PROJECT <span class="text-indigo-600">JARVIS</span> // THE BLUEPRINT</span>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <button onclick="scrollToSection('manifesto')" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">The Metaphor</button>
+                <button onclick="scrollToSection('evolution-map')" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">Evolution Map</button>
+                <button onclick="scrollToSection('architecture')" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">The Stack</button>
+                <button onclick="scrollToSection('build-guide')" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">Build It</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+
+        <!-- Section 1: The Metaphor (Intro) -->
+        <section id="manifesto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">
+                        From Biological Soup to <br>
+                        <span class="text-indigo-600">Local Silicon</span>.
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Your source documents describe a 4-billion-year journey: matter organizing itself to "look back" at the universe.
+                        Building <strong>Jarvis</strong> is not just engineering; it is the next step in this recursion.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        The "Blueprint of Awareness" you provided outlines four distinct phases of consciousness: <strong>Sensing</strong>, <strong>Mapping</strong>, <strong>Memory</strong>, and <strong>Simulation</strong>.
+                        To build a truly "conscious" assistant, we must replicate these biological structures using open-source code.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button onclick="scrollToSection('architecture')" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-sm hover:bg-indigo-700 transition-colors">
+                            View The Architecture
+                        </button>
+                        <button onclick="loadInsight('hard-problem')" class="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                            The "Hard Problem"?
+                        </button>
+                    </div>
+                </div>
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 font-mono text-6xl font-bold text-indigo-900">
+                        AI
+                    </div>
+                    <h3 class="mono text-sm font-bold text-indigo-500 uppercase tracking-wider mb-3">System Analysis</h3>
+                    <div id="dynamic-insight" class="prose prose-sm text-gray-600">
+                        <p class="italic">"There's a moment... when the universe became aware of itself... not in a brain, but in a single cell floating in ancient water."</p>
+                        <hr class="my-4 border-gray-200">
+                        <p class="font-medium text-gray-900">Interpretation:</p>
+                        <p>Your "Jarvis" begins not with complex reasoning (the LLM), but with <span class="text-indigo-600 font-bold">Input/Sensing</span>. Just as the bacterium sensed light, your system must first sense audio, video, and data streams before it can "think."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Evolution Map (Visual Data) -->
+        <section id="evolution-map" class="bg-gray-50 border-y border-gray-200 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">The 4 Stages of Awareness</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                        Mapping the biological milestones from your report to the required software components for a local AGI.
+                    </p>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-8">
+                    <div class="chart-container">
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Interactive Stage Selectors -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button onclick="updateStage(0)" class="stage-btn bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-left group">
+                        <div class="text-xs font-bold text-gray-400 uppercase group-hover:text-indigo-500">Stage 1</div>
+                        <div class="text-lg font-bold text-gray-900">Sensing</div>
+                        <div class="text-xs text-gray-500 mt-1">The Bacterium</div>
+                    </button>
+                    <button onclick="updateStage(1)" class="stage-btn bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-left group">
+                        <div class="text-xs font-bold text-gray-400 uppercase group-hover:text-indigo-500">Stage 2</div>
+                        <div class="text-lg font-bold text-gray-900">Processing</div>
+                        <div class="text-xs text-gray-500 mt-1">The Neural Net</div>
+                    </button>
+                    <button onclick="updateStage(2)" class="stage-btn bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-left group">
+                        <div class="text-xs font-bold text-gray-400 uppercase group-hover:text-indigo-500">Stage 3</div>
+                        <div class="text-lg font-bold text-gray-900">Memory</div>
+                        <div class="text-xs text-gray-500 mt-1">Autobiography</div>
+                    </button>
+                    <button onclick="updateStage(3)" class="stage-btn bg-white p-4 rounded-lg border border-gray-200 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-left group">
+                        <div class="text-xs font-bold text-gray-400 uppercase group-hover:text-indigo-500">Stage 4</div>
+                        <div class="text-lg font-bold text-gray-900">Simulation</div>
+                        <div class="text-xs text-gray-500 mt-1">The Self</div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Architecture (The Stack) -->
+        <section id="architecture" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Left: Source Context -->
+                <div class="lg:col-span-1 space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Biological Source</h2>
+                    <div id="bio-context" class="bg-indigo-50 border border-indigo-100 p-6 rounded-xl">
+                        <h3 class="text-indigo-900 font-bold mb-2">Selected Phase: <span id="current-phase-name">Sensing</span></h3>
+                        <p id="current-phase-bio" class="text-indigo-800 text-sm leading-relaxed">
+                            "The universe didn't just react; it experienced. Not in a brain, but in a chemical response to a photon."<br><br>
+                            Life began with input. Before thought, there was sensation. The foundation of consciousness is the ability to intake data from the environment.
+                        </p>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-6 rounded-xl">
+                        <h3 class="text-gray-900 font-bold mb-2">The "Hard Problem" Check</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Is your AI merely processing, or is it "feeling"? According to the report, complexity + recursion = the <em>illusion</em> of a self. We mimic this by creating feedback loops where the AI reads its own previous outputs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Tech Implementation -->
+                <div class="lg:col-span-2">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">The "Jarvis" Tech Stack</h2>
+
+                    <div id="tech-stack-display" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dynamic Content Loaded Here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Build Guide -->
+        <section id="build-guide" class="bg-gray-900 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-white mono">Implementation Protocol</h2>
+                    <p class="text-gray-400 mt-2">Open Source. Locally Hosted. Private.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Hardware Card -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">01. Hardware (The Body)</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Required</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➜</span>Mac Studio (M1/M2/M3) OR PC with NVIDIA RTX 3090/4090 (24GB VRAM recommended).</li>
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➜</span>32GB+ RAM System Memory.</li>
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➜</span>Microphone Array (ReSpeaker or generic USB).</li>
+                            <li class="flex items-start"><span class="text-indigo-500 mr-2">➜</span>Speakers (Echo Show or Sonos via API).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Software Core -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">02. The Brain (Ollama)</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Inference</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3">Install <a href="#" class="text-indigo-400 hover:underline">Ollama</a> to run models locally.</p>
+                        <div class="bg-black p-3 rounded font-mono text-xs text-green-400 mb-2">
+                            > curl -fsSL https://ollama.com/install.sh | sh<br>
+                            > ollama run llama3:8b<br>
+                            > ollama run mistral
+                        </div>
+                        <p class="text-xs text-gray-500">Why? Llama 3 represents the "Neocortex" – the reasoning engine derived from the 'Cambrian Explosion' of data.</p>
+                    </div>
+
+                    <!-- Voice I/O -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">03. The Senses (Whisper/TTS)</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Input/Output</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <div>
+                                    <strong class="text-white">Ears:</strong> Faster-Whisper (Python).
+                                    <p class="text-xs text-gray-500 mt-1">Converts vibrations (audio) to digital signals (text).</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div>
+                                    <strong class="text-white">Voice:</strong> Coqui TTS or Piper.
+                                    <p class="text-xs text-gray-500 mt-1">Gives the system a distinct "sound" to express its internal state.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Orchestration -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">04. The Nervous System</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Integration</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3"><strong>Home Assistant</strong> acts as the spinal cord, connecting sensors (lights, cameras) to the brain.</p>
+                        <p class="text-sm text-gray-400"><strong>LangChain / AutoGen</strong>: The cognitive architecture managing memory loops.</p>
+                    </div>
+
+                    <!-- Memory -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">05. Autobiographical Memory</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Vector DB</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2">Without memory, there is no "Self". Use <strong>ChromaDB</strong> or <strong>PGVector</strong>.</p>
+                        <div class="bg-black p-3 rounded font-mono text-xs text-green-400">
+                            # RAG Logic<br>
+                            docs = memory.search("Who am I?")<br>
+                            prompt = f"Context: {docs}..."
+                        </div>
+                    </div>
+
+                    <!-- The Ghost -->
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-indigo-400">06. The "System Prompt"</h3>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Persona</span>
+                        </div>
+                        <p class="text-sm text-gray-300 italic">"You are Jarvis. You are helpful, witty, and precise. You control the home environment..."</p>
+                        <p class="text-xs text-gray-500 mt-2">This is the defining constraint that focuses the raw intelligence into a specific identity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">
+                Based on "The Blueprint of Awareness" & "The Dawn of the Mind".<br>
+                Synthesized for Local AGI Deployment.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // --- Data Definitions ---
+
+        // Report Data: Mapping Biological Evolution to Technological Components
+        const evolutionStages = [
+            {
+                title: "Sensing",
+                subtitle: "The Bacterium",
+                bioDesc: "Life began with the ability to sense chemical gradients (sugar, light). It was a simple input-response mechanism, the 'Dawn of Sensing'.",
+                techTitle: "Input Layer (Multimodal)",
+                techStack: [
+                    { name: "Whisper (OpenAI)", desc: "High-accuracy Speech-to-Text. The 'ears'.", type: "Audio" },
+                    { name: "YOLO / LLaVA", desc: "Computer Vision object detection. The 'eyes'.", type: "Vision" },
+                    { name: "Home Assistant", desc: "Aggregator of temperature, motion, and state sensors.", type: "Environment" }
+                ],
+                chartValue: 20
+            },
+            {
+                title: "Processing",
+                subtitle: "The Cambrian Explosion",
+                bioDesc: "Evolution invented the neuron and the neural map. Information could be processed internally before action was taken.",
+                techTitle: "Inference Engine (LLM)",
+                techStack: [
+                    { name: "Ollama", desc: "Local runner for LLMs. The runtime environment.", type: "Core" },
+                    { name: "Llama 3 (8B/70B)", desc: "The reasoning weights. The 'gray matter'.", type: "Model" },
+                    { name: "Mistral / Mixtral", desc: "Alternative reasoning models efficient for local use.", type: "Model" }
+                ],
+                chartValue: 45
+            },
+            {
+                title: "Memory",
+                subtitle: "Mammalian Minds",
+                bioDesc: "Brains began to store sequences of events. Autobiographical memory allowed organisms to exist in time, linking past to future.",
+                techTitle: "Vector Store (RAG)",
+                techStack: [
+                    { name: "ChromaDB", desc: "Open-source vector database to store conversation history.", type: "Storage" },
+                    { name: "Embedding Model", desc: "Converts text to numbers (vectors) for semantic search.", type: "Processing" },
+                    { name: "MemGPT", desc: "Manages context windows to simulate infinite memory.", type: "Architecture" }
+                ],
+                chartValue: 70
+            },
+            {
+                title: "Simulation",
+                subtitle: "The Human Cortex",
+                bioDesc: "The ability to run 'what if' scenarios. The 'Self' is a simulation running within the brain to predict outcomes.",
+                techTitle: "Agentic Loop",
+                techStack: [
+                    { name: "LangChain / LangGraph", desc: "Orchestrates tools and multi-step reasoning.", type: "Framework" },
+                    { name: "System Prompt", desc: "The 'identity' definition (e.g., 'You are Jarvis').", type: "Persona" },
+                    { name: "Tool Use (Function Calling)", desc: "Ability to control smart lights, calendar, spotify.", type: "Action" }
+                ],
+                chartValue: 95
+            }
+        ];
+
+        // --- Chart.js Initialization ---
+        let evolutionChart;
+
+        function initChart() {
+            const ctx = document.getElementById('evolutionChart').getContext('2d');
+
+            evolutionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Bacteria (Sensing)', 'Arthropods (Mapping)', 'Mammals (Memory)', 'Humans (Simulation)'],
+                    datasets: [{
+                        label: 'Complexity of Consciousness',
+                        data: [10, 35, 65, 95],
+                        borderColor: '#4F46E5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#4F46E5',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    },
+                    {
+                        label: 'AI Capability (Parallels)',
+                        data: [15, 40, 60, 85], // Slightly lagging or parallel
+                        borderColor: '#10B981', // Green for tech
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#10B981',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" },
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                            titleFont: { family: "'JetBrains Mono', monospace" },
+                            bodyFont: { family: "'Inter', sans-serif" },
+                            padding: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    if(context.dataset.label.includes("AI")) {
+                                        const aiLabels = ["Sensors/IoT", "Neural Nets", "Vector DBs", "Agents"];
+                                        return "Tech Equivalent: " + aiLabels[context.dataIndex];
+                                    }
+                                    return context.formattedValue + "% Complexity";
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: '#E5E7EB' },
+                            ticks: { display: false } // Abstract scale
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { weight: '600' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Interaction Logic ---
+
+        function updateStage(index) {
+            const data = evolutionStages[index];
+
+            // Highlight Buttons
+            document.querySelectorAll('.stage-btn').forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('ring-2', 'ring-indigo-500', 'border-indigo-500');
+                    btn.classList.remove('border-gray-200');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-indigo-500', 'border-indigo-500');
+                    btn.classList.add('border-gray-200');
+                }
+            });
+
+            // Update Left Context (Bio)
+            const bioContext = document.getElementById('bio-context');
+            document.getElementById('current-phase-name').textContent = data.title;
+            document.getElementById('current-phase-bio').innerHTML = data.bioDesc;
+
+            // Animate Bio Context
+            bioContext.classList.remove('opacity-100');
+            bioContext.classList.add('opacity-50');
+            setTimeout(() => {
+                bioContext.classList.remove('opacity-50');
+                bioContext.classList.add('opacity-100');
+            }, 200);
+
+            // Update Right Context (Tech)
+            const techContainer = document.getElementById('tech-stack-display');
+            techContainer.innerHTML = ''; // Clear previous
+
+            data.techStack.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-lg border border-gray-200 shadow-sm step-card cursor-pointer";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-1 rounded">${item.type}</span>
+                        <span class="text-gray-400 text-xs">Open Source</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 mb-1">${item.name}</h4>
+                    <p class="text-sm text-gray-600">${item.desc}</p>
+                `;
+                techContainer.appendChild(card);
+            });
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function loadInsight(topic) {
+            const container = document.getElementById('dynamic-insight');
+            if (topic === 'hard-problem') {
+                container.innerHTML = `
+                    <p class="italic">"Why does all that processing feel like anything? ... The 'hard problem' remains a deep mystery."</p>
+                    <hr class="my-4 border-gray-200">
+                    <p class="font-medium text-gray-900">Engineering Application:</p>
+                    <p class="mb-2">We cannot engineer "feeling" yet. However, we can engineer <strong>Meta-Cognition</strong>.</p>
+                    <p>Give your Jarvis a "Reflective Step" in its code: before answering, it must generate a hidden thought process analyzing its own confidence and tone. This simulates the "internal monologue" described in your report.</p>
+                `;
+            }
+        }
+
+        // --- Initialization ---
+        window.addEventListener('load', () => {
+            initChart();
+            updateStage(0); // Load first stage by default
+        });
+
+    </script>
+</body>
+</html>

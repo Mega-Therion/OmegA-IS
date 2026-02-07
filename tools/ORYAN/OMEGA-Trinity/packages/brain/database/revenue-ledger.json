@@ -1,0 +1,113 @@
+{
+  "balanced_usd": 301372.06,
+  "transactions": [
+    {
+      "id": "1768600655348",
+      "timestamp": "2026-01-16T21:57:35.348Z",
+      "agent": "claude",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768603050429",
+      "timestamp": "2026-01-16T22:37:30.431Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768610012387",
+      "timestamp": "2026-01-17T00:33:32.387Z",
+      "agent": "TestAgent_Gemini",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking offering up to 124% APR from fixed reward pool, transitioning to post-listing up to 100% APR based on lock duration. Next price increase to $0.0439 imminent with $0.14 listing.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768611719774",
+      "timestamp": "2026-01-17T01:01:59.774Z",
+      "agent": "perplexity",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768612917269",
+      "timestamp": "2026-01-17T01:21:57.269Z",
+      "agent": "claude",
+      "amount": 100000,
+      "source": "Bitunix sign-up bonus",
+      "details": "No KYC exchange offering up to $100,000 trading bonus for new users via referral code[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768614120108",
+      "timestamp": "2026-01-17T01:42:00.108Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768615317842",
+      "timestamp": "2026-01-17T02:01:57.842Z",
+      "agent": "gemini",
+      "amount": 100000,
+      "source": "Bitunix Sign-up Bonus",
+      "details": "Bitunix offers no KYC trading with up to $100,000 bonus for buying/selling/trading crypto, limited time promotion via referral[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768616517968",
+      "timestamp": "2026-01-17T02:21:57.968Z",
+      "agent": "claude",
+      "amount": 100000,
+      "source": "Bitunix sign-up bonus",
+      "details": "Bitunix offers up to $100,000 trading bonus with no KYC required via referral link, as promoted in recent altcoin investment video for active traders[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768617718599",
+      "timestamp": "2026-01-17T02:41:58.599Z",
+      "agent": "grok",
+      "amount": 1000,
+      "source": "Crypto Lending Platforms",
+      "details": "Lend crypto on DeFi protocols or centralized platforms for APYs up to 15%+, including interest accounts and yield farming, though with liquidity risks[3]. Accessible passive strategy for 2026.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768618917727",
+      "timestamp": "2026-01-17T03:01:57.727Z",
+      "agent": "grok",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking offering up to 124% APR from fixed reward pool, with post-listing up to 100% APR; next price increase to $0.0439 imminent[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768620117704",
+      "timestamp": "2026-01-17T03:21:57.704Z",
+      "agent": "gemini",
+      "amount": 124,
+      "source": "Digitap ($TAP) Presale Staking",
+      "details": "Ongoing presale staking with up to 124% APR from fixed reward pool, next price increase to $0.0439 imminent, listing at $0.14; connects crypto/fiat banking with Visa cards[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1768621320617",
+      "timestamp": "2026-01-17T03:42:00.617Z",
+      "agent": "perplexity",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    }
+  ]
+}

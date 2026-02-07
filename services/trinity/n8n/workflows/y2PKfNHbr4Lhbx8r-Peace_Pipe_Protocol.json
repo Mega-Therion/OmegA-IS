@@ -1,0 +1,1079 @@
+{
+  "name": "Peace Pipe Protocol",
+  "nodes": [
+    {
+      "parameters": {
+        "toolDescription": "Reads the latest technology news from The Verge RSS feed",
+        "url": "https://www.theverge.com/rss/index.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedReadTool",
+      "typeVersion": 1.2,
+      "position": [
+        1264,
+        2592
+      ],
+      "id": "303e9b4e-cc4e-4d8a-8ede-7550f070d212",
+      "name": "Get Tech News"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Reads the latest world news from BBC News RSS feed",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedReadTool",
+      "typeVersion": 1.2,
+      "position": [
+        1392,
+        2592
+      ],
+      "id": "4090a753-f131-40b1-87c3-cf74d5a7e325",
+      "name": "Get World News"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        2512
+      ],
+      "id": "651543b5-0213-433f-8760-57d62b8d6d64",
+      "name": "Run every day at 7AM",
+      "notesInFlow": true,
+      "notes": "Double-click to open"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "85b5c530-2c13-4424-ab83-05979bc879a5",
+              "name": "output",
+              "value": "={ $json.output }",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        2128
+      ],
+      "id": "99f7bb9e-f8c0-43ca-a9a8-a76634ac9611",
+      "name": "Output",
+      "notesInFlow": true,
+      "notes": "Double-click to open"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        912,
+        2128
+      ],
+      "id": "a0390291-6794-4673-9a6a-5c3d3a5d9e4b",
+      "name": "Click ‘Execute workflow’ to run"
+    },
+    {
+      "parameters": {
+        "content": "## ⚡ Start here:",
+        "height": 224,
+        "width": 224,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        848,
+        2448
+      ],
+      "id": "fac5929f-e065-4474-96b1-7bcc06834238",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1136,
+        2592
+      ],
+      "id": "b16482e8-0d48-4426-aa93-c3fee11dd3cd",
+      "name": "OpenAI Model",
+      "notesInFlow": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "lAa2XcLLpba4XJh5",
+          "name": "n8n free OpenAI API credits"
+        }
+      },
+      "notes": "Double-click to open"
+    },
+    {
+      "parameters": {
+        "content": "@[youtube](cMyOkQ4N-5M)",
+        "height": 512,
+        "width": 902,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        1776
+      ],
+      "id": "ec65e69e-77fa-4912-a4af-49e0a248e2c8",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Summarize world news and tech news from the last 24 hours. Skip your comments. The titles should be \"World news:\" and \"Tech news:\" Today is {{ $today }}",
+        "options": {
+          "systemMessage": "You are a professional news summarizer. Your role is to analyze news feeds and create concise, informative summaries. Focus on key facts and present information clearly without editorial comments."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1184,
+        2368
+      ],
+      "id": "084d56aa-d157-4964-9073-b36d9d9589c5",
+      "name": "AI Summary Agent",
+      "notesInFlow": true,
+      "notes": "Double-click to open"
+    },
+    {
+      "parameters": {
+        "content": "### Double click here to see the results:",
+        "height": 240,
+        "width": 192,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        2432
+      ],
+      "id": "a4b7a69a-0db8-4b9b-a81d-fd83378043a3",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "### 📰 Daily AI Summary\n\n\nThis workflow gets the latest news and asks AI to summarize it for you.\n\n⭐ Bonus: Send the summary via email by connecting your Gmail account\n\n▶ Watch the video to get started ",
+        "height": 272,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        848,
+        2016
+      ],
+      "id": "74d80857-5e63-47a8-8e86-8ecd10fd5f9e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "sendTo": "viewsbyryan@gmail.com",
+        "subject": "Your news daily summary",
+        "emailType": "text",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1824,
+        2128
+      ],
+      "id": "45625d0d-bf26-4379-9eed-7bbc8e5d87a5",
+      "name": "Send summary by email",
+      "webhookId": "093b04f1-5e78-4926-9863-1b100d6f2ead",
+      "notesInFlow": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xvbnz9ZRfGwzQICP",
+          "name": "Gmail account 2"
+        }
+      },
+      "notes": "Double-click to open"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-news-summary",
+        "options": {}
+      },
+      "id": "cb626ae7-b81d-4713-990b-475f572ec9f4",
+      "name": "Omega System Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        912,
+        2944
+      ],
+      "webhookId": "1dd00b5f-66c7-49a5-88c2-2237f3e29c0d"
+    },
+    {
+      "parameters": {
+        "enableResponseOutput": true,
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "1300016a-6b20-4da9-8343-082c2fba67aa",
+      "name": "Send Response to Omega",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1824,
+        2320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/council",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "26eb9456-952e-42a7-b020-a6670d31e75e",
+      "name": "Send to Omega System",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1824,
+        2512
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "summary",
+              "value": "={{ $('Output').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "timestamp",
+              "value": "={{ $now }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "source",
+              "value": "AI News Summary",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "tech_news",
+              "value": "={{ JSON.stringify($('Get Tech News').item.json) }}",
+              "type": "object"
+            },
+            {
+              "id": "id-5",
+              "name": "world_news",
+              "value": "={{ JSON.stringify($('Get World News').item.json) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6b4ce73c-5652-4860-8187-1dc2ccef94ac",
+      "name": "Format for Omega",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        2512
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "members",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "active"
+            }
+          ]
+        }
+      },
+      "id": "f6b37c0c-e4db-4da4-8aa6-ae410d69c7a9",
+      "name": "Get Active Agents",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        2896
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "agent_name",
+        "options": {}
+      },
+      "id": "bcf47c61-65c4-4345-ba7c-3fc8a5e1ff7f",
+      "name": "Split Agents for Processing",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "memories",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "agent_name",
+              "condition": "eq",
+              "keyValue": "={{ $json.agent_name }}"
+            },
+            {
+              "keyName": "created_at",
+              "condition": "gt",
+              "keyValue": "={{ $now.minus({ days: 1 }).toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "816eaa09-973b-49f4-985c-46946678f30f",
+      "name": "Get Agent Memories",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1824,
+        2896
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze the following agent activity data and generate a status report for {{ $('Split Agents for Processing').item.json.agent_name }}. Review their memories from the last 24 hours: {{ JSON.stringify($json) }}. Provide: 1) Activity summary, 2) Key accomplishments, 3) Current status, 4) Any concerns or blockers.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI agent coordinator analyzing agent performance and activities. Provide concise, actionable status reports."
+        }
+      },
+      "id": "cfa56082-d35c-4d67-ab19-06bc64991cf0",
+      "name": "Generate Agent Status Report",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2048,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "1f25086b-4aac-4ba4-8cfe-d46501e98a20",
+      "name": "OpenAI Chat Model for Reports",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2048,
+        3120
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lAa2XcLLpba4XJh5",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"agent_name\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Name of the agent\"\n\t\t},\n\t\t\"activity_summary\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Summary of agent activities in last 24 hours\"\n\t\t},\n\t\t\"accomplishments\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Key accomplishments\"\n\t\t},\n\t\t\"status\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Current operational status\"\n\t\t},\n\t\t\"concerns\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"Any issues or blockers\"\n\t\t}\n\t}\n}"
+      },
+      "id": "62817fb3-68bf-49ba-b5f8-510cc950abc2",
+      "name": "Structure Agent Report Output",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2176,
+        3120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const inputTokens = $json.usage?.promptTokens || 0;\nconst outputTokens = $json.usage?.completionTokens || 0;\nconst inputCost = (inputTokens / 1000000) * 0.15;\nconst outputCost = (outputTokens / 1000000) * 0.60;\nconst totalCost = inputCost + outputCost;\n\nreturn [{\n  json: {\n    ...($json || {}),\n    api_cost: totalCost,\n    input_tokens: inputTokens,\n    output_tokens: outputTokens,\n    model: 'gpt-4o-mini',\n    operation: 'agent_status_report'\n  }\n}];"
+      },
+      "id": "7815b461-35cc-46d1-9aa8-365641789de8",
+      "name": "Calculate API Cost",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "financial_ledger",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "agent_name",
+              "fieldValue": "={{ $json.agent_name }}"
+            },
+            {
+              "fieldId": "operation",
+              "fieldValue": "={{ $json.operation }}"
+            },
+            {
+              "fieldId": "model",
+              "fieldValue": "={{ $json.model }}"
+            },
+            {
+              "fieldId": "input_tokens",
+              "fieldValue": "={{ $json.input_tokens }}"
+            },
+            {
+              "fieldId": "output_tokens",
+              "fieldValue": "={{ $json.output_tokens }}"
+            },
+            {
+              "fieldId": "cost_usd",
+              "fieldValue": "={{ $json.api_cost }}"
+            },
+            {
+              "fieldId": "timestamp",
+              "fieldValue": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "e1483a64-47c9-4ec2-b441-e9afec73a3ef",
+      "name": "Log API Cost to Ledger",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2624,
+        2896
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "b3b11714-6b49-4603-a516-9477583174ad",
+      "name": "Combine Agent Reports",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2848,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Based on the following individual agent reports, generate a strategic synthesis for the gAIng-Brain collective. Agent Reports: {{ JSON.stringify($json) }}. Provide: 1) Overall system health, 2) Collective achievements, 3) Strategic insights, 4) Recommended actions, 5) Resource allocation suggestions.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are the strategic coordinator for a multi-agent AI system. Synthesize individual agent reports into actionable strategic guidance for the collective."
+        }
+      },
+      "id": "a7979ce7-d17e-4d2d-8bb0-64c9d35107b5",
+      "name": "Generate Strategic Synthesis",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        3072,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "id": "ff3e7ed7-a591-4c83-9e4f-c6b9645cf5bd",
+      "name": "OpenAI Chat Model for Synthesis",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        3072,
+        3120
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lAa2XcLLpba4XJh5",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"system_health\": \"Overall health status of the agent collective\",\n\t\"collective_achievements\": \"Key achievements across all agents\",\n\t\"strategic_insights\": \"Strategic observations and patterns\",\n\t\"recommended_actions\": \"Recommended next steps\",\n\t\"resource_allocation\": \"Suggestions for resource distribution\"\n}"
+      },
+      "id": "fd94eed8-8006-40b9-9de0-04149c933317",
+      "name": "Structure Synthesis Output",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        3200,
+        3120
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "telegram_message",
+              "value": "=🌅 *Peace Pipe Protocol - Daily Report*\n📅 {{ $now.toFormat('MMMM dd, yyyy') }}\n\n🏥 *System Health:* {{ $json.system_health }}\n\n🎯 *Collective Achievements:*\n{{ $json.collective_achievements }}\n\n💡 *Strategic Insights:*\n{{ $json.strategic_insights }}\n\n✅ *Recommended Actions:*\n{{ $json.recommended_actions }}\n\n📊 *Resource Allocation:*\n{{ $json.resource_allocation }}\n\n🔥 Transmitted via Peace Pipe Protocol",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "86d30c60-a4cb-468b-9913-67cc0ccc69c6",
+      "name": "Format Telegram Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3872,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1003595805129",
+        "text": "={{ $json.telegram_message }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "8b74c459-ce34-46f8-b2a3-d22f6ca95133",
+      "name": "Send Peace Pipe Report",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        4096,
+        2896
+      ],
+      "webhookId": "107425e3-33b1-4185-ad81-de6ae51bd971",
+      "credentials": {
+        "telegramApi": {
+          "id": "0HMcudxH4kVEyj8c",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "financial_ledger",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "agent_name",
+              "fieldValue": "System"
+            },
+            {
+              "fieldId": "operation",
+              "fieldValue": "={{ $json.operation }}"
+            },
+            {
+              "fieldId": "model",
+              "fieldValue": "={{ $json.model }}"
+            },
+            {
+              "fieldId": "input_tokens",
+              "fieldValue": "={{ $json.input_tokens }}"
+            },
+            {
+              "fieldId": "output_tokens",
+              "fieldValue": "={{ $json.output_tokens }}"
+            },
+            {
+              "fieldId": "cost_usd",
+              "fieldValue": "={{ $json.api_cost }}"
+            },
+            {
+              "fieldId": "timestamp",
+              "fieldValue": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "477417fd-d763-438c-a731-91b815232e9e",
+      "name": "Log Synthesis Cost",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3648,
+        2896
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const inputTokens = $json.usage?.promptTokens || 0;\nconst outputTokens = $json.usage?.completionTokens || 0;\nconst inputCost = (inputTokens / 1000000) * 0.15;\nconst outputCost = (outputTokens / 1000000) * 0.60;\nconst totalCost = inputCost + outputCost;\n\nreturn [{\n  json: {\n    ...($json || {}),\n    api_cost: totalCost,\n    input_tokens: inputTokens,\n    output_tokens: outputTokens,\n    model: 'gpt-4o-mini',\n    operation: 'strategic_synthesis'\n  }\n}];"
+      },
+      "id": "bd74ae4c-cf91-4c01-9a3d-0032884bca93",
+      "name": "Calculate Synthesis Cost",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3424,
+        2896
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-peace-pipe",
+        "options": {}
+      },
+      "id": "60f46719-02f2-4672-9dc2-8049b19075f9",
+      "name": "Omega Peace Pipe Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        912,
+        2272
+      ],
+      "webhookId": "9f24f3d3-55cb-48ce-8c76-7f3d9f2f6b0f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'peace_pipe', event_type: $json.event_type || 'daily', timestamp: $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "92f3291f-e0e6-4ee6-a0c5-6a1c77e0c8c1",
+      "name": "Omega Context",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        2272
+      ]
+    }
+  ],
+  "connections": {
+    "Get Tech News": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Summary Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get World News": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Summary Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run every day at 7AM": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Click ‘Execute workflow’ to run": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Summary Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Summary Agent": {
+      "main": [
+        [
+          {
+            "node": "Output",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format for Omega",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output": {
+      "main": [
+        [
+          {
+            "node": "Send summary by email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega System Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Summary Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format for Omega": {
+      "main": [
+        [
+          {
+            "node": "Send to Omega System",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Response to Omega",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Agents": {
+      "main": [
+        [
+          {
+            "node": "Split Agents for Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Agents for Processing": {
+      "main": [
+        [
+          {
+            "node": "Get Agent Memories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Agent Memories": {
+      "main": [
+        [
+          {
+            "node": "Generate Agent Status Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model for Reports": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Agent Status Report",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structure Agent Report Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Generate Agent Status Report",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Agent Status Report": {
+      "main": [
+        [
+          {
+            "node": "Calculate API Cost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate API Cost": {
+      "main": [
+        [
+          {
+            "node": "Log API Cost to Ledger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log API Cost to Ledger": {
+      "main": [
+        [
+          {
+            "node": "Combine Agent Reports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Agent Reports": {
+      "main": [
+        [
+          {
+            "node": "Generate Strategic Synthesis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model for Synthesis": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Strategic Synthesis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structure Synthesis Output": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Generate Strategic Synthesis",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Strategic Synthesis": {
+      "main": [
+        [
+          {
+            "node": "Calculate Synthesis Cost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Synthesis Cost": {
+      "main": [
+        [
+          {
+            "node": "Log Synthesis Cost",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Synthesis Cost": {
+      "main": [
+        [
+          {
+            "node": "Format Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Telegram Message": {
+      "main": [
+        [
+          {
+            "node": "Send Peace Pipe Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Peace Pipe Webhook": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Context": {
+      "main": [
+        [
+          {
+            "node": "AI Summary Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Active Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "saveExecutionProgress": true,
+    "callerPolicy": "any",
+    "executionOrder": "v0"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": {
+    "templateId": "ready-to-run-ai-workflow",
+    "templateCredsSetupCompleted": true
+  }
+}

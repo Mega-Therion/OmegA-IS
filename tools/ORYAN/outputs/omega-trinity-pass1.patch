@@ -1,0 +1,647 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 1dcc76f..0f5a4b2 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -1,103 +1,97 @@
+-name: Continuous Integration
++name: CI
+ 
+ on:
+   push:
+     branches: [ master, develop ]
+   pull_request:
+     branches: [ master, develop ]
+   workflow_dispatch:
+ 
+ jobs:
+   lint:
+-    name: Lint Code
++    name: Lint + Format
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
+-
+       - name: Set up Node.js
+         uses: actions/setup-node@v4
+         with:
+           node-version: '22'
+-          cache: 'npm'
+-
++          cache: 'pnpm'
++      - name: Enable corepack
++        run: corepack enable
+       - name: Install dependencies
+-        run: npm ci
+-
+-      - name: Run ESLint
+-        run: npm run lint --if-present
+-
+-      - name: Check formatting
+-        run: npm run format:check --if-present
++        run: pnpm install --frozen-lockfile
++      - name: Format check
++        run: pnpm format:check
++      - name: Type check
++        run: pnpm check
+ 
+-  brain-test:
+-    name: Test Brain Service
++  test:
++    name: Tests
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
+-
+       - name: Set up Node.js
+         uses: actions/setup-node@v4
+         with:
+           node-version: '22'
+-          cache: 'npm'
+-
+-      - name: Install dependencies
+-        run: npm ci
+-
+-      - name: Run brain tests
+-        working-directory: ./packages/brain
+-        run: npm test --if-present
+-        env:
+-          NODE_ENV: test
+-
+-  test-bridge:
+-    name: Test Bridge Service
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/checkout@v4
+-
+-      - name: Set up Python
+-        uses: actions/setup-python@v5
+-        with:
+-          python-version: '3.11'
+-          cache: 'pip'
+-
+-      - name: Install dependencies
+-        working-directory: ./packages/bridge
+-        run: |
+-          python -m pip install --upgrade pip
+-          pip install -r requirements.txt
+-          pip install pytest pytest-cov
+-
+-      - name: Run tests
+-        working-directory: ./packages/bridge
+-        run: pytest --cov --cov-report=xml
+-
+-  test-client:
+-    name: Test Client
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/checkout@v4
+-
+-      - name: Set up Node.js
+-        uses: actions/setup-node@v4
+-        with:
+-          node-version: '22'
+-          cache: 'npm'
+-
+-      - name: Install dependencies
+-        working-directory: ./client
+-        run: npm ci
+-
+-      - name: Run tests
+-        working-directory: ./client
+-        run: npm test --if-present
+-
+-      - name: Build client
+-        working-directory: ./client
+-        run: npm run build --if-present
+-
+-  contracts-test:
+-    name: Test Contracts
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/checkout@v4
+-
+-      - name: Set up Node.js
+-        uses: actions/setup-node@v4
+-        with:
+-          node-version: '22'
+-          cache: 'npm'
+-
+-      - name: Install dependencies
+-        run: npm ci
+-
+-      - name: Run contract tests
+-        working-directory: ./packages/brain
+-        run: npm run test:contracts --if-present
+-
+-  security-scan:
+-    name: Security Scan
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/checkout@v4
+-
+-      - name: Run Trivy vulnerability scanner
+-        uses: aquasecurity/trivy-action@master
+-        with:
+-          scan-type: 'fs'
+-          scan-ref: '.'
+-          format: 'sarif'
+-          output: 'trivy-results.sarif'
+-
+-      - name: Upload Trivy results to GitHub Security
+-        uses: github/codeql-action/upload-sarif@v3
+-        with:
+-          sarif_file: 'trivy-results.sarif'
+-
+-  dependency-review:
+-    name: Dependency Review
+-    runs-on: ubuntu-latest
+-    if: github.event_name == 'pull_request'
+-    steps:
+-      - uses: actions/checkout@v4
+-      - uses: actions/dependency-review-action@v4
++          cache: 'pnpm'
++      - name: Enable corepack
++        run: corepack enable
++      - name: Install root dependencies
++        run: pnpm install --frozen-lockfile
++      - name: Run root tests
++        run: pnpm test --if-present
++      - name: Install Brain dependencies
++        working-directory: ./packages/brain
++        run: npm install
++      - name: Run Brain tests
++        working-directory: ./packages/brain
++        run: npm test --if-present
++        env:
++          NODE_ENV: test
++      - name: Set up Python
++        uses: actions/setup-python@v5
++        with:
++          python-version: '3.11'
++          cache: 'pip'
++      - name: Install Bridge dependencies
++        working-directory: ./packages/bridge
++        run: |
++          python -m pip install --upgrade pip
++          pip install -r requirements.txt
++          pip install pytest pytest-cov
++      - name: Run Bridge tests
++        working-directory: ./packages/bridge
++        run: pytest --cov --cov-report=xml
++
++  build:
++    name: Build
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Set up Node.js
++        uses: actions/setup-node@v4
++        with:
++          node-version: '22'
++          cache: 'pnpm'
++      - name: Enable corepack
++        run: corepack enable
++      - name: Install dependencies
++        run: pnpm install --frozen-lockfile
++      - name: Build root app
++        run: pnpm build
++      - name: Install HUD dependencies
++        working-directory: ./packages/hud
++        run: npm install
++      - name: Build HUD
++        working-directory: ./packages/hud
++        run: npm run build
+
+diff --git a/package.json b/package.json
+index 2a61376..8576d78 100644
+--- a/package.json
++++ b/package.json
+@@ -6,6 +6,7 @@
+     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
+     "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+     "start": "NODE_ENV=production node dist/index.js",
+     "check": "tsc --noEmit",
+     "format": "prettier --write .",
++    "format:check": "prettier --check .",
+     "test": "vitest run",
+     "db:push": "drizzle-kit generate && drizzle-kit migrate",
+     "omega": "node scripts/omega-start.mjs",
+     "omega:smoke": "node scripts/omega-smoke.mjs"
+@@ -98,7 +99,7 @@
+     "wouter": "^3.3.5",
+     "zod": "^4.1.12"
+   },
+   "devDependencies": {
+@@ -131,6 +132,7 @@
+     "vitest": "^2.1.4"
+   },
+   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
++
+   "pnpm": {
+     "patchedDependencies": {
+       "wouter@3.7.1": "patches/wouter@3.7.1.patch"
+     },
+     "overrides": {
+       "tailwindcss>nanoid": "3.3.7"
+     }
+   }
+ }
+
+diff --git a/packages/brain/package.json b/packages/brain/package.json
+index a80b8da..e2e7f1b 100644
+--- a/packages/brain/package.json
++++ b/packages/brain/package.json
+@@ -36,7 +36,8 @@
+         "three": "^0.182.0",
+         "tonweb": "^0.0.66",
+         "uuid": "^13.0.0",
+         "vm2": "^3.10.2",
+-        "ws": "^8.14.2"
++        "ws": "^8.14.2",
++        "zod": "^4.1.12"
+     },
+     "name": "gaing-brain",
+     "version": "1.0.0",
+@@ -81,6 +82,7 @@
+     "devDependencies": {
+         "jest": "^29.7.0",
+         "node-fetch": "^2.6.11"
+     }
+ }
+
+diff --git a/packages/brain/src/config/env.schema.js b/packages/brain/src/config/env.schema.js
+new file mode 100644
+index 0000000..fbfe3c6
+--- /dev/null
++++ b/packages/brain/src/config/env.schema.js
+@@ -0,0 +1,28 @@
++const { z } = require('zod');
++
++const urlSchema = z.string().url();
++
++const envSchema = z.object({
++  NODE_ENV: z.string().optional(),
++  PORT: z.coerce.number().int().min(1).max(65535).optional(),
++  SUPABASE_URL: urlSchema.optional(),
++  SUPABASE_ANON_KEY: z.string().min(1).optional(),
++  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
++  BRIDGE_URL: urlSchema.optional(),
++  HUD_URL: urlSchema.optional(),
++  REDIS_URL: z.string().min(1).optional(),
++  MILVUS_URL: z.string().min(1).optional(),
++  NEO4J_URL: z.string().min(1).optional(),
++  NEO4J_USER: z.string().min(1).optional(),
++  NEO4J_PASSWORD: z.string().min(1).optional()
++});
++
++function validateEnvSchema(rawEnv) {
++  return envSchema.safeParse(rawEnv);
++}
++
++module.exports = { envSchema, validateEnvSchema };
++
+
+diff --git a/packages/brain/src/config/env.js b/packages/brain/src/config/env.js
+index 6aa4f1a..c2fd0d8 100644
+--- a/packages/brain/src/config/env.js
++++ b/packages/brain/src/config/env.js
+@@ -1,6 +1,8 @@
+ require('dotenv').config();
++
++const { validateEnvSchema } = require('./env.schema');
+ 
+ const SUPABASE_URL = process.env.SUPABASE_URL;
+ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY;
+ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+@@ -33,11 +35,18 @@
+ const AZURE_OPENAI_ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT;
+ const AZURE_OPENAI_DEPLOYMENT = process.env.AZURE_OPENAI_DEPLOYMENT;
+ const AZURE_OPENAI_API_VERSION = process.env.AZURE_OPENAI_API_VERSION || '2024-06-01';
+ const DISABLE_AUTH = process.env.DISABLE_AUTH === '1';
+-const PORT = process.env.PORT || 8080;
++const envSchemaResult = validateEnvSchema(process.env);
++const PORT = envSchemaResult.success && envSchemaResult.data.PORT
++  ? envSchemaResult.data.PORT
++  : process.env.PORT || 8080;
+ 
+ // OMEGA Trinity Configuration
+-const BRIDGE_URL = process.env.BRIDGE_URL || 'http://localhost:8000';
+-const HUD_URL = process.env.HUD_URL || 'http://localhost:3000';
++const BRIDGE_URL = envSchemaResult.success && envSchemaResult.data.BRIDGE_URL
++  ? envSchemaResult.data.BRIDGE_URL
++  : process.env.BRIDGE_URL || 'http://localhost:8000';
++const HUD_URL = envSchemaResult.success && envSchemaResult.data.HUD_URL
++  ? envSchemaResult.data.HUD_URL
++  : process.env.HUD_URL || 'http://localhost:3000';
+ const REDIS_URL = process.env.REDIS_URL;
+ const MILVUS_URL = process.env.MILVUS_URL;
+ const NEO4J_URL = process.env.NEO4J_URL;
+@@ -48,6 +57,16 @@
+ 
+ const supabaseKey = SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
++
++function formatZodIssues(issues) {
++  return issues
++    .map(issue => {
++      const path = issue.path.length ? issue.path.join('.') : 'env';
++      return `${path}: ${issue.message}`;
++    })
++    .join('; ');
++}
+ 
+ function validateEnv({ strict = process.env.OMEGA_STRICT_ENV === '1' } = {}) {
+   const missing = [];
+   const requireSupabase = process.env.NODE_ENV === 'production' && !DISABLE_AUTH;
++
++  if (!envSchemaResult.success) {
++    const message = `[brain] Invalid env vars: ${formatZodIssues(envSchemaResult.error.issues)}`;
++    if (strict) {
++      throw new Error(message);
++    }
++    console.warn(message);
++  }
+ 
+   if (requireSupabase && !SUPABASE_URL) {
+     missing.push('SUPABASE_URL');
+   }
+@@ -57,7 +76,7 @@
+   if (requireSupabase && !supabaseKey) {
+     missing.push('SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_KEY');
+   }
+-
++
+   if (missing.length) {
+     const message = `[brain] Missing env vars: ${missing.join(', ')}`;
+     if (strict) {
+       throw new Error(message);
+@@ -111,6 +130,7 @@
+   NEO4J_PASSWORD,
+   supabaseKey,
+   validateEnv
+ };
+
+diff --git a/packages/bridge/api.py b/packages/bridge/api.py
+index 0cc967f..5c0f406 100644
+--- a/packages/bridge/api.py
++++ b/packages/bridge/api.py
+@@ -22,7 +22,7 @@
+ from fastapi.middleware.cors import CORSMiddleware
+ from fastapi.responses import JSONResponse
+ from pydantic import BaseModel, Field
+ 
+ from consensus_engine import DCBFTEngine, VoteType, ConsensusDecision
+-from config import settings
++from env import settings
+ from memory_layer import UnifiedMemoryLayer
+ from orchestrator import Orchestrator
+ from worker_pool import WorkerPool
+@@ -212,6 +212,7 @@
+ async def readiness_check():
+     """Readiness probe for orchestration dependencies."""
+     return {
+         "ready": True,
++        "status": "ready",
+         "service": "bridge",
+         "timestamp": datetime.now(timezone.utc).isoformat(),
+     }
+@@ -224,6 +225,7 @@
+ async def liveness_check():
+     """Liveness probe for basic process health."""
+     return {
+         "alive": True,
++        "status": "alive",
+         "service": "bridge",
+         "timestamp": datetime.now(timezone.utc).isoformat(),
+     }
+@@ -255,29 +257,6 @@
+     }
+ 
+ 
+-@app.get("/ready", tags=["Health"])
+-async def readiness_probe():
+-    """Readiness probe - checks if core components are initialized."""
+-    return {
+-        "status": "ready",
+-        "timestamp": datetime.now(timezone.utc).isoformat(),
+-        "components": {
+-            "memory": memory is not None,
+-            "orchestrator": orchestrator is not None,
+-            "worker_pool": worker_pool is not None,
+-            "consensus_engine": consensus_engine is not None,
+-        }
+-    }
+-
+-
+-@app.get("/live", tags=["Health"])
+-async def liveness_probe():
+-    """Liveness probe - simple heartbeat response."""
+-    return {
+-        "status": "alive",
+-        "timestamp": datetime.now(timezone.utc).isoformat(),
+-    }
+-
+-
+ # =============================================================================
+ # Memory Layer Endpoints
+ # =============================================================================
+ 
+ # --- Working Memory ---
+
+diff --git a/packages/bridge/env.py b/packages/bridge/env.py
+new file mode 100644
+index 0000000..f42f852
+--- /dev/null
++++ b/packages/bridge/env.py
+@@ -0,0 +1,21 @@
++"""Bridge environment validation helpers."""
++
++from pydantic import ValidationError
++
++from config import Settings
++
++
++def validate_env() -> Settings:
++    """Load and validate Bridge settings with Pydantic."""
++    try:
++        return Settings()
++    except ValidationError as exc:
++        raise RuntimeError("Invalid Bridge environment variables") from exc
++
++
++settings: Settings = validate_env()
++
+
+diff --git a/packages/hud/package.json b/packages/hud/package.json
+index 3f4cc36..0cfcb3d 100644
+--- a/packages/hud/package.json
++++ b/packages/hud/package.json
+@@ -14,7 +14,8 @@
+     "next": "14.2.35",
+     "react": "^18.3.1",
+     "react-dom": "^18.3.1",
+     "react-error-boundary": "^4.0.13",
+     "react-hotkeys-hook": "^4.4.4",
+-    "zustand": "^4.5.2"
++    "zustand": "^4.5.2",
++    "zod": "^4.1.12"
+   },
+   "devDependencies": {
+     "@types/node": "^20.12.12",
+     "@types/react": "^18.3.3",
+@@ -26,5 +27,5 @@
+     "eslint-config-next": "^14.2.5",
+     "postcss": "^8.4.38",
+     "tailwindcss": "^3.4.4",
+     "typescript": "^5.4.5"
+   }
+ }
+
+diff --git a/packages/hud/src/app/api/health/route.ts b/packages/hud/src/app/api/health/route.ts
+index 42df1a3..b1c7d71 100644
+--- a/packages/hud/src/app/api/health/route.ts
++++ b/packages/hud/src/app/api/health/route.ts
+@@ -6,6 +6,7 @@
+ export async function GET() {
+   return NextResponse.json({
+     status: 'ok',
++    service: 'hud',
+     timestamp: new Date().toISOString()
+   })
+ }
+
+diff --git a/packages/hud/src/app/api/live/route.ts b/packages/hud/src/app/api/live/route.ts
+new file mode 100644
+index 0000000..6b1a0ad
+--- /dev/null
++++ b/packages/hud/src/app/api/live/route.ts
+@@ -0,0 +1,13 @@
++import { NextResponse } from 'next/server'
++
++export const runtime = 'edge'
++
++export async function GET() {
++  return NextResponse.json({
++    status: 'alive',
++    service: 'hud',
++    timestamp: new Date().toISOString()
++  })
++}
++
+
+diff --git a/packages/hud/src/app/api/ready/route.ts b/packages/hud/src/app/api/ready/route.ts
+new file mode 100644
+index 0000000..2f0a5e6
+--- /dev/null
++++ b/packages/hud/src/app/api/ready/route.ts
+@@ -0,0 +1,13 @@
++import { NextResponse } from 'next/server'
++
++export const runtime = 'edge'
++
++export async function GET() {
++  return NextResponse.json({
++    status: 'ready',
++    service: 'hud',
++    timestamp: new Date().toISOString()
++  })
++}
++
+
+diff --git a/packages/hud/src/config/env.schema.ts b/packages/hud/src/config/env.schema.ts
+new file mode 100644
+index 0000000..b0f43c5
+--- /dev/null
++++ b/packages/hud/src/config/env.schema.ts
+@@ -0,0 +1,8 @@
++import { z } from 'zod'
++
++export const hudEnvSchema = z.object({
++  NEXT_PUBLIC_BRAIN_API_URL: z.string().url().optional(),
++  NEXT_PUBLIC_BRIDGE_API_URL: z.string().url().optional(),
++  GAING_BRAIN_URL: z.string().url().optional(),
++  GAING_BRAIN_TIMEOUT_MS: z.coerce.number().int().positive().optional()
++})
++
+
+diff --git a/packages/hud/src/config/env.ts b/packages/hud/src/config/env.ts
+index 2ee9601..2cc08c2 100644
+--- a/packages/hud/src/config/env.ts
++++ b/packages/hud/src/config/env.ts
+@@ -1,5 +1,18 @@
++import { hudEnvSchema } from './env.schema'
++
+ type EnvCheck = {
+   ok: boolean;
+   missing: string[];
+ };
+ 
+-const BRAIN_API_URL = process.env.NEXT_PUBLIC_BRAIN_API_URL || 'http://localhost:8080';
+-const BRIDGE_API_URL = process.env.NEXT_PUBLIC_BRIDGE_API_URL || 'http://localhost:8000';
++const parsedEnv = hudEnvSchema.safeParse({
++  NEXT_PUBLIC_BRAIN_API_URL: process.env.NEXT_PUBLIC_BRAIN_API_URL,
++  NEXT_PUBLIC_BRIDGE_API_URL: process.env.NEXT_PUBLIC_BRIDGE_API_URL,
++  GAING_BRAIN_URL: process.env.GAING_BRAIN_URL,
++  GAING_BRAIN_TIMEOUT_MS: process.env.GAING_BRAIN_TIMEOUT_MS
++});
++
++const parsedData = parsedEnv.success ? parsedEnv.data : {};
++
++const BRAIN_API_URL = parsedData.NEXT_PUBLIC_BRAIN_API_URL || 'http://localhost:8080';
++const BRIDGE_API_URL = parsedData.NEXT_PUBLIC_BRIDGE_API_URL || 'http://localhost:8000';
++
++const invalid = parsedEnv.success
++  ? []
++  : parsedEnv.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`);
+ 
+ export function validateEnv(): EnvCheck {
+   const missing: string[] = [];
+@@ -12,6 +25,14 @@
+   if (!process.env.NEXT_PUBLIC_BRIDGE_API_URL) {
+     missing.push('NEXT_PUBLIC_BRIDGE_API_URL');
+   }
+ 
++  if (invalid.length) {
++    console.warn(
++      `[hud] Invalid env vars: ${invalid.join('; ')}. ` +
++        `Using defaults: BRAIN_API_URL=${BRAIN_API_URL}, BRIDGE_API_URL=${BRIDGE_API_URL}.`
++    );
++  }
++
+   if (missing.length) {
+     // Keep as warning to avoid breaking dev.
+     console.warn(
+       `[hud] Missing env vars: ${missing.join(', ')}. Using defaults: ` +
+         `BRAIN_API_URL=${BRAIN_API_URL}, BRIDGE_API_URL=${BRIDGE_API_URL}.`
+     );
+   }
+ 
+   return { ok: missing.length === 0, missing };
+ }
+ 
+ export const env = {
+   BRAIN_API_URL,
+   BRIDGE_API_URL,
+ };
++
+
+diff --git a/packages/brain/src/routes/system.js b/packages/brain/src/routes/system.js
+index 7f75b3e..b0d3b64 100644
+--- a/packages/brain/src/routes/system.js
++++ b/packages/brain/src/routes/system.js
+@@ -30,7 +30,8 @@
+ router.get('/ready', async (req, res) => {
+   const ready = {
+     ready: true,
++    status: 'ready',
+     service: 'brain',
+     timestamp: new Date().toISOString()
+   };
+@@ -47,7 +48,9 @@
+ router.get('/live', async (req, res) => {
+   res.status(200).json({
+     alive: true,
++    status: 'alive',
++    service: 'brain',
+     timestamp: new Date().toISOString()
+   });
+ });

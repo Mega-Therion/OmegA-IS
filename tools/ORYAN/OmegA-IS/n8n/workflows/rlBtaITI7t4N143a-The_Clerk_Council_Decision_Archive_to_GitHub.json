@@ -1,0 +1,139 @@
+{
+  "name": "The Clerk - Council Decision Archive to GitHub",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-clerk-archive",
+        "options": {}
+      },
+      "id": "5480d868-19b9-477b-a8ed-0cfc36d129d5",
+      "name": "Webhook - omega-clerk-archive",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "e595d892-6349-4b87-8852-299aef2baeb7"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'clerk', event_type: $json.event_type || 'clerk_archive', timestamp: $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "117cb79f-ebbc-4085-825d-f45040644dba",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "megas-DIO"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "gAIng-brAin"
+        },
+        "filePath": "={{ 'resolutions/' + $json.body.council_id + '/transcript.md' }}",
+        "fileContent": "={{ $json.body.transcript_content }}",
+        "commitMessage": "={{ 'Archiving Council Session ' + $json.body.council_id }}"
+      },
+      "id": "5f80736a-fee3-4c34-8e7f-de61528d174f",
+      "name": "GitHub - Archive Transcript",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        0
+      ],
+      "webhookId": "2cac19d4-cf6e-4367-850d-12bf686725e1"
+    },
+    {
+      "parameters": {
+        "chatId": "7562208577",
+        "text": "={{ '📜 Scripture Filed! Council Session ' + $json.body.council_id + ' has been archived to GitHub.' }}",
+        "additionalFields": {}
+      },
+      "id": "71aef219-33a5-4890-bd81-755c7586a95f",
+      "name": "Telegram - Notify Archive Complete",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        0
+      ],
+      "webhookId": "5456c81a-567b-4783-bb18-6b19b4966f13",
+      "credentials": {
+        "telegramApi": {
+          "id": "0HMcudxH4kVEyj8c",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook - omega-clerk-archive": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "GitHub - Archive Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub - Archive Transcript": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Notify Archive Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": null
+}

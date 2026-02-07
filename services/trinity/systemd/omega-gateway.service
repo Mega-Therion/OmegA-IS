@@ -1,0 +1,28 @@
+[Unit]
+Description=OMEGA Gateway (FastAPI)
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/mega/NEXUS/repos/OMEGA-Trinity/gateway
+EnvironmentFile=/home/mega/NEXUS/repos/OMEGA-Trinity/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=GATEWAY_PORT=8787
+Environment=BIND_HOST=127.0.0.1
+Environment=AGENT_NAME=gateway
+Environment=AGENT_LOG=/var/log/omega/gateway.log
+Environment=AGENT_CWD=/home/mega/NEXUS/repos/OMEGA-Trinity/gateway
+Environment=OMEGA_INTERNAL_TOKEN=local
+ExecStartPre=/usr/bin/env mkdir -p /var/log/omega
+ExecStartPre=/usr/bin/env bash -lc 'touch ${AGENT_LOG} && chmod 644 ${AGENT_LOG}'
+ExecStartPre=/usr/bin/env bash -c 'test -x /home/mega/NEXUS/repos/OMEGA-Trinity/.venv/bin/python || exit 1'
+ExecStart=/home/mega/NEXUS/repos/OMEGA-Trinity/.venv/bin/python -m uvicorn app.main:app --host ${BIND_HOST} --port ${GATEWAY_PORT}
+ExecStartPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh register ${AGENT_NAME} $MAINPID ${AGENT_CWD} ${AGENT_LOG}'
+ExecStopPost=/usr/bin/env bash -lc '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh stopped ${AGENT_NAME}'
+StandardOutput=append:/var/log/omega/gateway.log
+StandardError=append:/var/log/omega/gateway.log
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

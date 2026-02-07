@@ -1,0 +1,334 @@
+{
+  "name": "Apprentice Loop - Feedback Learning System",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "ea11d758-8aee-484d-8648-875f8fa3af11",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        64
+      ],
+      "webhookId": "b01dd3c8-6977-4a90-bb9c-931b26f95a58",
+      "credentials": {
+        "telegramApi": {
+          "id": "0HMcudxH4kVEyj8c",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "omega-apprentice-feedback",
+        "options": {}
+      },
+      "id": "5b2772b3-2f19-4588-b9b3-0f92ce9b2a5e",
+      "name": "Omega Feedback Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        16,
+        -128
+      ],
+      "webhookId": "1b3ce02a-823d-4c67-9c54-699b8bde6a2b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "omega_context",
+              "value": "={{ $json.omega_context || { run_id: $execution.id, source: $json.source || 'apprentice_loop', event_type: $json.event_type || 'feedback', timestamp: $now.toISO() } }}",
+              "type": "object"
+            },
+            {
+              "id": "id-2",
+              "name": "message_text",
+              "value": "={{ $json.message?.text || $json.text || $json.body?.text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "chat_id",
+              "value": "={{ $json.message?.chat?.id || $json.body?.chat_id || $json.chat_id || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "b51ece08-aef8-4f29-8d10-c67a843fe253",
+      "name": "Omega Context",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+              "rightValue": "Correction:",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            },
+            {
+              "id": "id-2",
+              "leftValue": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+              "rightValue": "Actually,",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "59bfa0bf-5ce8-487f-ab42-fa4e95c82cf2",
+      "name": "Filter Feedback Messages",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        240,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"pattern\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The detected pattern or rule from the user feedback\"\n\t\t},\n\t\t\"context\": {\n\t\t\t\"type\": \"string\",\n\t\t\t\"description\": \"The context or situation where this rule applies\"\n\t\t}\n\t}\n}"
+      },
+      "id": "957b7c47-e539-47dc-afce-ec890ad9fafa",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message_text || $json.message?.text || $json.text || $json.body?.text || '' }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a preference extraction assistant. Your task is to analyze user feedback messages and extract the underlying preference or rule. Summarize it clearly and concisely."
+        }
+      },
+      "id": "2714f8ea-ef10-4765-8fec-8fc076bc7e25",
+      "name": "Extract Preference Rule",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        464,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "probation_queue",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "detected_pattern",
+              "fieldValue": "={{ $json.pattern }}"
+            },
+            {
+              "fieldId": "source_context",
+              "fieldValue": "={{ $json.context }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "pending"
+            }
+          ]
+        }
+      },
+      "id": "871ad370-9c90-4c69-9ceb-8b76f1c88175",
+      "name": "Insert to Probation Queue",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        816,
+        64
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "v3BU8S5RO8EWdBon",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node['Omega Context'].json.chat_id || $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "Message received. I have added this lesson to the Probation Queue for your review.",
+        "additionalFields": {}
+      },
+      "id": "0913bb7f-ec5d-4957-834c-766f99f13e0b",
+      "name": "Send Confirmation",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1040,
+        64
+      ],
+      "webhookId": "5ac9b4e1-9817-4577-8767-43d040855ad4",
+      "credentials": {
+        "telegramApi": {
+          "id": "0HMcudxH4kVEyj8c",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "228a1e33-baea-41cc-840a-364311b3e27b",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        480,
+        288
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lAa2XcLLpba4XJh5",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Feedback Webhook": {
+      "main": [
+        [
+          {
+            "node": "Omega Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Omega Context": {
+      "main": [
+        [
+          {
+            "node": "Filter Feedback Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Feedback Messages": {
+      "main": [
+        [
+          {
+            "node": "Extract Preference Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Extract Preference Rule",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Preference Rule": {
+      "main": [
+        [
+          {
+            "node": "Insert to Probation Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert to Probation Queue": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extract Preference Rule",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": null
+}
