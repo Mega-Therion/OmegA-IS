@@ -1,6 +1,9 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import { validateEnv } from '@/config/env'
+import { AuthProvider } from '@/lib/AuthContext'
+import { VoiceInterface } from '@/components/VoiceInterface'
+import { VoiceOutput } from '@/components/VoiceOutput'
 
 // SEO Metadata
 export const metadata: Metadata = {
@@ -98,8 +101,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <main id="main-content">
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </main>
+        <VoiceInterface />
+        <VoiceOutput />
       </body>
     </html>
   )

@@ -31,6 +31,7 @@ interface NeuroState {
   ragEnabled: boolean
   qualityMode: 'ultra' | 'balanced' | 'lite'
   activeTab: 'console' | 'terminal' | 'podcast' | 'vision'
+
   setMetrics: (metrics: Metrics) => void
   addMessage: (message: ChatMessage) => void
   addMemory: (memory: MemoryItem) => void
@@ -39,6 +40,13 @@ interface NeuroState {
   setQualityMode: (mode: NeuroState['qualityMode']) => void
   setActiveTab: (tab: NeuroState['activeTab']) => void
   clearSession: () => void
+
+  // Voice & Input State
+  isListening: boolean
+  setIsListening: (isListening: boolean) => void
+  inputText: string
+  setInputText: (text: string) => void
+  submitMessage: (text: string) => void
 }
 
 export const useNeuroStore = create<NeuroState>()(
@@ -50,6 +58,7 @@ export const useNeuroStore = create<NeuroState>()(
       ragEnabled: true,
       qualityMode: 'balanced',
       activeTab: 'console',
+
       setMetrics: (metrics: Metrics) => set({ metrics }),
       addMessage: (message: ChatMessage) =>
         set((state: NeuroState) => ({ messages: [...state.messages, message] })),
@@ -64,7 +73,25 @@ export const useNeuroStore = create<NeuroState>()(
       toggleRag: () => set((state: NeuroState) => ({ ragEnabled: !state.ragEnabled })),
       setQualityMode: (mode: NeuroState['qualityMode']) => set({ qualityMode: mode }),
       setActiveTab: (tab: NeuroState['activeTab']) => set({ activeTab: tab }),
-      clearSession: () => set({ messages: [], memory: [] })
+      clearSession: () => set({ messages: [], memory: [] }),
+
+      // Voice & Input State
+      isListening: false,
+      setIsListening: (isListening: boolean) => set({ isListening }),
+      inputText: '',
+      setInputText: (inputText: string) => set({ inputText }),
+      submitMessage: (text: string) =>
+        set((state: NeuroState) => ({
+          messages: [
+            ...state.messages,
+            {
+              id: Date.now().toString(),
+              role: 'user',
+              content: text,
+              timestamp: new Date().toISOString()
+            }
+          ]
+        }))
     }),
     {
       name: 'neuro-link-memory',
