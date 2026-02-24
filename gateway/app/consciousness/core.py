@@ -54,6 +54,7 @@ class ConsciousnessCore:
         from .swarm import SwarmCoordinator
         from .chronos import Chronos
         from .evolution import EvolutionEngine
+        from .zenith import SovereignZenith
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -65,6 +66,7 @@ class ConsciousnessCore:
         self.swarm = SwarmCoordinator(self)
         self.chronos = Chronos(self)
         self.evolution = EvolutionEngine(self)
+        self.zenith = SovereignZenith(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state

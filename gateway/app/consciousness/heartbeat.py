@@ -138,6 +138,10 @@ class HeartbeatDaemon:
             logger.info("Triggering recursive self-optimization (Evolution)...")
             asyncio.create_task(self.core.evolution.run_optimization_cycle())
 
+        # 7. Zenith Cognitive Override Check
+        if self._tick_count % 60 == 0: # Every 30 minutes
+            await self.core.zenith.evaluate_system_coherence()
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.
