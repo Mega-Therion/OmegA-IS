@@ -57,6 +57,7 @@ class ConsciousnessCore:
         from .zenith import SovereignZenith
         from .omni_memory import OmniMemory
         from .autonomic import AutonomicNervousSystem
+        from .nexus_link import NexusLink
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -71,6 +72,7 @@ class ConsciousnessCore:
         self.zenith = SovereignZenith(self)
         self.omni_memory = OmniMemory(self)
         self.autonomic = AutonomicNervousSystem(self)
+        self.nexus_link = NexusLink(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
