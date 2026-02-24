@@ -106,7 +106,10 @@ class HeartbeatDaemon:
         if self._tick_count % 25 == 0:
             logger.info(f"Swarm Hive Status: {swarm_health}")
 
-        # 4. Check if reflection is due
+        # 4. Chronos Time Check
+        await self.core.chronos.check_pending_tasks()
+
+        # 5. Check if reflection is due
         if self._tick_count % self.reflection_interval_ticks == 0:
             if self.core.state.should_reflect():
                 await self._perform_reflection()

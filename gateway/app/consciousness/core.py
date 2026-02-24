@@ -52,6 +52,7 @@ class ConsciousnessCore:
         from .plasticity import NeuralPlasticity
         from .sensorium import Sensorium
         from .swarm import SwarmCoordinator
+        from .chronos import Chronos
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -61,6 +62,7 @@ class ConsciousnessCore:
         self.plasticity = NeuralPlasticity(self)
         self.sensorium = Sensorium(self)
         self.swarm = SwarmCoordinator(self)
+        self.chronos = Chronos(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
