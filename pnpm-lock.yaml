@@ -252,8 +252,8 @@ importers:
         specifier: ^0.25.11
         version: 0.25.11
       pnpm:
-        specifier: ^10.28.2
-        version: 10.28.2
+        specifier: ^10.30.2
+        version: 10.30.2
       postcss:
         specifier: ^8.4.47
         version: 8.5.6
@@ -3887,8 +3887,8 @@ packages:
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
-  pnpm@10.28.2:
-    resolution: {integrity: sha512-QYcvA3rSL3NI47Heu69+hnz9RI8nJtnPdMCPGVB8MdLI56EVJbmD/rwt9kC1Q43uYCPrsfhO1DzC1lTSvDJiZA==}
+  pnpm@10.30.2:
+    resolution: {integrity: sha512-Ns3HB+e3lAqYjJwez4jQhPhRS1w/CF9TouJEwpIdOyVFvCDdTr4fwkX+7EY7spiuzqemPtH3aAuHfcY3nY0MtA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -4216,8 +4216,8 @@ packages:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
 
-  tar@7.5.7:
-    resolution: {integrity: sha512-fov56fJiRuThVFXD6o6/Q354S7pnWMJIVlDBYijsTNx6jKSE4pvrDTs6lUnmGvNyfJwFQQwWy3owKz1ucIhveQ==}
+  tar@7.5.9:
+    resolution: {integrity: sha512-BTLcK0xsDh2+PUe9F6c2TlRp4zOOBMTkoQHQIWSIzI0R7KG46uEwq4OPk2W7bZcprBMsuaeFsqwYr7pjh6CuHg==}
     engines: {node: '>=18'}
 
   tiny-invariant@1.3.3:
@@ -6709,7 +6709,7 @@ snapshots:
   '@tailwindcss/oxide@4.1.14':
     dependencies:
       detect-libc: 2.1.2
-      tar: 7.5.7
+      tar: 7.5.9
     optionalDependencies:
       '@tailwindcss/oxide-android-arm64': 4.1.14
       '@tailwindcss/oxide-darwin-arm64': 4.1.14
@@ -8630,7 +8630,7 @@ snapshots:
       exsolve: 1.0.7
       pathe: 2.0.3
 
-  pnpm@10.28.2: {}
+  pnpm@10.30.2: {}
 
   points-on-curve@0.2.0: {}
 
@@ -9066,7 +9066,7 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  tar@7.5.7:
+  tar@7.5.9:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
