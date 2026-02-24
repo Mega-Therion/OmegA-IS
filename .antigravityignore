@@ -1,0 +1,29 @@
+# Antigravity IDE Filter - Restoring Sovereignty
+# This file tells the IDE to ignore these directories in visual graphs and automated scans.
+
+# Third-party Dependencies
+node_modules/
+**/node_modules/**
+package-lock.json
+pnpm-lock.yaml
+
+# Environment/Versioning tools (e.g., Jordan Harband's nvm)
+.nvm/
+.npm/
+.yarn/
+
+# System/Cache
+.cache/
+.local/
+.config/
+**/__pycache__/**
+*.pyc
+
+# Local environments
+venv/
+venv_linux/
+.venv/
+
+# Lock files and metadata
+Cargo.lock
+.git/
