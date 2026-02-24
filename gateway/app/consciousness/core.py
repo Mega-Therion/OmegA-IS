@@ -48,11 +48,13 @@ class ConsciousnessCore:
 
         # Core modules
         from .reflection import ReflectionEngine
+        from .metabolism import Metabolism
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
         self.voice = VoiceSynthesizer(self.identity)
         self.reflection = ReflectionEngine(self)
+        self.metabolism = Metabolism(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state

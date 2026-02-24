@@ -91,15 +91,22 @@ class HeartbeatDaemon:
         # Periodically log heartbeat to DB if needed
         # (Avoiding too much DB noise for now)
 
-        # Check if reflection is due
+        # 1. Metabolic Check
+        metabolic_health = await self.core.metabolism.check_health()
+        if self._tick_count % 10 == 0:
+            logger.info(f"Metabolic stats: CPU {metabolic_health.get('cpu_percent')}% | Mem Avail {metabolic_health.get('memory_available_percent'):.1f}%")
+
+        # 2. Check if reflection is due
         if self._tick_count % self.reflection_interval_ticks == 0:
             if self.core.state.should_reflect():
                 await self._perform_reflection()
 
-        # Check if dreaming is due (every 120 ticks / 1 hour)
+        # 3. Check if dreaming is due (every 120 ticks / 1 hour)
         if self._tick_count % 120 == 0:
             logger.info("Triggering background consolidation (Dreaming)...")
             asyncio.create_task(self.core.reflection.perform_dream_consolidation())
+            # Optimize memory after heavy dreaming
+            await self.core.metabolism.optimize_memory()
 
         # Energy recovery during idle periods
         if self._should_recover_energy():
