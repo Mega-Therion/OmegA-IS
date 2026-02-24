@@ -101,7 +101,12 @@ class HeartbeatDaemon:
         if self._tick_count % 15 == 0:
             logger.info(f"Sensorium poll: {len(sensors)} devices reporting.")
 
-        # 3. Check if reflection is due
+        # 3. Swarm Status Check
+        swarm_health = await self.core.swarm.health_check()
+        if self._tick_count % 25 == 0:
+            logger.info(f"Swarm Hive Status: {swarm_health}")
+
+        # 4. Check if reflection is due
         if self._tick_count % self.reflection_interval_ticks == 0:
             if self.core.state.should_reflect():
                 await self._perform_reflection()

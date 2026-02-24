@@ -51,6 +51,7 @@ class ConsciousnessCore:
         from .metabolism import Metabolism
         from .plasticity import NeuralPlasticity
         from .sensorium import Sensorium
+        from .swarm import SwarmCoordinator
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -59,6 +60,7 @@ class ConsciousnessCore:
         self.metabolism = Metabolism(self)
         self.plasticity = NeuralPlasticity(self)
         self.sensorium = Sensorium(self)
+        self.swarm = SwarmCoordinator(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
