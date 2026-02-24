@@ -55,6 +55,7 @@ class ConsciousnessCore:
         from .chronos import Chronos
         from .evolution import EvolutionEngine
         from .zenith import SovereignZenith
+        from .omni_memory import OmniMemory
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -67,6 +68,7 @@ class ConsciousnessCore:
         self.chronos = Chronos(self)
         self.evolution = EvolutionEngine(self)
         self.zenith = SovereignZenith(self)
+        self.omni_memory = OmniMemory(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
@@ -160,13 +162,11 @@ class ConsciousnessCore:
             conversation_id, interface, user_id, user_name
         )
 
-        # 3. Retrieve relevant memories
-        memories = await self.memory.query(MemoryQuery(
+        # 3. Retrieve relevant memories (Omni-Retrieval)
+        memories = await self.omni_memory.hybrid_retrieve(
             query=user_input,
-            namespace=namespace if namespace != "default" else (f"user:{user_id}" if user_id else "default"),
-            include_episodes=True,
-            include_facts=True,
-        ))
+            limit=5
+        )
 
 
         # 4. Build context for response generation
