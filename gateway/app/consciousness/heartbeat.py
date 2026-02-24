@@ -96,9 +96,40 @@ class HeartbeatDaemon:
             if self.core.state.should_reflect():
                 await self._perform_reflection()
 
+        # Check if dreaming is due (every 120 ticks / 1 hour)
+        if self._tick_count % 120 == 0:
+            logger.info("Triggering background consolidation (Dreaming)...")
+            asyncio.create_task(self.core.reflection.perform_dream_consolidation())
+
         # Energy recovery during idle periods
         if self._should_recover_energy():
             await self.core.state.recover_energy(0.05)
+
+        # Autonomous Initiative (Check for "Contextual Itches")
+        if self._tick_count % 30 == 0: # Every 15 minutes
+            await self._check_initiative()
+
+    async def _check_initiative(self) -> None:
+        """
+        Check if OmegA should initiate an action or communication.
+        This is the heart of autonomous agency.
+        """
+        logger.info("Checking for autonomous initiatives...")
+        state = self.core.state.current
+        
+        # 1. Check pending goals
+        if state.current_goals:
+            logger.info(f"Active goals found: {len(state.current_goals)}. Assessing initiative...")
+            # Future: Use Analytical Core to decide if a background task should be spawned
+        
+        # 2. Check system heartbeat (simulated for now)
+        # 3. Check for external notifications/triggers
+        
+        # If an initiative is found, OmegA might:
+        # - Send a message to the user (if interface supports it)
+        # - Spawn a background mission
+        # - Log a reflection/insight
+        pass
 
     def _should_recover_energy(self) -> bool:
         """Check if energy recovery is appropriate."""
@@ -114,22 +145,13 @@ class HeartbeatDaemon:
         return True
 
     async def _perform_reflection(self) -> None:
-        """Perform a periodic reflection."""
-        logger.info("Performing periodic reflection...")
-        state = self.core.state.current
-
-        content = f"Periodic reflection. Status: {self.core.state.get_status_summary()}"
-        
-        reflection = Reflection(
-            id=f"refl_{uuid.uuid4().hex[:12]}",
-            reflection_type=ReflectionType.PATTERN,
-            content=content,
-            trigger="periodic_heartbeat",
-        )
-
+        """Perform a periodic reflection using the engine."""
+        logger.info("Performing periodic reflection via engine...")
         try:
-            await self.core.memory.save_reflection(reflection)
-            await self.core.state.update(last_reflection_at=datetime.utcnow())
-            logger.info("Reflection completed")
+            reflection = await self.core.reflection.generate_reflection()
+            if reflection:
+                logger.info(f"Reflection engine generated: {reflection.id}")
+            else:
+                logger.info("Reflection engine deferred generation.")
         except Exception as e:
-            logger.error(f"Failed to save reflection: {e}")
+            logger.error(f"Failed to perform reflection: {e}")

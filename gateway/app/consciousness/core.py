@@ -47,10 +47,12 @@ class ConsciousnessCore:
         logger.info("Initializing Consciousness Core...")
 
         # Core modules
+        from .reflection import ReflectionEngine
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
         self.voice = VoiceSynthesizer(self.identity)
+        self.reflection = ReflectionEngine(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state

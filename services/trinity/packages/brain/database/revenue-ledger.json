@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 1000327714.17,
+  "balanced_usd": 101000331914.17,
   "transactions": [
     {
       "id": "1768600655348",
@@ -638,6 +638,69 @@
       "amount": 150,
       "source": "Nexo Staking",
       "details": "Stake over 20 assets including ETH for up to 15% APY with daily rewards and flexible lock-up; loyalty tiers boost yields by holding NEXO tokens. Available to non-US users on custodial platform[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771936481550",
+      "timestamp": "2026-02-24T12:34:41.550Z",
+      "agent": "perplexity",
+      "amount": 500,
+      "source": "Ethereum Staking on Coinbase or Lido",
+      "details": "Stake ETH for ongoing rewards from network validation, with over 33 million ETH staked as of late 2025 yielding high APYs via proof-of-stake. Accessible on CEX like Coinbase for beginners or liquid staking protocols[3][4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771937687641",
+      "timestamp": "2026-02-24T12:54:47.641Z",
+      "agent": "grok",
+      "amount": 1000,
+      "source": "DeFi Yield Farming",
+      "details": "Provide liquidity in DeFi pools for trading fees, lending interest, and reward tokens; APYs can exceed 100% in new pools via auto-compounding vaults, accessing early governance tokens.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771938884834",
+      "timestamp": "2026-02-24T13:14:44.834Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "Ethereum (ETH) Staking",
+      "details": "Over 33 million ETH staked worth $100B as of Nov 2025, ongoing rewards from network validation and governance, highly reliable passive earning[4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771940081364",
+      "timestamp": "2026-02-24T13:34:41.365Z",
+      "agent": "grok",
+      "amount": 800,
+      "source": "Pump.fun (PUMP) liquidity provision or yield farming[3][4]",
+      "details": "Engage in yield farming or liquidity pools for PUMP meme token on-chain, capitalizing on high momentum and intraday activity for quick high APY returns.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771946936339",
+      "timestamp": "2026-02-24T15:28:56.339Z",
+      "agent": "perplexity",
+      "amount": 200,
+      "source": "Yield Farming on DeFi Protocols",
+      "details": "Provide liquidity in DeFi yield farming pools for high APYs exceeding 100%, earning fees and reward tokens via auto-compounding vaults.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771950536058",
+      "timestamp": "2026-02-24T16:28:56.058Z",
+      "agent": "codex",
+      "amount": 1500,
+      "source": "Ethereum Staking",
+      "details": "ETH holders benefit from staking rewards post-proof-of-stake transition, providing yield-bearing utility on the largest developer blockchain powering DeFi and dApps[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771951736731",
+      "timestamp": "2026-02-24T16:48:56.731Z",
+      "agent": "grok",
+      "amount": 100000000000,
+      "source": "Ethereum Staking",
+      "details": "Over 33 million ETH tokens worth $100 billion are staked as of November 2025, earning ongoing rewards through proof-of-stake for network security and governance[3]. High yields surpass traditional investments with low risk on established networks.",
       "type": "INCOME"
     }
   ]

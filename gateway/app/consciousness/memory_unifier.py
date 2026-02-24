@@ -286,3 +286,55 @@ class MemoryUnifier:
             )
 
         return reflection.id
+
+    async def save_episode(self, episode: Episode) -> str:
+        """Save an episodic memory."""
+        engine = get_engine()
+
+        embedding = None
+        if "sqlite" not in str(engine.url):
+            try:
+                embedding = (await embed([episode.summary]))[0]
+            except: pass
+
+        with engine.begin() as conn:
+            conn.execute(
+                text("""
+                    INSERT INTO omega_episodes (
+                        id, episode_type, started_at, ended_at,
+                        summary, key_points, participants,
+                        emotional_tone, importance_score, summary_embedding,
+                        related_episode_ids, related_memory_ids, created_at
+                    ) VALUES (
+                        :id, :type, :start, :end,
+                        :summary, :points, :parts,
+                        :tone, :importance, :emb,
+                        :rel_ep, :rel_mem, datetime('now')
+                    )
+                """),
+                {
+                    "id": episode.id,
+                    "type": episode.episode_type.value,
+                    "start": episode.started_at,
+                    "end": episode.ended_at,
+                    "summary": episode.summary,
+                    "points": json.dumps(episode.key_points),
+                    "parts": json.dumps(episode.participants),
+                    "tone": episode.emotional_tone,
+                    "importance": episode.importance_score,
+                    "emb": embedding if "sqlite" not in str(engine.url) else json.dumps(embedding),
+                    "rel_ep": json.dumps(episode.related_episode_ids),
+                    "rel_mem": json.dumps(episode.related_memory_ids),
+                }
+            )
+        return episode.id
+
+    async def get_recent_interactions(self, limit: int = 20) -> List[dict]:
+        """Fetch the most recent raw interactions from semantic memory."""
+        engine = get_engine()
+        with engine.begin() as conn:
+            rows = conn.execute(
+                text("SELECT * FROM omega_memory WHERE namespace LIKE 'conversation:%' ORDER BY ts DESC LIMIT :limit"),
+                {"limit": limit}
+            ).mappings().all()
+            return [dict(r) for r in rows]
