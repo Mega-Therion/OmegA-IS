@@ -2,6 +2,7 @@ from __future__ import annotations
 import httpx
 import logging
 from .config import settings
+from .usage import record_usage
 
 logger = logging.getLogger("uvicorn")
 
@@ -35,6 +36,13 @@ async def request_openai_compatible(
             logger.error(f"Provider Error ({model}): {r.text}")
             r.raise_for_status()
         data = r.json()
+        
+        # Record usage
+        usage = data.get("usage", {})
+        total_tokens = usage.get("total_tokens", 0)
+        if total_tokens:
+            record_usage(total_tokens)
+            
         return data["choices"][0]["message"]["content"]
 
 async def request_anthropic(
@@ -76,6 +84,13 @@ async def request_anthropic(
             logger.error(f"Anthropic Error: {r.text}")
             r.raise_for_status()
         data = r.json()
+        
+        # Record usage
+        usage = data.get("usage", {})
+        total_tokens = usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
+        if total_tokens:
+            record_usage(total_tokens)
+            
         return data["content"][0]["text"]
 
 async def request_google(
@@ -118,6 +133,13 @@ async def request_google(
             logger.error(f"Gemini Error: {r.text}")
             r.raise_for_status()
         data = r.json()
+        
+        # Record usage
+        usage = data.get("usageMetadata", {})
+        total_tokens = usage.get("totalTokenCount", 0)
+        if total_tokens:
+            record_usage(total_tokens)
+            
         try:
             return data["candidates"][0]["content"]["parts"][0]["text"]
         except (KeyError, IndexError):

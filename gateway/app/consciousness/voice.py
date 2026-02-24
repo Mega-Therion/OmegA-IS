@@ -8,10 +8,12 @@ Takes raw LLM responses and refines them to match OmegA's voice.
 from __future__ import annotations
 import logging
 import re
+import httpx
 from typing import Optional, Dict, Any
 
 from .identity import IdentityManager
 from .schemas import Identity, Mood
+from ..config import settings
 
 logger = logging.getLogger("omega.consciousness.voice")
 
@@ -19,16 +21,47 @@ logger = logging.getLogger("omega.consciousness.voice")
 class VoiceSynthesizer:
     """
     Ensures consistent personality expression across all outputs.
-
-    The Voice Synthesizer:
-    - Applies voice style adjustments
-    - Modulates tone based on mood
-    - Adds personality-consistent touches
-    - Ensures responses feel like they come from one entity
+    Also provides high-quality TTS through ElevenLabs.
     """
 
     def __init__(self, identity_manager: IdentityManager):
         self.identity_manager = identity_manager
+
+    async def generate_audio(self, text: str) -> bytes:
+        """
+        Generate audio for the given text using ElevenLabs.
+        Returns the raw audio bytes (typically MP3).
+        """
+        api_key = settings.elevenlabs_api_key
+        voice_id = settings.elevenlabs_voice_id
+        model_id = settings.elevenlabs_model_id
+
+        if not api_key:
+            logger.warning("ElevenLabs API key not set, voice synthesis unavailable")
+            raise ValueError("ElevenLabs API key is not configured")
+
+        url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+        headers = {
+            "Accept": "audio/mpeg",
+            "Content-Type": "application/json",
+            "xi-api-key": api_key
+        }
+        data = {
+            "text": text,
+            "model_id": model_id,
+            "voice_settings": {
+                "stability": 0.5,
+                "similarity_boost": 0.75
+            }
+        }
+
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url, json=data, headers=headers, timeout=30.0)
+            if response.status_code != 200:
+                logger.error(f"ElevenLabs error: {response.text}")
+                raise RuntimeError(f"ElevenLabs synthesis failed: {response.status_code}")
+            
+            return response.content
 
     async def synthesize(
         self,

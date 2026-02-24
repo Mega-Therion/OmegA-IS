@@ -1,11 +1,10 @@
 //! Sovereign Evolution Engine for ΩmegΑ.
 //! Implements self-reflection and prompt optimization (based on PPO concepts).
 
-use serde::{Serialize, Deserialize};
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::Path;
-use anyhow::Result;
-use crate::dna;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct EvolutionState {
@@ -71,7 +70,7 @@ impl EvolutionManager {
     pub fn reflect(&mut self, _logs: &str, critique: &str) -> Result<()> {
         // This is where the PPO logic would refine the internal 'policy' (principles).
         // For now, we simulate the extraction of a new principle from the critique.
-        
+
         if let Some(new_principle) = critique.lines().find(|l| l.contains("PRINCIPLE:")) {
             let p = new_principle.replace("PRINCIPLE:", "").trim().to_string();
             if !self.state.learned_principles.contains(&p) {
@@ -81,7 +80,7 @@ impl EvolutionManager {
                 self.state.save()?;
             }
         }
-        
+
         Ok(())
     }
 }

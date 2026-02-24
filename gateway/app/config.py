@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     omega_model: str = "gpt-4o"
 
     # --- Local / Ollama (Private) ---
-    omega_local_base_url: str = "http://omega-ollama:11434/v1"
+    omega_local_base_url: str = "http://localhost:11434/v1"
     omega_local_model: str = "llama3"
     
     # --- Anthropic (Claude) ---
@@ -47,5 +47,10 @@ class Settings(BaseSettings):
     # --- Internal ---
     omega_internal_token: str = ""
     omega_brain_base_url: str = "http://localhost:8080"
+
+    # --- ElevenLabs (Voice) ---
+    elevenlabs_api_key: str = ""
+    elevenlabs_voice_id: str = "pNInz6obpgu9P2pMifAy" # Adam (Jarvis-like)
+    elevenlabs_model_id: str = "eleven_monolingual_v1"
 
 settings = Settings()

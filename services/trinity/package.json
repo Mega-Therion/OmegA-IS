@@ -14,7 +14,8 @@
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "omega": "node scripts/omega-start.mjs",
     "omega:smoke": "node scripts/omega-smoke.mjs",
-    "omega:doctor": "node scripts/omega-doctor.mjs"
+    "omega:doctor": "node scripts/omega-doctor.mjs",
+    "dev:public": "pnpm --filter @omega/public-chat dev"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

@@ -1,6 +1,6 @@
-use whisper_rs::{WhisperContext, FullParams, SamplingStrategy};
 use std::path::Path;
 use std::process::Command;
+use whisper_rs::{FullParams, SamplingStrategy, WhisperContext};
 
 /// The Sovereign Ear of ΩmegΑ.
 /// Provides local, private speech-to-text capabilities using Whisper.
@@ -14,7 +14,10 @@ impl SovereignEar {
         if !Path::new(model_path).exists() {
             return Err(anyhow::anyhow!("Whisper model not found at {}", model_path));
         }
-        let ctx = WhisperContext::new_with_params(model_path, whisper_rs::WhisperContextParameters::default())?;
+        let ctx = WhisperContext::new_with_params(
+            model_path,
+            whisper_rs::WhisperContextParameters::default(),
+        )?;
         Ok(Self { ctx })
     }
 
@@ -64,7 +67,7 @@ impl SovereignEar {
     /// This is a simple bridge for initial implementation.
     pub fn record_and_transcribe(&self, duration_secs: u32) -> Result<String, anyhow::Error> {
         let temp_wav = "/tmp/omega_ear.wav";
-        
+
         // arecord -d <secs> -r 16000 -f S16_LE -c 1 /tmp/omega_ear.wav
         let status = Command::new("arecord")
             .arg("-d")
@@ -84,8 +87,28 @@ impl SovereignEar {
 
         let text = self.transcribe_wav(temp_wav)?;
         let _ = std::fs::remove_file(temp_wav);
-        
+
         Ok(text)
+    }
+
+    /// Listens for a specific wake word in a loop.
+    /// This is a simple implementation using Whisper tiny.
+    pub fn wait_for_wake_word(&self, keyword: &str) -> Result<(), anyhow::Error> {
+        loop {
+            // Record 1.5 seconds of audio to check for the wake word
+            let text = match self.record_and_transcribe(2) {
+                Ok(t) => t,
+                Err(_) => continue,
+            };
+
+            if text.to_lowercase().contains(&keyword.to_lowercase()) {
+                println!("[EAR] Wake word '{}' detected.", keyword);
+                return Ok(());
+            }
+            
+            // Small sleep to avoid tight loop if arecord fails
+            std::thread::sleep(std::time::Duration::from_millis(100));
+        }
     }
 }
 
@@ -93,7 +116,7 @@ impl SovereignEar {
 pub fn init_ear() -> Option<SovereignEar> {
     let paths = vec![
         "models/ggml-tiny.en.bin",
-        "/home/mega/NEXUS/OmegA/OmegA-SI/models/ggml-tiny.en.bin"
+        "/home/mega/NEXUS/OmegA/OmegA-SI/models/ggml-tiny.en.bin",
     ];
 
     for path in paths {
@@ -104,7 +127,7 @@ pub fn init_ear() -> Option<SovereignEar> {
             }
         }
     }
-    
+
     eprintln!("Failed to initialize Sovereign Ear: No model found.");
     None
 }

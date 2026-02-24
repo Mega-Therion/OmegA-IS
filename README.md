@@ -10,7 +10,8 @@ OmegA-IS/
 │   └── OmegA-UI/
 ├── services/       # Core services / backends
 │   ├── OmegA-AI/
-│   └── trinity/
+│   ├── trinity/    # Unified stack (Brain, Bridge, HUD, Public Chat)
+│   └── gateway/    # Sovereign Gateway (WASM Filter)
 ├── tools/          # Tooling, utilities, prototypes
 │   ├── OmegA-CL/
 │   ├── ORYAN/

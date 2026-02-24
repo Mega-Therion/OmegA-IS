@@ -47,7 +47,7 @@ async function callLlm(payload) {
         // Let's implement the Google AI format if it's easier, but many people use an OpenAI-bridge for Gemini.
         // Given this is a simple fetch, I'll add the Google AI fetch logic below.
         baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
-        model = payload.model || 'gemini-1.5-flash';
+        model = payload.model || process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     }
     else {
         throw new Error(`Unknown LLM Provider: ${provider}`);

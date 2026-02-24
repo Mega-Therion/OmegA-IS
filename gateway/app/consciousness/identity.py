@@ -62,6 +62,15 @@ class IdentityManager:
                 ).mappings().first()
 
                 if row:
+                    # Helper to parse JSON strings from SQLite or JSONB from Postgres
+                    def parse_json(val):
+                        if isinstance(val, str):
+                            try:
+                                return json.loads(val)
+                            except:
+                                return []
+                        return val or []
+
                     self.current = Identity(
                         id=row["id"],
                         name=row["name"],
@@ -76,9 +85,9 @@ class IdentityManager:
                         ),
                         voice_style=row["voice_style"],
                         default_greeting=row["default_greeting"],
-                        signature_phrases=row["signature_phrases"] or [],
-                        hard_constraints=row["hard_constraints"] or [],
-                        soft_preferences=row["soft_preferences"] or [],
+                        signature_phrases=parse_json(row["signature_phrases"]),
+                        hard_constraints=parse_json(row["hard_constraints"]),
+                        soft_preferences=parse_json(row["soft_preferences"]),
                     )
                     logger.info(
                         f"Loaded identity: {self.current.name} v{self.current.persona_version}"
@@ -113,8 +122,8 @@ class IdentityManager:
                             :id, :name, :version,
                             :curiosity, :warmth, :directness,
                             :humor, :formality, :verbosity,
-                            :voice_style, :greeting, :phrases::jsonb,
-                            :constraints::jsonb, :preferences::jsonb, NOW()
+                            :voice_style, :greeting, :phrases,
+                            :constraints, :preferences, datetime('now')
                         )
                         ON CONFLICT (id) DO UPDATE SET
                             name = EXCLUDED.name,
@@ -130,7 +139,7 @@ class IdentityManager:
                             signature_phrases = EXCLUDED.signature_phrases,
                             hard_constraints = EXCLUDED.hard_constraints,
                             soft_preferences = EXCLUDED.soft_preferences,
-                            updated_at = NOW()
+                            updated_at = datetime('now')
                     """),
                     {
                         "id": self.current.id,

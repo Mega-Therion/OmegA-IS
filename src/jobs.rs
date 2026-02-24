@@ -1,9 +1,9 @@
 //! Job management for ΩmegΑ.
 //! Handles parsing and scheduling of recurring daily missions.
 
+use anyhow::Result;
 use serde::Deserialize;
 use std::fs;
-use anyhow::Result;
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct JobMetadata {

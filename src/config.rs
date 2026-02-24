@@ -4,7 +4,7 @@
 //! This controls permissions, visual themes, and AI personality.
 
 use serde::Deserialize;
-use std::{fs, path::Path, env};
+use std::{env, fs};
 
 /// Capability configuration
 #[derive(Debug, Clone, Deserialize)]
@@ -18,6 +18,8 @@ pub struct Capabilities {
     /// Enable public-facing restricted mode
     #[serde(default)]
     pub is_public: bool,
+    /// URL for the external API Gateway (e.g. Consciousness Core)
+    pub gateway_url: Option<String>,
 }
 
 impl Default for Capabilities {
@@ -27,6 +29,7 @@ impl Default for Capabilities {
             allow_filesystem: false, // Default to safe
             max_parallel_agents: 3,
             is_public: false,
+            gateway_url: Some("http://localhost:8787".to_string()),
         }
     }
 }
@@ -56,22 +59,12 @@ pub struct SupabaseConfig {
     pub enabled: bool,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Default)]
 pub struct OmegaConfig {
     pub capabilities: Capabilities,
     pub profile: UserProfile,
     #[serde(default)]
     pub supabase: SupabaseConfig,
-}
-
-impl Default for OmegaConfig {
-    fn default() -> Self {
-        Self {
-            capabilities: Capabilities::default(),
-            profile: UserProfile::default(),
-            supabase: SupabaseConfig::default(),
-        }
-    }
 }
 
 /// Load configuration from a TOML file.
@@ -80,7 +73,9 @@ pub fn load_config(explicit_path: Option<&str>) -> OmegaConfig {
     let config_path = if let Some(p) = explicit_path {
         Some(p.to_string())
     } else {
-        env::var("HOME").ok().map(|h| format!("{}/.omega_config.toml", h))
+        env::var("HOME")
+            .ok()
+            .map(|h| format!("{}/.omega_config.toml", h))
     };
 
     if let Some(p) = config_path {
@@ -89,17 +84,20 @@ pub fn load_config(explicit_path: Option<&str>) -> OmegaConfig {
                 Ok(c) => return c,
                 Err(_) => {
                     // Try parsing just capabilities for backward compatibility or partial configs
-                    if let Ok(caps) = toml::from_str::<Capabilities>(&contents) {
-                         return OmegaConfig {
-                             capabilities: caps,
-                             profile: UserProfile::default(),
-                             supabase: SupabaseConfig::default(),
-                         };
+                    if let Ok(mut caps) = toml::from_str::<Capabilities>(&contents) {
+                        if caps.gateway_url.is_none() {
+                            caps.gateway_url = Some("http://localhost:8787".to_string());
+                        }
+                        return OmegaConfig {
+                            capabilities: caps,
+                            profile: UserProfile::default(),
+                            supabase: SupabaseConfig::default(),
+                        };
                     }
                 }
             }
         }
     }
-    
+
     OmegaConfig::default()
 }

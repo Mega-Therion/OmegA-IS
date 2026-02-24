@@ -125,20 +125,23 @@ server.listen(PORT, async () => {
     console.warn('[OMEGA] Economy initialization skipped:', err.message);
   }
 
-  // START TELEGRAM BOTS AUTOMATICALLY
-  try {
-    console.log('\n[AUTO-START] Launching Telegram Bots...');
+  // START TELEGRAM POLLING BOTS (legacy mode) ONLY WHEN EXPLICITLY ENABLED
+  if (process.env.ENABLE_TELEGRAM_POLLING_BOTS === '1') {
+    try {
+      console.log('\n[AUTO-START] Launching legacy Telegram polling bots...');
 
-    // Start Safa (Task Intake)
-    const { startSafaBot } = require('./src/safa-telegram-bot');
-    startSafaBot().catch(e => console.error('Failed to start Safa:', e.message));
+      // Start Safa (Task Intake)
+      const { startSafaBot } = require('./src/safa-telegram-bot');
+      startSafaBot().catch(e => console.error('Failed to start Safa:', e.message));
 
-    // Start Crew Bots (Gemini, Claude, etc.)
-    const { startCrewBots } = require('./src/crew-telegram-bot');
-    startCrewBots().catch(e => console.error('Failed to start Crew Bots:', e.message));
-
-  } catch (err) {
-    console.warn('[AUTO-START] Bot integration skipped:', err.message);
+      // Start Crew Bots (Gemini, Claude, etc.)
+      const { startCrewBots } = require('./src/crew-telegram-bot');
+      startCrewBots().catch(e => console.error('Failed to start Crew Bots:', e.message));
+    } catch (err) {
+      console.warn('[AUTO-START] Bot integration skipped:', err.message);
+    }
+  } else {
+    console.log('[AUTO-START] Legacy Telegram polling bots disabled (set ENABLE_TELEGRAM_POLLING_BOTS=1 to enable).');
   }
 
   if (ENABLE_NGROK && NGROK_AUTHTOKEN) {

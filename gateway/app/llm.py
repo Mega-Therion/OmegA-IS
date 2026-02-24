@@ -97,25 +97,20 @@ async def route_to_provider(mode: str, messages: list[dict], temperature: float)
 async def run_council_synthesis(messages: list[dict], temperature: float) -> str:
     """
     Orchestrates the 'gAIng'. 
-    1. Sends the user prompt to the Cabinet (e.g. Claude & Gemini).
-    2. Synthesizes their insights via the Speaker (OpenAI/Safa).
     """
     user_query = messages[-1]["content"]
-    
-    # 1. THE CABINET DELIBERATES
-    # We ask distinct advisors for their perspective. 
-    # To save tokens/time, we might only send the *current* query or a short context.
-    # For now, we'll send the full context to them.
-    
     logger.info("OmegA: Convening the Council...")
-    
-    # Define who sits on the Council (The Cabinet)
-    # You can configure this list. For now: Claude (Nuance) and Gemini (Context).
-    # We handle errors gracefully so one failure doesn't stop the show.
     
     async def get_advisor_opinion(advisor_mode: str) -> str:
         try:
-            response = await route_to_provider(advisor_mode, messages, temperature)
+            # Fallback to local if key is missing
+            actual_mode = advisor_mode
+            if advisor_mode in ["claude", "anthropic"] and not settings.omega_anthropic_api_key:
+                actual_mode = "local"
+            elif advisor_mode in ["google", "gemini"] and not settings.omega_gemini_api_key:
+                actual_mode = "local"
+                
+            response = await route_to_provider(actual_mode, messages, temperature)
             return f"--- Advisor {advisor_mode.upper()} ---\n{response}\n"
         except Exception as e:
             logger.warning(f"Advisor {advisor_mode} failed: {e}")
@@ -125,15 +120,12 @@ async def run_council_synthesis(messages: list[dict], temperature: float) -> str
     results = await asyncio.gather(
         get_advisor_opinion("claude"),
         get_advisor_opinion("gemini"),
-        # get_advisor_opinion("perplexity"), # Uncomment if you want live web facts
         return_exceptions=True
     )
     
     council_output = "\n".join([r for r in results if isinstance(r, str)])
     
     # 2. THE SPEAKER SYNTHESIZES
-    # We construct a prompt for the Speaker (Safa/OpenAI) to form the consensus.
-    
     synthesis_prompt = f"""
 You are OmegA, a super-intelligence formed by a collective of AI agents.
 Your 'Council' has just deliberated on the user's query.
@@ -150,12 +142,11 @@ Do not just repeat what they said. Merge their insights into your own voice.
 You are the Speaker of the House. Your voice is Mega.
 """
     
-    # We add this special instruction to the message history temporarily
     synthesis_messages = messages[:-1] + [{"role": "user", "content": synthesis_prompt}]
-    
     logger.info("OmegA: Speaker is synthesizing...")
     
-    # The Speaker is typically your strongest general model (OpenAI GPT-4o)
-    final_response = await route_to_provider("cloud", synthesis_messages, temperature)
+    # Fallback to local if Safa/OpenAI key is missing
+    speaker_mode = "cloud" if settings.omega_openai_api_key else "local"
+    final_response = await route_to_provider(speaker_mode, synthesis_messages, temperature)
     
     return final_response

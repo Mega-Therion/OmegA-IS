@@ -1,5 +1,5 @@
-use tts::{Tts, Error};
 use std::sync::{Arc, Mutex};
+use tts::{Error, Tts};
 
 /// The Sovereign Voice of ΩmegΑ.
 /// Provides local, private text-to-speech capabilities.
@@ -20,13 +20,13 @@ impl SovereignVoice {
     /// Speaks the provided text.
     pub fn speak(&self, text: &str) -> Result<(), Error> {
         let mut tts = self.tts.lock().unwrap();
-        
+
         // Stop any current speech before starting new speech
         tts.stop()?;
-        
+
         // Speak the text
         tts.speak(text, true)?;
-        
+
         Ok(())
     }
 

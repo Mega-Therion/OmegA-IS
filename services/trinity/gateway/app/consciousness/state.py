@@ -51,19 +51,44 @@ class StateController:
                 ).mappings().first()
 
                 if row:
+                    pending_reflections = row["pending_reflections"]
+                    if isinstance(pending_reflections, str):
+                        try:
+                            pending_reflections = json.loads(pending_reflections)
+                        except:
+                            pending_reflections = []
+                            
+                    active_task_ids = row["active_task_ids"]
+                    if active_task_ids is None:
+                        active_task_ids = []
+                    elif isinstance(active_task_ids, str):
+                        try:
+                            active_task_ids = json.loads(active_task_ids)
+                        except:
+                            active_task_ids = []
+                            
+                    current_goals = row["current_goals"]
+                    if current_goals is None:
+                        current_goals = []
+                    elif isinstance(current_goals, str):
+                        try:
+                            current_goals = json.loads(current_goals)
+                        except:
+                            current_goals = []
+
                     self.current = ConsciousnessState(
                         mode=OperationalMode(row["mode"]),
                         focus_topic=row["focus_topic"],
                         energy_level=row["energy_level"],
                         mood=Mood(row["mood"]),
                         active_conversation_id=row["active_conversation_id"],
-                        active_task_ids=row["active_task_ids"] or [],
-                        current_goals=row["current_goals"] or [],
+                        active_task_ids=active_task_ids,
+                        current_goals=current_goals,
                         session_started_at=row["session_started_at"] or datetime.utcnow(),
                         last_interaction_at=row["last_interaction_at"],
                         interactions_today=row["interactions_today"] or 0,
                         last_reflection_at=row["last_reflection_at"],
-                        pending_reflections=row["pending_reflections"] or [],
+                        pending_reflections=pending_reflections,
                     )
                     logger.info(
                         f"Restored state: mode={self.current.mode.value}, "

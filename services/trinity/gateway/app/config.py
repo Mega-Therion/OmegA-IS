@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # --- Google (Gemini) ---
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-1.5-pro"
+    gemini_model: str = "gemini-2.0-flash"
 
     # --- Perplexity (Search/Comet) ---
     perplexity_api_key: str = ""

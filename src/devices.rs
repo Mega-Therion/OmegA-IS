@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 
-#[derive(Debug, Clone, Serialize, Deserialize, utoipa::ToSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, utoipa::ToSchema, PartialEq)]
 pub enum EntityType {
     Sensor,
     Actuator,
@@ -36,6 +36,17 @@ pub struct RobotState {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, utoipa::ToSchema)]
+pub struct KineticMemoryEntry {
+    pub id: String,
+    pub device_id: String,
+    pub timestamp: DateTime<Utc>,
+    pub command: Option<String>,
+    pub telemetry: Option<String>,
+    pub impact_score: f32,
+    pub meta: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, utoipa::ToSchema)]
 pub struct PhysicalEntity {
     pub id: String,
     pub name: String,
@@ -52,16 +63,24 @@ pub struct PhysicalEntity {
     pub robot_state: Option<RobotState>,
 }
 
-fn default_max_telemetry() -> usize { 100 }
+fn default_max_telemetry() -> usize {
+    100
+}
+
+pub type CommandHandler = Arc<dyn Fn(&str, &str) -> Result<String, String> + Send + Sync>;
 
 pub struct DeviceRegistry {
     entities: Arc<RwLock<HashMap<String, PhysicalEntity>>>,
+    kinetic_memory: Arc<RwLock<Vec<KineticMemoryEntry>>>,
+    external_handler: Arc<RwLock<Option<CommandHandler>>>,
 }
 
 impl DeviceRegistry {
     pub fn new() -> Self {
         let registry = Self {
             entities: Arc::new(RwLock::new(HashMap::new())),
+            kinetic_memory: Arc::new(RwLock::new(Vec::new())),
+            external_handler: Arc::new(RwLock::new(None)),
         };
 
         // Initialize with default ARK entities as per Architectural Overview
@@ -118,7 +137,11 @@ impl DeviceRegistry {
             signal_strength: 100,
             status: "LANDED".to_string(),
             last_seen: Utc::now(),
-            capabilities: vec!["takeoff".to_string(), "land".to_string(), "video_feed".to_string()],
+            capabilities: vec![
+                "takeoff".to_string(),
+                "land".to_string(),
+                "video_feed".to_string(),
+            ],
             telemetry: vec![],
             max_telemetry_size: 200,
             robot_state: Some(RobotState::default()),
@@ -149,8 +172,7 @@ impl DeviceRegistry {
             entity
                 .telemetry
                 .iter()
-                .filter(|t| t.metric == metric)
-                .last()
+                .rfind(|t| t.metric == metric)
                 .cloned()
                 .ok_or_else(|| format!("No {} readings for {}", metric, entity_id))
         } else {
@@ -163,13 +185,29 @@ impl DeviceRegistry {
         let mut map = self.entities.write().unwrap();
         if let Some(entity) = map.get_mut(entity_id) {
             entity.last_seen = Utc::now();
-            entity.telemetry.push(reading);
-            
+            entity.telemetry.push(reading.clone());
+
             // Truncate if over limit
             if entity.telemetry.len() > entity.max_telemetry_size {
                 let to_remove = entity.telemetry.len() - entity.max_telemetry_size;
                 entity.telemetry.drain(0..to_remove);
             }
+
+            // Record to kinetic memory
+            let mut km = self.kinetic_memory.write().unwrap();
+            km.push(KineticMemoryEntry {
+                id: uuid::Uuid::new_v4().to_string(),
+                device_id: entity_id.to_string(),
+                timestamp: Utc::now(),
+                command: None,
+                telemetry: Some(format!(
+                    "{}: {} {}",
+                    reading.metric, reading.value, reading.unit
+                )),
+                impact_score: 1.0,
+                meta: "{}".to_string(),
+            });
+
             Ok(())
         } else {
             Err(format!("Entity {} not found.", entity_id))
@@ -183,6 +221,18 @@ impl DeviceRegistry {
         if let Some(entity) = map.get_mut(entity_id) {
             entity.last_seen = Utc::now();
             println!("[ARK BUS] Command: {} -> {}", command, entity.id);
+
+            // Record to kinetic memory
+            let mut km = self.kinetic_memory.write().unwrap();
+            km.push(KineticMemoryEntry {
+                id: uuid::Uuid::new_v4().to_string(),
+                device_id: entity_id.to_string(),
+                timestamp: Utc::now(),
+                command: Some(command.to_string()),
+                telemetry: None,
+                impact_score: 1.0,
+                meta: "{}".to_string(),
+            });
 
             // Parse parameterized commands (format: "CMD:param1,param2,...")
             let (cmd, params): (&str, Option<&str>) = if let Some(idx) = command.find(':') {
@@ -337,11 +387,24 @@ impl DeviceRegistry {
                     Ok(format!("Sensor {} calibration initiated.", entity.name))
                 }
 
-                _ => Err(format!("Unknown command: {}", cmd)),
+                _ => {
+                    // Try external handler if registered
+                    let handler_opt = self.external_handler.read().unwrap();
+                    if let Some(handler) = handler_opt.as_ref() {
+                        handler(entity_id, command)
+                    } else {
+                        Err(format!("Unknown command: {}", cmd))
+                    }
+                }
             }
         } else {
             Err(format!("Entity {} not found.", entity_id))
         }
+    }
+
+    pub fn set_external_handler(&self, handler: CommandHandler) {
+        let mut h = self.external_handler.write().unwrap();
+        *h = Some(handler);
     }
 
     /// Simulated discovery pulse - discovers nearby devices on the ARK bus

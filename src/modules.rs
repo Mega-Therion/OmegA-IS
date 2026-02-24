@@ -3,13 +3,13 @@
 //! as defined in the Architectural Overview.
 
 use crate::devices::DeviceRegistry;
+use crate::events::UiEvent;
 use anyhow::Result;
 use std::fs;
 use std::path::Path;
 use std::sync::Arc;
-use wasmtime::*;
 use tokio::sync::mpsc;
-use crate::events::UiEvent;
+use wasmtime::*;
 
 pub struct ModuleManager {
     engine: Engine,
@@ -35,7 +35,7 @@ impl ModuleManager {
         for entry in fs::read_dir(skills_dir)? {
             let entry = entry?;
             let path = entry.path();
-            if path.extension().map_or(false, |ext| ext == "wasm") {
+            if path.extension().is_some_and(|ext| ext == "wasm") {
                 if let Some(name) = path.file_stem().and_then(|s| s.to_str()) {
                     skills.push(name.to_string());
                 }
@@ -45,7 +45,12 @@ impl ModuleManager {
     }
 
     /// Load and execute a WASM skill with host-defined capabilities.
-    pub fn execute_skill(&self, path: &Path, input: &str, ui_tx: Option<mpsc::UnboundedSender<UiEvent>>) -> Result<String> {
+    pub fn execute_skill(
+        &self,
+        path: &Path,
+        input: &str,
+        ui_tx: Option<mpsc::UnboundedSender<UiEvent>>,
+    ) -> Result<String> {
         let module = Module::from_file(&self.engine, path)?;
 
         // Define the state for the WASM sandbox
@@ -196,14 +201,14 @@ impl ModuleManager {
                 let devices = caller.data().registry.get_all();
                 let json = serde_json::to_string(&devices).unwrap_or_else(|_| "[]".to_string());
                 let bytes = json.as_bytes();
-                
+
                 let mem = caller
                     .get_export("memory")
                     .and_then(|e| e.into_memory())
                     .unwrap();
 
                 if bytes.len() <= out_len as usize {
-                    if let Err(_) = mem.write(&mut caller, out_ptr as usize, bytes) {
+                    if mem.write(&mut caller, out_ptr as usize, bytes).is_err() {
                         return -1;
                     }
                     bytes.len() as i32
@@ -223,7 +228,7 @@ impl ModuleManager {
                     .and_then(|e| e.into_memory())
                     .unwrap();
                 let mut buf = vec![0u8; len as usize];
-                if let Ok(_) = mem.read(&caller, ptr as usize, &mut buf) {
+                if mem.read(&caller, ptr as usize, &mut buf).is_ok() {
                     let msg = String::from_utf8_lossy(&buf).to_string();
                     if let Some(tx) = &caller.data().ui_tx {
                         let _ = tx.send(UiEvent::Output(msg));

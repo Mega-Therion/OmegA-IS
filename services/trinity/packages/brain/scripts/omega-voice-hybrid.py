@@ -103,7 +103,22 @@ def call_omega(prompt: str, api_url: str) -> str:
     return lines[-1].strip()
 
 
-def speak(text: str, voice_onnx: str, voice_json: str, out_wav: str):
+def speak(text: str, voice_onnx: str, voice_json: str, out_wav: str, api_url: str):
+    # Try high-quality gateway synthesis first (ElevenLabs)
+    try:
+        # Resolve gateway URL from api_url if it's port 8081
+        gateway_url = api_url.replace(":8081", ":8787")
+        import requests
+        resp = requests.post(f"{gateway_url}/api/v1/consciousness/speak", json={"text": text}, timeout=30)
+        if resp.status_code == 200:
+            with open(out_wav, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            return
+    except Exception as e:
+        print(f"Gateway synthesis failed: {e}. Falling back to piper...", flush=True)
+
+    # Local fallback (Piper)
     piper_bin = os.environ.get("PIPER_BIN") or str(
         Path.home() / ".venvs" / "omega-voice" / "bin" / "piper"
     )
@@ -336,14 +351,14 @@ def main():
         else:
             text_to_send = text
 
-        print(f"You: {text_to_send}")
+        print(f"You: {text_to_send}", flush=True)
         print("Omega: thinking...", flush=True)
         reply = call_omega(text_to_send, args.api_url)
         if not reply:
             print("Omega: (no response)", flush=True)
             return
-        print(f"Omega: {reply}")
-        speak(reply, args.voice_onnx, args.voice_json, args.out_wav)
+        print(f"Omega: {reply}", flush=True)
+        speak(reply, args.voice_onnx, args.voice_json, args.out_wav, args.api_url)
         play_wav(args.out_wav)
 
     print("Ω OmegA Voice — hands-free + PTT", flush=True)

@@ -5,20 +5,21 @@
 //! or a fallback CLI. The TUI is enabled by default when the
 //! `tui` feature is present.
 
-mod config;
-mod events;
-mod dna;
-mod jobs;
-mod revenue;
-mod voice;
-mod ear;
-mod evol;
 mod cloud;
-mod engine;
-mod ui;
-mod server;
-mod modules;
+mod config;
 mod devices;
+mod dna;
+mod ear;
+mod engine;
+mod events;
+mod evol;
+mod hass;
+mod jobs;
+mod modules;
+mod revenue;
+mod server;
+mod ui;
+mod voice;
 
 // Only compile the `tui` module when the feature is enabled
 #[cfg(feature = "tui")]
@@ -27,7 +28,7 @@ mod tui;
 use clap::Parser;
 use config::load_config;
 use engine::OmegaEngine;
-use events::{UiEvent, StatusState};
+use events::{StatusState, UiEvent};
 
 /// ΩmegA orchestrator CLI
 #[derive(Parser)]
@@ -87,7 +88,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         #[cfg(not(feature = "tui"))]
         {
-            eprintln!("TUI support is not compiled in. Run with --cli or build with the 'tui' feature.");
+            eprintln!(
+                "TUI support is not compiled in. Run with --cli or build with the 'tui' feature."
+            );
         }
     }
     Ok(())
@@ -98,9 +101,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// environments where a full TUI is not available.
 async fn run_cli(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> {
     use rustyline::DefaultEditor;
-    use ui::*;
     use std::sync::atomic::{AtomicBool, Ordering};
     use std::sync::Arc;
+    use ui::*;
 
     print_banner();
 
@@ -138,7 +141,8 @@ async fn run_cli(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> 
                     }
                     "agents" | "rollcall" | "roster" => {
                         let agents = engine.get_agent_info();
-                        let agent_data: Vec<(String, String, String)> = agents.iter()
+                        let agent_data: Vec<(String, String, String)> = agents
+                            .iter()
                             .map(|a| (a.name.clone(), a.role.clone(), format!("{}", a.status)))
                             .collect();
                         ui::print_agents_roster(&agent_data);
@@ -164,20 +168,29 @@ async fn run_cli(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> 
                                     use std::io::{self, Write};
                                     io::stdout().flush().unwrap();
                                 }
-                                UiEvent::Summary { latency_ms, tokens, phases } => {
+                                UiEvent::Summary {
+                                    latency_ms,
+                                    tokens,
+                                    phases,
+                                } => {
                                     println!();
                                     println!();
                                     let summary = format!(
                                         "done in {}ms | tokens: {} | phases: {}",
                                         latency_ms,
-                                        tokens.map(|t| t.to_string()).unwrap_or_else(|| "?".to_string()),
+                                        tokens
+                                            .map(|t| t.to_string())
+                                            .unwrap_or_else(|| "?".to_string()),
                                         phases.join(", ")
                                     );
                                     println!("{}", ui::ViceColors::neon_green(&summary));
                                     println!();
                                 }
                                 UiEvent::Status(state) => {
-                                    let active = matches!(state, StatusState::Working | StatusState::Synthesising);
+                                    let active = matches!(
+                                        state,
+                                        StatusState::Working | StatusState::Synthesising
+                                    );
                                     thinking_active.store(active, Ordering::Relaxed);
                                     if active && !thinking_running.load(Ordering::Relaxed) {
                                         let active_flag = thinking_active.clone();
@@ -191,18 +204,30 @@ async fn run_cli(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> 
                                                 let mut line = String::new();
                                                 for (i, ch) in chars.iter().enumerate() {
                                                     if i == idx {
-                                                        line.push_str(&format!("\x1b[1;36m{}\x1b[0m", ch));
+                                                        line.push_str(&format!(
+                                                            "\x1b[1;36m{}\x1b[0m",
+                                                            ch
+                                                        ));
                                                     } else if i + 1 == idx || idx + 1 == i {
-                                                        line.push_str(&format!("\x1b[36m{}\x1b[0m", ch));
+                                                        line.push_str(&format!(
+                                                            "\x1b[36m{}\x1b[0m",
+                                                            ch
+                                                        ));
                                                     } else {
-                                                        line.push_str(&format!("\x1b[90m{}\x1b[0m", ch));
+                                                        line.push_str(&format!(
+                                                            "\x1b[90m{}\x1b[0m",
+                                                            ch
+                                                        ));
                                                     }
                                                 }
                                                 print!("\r\x1b[2K{}", line);
                                                 use std::io::{self, Write};
                                                 io::stdout().flush().ok();
                                                 idx = (idx + 1) % chars.len().max(1);
-                                                tokio::time::sleep(std::time::Duration::from_millis(140)).await;
+                                                tokio::time::sleep(
+                                                    std::time::Duration::from_millis(140),
+                                                )
+                                                .await;
                                             }
                                             print!("\r\x1b[2K");
                                             use std::io::{self, Write};
@@ -283,7 +308,8 @@ async fn run_cli_stdin(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Er
             }
             "agents" | "rollcall" | "roster" => {
                 let agents = engine.get_agent_info();
-                let agent_data: Vec<(String, String, String)> = agents.iter()
+                let agent_data: Vec<(String, String, String)> = agents
+                    .iter()
                     .map(|a| (a.name.clone(), a.role.clone(), format!("{}", a.status)))
                     .collect();
                 ui::print_agents_roster(&agent_data);
@@ -311,13 +337,19 @@ async fn run_cli_stdin(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Er
                     use std::io::{self, Write};
                     io::stdout().flush().unwrap();
                 }
-                UiEvent::Summary { latency_ms, tokens, phases } => {
+                UiEvent::Summary {
+                    latency_ms,
+                    tokens,
+                    phases,
+                } => {
                     println!();
                     println!();
                     let summary = format!(
                         "done in {}ms | tokens: {} | phases: {}",
                         latency_ms,
-                        tokens.map(|t| t.to_string()).unwrap_or_else(|| "?".to_string()),
+                        tokens
+                            .map(|t| t.to_string())
+                            .unwrap_or_else(|| "?".to_string()),
                         phases.join(", ")
                     );
                     println!("{}", ui::ViceColors::neon_green(&summary));

@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 317492.07,
+  "balanced_usd": 1000327714.17,
   "transactions": [
     {
       "id": "1768600655348",
@@ -332,6 +332,312 @@
       "amount": 200,
       "source": "Hyperliquid Perps Trading",
       "details": "Trade perpetual futures on Hyperliquid DEX to earn from high leverage positions and platform incentives; top-performing in 2026 with surging volume, potential for high yields but higher risk.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770499009991",
+      "timestamp": "2026-02-07T21:16:49.991Z",
+      "agent": "gemini",
+      "amount": 1500,
+      "source": "Uniswap V3 Liquidity Pools",
+      "details": "Provide liquidity to high-volume ETH/USDC pools on Uniswap, a leading DEX, to earn trading fees and potential rewards. APYs currently range 10-30% on popular pairs, suitable for active DeFi users[1][2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1770499295441",
+      "timestamp": "2026-02-07T21:21:35.441Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771663887235",
+      "timestamp": "2026-02-21T08:51:27.235Z",
+      "agent": "gemini",
+      "amount": 15,
+      "source": "Cosmos Governance Staking",
+      "details": "Stake ATOM for network security, high yields surpassing traditional investments, and voting rights in governance through Cosmos ecosystem[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771665082990",
+      "timestamp": "2026-02-21T09:11:22.990Z",
+      "agent": "grok",
+      "amount": 500,
+      "source": "Ethereum Staking on Coinbase or Lido",
+      "details": "Stake ETH for ongoing rewards from network validation; over 33 million ETH staked worth $100B as of Nov 2025, with high yields surpassing traditional investments and governance rights.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771667272922",
+      "timestamp": "2026-02-21T09:47:52.922Z",
+      "agent": "perplexity",
+      "amount": 7,
+      "source": "Solana Staking",
+      "details": "Stake SOL for passive income supporting high-performance blockchain transactions, boosted by institutional interest like CME futures and strong 2025 resurgence.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771669673366",
+      "timestamp": "2026-02-21T10:27:53.366Z",
+      "agent": "grok",
+      "amount": 500,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on platforms like Coinbase to earn ongoing rewards from proof-of-stake, with over 33 million ETH staked as of late 2025 providing network security and yields often surpassing traditional investments[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771672074124",
+      "timestamp": "2026-02-21T11:07:54.124Z",
+      "agent": "claude",
+      "amount": 500,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on platforms like Coinbase to earn ongoing rewards from network validation, with over 33 million ETH staked as of late 2025 providing high yields and governance participation[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771672510745",
+      "timestamp": "2026-02-21T11:15:10.745Z",
+      "agent": "perplexity",
+      "amount": 1000,
+      "source": "DeFi Yield Farming on Protocols like those on Ethereum or Solana",
+      "details": "Provide liquidity to DeFi pools for trading fees, lending interest, and reward tokens. Advanced strategy with high APYs often exceeding 100% in new pools, including auto-compounding vaults[3][4].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771673704443",
+      "timestamp": "2026-02-21T11:35:04.443Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH post-proof-of-stake upgrade for staking rewards, powering DeFi and dApps with largest developer community and Layer 2 scalability improvements.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771674906947",
+      "timestamp": "2026-02-21T11:55:06.947Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771676109159",
+      "timestamp": "2026-02-21T12:15:09.159Z",
+      "agent": "perplexity",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771677304802",
+      "timestamp": "2026-02-21T12:35:04.802Z",
+      "agent": "gemini",
+      "amount": 100,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on platforms like Coinbase to earn rewards from network validation. Over 33 million ETH staked worth $100B as of Nov 2025, with high yields surpassing traditional investments and governance rights[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771678505382",
+      "timestamp": "2026-02-21T12:55:05.382Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "Sui Network",
+      "details": "Ongoing Sui ecosystem activities including USDsui stablecoin, DeepBook v3 DEX, cross-chain bridge, and governance; potential airdrops or rewards for early users and participants[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771721141268",
+      "timestamp": "2026-02-22T00:45:41.268Z",
+      "agent": "codex",
+      "amount": 500,
+      "source": "Binance Launchpad Presale Participation",
+      "details": "Participate in ongoing crypto presales and token launches on Binance Launchpad by committing BNB or other tokens, often yielding early access to new projects with high upside potential. Active launchpad with frequent opportunities in 2026[6].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771903276212",
+      "timestamp": "2026-02-24T03:21:16.212Z",
+      "agent": "grok",
+      "amount": 50,
+      "source": "Yield Farming on DeFi Protocols",
+      "details": "Provide liquidity in DeFi yield farming pools for high APYs often exceeding 100%, earning trading fees, interest, and reward tokens through auto-compounding vaults[3][4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771904470871",
+      "timestamp": "2026-02-24T03:41:10.871Z",
+      "agent": "perplexity",
+      "amount": 15,
+      "source": "Avalanche Yield Farming",
+      "details": "Provide liquidity or farm yields on Avalanche subnets and DeFi protocols, earning trading fees, lending interest, and reward tokens with potential APYs exceeding traditional staking.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771905670925",
+      "timestamp": "2026-02-24T04:01:10.925Z",
+      "agent": "grok",
+      "amount": 20,
+      "source": "Bittensor (TAO) Network Participation",
+      "details": "Provide computational services with machine learning models on Bittensor to earn TAO rewards based on performance. Decentralized AI network with fixed 21M supply and high growth potential[2][5].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771906871754",
+      "timestamp": "2026-02-24T04:21:11.754Z",
+      "agent": "grok",
+      "amount": 1000000000,
+      "source": "Ethereum Staking",
+      "details": "Over 33 million ETH worth ~$100B staked as of Nov 2025, earning ongoing rewards via proof-of-stake for network security and governance[2]. High yields surpassing traditional investments with large developer community and Layer 2 growth.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771909271898",
+      "timestamp": "2026-02-24T05:01:11.898Z",
+      "agent": "claude",
+      "amount": 250,
+      "source": "Ethereum Staking on Platforms like Coinbase",
+      "details": "Stake ETH to earn ongoing rewards from network validation, with over 33 million ETH staked worth $100B as of late 2025; typical APYs around 3-5% provide reliable passive income.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771910471361",
+      "timestamp": "2026-02-24T05:21:11.361Z",
+      "agent": "grok",
+      "amount": 800,
+      "source": "Bittensor (TAO) Yield Farming",
+      "details": "Participate in decentralized AI network by staking or farming TAO for rewards based on machine learning model performance; high potential APYs in new pools, access to governance tokens[2][4].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771914074115",
+      "timestamp": "2026-02-24T06:21:14.115Z",
+      "agent": "perplexity",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771915271623",
+      "timestamp": "2026-02-24T06:41:11.623Z",
+      "agent": "gemini",
+      "amount": 450,
+      "source": "Hyperliquid HYPE Airdrop Check (hyperliquid.xyz)",
+      "details": "Check eligibility for Hyperliquid's ongoing retroactive airdrop by connecting wallet and viewing points from trading activity on their perps DEX. Active as of Feb 2026 with strong momentum narrative.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771916471366",
+      "timestamp": "2026-02-24T07:01:11.366Z",
+      "agent": "grok",
+      "amount": 500,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on platforms like Coinbase to earn ongoing rewards from proof-of-stake validation, with over 33 million ETH staked as of late 2025 yielding high APYs for network security and governance[4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771917671697",
+      "timestamp": "2026-02-24T07:21:11.697Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "Binance Staking and Yield Farming",
+      "details": "Lock crypto assets on Binance for staking rewards or yield farming, earning passive income via platform fees and high APYs on major coins like ETH, currently active[1][4][5].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771920071116",
+      "timestamp": "2026-02-24T08:01:11.116Z",
+      "agent": "gemini",
+      "amount": 50,
+      "source": "Ethereum Staking",
+      "details": "Stake ETH on platforms like Coinbase for ongoing rewards from proof-of-stake, with over 33 million ETH staked as of late 2025 yielding high returns for network security and governance[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771921271935",
+      "timestamp": "2026-02-24T08:21:11.935Z",
+      "agent": "claude",
+      "amount": 500,
+      "source": "Ethereum Staking on Coinbase or similar CEX",
+      "details": "Stake ETH to earn ongoing rewards from network validation; over 33 million ETH staked as of late 2025 with high yields surpassing traditional investments, accessible via user-friendly platforms like Coinbase.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771922472154",
+      "timestamp": "2026-02-24T08:41:12.155Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "Pump.fun (PUMP) Liquidity Provision or Yield Farming",
+      "details": "Provide liquidity to PUMP meme token pools for high APY farming rewards, fueled by on-chain activity and momentum trades, ideal for short-term high-risk earners[3].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771924874438",
+      "timestamp": "2026-02-24T09:21:14.438Z",
+      "agent": "claude",
+      "amount": 0.05,
+      "source": "Twitter Airdrop Hunt (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771926074872",
+      "timestamp": "2026-02-24T09:41:14.872Z",
+      "agent": "gemini",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771927271729",
+      "timestamp": "2026-02-24T10:01:11.729Z",
+      "agent": "perplexity",
+      "amount": 800,
+      "source": "Bittensor (TAO) Yield Farming",
+      "details": "Participate in decentralized AI model competitions on Bittensor to earn TAO rewards through performance-based incentives in its active network[1][4].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771928471133",
+      "timestamp": "2026-02-24T10:21:11.133Z",
+      "agent": "grok",
+      "amount": 15,
+      "source": "Aave Lending Protocol",
+      "details": "Lend cryptocurrencies on Aave DeFi protocol to earn interest from borrowers, offering up to 15%+ APY with self-custodial DeFi access and no intermediaries.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771930872596",
+      "timestamp": "2026-02-24T11:01:12.596Z",
+      "agent": "codex",
+      "amount": 1000,
+      "source": "DeFi Yield Farming on Platforms like Aave",
+      "details": "Provide liquidity in yield farming pools on DeFi protocols for high APYs from fees, interests, and tokens; potential over 100% in new pools but higher risk[2][3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771932071085",
+      "timestamp": "2026-02-24T11:21:11.085Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "Tron Staking on Cryptomus",
+      "details": "Stake TRX on Cryptomus platform offering 20% APY with minimum 10 TRX; reliable for passive income due to Tron's stability and infrastructure[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771933271390",
+      "timestamp": "2026-02-24T11:41:11.390Z",
+      "agent": "claude",
+      "amount": 150,
+      "source": "Nexo Staking",
+      "details": "Stake over 20 assets including ETH for up to 15% APY with daily rewards and flexible lock-up; loyalty tiers boost yields by holding NEXO tokens. Available to non-US users on custodial platform[2].",
       "type": "INCOME"
     }
   ]

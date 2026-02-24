@@ -1,0 +1,8 @@
+{
+  "name": "SAIS_API_Ingestion_Final",
+  "nodes": [
+    { "parameters": { "rule": { "interval": [ { "field": "cronExpression", "expression": "0 9,21 * * *" } ] } }, "name": "Schedule Trigger", "type": "n8n-nodes-base.scheduleTrigger", "typeVersion": 1, "position": [ 100, 100 ] },
+    { "parameters": { "url": "https://api.sam.gov/opportunities/v2/search", "sendQuery": true, "queryParameters": { "parameters": [ { "name": "api_key", "value": "3jeGfv17HbHtxlmVnuW9N6c2NMn6YQWY0vLeHbOm" }, { "name": "state", "value": "AR" }, { "name": "limit", "value": "100" } ] } }, "name": "SAM.gov API", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.1, "position": [ 300, 100 ] }
+  ],
+  "connections": { "Schedule Trigger": { "main": [ [ { "node": "SAM.gov API", "type": "main", "index": 0 } ] ] } }
+}

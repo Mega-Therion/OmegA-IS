@@ -84,6 +84,14 @@ const services = [
     },
     readyCheck: () => fs.existsSync(path.join(repoRoot, "Jarvis")),
   },
+  {
+    name: "public-chat",
+    cwd: path.join(repoRoot, "packages", "public-chat"),
+    cmd: "npm",
+    args: ["run", "dev", "--", "-p", process.env.PUBLIC_CHAT_PORT || "3005"],
+    env: process.env,
+    readyCheck: () => fs.existsSync(path.join(repoRoot, "packages", "public-chat")),
+  },
 ];
 
 const children = [];
@@ -139,3 +147,4 @@ console.log("- Gateway: http://localhost:8787");
 console.log("- Bridge:  http://localhost:8000");
 console.log("- Brain:   http://localhost:8080");
 console.log("- Jarvis:  http://localhost:3001");
+console.log("- Public:  http://localhost:3005");

@@ -9,8 +9,8 @@ use std::fmt;
 /// Real-time metrics for the JARVIS-style diagnostics
 #[derive(Debug, Clone)]
 pub struct SystemMetrics {
-    pub load: Vec<u64>,     // Scrolling load history
-    pub memory_used: f64,   // 0.0 to 1.0
+    pub load: Vec<u64>,                 // Scrolling load history
+    pub memory_used: f64,               // 0.0 to 1.0
     pub agent_load: Vec<(String, u64)>, // Name and score
 }
 
@@ -44,7 +44,7 @@ pub enum UiEvent {
 }
 
 /// Coarse status of the orchestrator.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum StatusState {
     Ready,
     Working,
@@ -52,7 +52,7 @@ pub enum StatusState {
 }
 
 /// Task lifecycle state for UI cards.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum TaskStatus {
     Pending,
     Running,

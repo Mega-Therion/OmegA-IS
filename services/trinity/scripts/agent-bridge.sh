@@ -3,8 +3,8 @@ set -euo pipefail
 
 REDIS_HOST="${REDIS_HOST:-127.0.0.1}"
 REDIS_PORT="${REDIS_PORT:-6379}"
-SUMMARY_SCRIPT="${SUMMARY_SCRIPT:-/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-summary.py}"
-SUMMARY_OUT="${SUMMARY_OUT:-/var/lib/omega/last_summary.md}"
+SUMMARY_SCRIPT="${SUMMARY_SCRIPT:-/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/scripts/agent-summary.py}"
+SUMMARY_OUT="${SUMMARY_OUT:-/home/mega/.omega/last_summary.md}"
 
 case "${1:-}" in
   register)

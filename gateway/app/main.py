@@ -11,17 +11,84 @@ from .events import append_event
 from .knowledge import kg
 from .mcp import mcp_manager
 from .consolidation import run_consolidation_cycle
+from .consciousness.core import get_consciousness
+from .consciousness.routes import router as consciousness_router
+from .consciousness.cortex.visual import visual_cortex
+from .wasm import wasm_manager
 import httpx
 import json
 import asyncio
+import os
 
 app = FastAPI(title="OMEGA Gateway", version="0.1")
 router = APIRouter(prefix="/api/v1")
 
+def auth(authorization: str | None = Header(default=None)) -> None:
+    if not settings.omega_api_bearer_token:
+        return
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing bearer token.")
+    token = authorization.split(" ", 1)[1].strip()
+    if token != settings.omega_api_bearer_token:
+        raise HTTPException(status_code=403, detail="Invalid bearer token.")
+
+class VisionRequest(BaseModel):
+    image_b64: str = Field(..., description="Base64 encoded image data.")
+    prompt: str = Field(default="Analyze this image for OMEGA context.", description="Analysis prompt.")
+
+@router.post("/vision/analyze")
+async def v1_vision_analyze(req: VisionRequest, _: None = Depends(auth)):
+    try:
+        reply = await visual_cortex.analyze_image(req.image_b64, req.prompt)
+        return {"reply": reply}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.middleware("http")
+async def wasm_filter_middleware(request: Request, call_next):
+    # Skip filter for non-API routes
+    if not request.url.path.startswith("/api/v1"):
+        return await call_next(request)
+
+    # Path to the gateway filter WASM
+    wasm_path = os.path.join(os.getcwd(), "skills", "gateway_filter.wasm")
+    if not os.path.exists(wasm_path):
+        wasm_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "skills", "gateway_filter.wasm")
+
+    if os.path.exists(wasm_path):
+        try:
+            # Extract input for filter (path + body if applicable)
+            filter_input = request.url.path
+            if request.method in ["POST", "PUT", "PATCH"]:
+                body = await request.body()
+                if body:
+                    filter_input += " " + body.decode("utf-8", errors="replace")
+                
+                # Since we consumed the body, we need to replace it so the route handler can read it
+                async def receive():
+                    return {"type": "http.request", "body": body}
+                request._receive = receive
+
+            result = wasm_manager.execute_skill(wasm_path, filter_input)
+            if result.startswith("DENY"):
+                return Response(content=json.dumps({"detail": result}), status_code=403, media_type="application/json")
+        except Exception as e:
+            print(f"[WASM FILTER ERROR] {e}")
+
+    return await call_next(request)
+
 @app.on_event("startup")
 async def _startup() -> None:
     init_db()
+    # Awaken consciousness
+    core = get_consciousness()
+    await core.awaken()
     asyncio.create_task(run_consolidation_cycle())
+
+@app.on_event("shutdown")
+async def _shutdown() -> None:
+    core = get_consciousness()
+    await core.sleep()
 
 @app.get("/")
 def root():
@@ -64,14 +131,7 @@ def status():
         "auth": bool(settings.omega_api_bearer_token),
     }
 
-def auth(authorization: str | None = Header(default=None)) -> None:
-    if not settings.omega_api_bearer_token:
-        return
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing bearer token.")
-    token = authorization.split(" ", 1)[1].strip()
-    if token != settings.omega_api_bearer_token:
-        raise HTTPException(status_code=403, detail="Invalid bearer token.")
+
 
 class ChatRequest(BaseModel):
     user: str = Field(..., description="User message.")
@@ -88,6 +148,20 @@ class ChatResponse(BaseModel):
 
 @router.post("/chat", response_model=ChatResponse)
 async def v1_chat(req: ChatRequest, _: None = Depends(auth)):
+    # If mode is 'omega', use Consciousness Core for enhanced logic
+    if req.mode == "omega":
+        core = get_consciousness()
+        result = await core.process_input(
+            user_input=req.user,
+            interface="api",
+            namespace=req.namespace,
+        )
+        return ChatResponse(
+            reply=result["response"], 
+            mode="omega_consciousness", 
+            memory_hits=result["memories_used"]
+        )
+
     memory_hits = []
     system = "You are OMEGA, a pragmatic assistant that can use retrieved memory snippets when provided. Be concise and accurate."
     if req.use_memory:
@@ -208,3 +282,4 @@ def healthz():
     return {"ok": True}
 
 app.include_router(router)
+app.include_router(consciousness_router)

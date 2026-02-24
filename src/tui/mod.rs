@@ -11,19 +11,19 @@
 pub mod app;
 pub mod view;
 
-use app::{App, UiLayout};
-use crate::events::UiEvent;
 use crate::engine::OmegaEngine;
-use futures::StreamExt;
-use ratatui::Terminal;
-use ratatui::backend::CrosstermBackend;
+use crate::events::UiEvent;
+use app::{App, UiLayout};
 use crossterm::{
     self,
-    event::{Event as CEvent, EventStream},
-    terminal::{enable_raw_mode, disable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
     event::{DisableMouseCapture, EnableMouseCapture},
+    event::{Event as CEvent, EventStream},
     execute,
+    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
+use futures::StreamExt;
+use ratatui::backend::CrosstermBackend;
+use ratatui::Terminal;
 use tokio::sync::mpsc::unbounded_channel;
 
 /// Run the terminal UI. This function takes ownership of an
@@ -33,15 +33,14 @@ pub async fn run(engine: OmegaEngine) -> Result<(), Box<dyn std::error::Error>> 
     run_with_layout(engine, UiLayout::Tui).await
 }
 
-pub async fn run_with_layout(engine: OmegaEngine, layout: UiLayout) -> Result<(), Box<dyn std::error::Error>> {
+pub async fn run_with_layout(
+    engine: OmegaEngine,
+    layout: UiLayout,
+) -> Result<(), Box<dyn std::error::Error>> {
     // Put the terminal into raw mode and switch to the alternate screen
     enable_raw_mode()?;
     let mut stdout = std::io::stdout();
-    execute!(
-        stdout,
-        EnterAlternateScreen,
-        EnableMouseCapture
-    )?;
+    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
     terminal.clear()?;
@@ -65,6 +64,10 @@ pub async fn run_with_layout(engine: OmegaEngine, layout: UiLayout) -> Result<()
     let mut app = App::new(engine.get_config().profile.clone(), layout);
     app.agents = engine.get_agent_info();
 
+    // Native startup greeting
+    let greeting = "Hello sir, what are we diving into today?";
+    engine.force_speak(greeting);
+
     // Main event loop
     loop {
         // Draw UI
@@ -79,13 +82,10 @@ pub async fn run_with_layout(engine: OmegaEngine, layout: UiLayout) -> Result<()
             maybe_evt = event_rx.recv() => {
                 if let Some(evt) = maybe_evt {
                     use crossterm::event::Event as InputEvent;
-                    match evt {
-                        InputEvent::Key(key_event) => {
-                            if app.on_key(key_event, &ui_tx, &engine) {
-                                break;
-                            }
+                    if let InputEvent::Key(key_event) = evt {
+                        if app.on_key(key_event, &ui_tx, &engine) {
+                            break;
                         }
-                        _ => {}
                     }
                 } else {
                     break;

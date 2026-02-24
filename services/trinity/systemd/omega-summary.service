@@ -5,7 +5,7 @@ After=network.target redis-server.service omega-gateway.service omega-bridge.ser
 [Service]
 Type=oneshot
 Environment=SUMMARY_OUT=/var/lib/omega/last_summary.md
-ExecStart=/usr/bin/env bash -c '/home/mega/NEXUS/repos/OMEGA-Trinity/scripts/agent-bridge.sh summarize'
+ExecStart=/usr/bin/env bash -c '/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/scripts/agent-bridge.sh summarize'
 
 [Install]
 WantedBy=multi-user.target

@@ -32,6 +32,7 @@ const rlhfRoutes = require('./routes/rlhf');
 const codeInterpreterRoutes = require('./routes/code-interpreter');
 const orchestratorUtilsRoutes = require('./routes/orchestrator-utils');
 const alexaRoutes = require('./routes/alexa');
+let telegramWebhookRouter;
 
 // New advanced routes
 let podcastRoutes, observability, streaming, vaultQueueRoutes;
@@ -39,6 +40,20 @@ try { podcastRoutes = require('./routes/podcast'); } catch (e) { podcastRoutes =
 try { observability = require('./services/observability'); } catch (e) { observability = null; }
 try { streaming = require('./services/streaming'); } catch (e) { streaming = null; }
 try { vaultQueueRoutes = require('./routes/vault-queue'); } catch (e) { vaultQueueRoutes = null; }
+try {
+  const { createConfig } = require('./telegram/config');
+  const { TelegramClient } = require('./telegram/telegram-client');
+  const { MemoryStore } = require('./telegram/memory');
+  const { createTelegramRouter } = require('./telegram/router');
+  const telegramConfig = createConfig();
+  telegramWebhookRouter = createTelegramRouter({
+    config: telegramConfig,
+    telegramClient: new TelegramClient(telegramConfig),
+    memoryStore: new MemoryStore(telegramConfig)
+  });
+} catch (e) {
+  telegramWebhookRouter = null;
+}
 
 // Consciousness Kernel
 const { ConsciousnessKernel } = require('./services/consciousnessKernel');
@@ -113,6 +128,10 @@ app.use('/code-interpreter', codeInterpreterRoutes);
 app.use('/api', orchestratorUtilsRoutes);
 app.use('/api/kernel', createKernelRouter(kernel));
 app.use('/api/alexa', alexaRoutes);
+if (telegramWebhookRouter) {
+  app.use('/telegram', telegramWebhookRouter);
+  console.log('[App] Telegram webhook router enabled at /telegram');
+}
 app.use('/captures', express.static('public/captures'));
 
 // Podcast routes

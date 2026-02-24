@@ -79,3 +79,4 @@ whisper-rs = "0.15.1"
 cpal = "0.17.1"
 hound = "3.5.1"
 postgrest = "1.6.0"
+uuid = { version = "1.8", features = ["v4", "serde"] }

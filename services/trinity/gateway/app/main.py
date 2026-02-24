@@ -11,6 +11,13 @@ from .events import append_event
 from .knowledge import kg
 from .mcp import mcp_manager
 from .consolidation import run_consolidation_cycle
+from .soul import take_snapshot
+from .dream import run_dream_cycle
+from .kinetic import kinetic_bridge, KineticCommand, TelemetryReading
+from .ipfs import ipfs_service
+from .treasury import treasury_service, WalletCommand
+from .diplomacy import diplomacy_bot
+from .local_memory import local_memory
 import httpx
 import json
 import asyncio
@@ -22,6 +29,8 @@ router = APIRouter(prefix="/api/v1")
 async def _startup() -> None:
     init_db()
     asyncio.create_task(run_consolidation_cycle())
+    asyncio.create_task(run_dream_cycle())
+    asyncio.create_task(ipfs_service.backup_phylactery())
 
 @app.get("/")
 def root():
@@ -104,6 +113,11 @@ async def v1_chat(req: ChatRequest, _: None = Depends(auth)):
         {"role": "user", "content": req.user + (("\n\nRetrieved memory:\n" + "\n".join([f"- ({h.get('score', 0):.3f}) {h.get('content','')}" for h in memory_hits[:6]])) if memory_hits else "")},
     ]
     reply = await chat_completion(messages, temperature=req.temperature, mode=req.mode)
+    
+    # Take Soul Snapshots
+    take_snapshot(req.user, "Architect")
+    take_snapshot(reply, "System")
+    
     await upsert(req.namespace, f"USER: {req.user}\nASSISTANT: {reply}", meta={"type": "chat"})
     
     if "[FACT]" in reply:
@@ -202,6 +216,161 @@ async def proxy_day_jobs(full_path: str, request: Request, _: None = Depends(aut
     if idem_key and request.method.lower() in {"post", "put", "patch", "delete"}:
         store_response(idem_key, response.status_code, response.body)
     return response
+
+# --- KINETIC SOVEREIGN (ARK BUS) ---
+
+@router.get("/ark/devices")
+async def get_ark_devices(_: None = Depends(auth)):
+    return await kinetic_bridge.get_devices()
+
+@router.post("/ark/devices/{device_id}/command")
+async def post_ark_command(device_id: str, req: KineticCommand, _: None = Depends(auth)):
+    return await kinetic_bridge.execute_command(device_id, req.command)
+
+@router.post("/ark/devices/{device_id}/telemetry")
+async def post_ark_telemetry(device_id: str, reading: TelemetryReading, _: None = Depends(auth)):
+    await kinetic_bridge.push_telemetry(device_id, reading)
+    return {"status": "recorded"}
+
+# --- ECONOMIC SOVEREIGN (TREASURY) ---
+
+@router.get("/treasury/balance")
+async def get_treasury_balance(_: None = Depends(auth)):
+    return await treasury_service.get_balances()
+
+@router.post("/treasury/execute")
+async def post_treasury_execute(req: WalletCommand, _: None = Depends(auth)):
+    if req.command == "pay":
+        return await treasury_service.execute_payment(req.amount, req.service)
+    elif req.command == "collect":
+        return await treasury_service.collect_revenue(req.amount, req.source)
+    else:
+        raise HTTPException(status_code=400, detail="Invalid wallet command")
+
+# --- SOCIAL SOVEREIGN (DIPLOMACY) ---
+
+class NegotiationRequest(BaseModel):
+    provider: str
+    context: str
+
+@router.get("/diplomacy/reputation")
+async def get_reputation(_: None = Depends(auth)):
+    return await diplomacy_bot.get_reputation()
+
+@router.post("/diplomacy/negotiate")
+async def post_negotiate(req: NegotiationRequest, _: None = Depends(auth)):
+    return await diplomacy_bot.initiate_negotiation(req.provider, req.context)
+
+# --- LOCAL MEMORY ---
+
+@router.post("/local_memory/context")
+async def get_local_context(req: QueryRequest, _: None = Depends(auth)):
+    context = await local_memory.get_context(req.query, req.k)
+    return {"context": context}
+
+# --- MESH SOVEREIGNTY ---
+
+class HeartbeatUpdate(BaseModel):
+    node_id: str
+    status: str
+    peers: int
+    latency: str
+
+@router.post("/mesh/heartbeat")
+async def post_mesh_heartbeat(req: HeartbeatUpdate, _: None = Depends(auth)):
+    # Log the mesh heartbeat to events
+    append_event("mesh.heartbeat", req.dict(), actor=req.node_id)
+    return {"status": "heartbeat_received", "timestamp": datetime.utcnow().isoformat()}
+
+# --- TASK GRAPH PERSISTENCE ---
+
+class TaskGraphSaveRequest(BaseModel):
+    mission_id: str
+    mission_description: str
+    status: str
+    graph_json: dict
+    sub_tasks: List[dict] # List of SubTask dicts
+
+@router.post("/task_graph/save")
+async def save_task_graph(req: TaskGraphSaveRequest, _: None = Depends(auth)):
+    engine = get_engine()
+    ts_func = "NOW()" if engine.dialect.name == "postgresql" else "datetime('now')"
+    
+    with engine.begin() as conn:
+        conn.execute(
+            text(f"""
+                INSERT INTO omega_task_graph (mission_id, mission_description, status, graph_json, created_at, updated_at)
+                VALUES (:mission_id, :mission_description, :status, :graph_json, {ts_func}, {ts_func})
+                ON CONFLICT (mission_id) DO UPDATE SET
+                    mission_description = EXCLUDED.mission_description,
+                    status = EXCLUDED.status,
+                    graph_json = EXCLUDED.graph_json,
+                    updated_at = {ts_func};
+            """),
+            {
+                "mission_id": req.mission_id,
+                "mission_description": req.mission_description,
+                "status": req.status,
+                "graph_json": json.dumps(req.graph_json),
+            }
+        )
+        
+        # Save sub-tasks
+        for sub_task in req.sub_tasks:
+            conn.execute(
+                text("""
+                    INSERT INTO omega_sub_tasks (id, mission_id, description, depends_on, assigned_agent, status, output)
+                    VALUES (:id, :mission_id, :description, :depends_on, :assigned_agent, :status, :output)
+                    ON CONFLICT (id) DO UPDATE SET
+                        description = EXCLUDED.description,
+                        depends_on = EXCLUDED.depends_on,
+                        assigned_agent = EXCLUDED.assigned_agent,
+                        status = EXCLUDED.status,
+                        output = EXCLUDED.output;
+                """),
+                {
+                    "id": sub_task["id"],
+                    "mission_id": req.mission_id,
+                    "description": sub_task["description"],
+                    "depends_on": json.dumps(sub_task["depends_on"]),
+                    "assigned_agent": sub_task["assigned_agent"],
+                    "status": sub_task["status"],
+                    "output": sub_task["output"],
+                }
+            )
+            
+    return {"status": "success", "mission_id": req.mission_id}
+
+@router.get("/task_graph/load/{mission_id}")
+async def load_task_graph(mission_id: str, _: None = Depends(auth)):
+    engine = get_engine()
+    with engine.begin() as conn:
+        graph_row = conn.execute(
+            text("SELECT mission_description, status, graph_json FROM omega_task_graph WHERE mission_id = :mission_id"),
+            {"mission_id": mission_id}
+        ).mappings().first()
+        
+        if not graph_row:
+            raise HTTPException(status_code=404, detail="Mission not found")
+            
+        sub_task_rows = conn.execute(
+            text("SELECT id, description, depends_on, assigned_agent, status, output FROM omega_sub_tasks WHERE mission_id = :mission_id"),
+            {"mission_id": mission_id}
+        ).mappings().all()
+        
+        sub_tasks = []
+        for row in sub_task_rows:
+            st = dict(row)
+            st["depends_on"] = json.loads(st["depends_on"])
+            sub_tasks.append(st)
+            
+        return {
+            "mission_id": mission_id,
+            "mission_description": graph_row["mission_description"],
+            "status": graph_row["status"],
+            "graph_json": json.loads(graph_row["graph_json"]),
+            "sub_tasks": sub_tasks
+        }
 
 @app.get("/healthz")
 def healthz():

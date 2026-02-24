@@ -1,8 +1,11 @@
 //! Rendering functions for ΩmegΑ's TUI (Sovereign Orchestrator Edition).
-use crate::tui::app::{App, Mode, UiLayout};
 use crate::events::{StatusState, TaskStatus};
+use crate::tui::app::{App, Mode, UiLayout};
 use ratatui::prelude::*;
-use ratatui::widgets::{Block, Borders, Paragraph, Wrap, List, ListItem, Gauge, Sparkline, BarChart, Table, Row, Cell, Scrollbar, ScrollbarOrientation, ScrollbarState};
+use ratatui::widgets::{
+    BarChart, Block, Borders, Cell, Gauge, List, ListItem, Paragraph, Row, Scrollbar,
+    ScrollbarOrientation, ScrollbarState, Sparkline, Table, Wrap,
+};
 
 // --- COLOR PALETTE ---
 const NEON_CYAN: Color = Color::Rgb(0, 255, 255);
@@ -80,7 +83,11 @@ fn shimmer_spans(text: &str, step: usize, base: Color, glow: Color) -> Vec<Span<
 }
 
 fn spinner_glyph(step: usize) -> &'static str {
-    if step % 2 == 0 { "α" } else { "ω" }
+    if step.is_multiple_of(2) {
+        "α"
+    } else {
+        "ω"
+    }
 }
 
 fn wrap_text(text: &str, width: usize) -> Vec<String> {
@@ -121,9 +128,9 @@ pub fn ui(f: &mut Frame, app: &mut App) {
             let chunks = Layout::default()
                 .direction(Direction::Vertical)
                 .constraints([
-                    Constraint::Length(3),  // Header
-                    Constraint::Min(3),     // Main Body
-                    Constraint::Length(3),  // Footer
+                    Constraint::Length(3), // Header
+                    Constraint::Min(3),    // Main Body
+                    Constraint::Length(3), // Footer
                 ])
                 .split(size);
 
@@ -141,11 +148,11 @@ fn draw_cli_layout(f: &mut Frame, app: &mut App, area: Rect) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
-            Constraint::Length(3),  // Header
-            Constraint::Length(5),  // HUD
-            Constraint::Min(6),     // Chat
-            Constraint::Length(3),  // Agents strip
-            Constraint::Length(3),  // Input
+            Constraint::Length(3), // Header
+            Constraint::Length(5), // HUD
+            Constraint::Min(6),    // Chat
+            Constraint::Length(3), // Agents strip
+            Constraint::Length(3), // Input
         ])
         .split(area);
 
@@ -167,17 +174,31 @@ fn draw_header(f: &mut Frame, app: &App, area: Rect) {
         ])
         .split(area);
 
-    let brand_color = if app.status == StatusState::Working { NEON_PINK } else { NEON_CYAN };
+    let brand_color = if app.status == StatusState::Working {
+        NEON_PINK
+    } else {
+        NEON_CYAN
+    };
     let branding = Line::from(vec![
-        Span::styled(" ⌬ ", Style::default().fg(brand_color).add_modifier(Modifier::BOLD)),
-        Span::styled(format!("{}", app.profile.assistant_name), Style::default().fg(Color::White).add_modifier(Modifier::BOLD)),
+        Span::styled(
+            " ⌬ ",
+            Style::default()
+                .fg(brand_color)
+                .add_modifier(Modifier::BOLD),
+        ),
+        Span::styled(
+            app.profile.assistant_name.to_string(),
+            Style::default()
+                .fg(Color::White)
+                .add_modifier(Modifier::BOLD),
+        ),
         Span::styled(" SYSTEM", Style::default().fg(SLATE_GRAY)),
     ]);
     f.render_widget(
         Paragraph::new(branding).block(
             Block::default()
                 .borders(Borders::BOTTOM)
-                .border_style(Style::default().fg(SLATE_GRAY))
+                .border_style(Style::default().fg(SLATE_GRAY)),
         ),
         layout[0],
     );
@@ -188,15 +209,23 @@ fn draw_header(f: &mut Frame, app: &App, area: Rect) {
                 .title(" NEURAL PULSE ")
                 .title_style(Style::default().fg(SLATE_GRAY))
                 .borders(Borders::BOTTOM)
-                .border_style(Style::default().fg(SLATE_GRAY))
+                .border_style(Style::default().fg(SLATE_GRAY)),
         )
         .data(&app.metrics.load)
         .style(Style::default().fg(brand_color));
     f.render_widget(sparkline, layout[1]);
 
     let right_text = Line::from(vec![
-        Span::styled(format!(" MODE: {} ", app.mode), Style::default().fg(brand_color).add_modifier(Modifier::BOLD)),
-        Span::styled(format!(" {} ", spinner_glyph(app.spinner_index)), Style::default().fg(NEON_CYAN)),
+        Span::styled(
+            format!(" MODE: {} ", app.mode),
+            Style::default()
+                .fg(brand_color)
+                .add_modifier(Modifier::BOLD),
+        ),
+        Span::styled(
+            format!(" {} ", spinner_glyph(app.spinner_index)),
+            Style::default().fg(NEON_CYAN),
+        ),
     ]);
     f.render_widget(
         Paragraph::new(right_text)
@@ -204,7 +233,7 @@ fn draw_header(f: &mut Frame, app: &App, area: Rect) {
             .block(
                 Block::default()
                     .borders(Borders::BOTTOM)
-                    .border_style(Style::default().fg(SLATE_GRAY))
+                    .border_style(Style::default().fg(SLATE_GRAY)),
             ),
         layout[2],
     );
@@ -221,7 +250,11 @@ fn draw_hud(f: &mut Frame, app: &App, area: Rect) {
 
     let cols = Layout::default()
         .direction(Direction::Horizontal)
-        .constraints([Constraint::Percentage(35), Constraint::Percentage(35), Constraint::Percentage(30)])
+        .constraints([
+            Constraint::Percentage(35),
+            Constraint::Percentage(35),
+            Constraint::Percentage(30),
+        ])
         .split(inner);
 
     let sparkline = Sparkline::default()
@@ -234,7 +267,7 @@ fn draw_hud(f: &mut Frame, app: &App, area: Rect) {
     let gauge = Gauge::default()
         .block(Block::default().title(" MEMORY ").borders(Borders::NONE))
         .gauge_style(Style::default().fg(NEON_PINK))
-        .ratio(app.metrics.memory_used as f64)
+        .ratio(app.metrics.memory_used)
         .label(format!("{}%", mem));
     f.render_widget(gauge, cols[1]);
 
@@ -244,6 +277,9 @@ fn draw_hud(f: &mut Frame, app: &App, area: Rect) {
         Span::styled("· ", Style::default().fg(SLATE_GRAY)),
         Span::styled("TOOLS ", Style::default().fg(SLATE_GRAY)),
         Span::styled("ARMED ", Style::default().fg(NEON_CYAN)),
+        Span::styled("· ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("VOICE ", Style::default().fg(SLATE_GRAY)),
+        Span::styled("HOT ", Style::default().fg(NEON_PINK)),
         Span::styled("· ", Style::default().fg(SLATE_GRAY)),
         Span::styled("SYNC ", Style::default().fg(SLATE_GRAY)),
         Span::styled("LIVE", Style::default().fg(NEON_PINK)),
@@ -257,7 +293,11 @@ fn draw_hud(f: &mut Frame, app: &App, area: Rect) {
 fn draw_body(f: &mut Frame, app: &mut App, area: Rect) {
     let constraints = match app.mode {
         Mode::Focus => vec![Constraint::Percentage(20), Constraint::Percentage(80)],
-        Mode::Ops => vec![Constraint::Percentage(20), Constraint::Percentage(50), Constraint::Percentage(30)],
+        Mode::Ops => vec![
+            Constraint::Percentage(20),
+            Constraint::Percentage(50),
+            Constraint::Percentage(30),
+        ],
         Mode::Showcase => vec![Constraint::Percentage(30), Constraint::Percentage(70)],
     };
 
@@ -268,7 +308,7 @@ fn draw_body(f: &mut Frame, app: &mut App, area: Rect) {
 
     draw_agents(f, app, chunks[0]);
     draw_output(f, app, chunks[1]);
-    
+
     if app.mode == Mode::Ops && chunks.len() > 2 {
         draw_satellite_feed(f, app, chunks[2]);
     } else if app.mode != Mode::Focus && chunks.len() > 2 {
@@ -280,8 +320,11 @@ fn draw_agents(f: &mut Frame, app: &App, area: Rect) {
     let block = Block::default()
         .borders(Borders::ALL)
         .border_style(Style::default().fg(SLATE_GRAY))
-        .title(Span::styled(" SWARM NODES ", Style::default().fg(NEON_CYAN)));
-    
+        .title(Span::styled(
+            " SWARM NODES ",
+            Style::default().fg(NEON_CYAN),
+        ));
+
     let mut items: Vec<ListItem> = Vec::new();
     for agent in &app.agents {
         let symbol = agent_symbol(&agent.name);
@@ -303,14 +346,22 @@ fn draw_agents(f: &mut Frame, app: &App, area: Rect) {
                     format!("{} ", symbol),
                     Style::default()
                         .fg(glow)
-                        .bg(if is_active { Color::Rgb(15, 10, 20) } else { DARK_BG })
+                        .bg(if is_active {
+                            Color::Rgb(15, 10, 20)
+                        } else {
+                            DARK_BG
+                        })
                         .add_modifier(Modifier::BOLD),
                 ),
                 Span::styled(
                     format!("{}~", agent.name),
                     Style::default()
                         .fg(name_color)
-                        .bg(if is_active { Color::Rgb(15, 10, 20) } else { DARK_BG })
+                        .bg(if is_active {
+                            Color::Rgb(15, 10, 20)
+                        } else {
+                            DARK_BG
+                        })
                         .add_modifier(Modifier::BOLD),
                 ),
             ]),
@@ -318,7 +369,9 @@ fn draw_agents(f: &mut Frame, app: &App, area: Rect) {
                 Span::raw("  "),
                 Span::styled(
                     format!("{} · {}", agent.role, agent.status),
-                    Style::default().fg(SLATE_GRAY).add_modifier(Modifier::ITALIC),
+                    Style::default()
+                        .fg(SLATE_GRAY)
+                        .add_modifier(Modifier::ITALIC),
                 ),
             ]),
             Line::raw(""),
@@ -329,18 +382,31 @@ fn draw_agents(f: &mut Frame, app: &App, area: Rect) {
 }
 
 fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
-    let border_color = if app.status == StatusState::Working { NEON_PINK } else { SLATE_GRAY };
-    let scroll_indicator = if app.auto_scroll { " AUTO " } else { " MANUAL " };
-    
+    let border_color = if app.status == StatusState::Working {
+        NEON_PINK
+    } else {
+        SLATE_GRAY
+    };
+    let scroll_indicator = if app.auto_scroll {
+        " AUTO "
+    } else {
+        " MANUAL "
+    };
+
     let block = Block::default()
         .borders(Borders::ALL)
         .border_style(Style::default().fg(border_color))
         .title(vec![
             Span::styled(" CHAT ", Style::default().fg(Color::White)),
-            Span::styled(scroll_indicator, Style::default().fg(WARNING_ORANGE).add_modifier(Modifier::BOLD)),
+            Span::styled(
+                scroll_indicator,
+                Style::default()
+                    .fg(WARNING_ORANGE)
+                    .add_modifier(Modifier::BOLD),
+            ),
         ]);
     let block = block.style(Style::default().bg(GLASS_BG));
-    
+
     let inner_area = block.inner(area);
     f.render_widget(block, area);
     let output_chunks = Layout::default()
@@ -352,16 +418,30 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
 
     let mut lines: Vec<Line> = Vec::new();
     for msg in &app.messages {
-        let label = if msg.from_user { "YOU" } else { &app.profile.assistant_name };
+        let label = if msg.from_user {
+            "YOU"
+        } else {
+            &app.profile.assistant_name
+        };
         let accent = if msg.from_user { NEON_PINK } else { NEON_CYAN };
-        let text_color = if msg.from_user { Color::White } else { Color::Rgb(200, 200, 200) };
+        let text_color = if msg.from_user {
+            Color::White
+        } else {
+            Color::Rgb(200, 200, 200)
+        };
         let width = content_area.width.saturating_sub(4) as usize;
         let wrapped = wrap_text(&msg.text, width.max(1));
 
         lines.push(Line::from(vec![
             Span::styled("╭─ ", Style::default().fg(SLATE_GRAY)),
-            Span::styled(format!("{} ", label), Style::default().fg(accent).add_modifier(Modifier::BOLD)),
-            Span::styled(format!("{} ", spinner_glyph(app.spinner_index)), Style::default().fg(accent)),
+            Span::styled(
+                format!("{} ", label),
+                Style::default().fg(accent).add_modifier(Modifier::BOLD),
+            ),
+            Span::styled(
+                format!("{} ", spinner_glyph(app.spinner_index)),
+                Style::default().fg(accent),
+            ),
         ]));
         for line in wrapped {
             lines.push(Line::from(vec![
@@ -369,17 +449,26 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
                 Span::styled(line, Style::default().fg(text_color)),
             ]));
         }
-        lines.push(Line::from(vec![
-            Span::styled("╰────────────────────────────────────────", Style::default().fg(SLATE_GRAY)),
-        ]));
+        lines.push(Line::from(vec![Span::styled(
+            "╰────────────────────────────────────────",
+            Style::default().fg(SLATE_GRAY),
+        )]));
         lines.push(Line::raw(""));
     }
 
     // Dispatch prompt (confirmation)
     if let Some(prompt) = &app.dispatch_prompt {
         lines.push(Line::from(vec![
-            Span::styled("⟡ ", Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD)),
-            Span::styled("Dispatch request pending", Style::default().fg(Color::White).add_modifier(Modifier::BOLD)),
+            Span::styled(
+                "⟡ ",
+                Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD),
+            ),
+            Span::styled(
+                "Dispatch request pending",
+                Style::default()
+                    .fg(Color::White)
+                    .add_modifier(Modifier::BOLD),
+            ),
         ]));
         lines.push(Line::from(Span::styled(
             format!("Proposed: {}. Reply 'yes' or 'no'.", prompt.summary),
@@ -392,7 +481,9 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
     if !app.tasks.is_empty() {
         lines.push(Line::from(Span::styled(
             "— Active Operations —",
-            Style::default().fg(SLATE_GRAY).add_modifier(Modifier::ITALIC),
+            Style::default()
+                .fg(SLATE_GRAY)
+                .add_modifier(Modifier::ITALIC),
         )));
         lines.push(Line::raw(""));
         for task in &app.tasks {
@@ -405,17 +496,24 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
             };
             lines.push(Line::from(vec![
                 Span::styled("┌─ ", Style::default().fg(SLATE_GRAY)),
-                Span::styled(format!("{} {}~ ", symbol, task.name), Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD)),
-                Span::styled(format!("[{}]", status.0), Style::default().fg(status.1).add_modifier(Modifier::BOLD)),
+                Span::styled(
+                    format!("{} {}~ ", symbol, task.name),
+                    Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD),
+                ),
+                Span::styled(
+                    format!("[{}]", status.0),
+                    Style::default().fg(status.1).add_modifier(Modifier::BOLD),
+                ),
             ]));
             lines.push(Line::from(vec![
                 Span::styled("│ ", Style::default().fg(SLATE_GRAY)),
                 Span::styled("Task: ", Style::default().fg(SLATE_GRAY)),
                 Span::styled(&task.detail, Style::default().fg(Color::Rgb(200, 200, 200))),
             ]));
-            lines.push(Line::from(vec![
-                Span::styled("└────────────────────────────────────────", Style::default().fg(SLATE_GRAY)),
-            ]));
+            lines.push(Line::from(vec![Span::styled(
+                "└────────────────────────────────────────",
+                Style::default().fg(SLATE_GRAY),
+            )]));
             lines.push(Line::raw(""));
         }
     }
@@ -443,13 +541,15 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
     }
 
     let visible_height = content_area.height;
-    
+
     if app.auto_scroll && total_rendered_lines > visible_height {
         app.scroll = total_rendered_lines - visible_height;
     }
 
     // Clamp scroll to valid range
-    app.scroll = app.scroll.min(total_rendered_lines.saturating_sub(visible_height));
+    app.scroll = app
+        .scroll
+        .min(total_rendered_lines.saturating_sub(visible_height));
 
     let paragraph = Paragraph::new(lines)
         .wrap(Wrap { trim: false })
@@ -465,9 +565,9 @@ fn draw_output(f: &mut Frame, app: &mut App, area: Rect) {
             .end_symbol(Some("▼"))
             .track_symbol(Some("│"))
             .thumb_symbol("┃");
-        
-        let mut scrollbar_state = ScrollbarState::new(total_rendered_lines as usize)
-            .position(app.scroll as usize);
+
+        let mut scrollbar_state =
+            ScrollbarState::new(total_rendered_lines as usize).position(app.scroll as usize);
 
         f.render_stateful_widget(scrollbar, scrollbar_area, &mut scrollbar_state);
     }
@@ -507,7 +607,10 @@ fn draw_agents_strip(f: &mut Frame, app: &mut App, area: Rect) {
         spans.push(Span::styled("  •  ", Style::default().fg(glow)));
     }
     if spans.is_empty() {
-        spans.push(Span::styled("No crew loaded.", Style::default().fg(SLATE_GRAY)));
+        spans.push(Span::styled(
+            "No crew loaded.",
+            Style::default().fg(SLATE_GRAY),
+        ));
     }
     let line = Line::from(spans);
     let paragraph = Paragraph::new(line).alignment(Alignment::Center);
@@ -527,7 +630,7 @@ fn draw_task_overlay(f: &mut Frame, app: &mut App, area: Rect) {
     let max_shells = 3usize.min(running_tasks.len());
     let popup_width = area.width.saturating_sub(6).min(72);
     let popup_height = 9u16.min(area.height.saturating_sub(4));
-    let total_height = popup_height * max_shells as u16 + (max_shells.saturating_sub(1) as u16 * 1);
+    let total_height = popup_height * max_shells as u16 + (max_shells.saturating_sub(1) as u16);
     let top = area.y + (area.height.saturating_sub(total_height)) / 2;
 
     for (i, task) in running_tasks.iter().take(max_shells).enumerate() {
@@ -543,7 +646,8 @@ fn draw_task_overlay(f: &mut Frame, app: &mut App, area: Rect) {
             x: popup.x.saturating_sub(1),
             y: popup.y.saturating_sub(1),
             width: (popup.width + 2).min(area.width.saturating_sub(popup.x.saturating_sub(area.x))),
-            height: (popup.height + 2).min(area.height.saturating_sub(popup.y.saturating_sub(area.y))),
+            height: (popup.height + 2)
+                .min(area.height.saturating_sub(popup.y.saturating_sub(area.y))),
         };
         let glow_block = Block::default()
             .borders(Borders::ALL)
@@ -554,17 +658,29 @@ fn draw_task_overlay(f: &mut Frame, app: &mut App, area: Rect) {
         let block = Block::default()
             .borders(Borders::ALL)
             .border_style(Style::default().fg(NEON_PINK))
-            .title(Span::styled(" TASK SHELL ", Style::default().fg(Color::White)))
+            .title(Span::styled(
+                " TASK SHELL ",
+                Style::default().fg(Color::White),
+            ))
             .style(Style::default().bg(Color::Rgb(8, 8, 14)));
         let inner = block.inner(popup);
         f.render_widget(block, popup);
 
         let mut lines: Vec<Line> = Vec::new();
         lines.push(Line::from(vec![
-            Span::styled(format!("{} {}~", agent_symbol(&task.name), task.name), Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD)),
-            Span::styled("  RUNNING", Style::default().fg(NEON_PINK).add_modifier(Modifier::BOLD)),
+            Span::styled(
+                format!("{} {}~", agent_symbol(&task.name), task.name),
+                Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD),
+            ),
+            Span::styled(
+                "  RUNNING",
+                Style::default().fg(NEON_PINK).add_modifier(Modifier::BOLD),
+            ),
         ]));
-        lines.push(Line::from(Span::styled(&task.detail, Style::default().fg(Color::Rgb(200, 200, 200)))));
+        lines.push(Line::from(Span::styled(
+            &task.detail,
+            Style::default().fg(Color::Rgb(200, 200, 200)),
+        )));
         lines.push(Line::from(shimmer_spans(
             " ▸ streaming output … ",
             app.spinner_index / 2,
@@ -580,10 +696,7 @@ fn draw_task_overlay(f: &mut Frame, app: &mut App, area: Rect) {
 fn draw_satellite_feed(f: &mut Frame, app: &App, area: Rect) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .constraints([
-            Constraint::Length(10), 
-            Constraint::Min(3),    
-        ])
+        .constraints([Constraint::Length(10), Constraint::Min(3)])
         .split(area);
 
     let header_cells = ["ID", "ENTITY", "SIG", "STATUS"]
@@ -591,30 +704,57 @@ fn draw_satellite_feed(f: &mut Frame, app: &App, area: Rect) {
         .map(|h| Cell::from(*h).style(Style::default().fg(NEON_CYAN).add_modifier(Modifier::BOLD)));
     let header = Row::new(header_cells).bottom_margin(1);
 
-    let rows: Vec<Row> = app.entities.iter().map(|e| {
-        let sig_color = if e.signal_strength > 80 { TERMINAL_GREEN } else if e.signal_strength > 40 { WARNING_ORANGE } else { NEON_PINK };
-        Row::new(vec![
-            Cell::from(e.id.clone()),
-            Cell::from(e.name.clone()),
-            Cell::from(format!("{}%", e.signal_strength)).style(Style::default().fg(sig_color)),
-            Cell::from(e.status.clone()).style(Style::default().fg(if e.status == "ONLINE" || e.status == "STABLE" { TERMINAL_GREEN } else { WARNING_ORANGE })),
-        ]).style(Style::default().fg(SLATE_GRAY))
-    }).collect();
+    let rows: Vec<Row> = app
+        .entities
+        .iter()
+        .map(|e| {
+            let sig_color = if e.signal_strength > 80 {
+                TERMINAL_GREEN
+            } else if e.signal_strength > 40 {
+                WARNING_ORANGE
+            } else {
+                NEON_PINK
+            };
+            Row::new(vec![
+                Cell::from(e.id.clone()),
+                Cell::from(e.name.clone()),
+                Cell::from(format!("{}%", e.signal_strength)).style(Style::default().fg(sig_color)),
+                Cell::from(e.status.clone()).style(Style::default().fg(
+                    if e.status == "ONLINE" || e.status == "STABLE" {
+                        TERMINAL_GREEN
+                    } else {
+                        WARNING_ORANGE
+                    },
+                )),
+            ])
+            .style(Style::default().fg(SLATE_GRAY))
+        })
+        .collect();
 
-    let table = Table::new(rows, [
-        Constraint::Length(8),
-        Constraint::Min(15),
-        Constraint::Length(5),
-        Constraint::Length(10),
-    ])
+    let table = Table::new(
+        rows,
+        [
+            Constraint::Length(8),
+            Constraint::Min(15),
+            Constraint::Length(5),
+            Constraint::Length(10),
+        ],
+    )
     .header(header)
-    .block(Block::default().borders(Borders::ALL).title(" SATELLITE FEED "));
+    .block(
+        Block::default()
+            .borders(Borders::ALL)
+            .title(" SATELLITE FEED "),
+    );
     f.render_widget(table, chunks[0]);
 
     let mut signal_symbols = String::new();
     for e in &app.entities {
-        if e.signal_strength > 50 { signal_symbols.push_str("⧉ "); }
-        else { signal_symbols.push_str("⧈ "); }
+        if e.signal_strength > 50 {
+            signal_symbols.push_str("⧉ ");
+        } else {
+            signal_symbols.push_str("⧈ ");
+        }
     }
 
     let signal_map = vec![
@@ -622,53 +762,98 @@ fn draw_satellite_feed(f: &mut Frame, app: &App, area: Rect) {
             Span::styled(" SIGNAL MAP: ", Style::default().fg(NEON_PINK)),
             Span::styled(signal_symbols, Style::default().fg(TERMINAL_GREEN)),
         ]),
-        Line::from(format!(" UPLINK: {}", if app.entities.is_empty() { "Searching..." } else { "Synchronized" })),
+        Line::from(format!(
+            " UPLINK: {}",
+            if app.entities.is_empty() {
+                "Searching..."
+            } else {
+                "Synchronized"
+            }
+        )),
         Line::from(format!(" NODES: {}", app.entities.len())),
     ];
-    f.render_widget(Paragraph::new(signal_map).block(Block::default().borders(Borders::ALL)), chunks[1]);
+    f.render_widget(
+        Paragraph::new(signal_map).block(Block::default().borders(Borders::ALL)),
+        chunks[1],
+    );
 }
 
 fn draw_diagnostics_panel(f: &mut Frame, app: &App, area: Rect) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
-            Constraint::Length(3), 
-            Constraint::Length(10), 
-            Constraint::Min(3),    
+            Constraint::Length(3),
+            Constraint::Length(10),
+            Constraint::Min(3),
         ])
         .split(area);
 
     let gauge = Gauge::default()
-        .block(Block::default().title(" CONTEXT SYNAPSE ").title_style(Style::default().fg(NEON_CYAN)))
-        .gauge_style(Style::default().fg(NEON_CYAN).bg(DARK_BG).add_modifier(Modifier::ITALIC))
+        .block(
+            Block::default()
+                .title(" CONTEXT SYNAPSE ")
+                .title_style(Style::default().fg(NEON_CYAN)),
+        )
+        .gauge_style(
+            Style::default()
+                .fg(NEON_CYAN)
+                .bg(DARK_BG)
+                .add_modifier(Modifier::ITALIC),
+        )
         .percent((app.metrics.memory_used * 100.0) as u16)
         .label(format!("{:.1}%", app.metrics.memory_used * 100.0));
     f.render_widget(gauge, chunks[0]);
 
     let bar_data = [("ALPHA", 65), ("BETA", 42), ("GAMMA", 15)];
     let barchart = BarChart::default()
-        .block(Block::default().title(" TRAJECTORIES ").borders(Borders::ALL).border_style(Style::default().fg(SLATE_GRAY)))
+        .block(
+            Block::default()
+                .title(" TRAJECTORIES ")
+                .borders(Borders::ALL)
+                .border_style(Style::default().fg(SLATE_GRAY)),
+        )
         .data(&bar_data)
         .bar_width(5)
         .bar_style(Style::default().fg(NEON_PINK))
-        .value_style(Style::default().fg(Color::Black).bg(NEON_PINK).add_modifier(Modifier::BOLD));
+        .value_style(
+            Style::default()
+                .fg(Color::Black)
+                .bg(NEON_PINK)
+                .add_modifier(Modifier::BOLD),
+        );
     f.render_widget(barchart, chunks[1]);
 
     let vitals = vec![
-        Line::from(vec![Span::styled(" CORE: ", Style::default().fg(SLATE_GRAY)), Span::styled("STABLE", Style::default().fg(TERMINAL_GREEN))]),
-        Line::from(vec![Span::styled(" VEC: ", Style::default().fg(SLATE_GRAY)), Span::styled("INDEXED", Style::default().fg(NEON_CYAN))]),
-        Line::from(vec![Span::styled(" WASM: ", Style::default().fg(SLATE_GRAY)), Span::styled("READY", Style::default().fg(NEON_PINK))]),
+        Line::from(vec![
+            Span::styled(" CORE: ", Style::default().fg(SLATE_GRAY)),
+            Span::styled("STABLE", Style::default().fg(TERMINAL_GREEN)),
+        ]),
+        Line::from(vec![
+            Span::styled(" VEC: ", Style::default().fg(SLATE_GRAY)),
+            Span::styled("INDEXED", Style::default().fg(NEON_CYAN)),
+        ]),
+        Line::from(vec![
+            Span::styled(" WASM: ", Style::default().fg(SLATE_GRAY)),
+            Span::styled("READY", Style::default().fg(NEON_PINK)),
+        ]),
     ];
-    f.render_widget(Paragraph::new(vitals).block(Block::default().borders(Borders::ALL).title(" VITALS ")), chunks[2]);
+    f.render_widget(
+        Paragraph::new(vitals).block(Block::default().borders(Borders::ALL).title(" VITALS ")),
+        chunks[2],
+    );
 }
 
 fn draw_input(f: &mut Frame, app: &App, area: Rect) {
-    let border_color = if app.input.starts_with('/') { WARNING_ORANGE } else { NEON_CYAN };
+    let border_color = if app.input.starts_with('/') {
+        WARNING_ORANGE
+    } else {
+        NEON_CYAN
+    };
     let block = Block::default()
         .borders(Borders::ALL)
         .border_style(Style::default().fg(border_color))
         .title(Span::styled(" COMMAND ", Style::default().fg(Color::White)));
-    
+
     let inner = block.inner(area);
     f.render_widget(block, area);
 
@@ -682,9 +867,17 @@ fn draw_input(f: &mut Frame, app: &App, area: Rect) {
         format!("{} > ", status_symbol)
     };
     let input_line = Line::from(vec![
-        Span::styled(prefix_text, Style::default().fg(NEON_PINK).add_modifier(Modifier::BOLD)),
+        Span::styled(
+            prefix_text,
+            Style::default().fg(NEON_PINK).add_modifier(Modifier::BOLD),
+        ),
         Span::styled(&app.input, Style::default().fg(Color::White)),
-        Span::styled("█", Style::default().fg(NEON_CYAN).add_modifier(Modifier::RAPID_BLINK)),
+        Span::styled(
+            "█",
+            Style::default()
+                .fg(NEON_CYAN)
+                .add_modifier(Modifier::RAPID_BLINK),
+        ),
     ]);
 
     f.render_widget(Paragraph::new(input_line), inner);

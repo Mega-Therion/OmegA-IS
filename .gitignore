@@ -94,3 +94,4 @@ jspm_packages/
 
 # Models
 models/
+.aider*

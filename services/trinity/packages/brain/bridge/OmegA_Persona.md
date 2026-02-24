@@ -1,0 +1,1 @@
+/home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/packages/bridge/OmegA_Persona.md

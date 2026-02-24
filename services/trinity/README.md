@@ -11,6 +11,8 @@ omega-trinity/
 ├── packages/
 │   ├── hud/              # 🎨 OMEGA HUD (Next.js Frontend)
 │   │   └── Jarvis Neuro-Link interface
+│   ├── public-chat/      # 🌐 OMEGA Public Chat (Next.js Frontend)
+│   │   └── Informational chatbot for visitors
 │   ├── brain/            # 🧠 gAIng-Brain (Memory & Orchestration)
 │   │   ├── frontend/     # React frontend
 │   │   ├── cli/          # Command-line interface
@@ -63,14 +65,16 @@ npm run dev
 
 This starts:
 
-- 🎨 **HUD** on `http://localhost:3000`
+- 🎨 **HUD** on `http://localhost:3001`
 - 🧠 **Brain** on `http://localhost:8080`
 - 🌉 **Bridge** on `http://localhost:8000`
+- 🌐 **Public Chat** on `http://localhost:3005`
 
 **Individual Services:**
 
 ```bash
-npm run dev:hud      # Start only the frontend
+npm run dev:hud      # Start only the HUD frontend
+npm run dev:public   # Start only the public chatbot
 npm run dev:brain    # Start only the brain/memory layer
 npm run dev:bridge   # Start only the Python backend
 ```

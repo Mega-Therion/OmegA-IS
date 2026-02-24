@@ -51,19 +51,28 @@ class StateController:
                 ).mappings().first()
 
                 if row:
+                    # Helper to parse JSON strings from SQLite or JSONB from Postgres
+                    def parse_json(val):
+                        if isinstance(val, str):
+                            try:
+                                return json.loads(val)
+                            except:
+                                return []
+                        return val or []
+
                     self.current = ConsciousnessState(
                         mode=OperationalMode(row["mode"]),
                         focus_topic=row["focus_topic"],
                         energy_level=row["energy_level"],
                         mood=Mood(row["mood"]),
                         active_conversation_id=row["active_conversation_id"],
-                        active_task_ids=row["active_task_ids"] or [],
-                        current_goals=row["current_goals"] or [],
+                        active_task_ids=parse_json(row["active_task_ids"]),
+                        current_goals=parse_json(row["current_goals"]),
                         session_started_at=row["session_started_at"] or datetime.utcnow(),
                         last_interaction_at=row["last_interaction_at"],
                         interactions_today=row["interactions_today"] or 0,
                         last_reflection_at=row["last_reflection_at"],
-                        pending_reflections=row["pending_reflections"] or [],
+                        pending_reflections=parse_json(row["pending_reflections"]),
                     )
                     logger.info(
                         f"Restored state: mode={self.current.mode.value}, "
@@ -90,31 +99,32 @@ class StateController:
             with engine.begin() as conn:
                 conn.execute(
                     text("""
-                        INSERT INTO omega_state (
-                            id, mode, focus_topic, energy_level, mood,
-                            active_conversation_id, active_task_ids, current_goals,
-                            session_started_at, last_interaction_at, interactions_today,
-                            last_reflection_at, pending_reflections, updated_at
-                        ) VALUES (
-                            'current', :mode, :focus, :energy, :mood,
-                            :conv_id, :tasks::jsonb, :goals::jsonb,
-                            :session_start, :last_interaction, :interactions,
-                            :last_reflection, :pending::jsonb, NOW()
-                        )
-                        ON CONFLICT (id) DO UPDATE SET
-                            mode = EXCLUDED.mode,
-                            focus_topic = EXCLUDED.focus_topic,
-                            energy_level = EXCLUDED.energy_level,
-                            mood = EXCLUDED.mood,
-                            active_conversation_id = EXCLUDED.active_conversation_id,
-                            active_task_ids = EXCLUDED.active_task_ids,
-                            current_goals = EXCLUDED.current_goals,
-                            session_started_at = EXCLUDED.session_started_at,
-                            last_interaction_at = EXCLUDED.last_interaction_at,
-                            interactions_today = EXCLUDED.interactions_today,
-                            last_reflection_at = EXCLUDED.last_reflection_at,
-                            pending_reflections = EXCLUDED.pending_reflections,
-                            updated_at = NOW()
+                                            INSERT INTO omega_state (
+                                                id, mode, focus_topic, energy_level, mood,
+                                                active_conversation_id, active_task_ids, current_goals,
+                                                session_started_at, last_interaction_at, interactions_today,
+                                                last_reflection_at, pending_reflections, updated_at
+                                            ) VALUES (
+                                                'current', :mode, :focus, :energy, :mood,
+                                                :conv_id, :tasks, :goals,
+                                                :session_start, :last_interaction, :interactions,
+                                                :last_reflection, :pending, datetime('now')
+                                            )
+                                            ON CONFLICT (id) DO UPDATE SET
+                                                mode = EXCLUDED.mode,
+                                                focus_topic = EXCLUDED.focus_topic,
+                                                energy_level = EXCLUDED.energy_level,
+                                                mood = EXCLUDED.mood,
+                                                active_conversation_id = EXCLUDED.active_conversation_id,
+                                                active_task_ids = EXCLUDED.active_task_ids,
+                                                current_goals = EXCLUDED.current_goals,
+                                                session_started_at = EXCLUDED.session_started_at,
+                                                last_interaction_at = EXCLUDED.last_interaction_at,
+                                                interactions_today = EXCLUDED.interactions_today,
+                                                last_reflection_at = EXCLUDED.last_reflection_at,
+                                                pending_reflections = EXCLUDED.pending_reflections,
+                                                updated_at = datetime('now')
+                        
                     """),
                     {
                         "mode": self.current.mode.value,

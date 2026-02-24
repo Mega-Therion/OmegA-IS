@@ -1,11 +1,11 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use actix_cors::Cors;
-use serde::{Deserialize, Serialize};
+use crate::config::{Capabilities, OmegaConfig, SupabaseConfig, UserProfile};
+use crate::devices::{EntityType, PhysicalEntity, RobotState, TelemetryReading};
 use crate::engine::OmegaEngine;
-use crate::config::{OmegaConfig, Capabilities, UserProfile, SupabaseConfig};
-use crate::devices::{PhysicalEntity, EntityType, TelemetryReading, RobotState};
-use tokio::sync::mpsc;
 use crate::events::UiEvent;
+use actix_cors::Cors;
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
+use serde::{Deserialize, Serialize};
+use tokio::sync::mpsc;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
@@ -54,16 +54,19 @@ where
 
     fn call(&self, req: ServiceRequest) -> Self::Future {
         let engine = req.app_data::<web::Data<OmegaEngine>>().cloned();
-        
-        // In a real implementation, we would extract the body and pass it to WASM.
-        // For this prototype, we log the path and perform a basic WASM-gated check.
+
         if let Some(engine) = engine {
             let path = req.path().to_string();
+            let method = req.method().to_string();
+            let filter_input = format!("{} {}", method, path);
             let filter_path = std::path::PathBuf::from("skills/gateway_filter.wasm");
-            
+
             if filter_path.exists() {
                 // Execute WASM filter
-                match engine.modules.execute_skill(&filter_path, &path, None) {
+                match engine
+                    .modules
+                    .execute_skill(&filter_path, &filter_input, None)
+                {
                     Ok(result) => {
                         if result.starts_with("DENY") {
                             return Box::pin(async move {
@@ -130,10 +133,7 @@ pub struct SpeakResponse {
         (status = 200, description = "Success", body = ChatResponse)
     )
 )]
-async fn chat_handler(
-    data: web::Data<OmegaEngine>,
-    req: web::Json<ChatRequest>,
-) -> impl Responder {
+async fn chat_handler(data: web::Data<OmegaEngine>, req: web::Json<ChatRequest>) -> impl Responder {
     let (tx, mut rx) = mpsc::unbounded_channel();
     let engine = data.get_ref().clone();
     let prompt = req.message.clone();
@@ -147,7 +147,7 @@ async fn chat_handler(
         match event {
             UiEvent::Output(text) => final_response = text,
             UiEvent::Summary { latency_ms, .. } => latency = latency_ms,
-            _ => {},
+            _ => {}
         }
     }
 
@@ -166,10 +166,7 @@ async fn chat_handler(
         (status = 500, description = "Error transcribing")
     )
 )]
-async fn voice_listen(
-    data: web::Data<OmegaEngine>,
-    req_body: web::Bytes,
-) -> impl Responder {
+async fn voice_listen(data: web::Data<OmegaEngine>, req_body: web::Bytes) -> impl Responder {
     // Try to parse as JSON first for local recording
     if let Ok(req) = serde_json::from_slice::<ListenRequest>(&req_body) {
         match data.listen(req.duration_secs).await {
@@ -180,7 +177,8 @@ async fn voice_listen(
 
     // Otherwise treat as raw audio bytes
     if req_body.is_empty() {
-        return HttpResponse::BadRequest().json("Empty body. Provide ListenRequest JSON or WAV bytes.");
+        return HttpResponse::BadRequest()
+            .json("Empty body. Provide ListenRequest JSON or WAV bytes.");
     }
 
     match data.transcribe(req_body.to_vec()).await {
@@ -197,10 +195,7 @@ async fn voice_listen(
         (status = 200, description = "Success", body = SpeakResponse)
     )
 )]
-async fn voice_speak(
-    data: web::Data<OmegaEngine>,
-    req: web::Json<SpeakRequest>,
-) -> impl Responder {
+async fn voice_speak(data: web::Data<OmegaEngine>, req: web::Json<SpeakRequest>) -> impl Responder {
     data.speak(&req.text);
     HttpResponse::Ok().json(SpeakResponse { success: true })
 }
@@ -312,14 +307,14 @@ async fn post_skill_execute(
     if !path.exists() {
         return HttpResponse::NotFound().json(format!("Skill {} not found", name));
     }
-    
+
     let (tx, _rx) = mpsc::unbounded_channel();
     let input_clone = req.input.clone();
-    
+
     // We execute in a thread to allow for potential ui_broadcast via the channel
     // although for now the handler waits for completion.
     let res = data.modules.execute_skill(&path, &input_clone, Some(tx));
-    
+
     match res {
         Ok(res) => HttpResponse::Ok().json(res),
         Err(e) => HttpResponse::InternalServerError().json(e.to_string()),
@@ -346,10 +341,7 @@ async fn discover_devices(data: web::Data<OmegaEngine>) -> impl Responder {
         (status = 404, description = "Device not found")
     )
 )]
-async fn get_device(
-    data: web::Data<OmegaEngine>,
-    id: web::Path<String>,
-) -> impl Responder {
+async fn get_device(data: web::Data<OmegaEngine>, id: web::Path<String>) -> impl Responder {
     match data.devices.get(&id) {
         Some(device) => HttpResponse::Ok().json(device),
         None => HttpResponse::NotFound().json(format!("Device {} not found", id)),
@@ -390,6 +382,7 @@ pub async fn run_server(port: u16) -> std::io::Result<()> {
             allow_filesystem: true,
             max_parallel_agents: 5,
             is_public: false,
+            gateway_url: Some("http://localhost:8787".to_string()),
         },
         profile: UserProfile {
             pilot_name: "API User".to_string(),
@@ -398,13 +391,16 @@ pub async fn run_server(port: u16) -> std::io::Result<()> {
         },
         supabase: SupabaseConfig::default(),
     };
-    
+
     let engine = OmegaEngine::new(config);
     let engine_data = web::Data::new(engine);
     let openapi = ApiDoc::openapi();
 
     println!("Starting ΩmegΑ Sovereign Server on port {}", port);
-    println!("Swagger UI available at http://localhost:{}/swagger-ui/", port);
+    println!(
+        "Swagger UI available at http://localhost:{}/swagger-ui/",
+        port
+    );
 
     HttpServer::new(move || {
         let cors = Cors::permissive();
@@ -412,17 +408,28 @@ pub async fn run_server(port: u16) -> std::io::Result<()> {
             .wrap(cors)
             .wrap(GatewayMiddleware)
             .app_data(engine_data.clone())
-            .service(SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()))
+            .service(
+                SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),
+            )
             .route("/health", web::get().to(health_check))
             .route("/api/chat", web::post().to(chat_handler))
             .route("/api/devices", web::get().to(get_devices))
             .route("/api/devices/discover", web::post().to(discover_devices))
             .route("/api/devices/{id}", web::get().to(get_device))
             // .route("/api/devices/{id}/telemetry", web::get().to(get_device_telemetry))
-            .route("/api/devices/{id}/telemetry", web::post().to(post_device_telemetry))
-            .route("/api/devices/{id}/command", web::post().to(post_device_command))
+            .route(
+                "/api/devices/{id}/telemetry",
+                web::post().to(post_device_telemetry),
+            )
+            .route(
+                "/api/devices/{id}/command",
+                web::post().to(post_device_command),
+            )
             .route("/api/skills", web::get().to(get_skills))
-            .route("/api/skills/{name}/execute", web::post().to(post_skill_execute))
+            .route(
+                "/api/skills/{name}/execute",
+                web::post().to(post_skill_execute),
+            )
             .route("/api/voice/listen", web::post().to(voice_listen))
             .route("/api/voice/speak", web::post().to(voice_speak))
             .route("/api/voice/synthesize", web::post().to(voice_synthesize))

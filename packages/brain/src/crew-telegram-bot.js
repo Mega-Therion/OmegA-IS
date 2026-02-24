@@ -15,11 +15,11 @@
  * 3. Run: npm run crew
  */
 
-const fs = require('fs');
 const https = require('https');
 const path = require('path');
 const { getPeacePipeProtocol } = require('./core/peace-pipe');
 const { getNeuralPulsing } = require('./services/neural-pulsing');
+const { generateReply: generateProviderReply } = require('./telegram/providers');
 
 // DEBUG: FORCE LOAD .ENV
 const envPath = path.join(__dirname, '..', '.env');
@@ -90,6 +90,22 @@ const CREW_CONFIG = {
         model: process.env.PERPLEXITY_MODEL || 'sonar-pro',
         emoji: '🔍',
         handle: 'Perplexity_gAIng_bot'
+    },
+    deepseek: {
+        name: 'DeepSeek',
+        token: process.env.DEEPSEEK_BOT_TOKEN,
+        apiKey: process.env.DEEPSEEK_API_KEY,
+        model: process.env.DEEPSEEK_MODEL || 'deepseek-chat',
+        emoji: '🌊',
+        handle: 'DeepSeek_gAIng_bot'
+    },
+    kimi: {
+        name: 'Kimi',
+        token: process.env.KIMI_BOT_TOKEN,
+        apiKey: process.env.KIMI_API_KEY || process.env.MOONSHOT_API_KEY,
+        model: process.env.KIMI_MODEL || 'moonshot-v1-8k',
+        emoji: '🌙',
+        handle: 'Kimi_gAIng_bot'
     },
     grav: {
         name: 'Grav',
@@ -185,311 +201,19 @@ async function sendTypingAction(token, chatId) {
 // LLM API CALLS
 // ============================================================================
 
-async function callGemini(messages, config) {
-    const contents = [];
-    let systemInstruction = null;
-
-    for (const msg of messages) {
-        if (msg.role === 'system') {
-            systemInstruction = msg.content;
-        } else {
-            const role = msg.role === 'user' ? 'user' : 'model';
-            contents.push({ role, parts: [{ text: msg.content }] });
+async function callLLM(agent, { userMessage, history, context, config }) {
+    return generateProviderReply({
+        agent,
+        userMessage,
+        history,
+        context,
+        config: {
+            ...config,
+            openaiApiKey: process.env.OPENAI_API_KEY,
+            openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+            openaiBaseUrl: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
         }
-    }
-
-    const payload = {
-        contents,
-        generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 2000
-        }
-    };
-
-    if (systemInstruction) {
-        payload.systemInstruction = { parts: [{ text: systemInstruction }] };
-    }
-
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent?key=${config.apiKey}`;
-
-    return new Promise((resolve, reject) => {
-        const urlObj = new URL(url);
-        const req = https.request({
-            hostname: urlObj.hostname,
-            path: urlObj.pathname + urlObj.search,
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.candidates?.[0]?.content?.parts?.[0]?.text) {
-                        resolve(json.candidates[0].content.parts[0].text);
-                    } else {
-                        reject(new Error(json.error?.message || 'No response from Gemini'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
     });
-}
-
-async function callClaude(messages, config) {
-    let systemContent = '';
-    const anthropicMessages = [];
-
-    for (const msg of messages) {
-        if (msg.role === 'system') {
-            systemContent = msg.content;
-        } else {
-            anthropicMessages.push({ role: msg.role, content: msg.content });
-        }
-    }
-
-    const payload = {
-        model: config.model,
-        messages: anthropicMessages,
-        max_tokens: 2000
-    };
-
-    if (systemContent) {
-        payload.system = systemContent;
-    }
-
-    return new Promise((resolve, reject) => {
-        const req = https.request({
-            hostname: 'api.anthropic.com',
-            path: '/v1/messages',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': config.apiKey,
-                'anthropic-version': '2024-01-01'
-            }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.content?.[0]?.text) {
-                        resolve(json.content[0].text);
-                    } else {
-                        reject(new Error(json.error?.message || 'No response from Claude'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
-    });
-}
-
-async function callOpenAI(messages, config) {
-    const payload = {
-        model: config.model,
-        messages,
-        temperature: 0.7,
-        max_tokens: 2000
-    };
-
-    return new Promise((resolve, reject) => {
-        const req = https.request({
-            hostname: 'api.openai.com',
-            path: '/v1/chat/completions',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${config.apiKey}`
-            }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.choices?.[0]?.message?.content) {
-                        resolve(json.choices[0].message.content);
-                    } else {
-                        reject(new Error(json.error?.message || 'No response from OpenAI'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
-    });
-}
-
-async function callGrok(messages, config) {
-    const payload = {
-        model: config.model,
-        messages,
-        temperature: 0.7,
-        max_tokens: 2000
-    };
-
-    return new Promise((resolve, reject) => {
-        const req = https.request({
-            hostname: 'api.x.ai',
-            path: '/v1/chat/completions',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${config.apiKey}`
-            }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.choices?.[0]?.message?.content) {
-                        resolve(json.choices[0].message.content);
-                    } else {
-                        reject(new Error(json.error?.message || 'No response from Grok'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
-    });
-}
-
-async function callPerplexity(messages, config) {
-    const payload = {
-        model: config.model,
-        messages,
-        temperature: 0.7,
-        max_tokens: 2000
-    };
-
-    return new Promise((resolve, reject) => {
-        const req = https.request({
-            hostname: 'api.perplexity.ai',
-            path: '/chat/completions',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${config.apiKey}`
-            }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.choices?.[0]?.message?.content) {
-                        resolve(json.choices[0].message.content);
-                    } else {
-                        reject(new Error(json.error?.message || 'No response from Perplexity'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
-    });
-}
-
-async function callOllama(messages, config) {
-    const payload = {
-        model: 'llama3.2:1b', // Ultra-fast local model
-        messages,
-        stream: false
-    };
-
-    return new Promise((resolve, reject) => {
-        const req = https.request({
-            hostname: 'localhost',
-            port: 11434,
-            path: '/api/chat',
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const json = JSON.parse(data);
-                    if (json.message?.content) {
-                        resolve(json.message.content);
-                    } else {
-                        reject(new Error('No response from local brain (Ollama)'));
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        });
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
-        req.end();
-    });
-}
-
-async function callLLM(agent, messages, config) {
-    try {
-        switch (agent) {
-            case 'gemini':
-                return await callGemini(messages, config);
-            case 'claude':
-                return await callClaude(messages, config);
-            case 'codex':
-            case 'grav':
-                return await callOpenAI(messages, config);
-            case 'grok':
-                return await callGrok(messages, config);
-            case 'perplexity':
-                return await callPerplexity(messages, config);
-            default:
-                throw new Error(`Unknown agent: ${agent}`);
-        }
-    } catch (error) {
-        console.warn(`[${config.name}] API Error: ${error.message}. Attempting fallback chain...`);
-
-        // FALLBACK 1: Try OpenAI (if not already failing OpenAI)
-        if (agent !== 'codex' && agent !== 'grav' && process.env.OPENAI_API_KEY) {
-            try {
-                const response = await callOpenAI(messages, {
-                    apiKey: process.env.OPENAI_API_KEY,
-                    model: 'gpt-4o-mini'
-                });
-                return `(Cloud Bridge) ${response}`;
-            } catch (fallbackError) {
-                console.warn(`[${config.name}] Cloud Bridge failed: ${fallbackError.message}`);
-            }
-        }
-
-        // FALLBACK 2: Try Local Ollama (The "Unstoppable" Brain)
-        try {
-            const response = await callOllama(messages, config);
-            return `(Local Brain) ${response}`;
-        } catch (ollamaError) {
-            console.error(`[${config.name}] Local Brain also failed:`, ollamaError.message);
-            throw error; // Throw original error if all fallbacks fail
-        }
-    }
 }
 
 // ============================================================================
@@ -636,6 +360,7 @@ async function handleMessage(agent, config, message) {
     const userId = message.from.id;
     const username = message.from.username || message.from.first_name || 'User';
     const isGroup = message.chat.type === 'group' || message.chat.type === 'supergroup';
+    const isReply = Boolean(message.reply_to_message);
 
     // DEBUG: Log ALL messages
     console.log(`[MSG] From: ${username} (${userId}) | Chat: ${chatId} | Type: ${message.chat.type} | Text: "${message.text}"`);
@@ -759,24 +484,25 @@ async function handleMessage(agent, config, message) {
         try {
             // Get conversation history
             const history = await getConversation(userId, agent);
-
-            // Build messages with system prompt
-            const messages = [
-                {
-                    role: 'system',
-                    content: `You are ${config.name}, an AI assistant. Be helpful, concise, and friendly. ` +
-                        `Remember: you're chatting on Telegram, so keep responses reasonably brief. ` +
-                        `You're part of the OMEGA crew, a team of AI agents working together.`
-                },
-                ...history,
-                { role: 'user', content: userMessage }
-            ];
+            const context = {
+                chatType: message.chat.type,
+                username,
+                systemPrompt:
+                    `You are ${config.name}, an AI assistant. Be helpful, concise, and friendly. ` +
+                    `Remember: you're chatting on Telegram, so keep responses reasonably brief. ` +
+                    `You're part of the OMEGA crew, a team of AI agents working together.`
+            };
 
             // Add user message to history
             await addToConversation(userId, agent, 'user', userMessage);
 
             // Call LLM
-            const response = await callLLM(agent, messages, config);
+            const response = await callLLM(agent, {
+                userMessage,
+                history,
+                context,
+                config
+            });
 
             // Add assistant response to history
             await addToConversation(userId, agent, 'assistant', response);

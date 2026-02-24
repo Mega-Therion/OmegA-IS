@@ -15,6 +15,7 @@ OMEGA_AUDIO_DEVICE="${OMEGA_AUDIO_DEVICE:-default}" \
 OMEGA_WAKEWORD="${OMEGA_WAKEWORD:-mega}" \
 OMEGA_SPK_VERIFY="${OMEGA_SPK_VERIFY:-soft}" \
 OMEGA_SPK_THRESHOLD="${OMEGA_SPK_THRESHOLD:-0.62}" \
+PYTHONUNBUFFERED=1 \
 "$PY" /home/mega/NEXUS/OmegA/OmegA-SI/services/trinity/packages/brain/scripts/omega-voice-hybrid.py \
   --padding-ms "${OMEGA_PADDING_MS:-200}" \
   --silence-ms "${OMEGA_SILENCE_MS:-300}" \
