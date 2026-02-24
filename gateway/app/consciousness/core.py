@@ -56,6 +56,7 @@ class ConsciousnessCore:
         from .evolution import EvolutionEngine
         from .zenith import SovereignZenith
         from .omni_memory import OmniMemory
+        from .autonomic import AutonomicNervousSystem
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -69,6 +70,7 @@ class ConsciousnessCore:
         self.evolution = EvolutionEngine(self)
         self.zenith = SovereignZenith(self)
         self.omni_memory = OmniMemory(self)
+        self.autonomic = AutonomicNervousSystem(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state

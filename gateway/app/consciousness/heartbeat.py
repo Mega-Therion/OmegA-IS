@@ -142,6 +142,10 @@ class HeartbeatDaemon:
         if self._tick_count % 60 == 0: # Every 30 minutes
             await self.core.zenith.evaluate_system_coherence()
 
+        # 8. Autonomic Healing (Self-Correction)
+        if self._tick_count % 90 == 0:
+            await self.core.autonomic.run_healing_cycle()
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.
