@@ -96,7 +96,12 @@ class HeartbeatDaemon:
         if self._tick_count % 10 == 0:
             logger.info(f"Metabolic stats: CPU {metabolic_health.get('cpu_percent')}% | Mem Avail {metabolic_health.get('memory_available_percent'):.1f}%")
 
-        # 2. Check if reflection is due
+        # 2. Sensory Poll
+        sensors = await self.core.sensorium.poll_sensors()
+        if self._tick_count % 15 == 0:
+            logger.info(f"Sensorium poll: {len(sensors)} devices reporting.")
+
+        # 3. Check if reflection is due
         if self._tick_count % self.reflection_interval_ticks == 0:
             if self.core.state.should_reflect():
                 await self._perform_reflection()

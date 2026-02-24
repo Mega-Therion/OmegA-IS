@@ -50,6 +50,7 @@ class ConsciousnessCore:
         from .reflection import ReflectionEngine
         from .metabolism import Metabolism
         from .plasticity import NeuralPlasticity
+        from .sensorium import Sensorium
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -57,6 +58,7 @@ class ConsciousnessCore:
         self.reflection = ReflectionEngine(self)
         self.metabolism = Metabolism(self)
         self.plasticity = NeuralPlasticity(self)
+        self.sensorium = Sensorium(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
