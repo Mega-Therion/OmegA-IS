@@ -49,12 +49,14 @@ class ConsciousnessCore:
         # Core modules
         from .reflection import ReflectionEngine
         from .metabolism import Metabolism
+        from .plasticity import NeuralPlasticity
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
         self.voice = VoiceSynthesizer(self.identity)
         self.reflection = ReflectionEngine(self)
         self.metabolism = Metabolism(self)
+        self.plasticity = NeuralPlasticity(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
@@ -298,9 +300,16 @@ class ConsciousnessCore:
 
     async def _generate_response(self, context: Dict[str, Any]) -> str:
         """
-        Generate response using LLM.
+        Generate response using LLM with dynamic routing.
         """
         from ..llm import chat_completion
+
+        # 1. Route the request (Neural Plasticity)
+        model_strategy = await self.plasticity.route_request(
+            context["user_input"],
+            context=context
+        )
+        logger.info(f"Neural Plasticity: Routing to strategy '{model_strategy}'")
 
         messages = [
             {"role": "system", "content": context["system_prompt"]},

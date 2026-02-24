@@ -115,6 +115,10 @@ class HeartbeatDaemon:
         # Autonomous Initiative (Check for "Contextual Itches")
         if self._tick_count % 30 == 0: # Every 15 minutes
             await self._check_initiative()
+        
+        # Neural Adaptation
+        if self._tick_count % 20 == 0:
+            await self.core.plasticity.adapt_model_selection(metabolic_health)
 
     async def _check_initiative(self) -> None:
         """
