@@ -133,6 +133,11 @@ class HeartbeatDaemon:
         if self._tick_count % 20 == 0:
             await self.core.plasticity.adapt_model_selection(metabolic_health)
 
+        # 6. Recursive Self-Optimization (Evolution)
+        if self._tick_count % 240 == 0: # Every 2 hours
+            logger.info("Triggering recursive self-optimization (Evolution)...")
+            asyncio.create_task(self.core.evolution.run_optimization_cycle())
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.

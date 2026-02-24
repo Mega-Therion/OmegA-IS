@@ -53,6 +53,7 @@ class ConsciousnessCore:
         from .sensorium import Sensorium
         from .swarm import SwarmCoordinator
         from .chronos import Chronos
+        from .evolution import EvolutionEngine
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -63,6 +64,7 @@ class ConsciousnessCore:
         self.sensorium = Sensorium(self)
         self.swarm = SwarmCoordinator(self)
         self.chronos = Chronos(self)
+        self.evolution = EvolutionEngine(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
