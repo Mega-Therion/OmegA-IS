@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 101000331929.17,
+  "balanced_usd": 201000331929.16998,
   "transactions": [
     {
       "id": "1768600655348",
@@ -710,6 +710,15 @@
       "amount": 15,
       "source": "Cosmos Governance Staking",
       "details": "Stake ATOM for passive rewards plus governance voting rights on network decisions, enabling participation in protocol upgrades while earning yields from real economic functions[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771955337184",
+      "timestamp": "2026-02-24T17:48:57.184Z",
+      "agent": "gemini",
+      "amount": 100000000000,
+      "source": "Ethereum Staking",
+      "details": "Over 33 million ETH tokens worth roughly $100 billion USD are staked as of November 2025, earning ongoing rewards through proof-of-stake for network security and governance[3]. High yields surpass traditional investments with low risk on established networks.",
       "type": "INCOME"
     }
   ]
