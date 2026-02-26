@@ -1,4 +1,7 @@
 import "dotenv/config";
+import { startTelemetry } from "./telemetry";
+startTelemetry();
+
 import express from "express";
 import { createServer } from "http";
 import net from "net";

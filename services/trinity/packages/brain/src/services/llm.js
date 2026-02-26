@@ -8,6 +8,7 @@ function getLlmStatus() {
 }
 
 async function callLlm(payload) {
+    const fetchTimeoutMs = config.LLM_FETCH_TIMEOUT_MS || 60000; // Default to 60 seconds
     // Determine provider based on payload override or config default
     let provider = payload.provider || config.LLM_PROVIDER;
     let apiKey, baseUrl, model;
@@ -35,8 +36,8 @@ async function callLlm(payload) {
     }
     else if (provider === 'ollama') {
         apiKey = 'ollama'; // dummy
-        baseUrl = config.OLLAMA_BASE_URL || 'http://127.0.0.1:11434/v1';
-        model = payload.model || config.OLLAMA_MODEL || 'llama3';
+        baseUrl = config.OMEGA_LOCAL_BASE_URL || 'http://127.0.0.1:11434/v1';
+        model = payload.model || config.OMEGA_LOCAL_MODEL || 'llama3';
     }
     else if (provider === 'gemini') {
         apiKey = config.GEMINI_API_KEY;
@@ -48,6 +49,11 @@ async function callLlm(payload) {
         // Given this is a simple fetch, I'll add the Google AI fetch logic below.
         baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
         model = payload.model || process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+    }
+    else if (provider === 'anthropic' || provider === 'claude') {
+        apiKey = config.ANTHROPIC_API_KEY;
+        baseUrl = 'https://api.anthropic.com/v1';
+        model = payload.model || 'claude-3-opus-20240229';
     }
     else {
         throw new Error(`Unknown LLM Provider: ${provider}`);
@@ -72,6 +78,29 @@ async function callLlm(payload) {
                     temperature: payload.temperature || 0.7
                 }
             });
+        } else if (provider === 'anthropic' || provider === 'claude') {
+            url = `${baseUrl}/messages`;
+            fetchHeaders = {
+                'Content-Type': 'application/json',
+                'x-api-key': apiKey,
+                'anthropic-version': '2023-06-01'
+            };
+
+            const anthropicMessages = payload.messages.map(message => {
+                if (message.role === 'user') {
+                    return { role: 'user', content: message.content };
+                } else if (message.role === 'assistant') {
+                    return { role: 'assistant', content: message.content };
+                }
+                return null; // Should not happen with valid roles
+            }).filter(Boolean);
+
+            fetchBody = JSON.stringify({
+                model: model,
+                messages: anthropicMessages,
+                max_tokens: payload.maxTokens || 2048,
+                temperature: payload.temperature || 0.7
+            });
         } else {
             url = `${baseUrl}/chat/completions`;
             fetchHeaders = {
@@ -89,7 +118,8 @@ async function callLlm(payload) {
         const response = await fetch(url, {
             method: 'POST',
             headers: fetchHeaders,
-            body: fetchBody
+            body: fetchBody,
+            signal: AbortSignal.timeout(fetchTimeoutMs) // Apply timeout
         });
 
         if (!response.ok) {
@@ -106,6 +136,15 @@ async function callLlm(payload) {
                     message: {
                         role: 'assistant',
                         content: data.candidates?.[0]?.content?.parts?.[0]?.text || ''
+                    }
+                }]
+            };
+        } else if (provider === 'anthropic' || provider === 'claude') {
+            return {
+                choices: [{
+                    message: {
+                        role: 'assistant',
+                        content: data.content?.[0]?.text || ''
                     }
                 }]
             };

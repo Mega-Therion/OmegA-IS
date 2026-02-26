@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Trinity Service API
+  version: 1.0.0
+paths:
+  /api/oauth/callback:
+    get:
+      summary: OAuth callback handler
+      description: Handles the redirect back from the OAuth provider.
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: The authorization code provided by the OAuth server.
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: true
+          description: The state parameter passed to the authorize URL.
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Successfully authenticated and redirected to home.
+        '400':
+          description: Bad request (missing code or state).
+        '500':
+          description: OAuth callback failed.
+
+  /api/trpc/auth.me:
+    get:
+      summary: Get current session user
+      description: Returns the user object stored in the current session.
+      responses:
+        '200':
+          description: The current user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '403':
+          description: Forbidden (not authenticated).
+
+  /api/trpc/auth.logout:
+    post:
+      summary: Logout
+      description: Clears the session cookie.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - openId
+      properties:
+        openId:
+          type: string
+          description: Unique identifier for the user.
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        loginMethod:
+          type: string
+          nullable: true
+        lastSignedIn:
+          type: string
+          format: date-time

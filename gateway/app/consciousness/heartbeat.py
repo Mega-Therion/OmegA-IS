@@ -146,6 +146,11 @@ class HeartbeatDaemon:
         if self._tick_count % 90 == 0:
             await self.core.autonomic.run_healing_cycle()
 
+        # 9. Nexus Hive Sync
+        if self._tick_count % 180 == 0: # Every 90 minutes
+            logger.info("Triggering Nexus hive synchronization...")
+            asyncio.create_task(self.core.nexus_link.sync_hive_mind())
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.

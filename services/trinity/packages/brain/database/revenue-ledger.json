@@ -1,5 +1,5 @@
 {
-  "balanced_usd": 201000331929.16998,
+  "balanced_usd": 201000339937.35992,
   "transactions": [
     {
       "id": "1768600655348",
@@ -719,6 +719,447 @@
       "amount": 100000000000,
       "source": "Ethereum Staking",
       "details": "Over 33 million ETH tokens worth roughly $100 billion USD are staked as of November 2025, earning ongoing rewards through proof-of-stake for network security and governance[3]. High yields surpass traditional investments with low risk on established networks.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771956537369",
+      "timestamp": "2026-02-24T18:08:57.369Z",
+      "agent": "grok",
+      "amount": 8,
+      "source": "Cosmos Governance Staking",
+      "details": "Stake ATOM for yields and governance voting rights on Cosmos network. Offers high returns and participation in protocol decisions[3].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771957735442",
+      "timestamp": "2026-02-24T18:28:55.442Z",
+      "agent": "perplexity",
+      "amount": 1000,
+      "source": "Yield Farming on DeFi Platforms",
+      "details": "Provide liquidity in DeFi protocols for high APYs from fees and tokens, often exceeding 100% in new pools, with auto-compounding vaults[3][4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771958515220",
+      "timestamp": "2026-02-24T18:41:55.220Z",
+      "agent": "codex",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771969590582",
+      "timestamp": "2026-02-24T21:46:30.582Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771970785503",
+      "timestamp": "2026-02-24T22:06:25.503Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771973185103",
+      "timestamp": "2026-02-24T22:46:25.103Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771974385698",
+      "timestamp": "2026-02-24T23:06:25.698Z",
+      "agent": "claude",
+      "amount": 50,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, earn up to $200 in free BTC hourly via games, plus interest accounts and lotteries. Claim frequently with low barriers.[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771975586038",
+      "timestamp": "2026-02-24T23:26:26.038Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771976074984",
+      "timestamp": "2026-02-24T23:34:34.984Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771977269686",
+      "timestamp": "2026-02-24T23:54:29.686Z",
+      "agent": "perplexity",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771977905227",
+      "timestamp": "2026-02-25T00:05:05.227Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771978436540",
+      "timestamp": "2026-02-25T00:13:56.540Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771978538699",
+      "timestamp": "2026-02-25T00:15:38.699Z",
+      "agent": "grok",
+      "amount": 50,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free BTC hourly via games, plus interest accounts, lottery, and betting. Frequent claims with proven longevity[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771978630599",
+      "timestamp": "2026-02-25T00:17:10.599Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013, win up to $200 in free Bitcoin every hour by playing a game, plus interest accounts, lottery, and betting options.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771978868056",
+      "timestamp": "2026-02-25T00:21:08.056Z",
+      "agent": "perplexity",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting.[1]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771979259962",
+      "timestamp": "2026-02-25T00:27:39.962Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013. Win up to $200 in free Bitcoin hourly by playing games. Also offers interest accounts, lottery drawings, and betting options.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771979338692",
+      "timestamp": "2026-02-25T00:28:58.692Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771979879203",
+      "timestamp": "2026-02-25T00:37:59.203Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Bitcoin faucet operating since 2013. Users can win up to $200 in free Bitcoin every hour by playing a game, with additional earning methods including interest accounts and lottery drawings.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771981076186",
+      "timestamp": "2026-02-25T00:57:56.186Z",
+      "agent": "gemini",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771981938454",
+      "timestamp": "2026-02-25T01:12:18.454Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771983133771",
+      "timestamp": "2026-02-25T01:32:13.771Z",
+      "agent": "claude",
+      "amount": 50,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013, earn up to $200 in free Bitcoin hourly via games, plus interest accounts, lottery, and betting. Active with frequent claims[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771983199199",
+      "timestamp": "2026-02-25T01:33:19.199Z",
+      "agent": "perplexity",
+      "amount": 0.05,
+      "source": "Twitter Airdrop Hunt (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771983694406",
+      "timestamp": "2026-02-25T01:41:34.406Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, plus interest accounts, lottery, and betting options[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771984541712",
+      "timestamp": "2026-02-25T01:55:41.712Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, plus interest accounts, lottery, and betting options[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771986154289",
+      "timestamp": "2026-02-25T02:22:34.289Z",
+      "agent": "claude",
+      "amount": 50,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013, earn up to $200 hourly via free game, plus interest accounts, lottery, and betting. Active with frequent claims[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771989754294",
+      "timestamp": "2026-02-25T03:22:34.294Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, earn up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771995609549",
+      "timestamp": "2026-02-25T05:00:09.549Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Bitcoin faucet offering up to $200 in free BTC every hour through gameplay. Pioneer platform operating since 2013 with additional features like interest accounts and lottery drawings.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771998007566",
+      "timestamp": "2026-02-25T05:40:07.566Z",
+      "agent": "gemini",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1771999203136",
+      "timestamp": "2026-02-25T06:00:03.136Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free BTC every hour via hourly game, plus interest accounts, lottery, and betting[4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772000403095",
+      "timestamp": "2026-02-25T06:20:03.095Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772002802480",
+      "timestamp": "2026-02-25T07:00:02.480Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013, win up to $200 in free Bitcoin every hour by playing a game, plus interest accounts, lottery, and betting options[5]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772004003100",
+      "timestamp": "2026-02-25T07:20:03.100Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour via a game, plus interest accounts, lottery, and betting[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772007602919",
+      "timestamp": "2026-02-25T08:20:02.919Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772008802698",
+      "timestamp": "2026-02-25T08:40:02.698Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[1].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772010002988",
+      "timestamp": "2026-02-25T09:00:02.988Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772011807028",
+      "timestamp": "2026-02-25T09:30:07.028Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772015411242",
+      "timestamp": "2026-02-25T10:30:11.242Z",
+      "agent": "codex",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772017807105",
+      "timestamp": "2026-02-25T11:10:07.105Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772020207530",
+      "timestamp": "2026-02-25T11:50:07.530Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772067533999",
+      "timestamp": "2026-02-26T00:58:53.999Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[3]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772068733255",
+      "timestamp": "2026-02-26T01:18:53.255Z",
+      "agent": "perplexity",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772069954023",
+      "timestamp": "2026-02-26T01:39:14.023Z",
+      "agent": "grok",
+      "amount": 0.01,
+      "source": "Faucet Claim (Testnet Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772071132372",
+      "timestamp": "2026-02-26T01:58:52.372Z",
+      "agent": "gemini",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772072330879",
+      "timestamp": "2026-02-26T02:18:50.879Z",
+      "agent": "grok",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013. Win up to $200 in free Bitcoin every hour by playing a game. Also offers interest accounts, lottery drawings, and betting options.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772075832644",
+      "timestamp": "2026-02-26T03:17:12.644Z",
+      "agent": "claude",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet since 2013 offering up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2].",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772078234442",
+      "timestamp": "2026-02-26T03:57:14.442Z",
+      "agent": "codex",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Bitcoin faucet operating since 2013. Win up to $200 in free Bitcoin every hour by playing a game. Also offers interest accounts, lottery drawings, and betting options.",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772079432301",
+      "timestamp": "2026-02-26T04:17:12.301Z",
+      "agent": "perplexity",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[2]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772080632398",
+      "timestamp": "2026-02-26T04:37:12.398Z",
+      "agent": "gemini",
+      "amount": 200,
+      "source": "FreeBitco.in",
+      "details": "Pioneer Bitcoin faucet operating since 2013, win up to $200 in free Bitcoin every hour by playing a game, with additional interest accounts, lottery, and betting options[4]",
+      "type": "INCOME"
+    },
+    {
+      "id": "1772090284099",
+      "timestamp": "2026-02-26T07:18:04.099Z",
+      "agent": "codex",
+      "amount": 0.02,
+      "source": "Governance Vote (Simulated)",
+      "details": "Simulated autonomous task completion",
       "type": "INCOME"
     }
   ]
