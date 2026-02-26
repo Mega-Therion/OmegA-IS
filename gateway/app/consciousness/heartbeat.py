@@ -155,6 +155,11 @@ class HeartbeatDaemon:
         if self._tick_count % 15 == 0:
             asyncio.create_task(self.core.foresight.compute_predictions())
 
+        # 11. Transcendent Synthesis (Skill Gap Analysis) - every 3 hours
+        if self._tick_count % 360 == 0:
+            logger.info("HEARTBEAT: Entering Transcendent Synthesis cycle...")
+            asyncio.create_task(self.core.synthesis.run_synthesis_cycle())
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.

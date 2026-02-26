@@ -59,6 +59,7 @@ class ConsciousnessCore:
         from .autonomic import AutonomicNervousSystem
         from .nexus_link import NexusLink
         from .foresight import Foresight
+        from .synthesis import TranscendentSynthesis
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -75,6 +76,7 @@ class ConsciousnessCore:
         self.autonomic = AutonomicNervousSystem(self)
         self.nexus_link = NexusLink(self)
         self.foresight = Foresight(self)
+        self.synthesis = TranscendentSynthesis(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state

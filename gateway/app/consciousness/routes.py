@@ -120,3 +120,24 @@ async def heartbeat_status():
     """Get heartbeat daemon status."""
     core = get_consciousness()
     return core.heartbeat.status()
+
+
+@router.get("/foresight")
+async def get_foresight():
+    """Get current predictive pre-computed insights."""
+    core = get_consciousness()
+    return {
+        "predictions": core.foresight.predictions,
+        "context_injection": core.foresight.get_context_injection(),
+    }
+
+
+@router.get("/synthesis")
+async def get_synthesis():
+    """Get the Transcendent Synthesis report and generated blueprints."""
+    core = get_consciousness()
+    return {
+        "cycles": core.synthesis.synthesis_cycles,
+        "blueprints": core.synthesis.generated_blueprints,
+        "report": core.synthesis.get_synthesis_report(),
+    }
