@@ -151,6 +151,10 @@ class HeartbeatDaemon:
             logger.info("Triggering Nexus hive synchronization...")
             asyncio.create_task(self.core.nexus_link.sync_hive_mind())
 
+        # 10. Foresight prediction refresh (every 15 ticks / ~7.5 min)
+        if self._tick_count % 15 == 0:
+            asyncio.create_task(self.core.foresight.compute_predictions())
+
     async def _check_initiative(self) -> None:
         """
         Check if OmegA should initiate an action or communication.

@@ -58,6 +58,7 @@ class ConsciousnessCore:
         from .omni_memory import OmniMemory
         from .autonomic import AutonomicNervousSystem
         from .nexus_link import NexusLink
+        from .foresight import Foresight
         self.identity = IdentityManager()
         self.state = StateController()
         self.memory = MemoryUnifier()
@@ -73,6 +74,7 @@ class ConsciousnessCore:
         self.omni_memory = OmniMemory(self)
         self.autonomic = AutonomicNervousSystem(self)
         self.nexus_link = NexusLink(self)
+        self.foresight = Foresight(self)
         self.heartbeat = HeartbeatDaemon(self)
 
         # Runtime state
@@ -172,6 +174,10 @@ class ConsciousnessCore:
             limit=5
         )
 
+        # 3b. Inject Foresight pre-computed context
+        foresight_ctx = self.foresight.get_context_injection()
+        if foresight_ctx:
+            context["foresight"] = foresight_ctx
 
         # 4. Build context for response generation
         response_context = await self._build_response_context(
